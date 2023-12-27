@@ -2,13 +2,20 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 const dbConnect = require("./config/database.js");
-const userRoutes = require("./routes/user");
+const userRoutes = require("./routes/user.js");
+const cors = require("cors");
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 
 // Middleware to parse JSON request body
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 // Connect to the database
 dbConnect();
