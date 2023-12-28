@@ -17,7 +17,7 @@ const App = () => {
     fetchData();
   }, []);
 
-  return <Home />;
+  // return <Home />;
 };
 
 export default App;
