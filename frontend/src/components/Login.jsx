@@ -43,44 +43,45 @@ const Login = () => {
 
   return (
     <div>
-      <div className=" w-screen flex items-center justify-center mt-[10%]">
-        <div className="flex flex-col items-center justify-center max-w-[450px] max-h-[407px]">
-          <div>
-            <h2 className="text-[30px] text-center font-semibold pb-4 leading-9">
+      <div className=" w-screen flex items-center justify-center mt-36">
+        <div className="flex flex-col items-center justify-center max-w-[450px] max-h-[407px] p-6">
+          <div className="p-4">
+            <h2 className="text-[30px] text-center font-semibold font-inter pb-4 leading-9">
               LOG IN
             </h2>
-            <div className="w-[370px] h-[236px] gap-6 mt-5">
-              <div className="gap-3">
-                <label className="font[500] size-3.5 leading-4">EMAIL</label>
+            <div className="w-[400px] gap-6 mt-5">
+              <div className="gap-3 mb-5">
+                <label className="font[500] size-3.5 leading-4 font-inter">
+                  EMAIL<sup className="text-red-600">*</sup>
+                </label>
                 <input
-                  className="w-[370px] h-[42px] rounded-[3px] border-gray-[#D0D0D0] border-[1px] mt-2 px-3"
+                  className="w-[400px] h-[42px] rounded-[3px] border-gray-[#D0D0D0] border-[1px] mt-2 px-3"
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="pt-4 gap-3">
-                <label className="font[500] size-3.5 leading-4">
-                  PASSWORD
-                  <a
-                    href="/login"
-                    className="float-end w-[400] text-[12px] cursor-pointer"
-                  >
-                    forgot password?
-                  </a>
+              <div className="pt-4 gap-3 mb-5">
+                <label className="font[500] size-3.5 leading-4 font-inter">
+                  PASSWORD <sup className="text-red-600">*</sup>
                 </label>
                 <input
-                  className="w-[370px] h-[42px] rounded-[3px] border-gray-[#D0D0D0] border-[1px] mt-2 px-3"
+                  className="w-[400px] h-[42px] rounded-[3px] border-gray-[#D0D0D0] border-[1px] mt-2 px-3"
                   type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
                 />
               </div>
+              <div className="flex justify-center -mb-3">
+                <div className="w-[400] text-[15px] text-red-700 font-inter cursor-pointer">
+                  Forgot password?
+                </div>
+              </div>
               <div>
                 <button
-                  className="font[700] leading-[18.8px] w-[370px] h-[46px] p-[10px] gap-[10px] bg-black text-white mt-6 align-center font-bold"
+                  className="font[700] leading-[18.8px] w-[400px] h-[46px] p-[10px] gap-[10px] bg-black text-white mt-6 align-center font-bold"
                   onClick={handleLogin}
                 >
                   LOG IN
@@ -88,7 +89,7 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <p className="font[400] leading-[20px] tracking-[0.6px] mt-4 w-[370px] h-[46px]">
+              <p className="font[400] leading-[20px] tracking-[0.6px] mt-4 w-[370px] h-[46px] font-inter">
                 Haven't create an account?{" "}
                 <a href="/login" className="text-[#0021D1]">
                   create an account
