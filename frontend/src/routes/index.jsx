@@ -1,6 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import { useEffect } from "react";
 import LoginRoutes from "./LoginRoutes";
+import HomeRoutes from './HomeRoutes'
 // import MainRoutes from "./MainRoutes";
 import { removeAuthToken } from "../utils/localstorage.helper";
 import toast from "react-hot-toast";
@@ -43,5 +44,14 @@ export default function ThemeRoutes() {
     };
   }, []);
 
-  return useRoutes([LoginRoutes]);
+  const routes = [
+    ...LoginRoutes.children,
+    ...HomeRoutes.children,
+  ]
+
+  return useRoutes(routes)
+
+  // return useRoutes([HomeRoutes])
+
+  // return useRoutes([LoginRoutes]);
 }
