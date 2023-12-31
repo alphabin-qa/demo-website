@@ -26,7 +26,7 @@ const handlePasswordMismatch = (res) => {
 exports.register = async (req, res) => {
   try {
     //get data
-    const { firstName, lastName, email, password } = req.body;
+    const { firstname, lastname, email, password } = req.body;
 
     //check if user already exit
     const existingUser = await User.findOne({ email });
@@ -38,7 +38,6 @@ exports.register = async (req, res) => {
       });
     }
 
-    console.log(firstName, lastName, email, password);
     //Secure Password
     async function hashPassword(password) {
       try {
@@ -53,13 +52,15 @@ exports.register = async (req, res) => {
     //creating entry for user
 
     const user = await User.create({
-      firstname: firstName,
-      lastname: lastName,
+      firstname,
+      lastname,
       email,
       password: hashedPassword,
     });
+
+    console.log("USERRRR", user);
     return res.status(200).json({
-      sucess: true,
+      success: true,
       message: "USer Created Successfully",
     });
   } catch (error) {

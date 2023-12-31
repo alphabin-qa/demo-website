@@ -33,7 +33,7 @@ const Login = () => {
       const { data } = await login(formData);
       if (data) {
         setUserAccessToken(data?.user?.token);
-        toast.success("Login Succesfully", {
+        toast.success("Welcome to the Alphabin DEMO STORE", {
           duration: 4000,
           style: {
             border: "1px solid black",
@@ -128,7 +128,7 @@ const Login = () => {
             <div>
               <p className="font[400] leading-[20px] tracking-[0.6px] mt-4 w-[370px] h-[46px] font-inter">
                 Haven't create an account?{" "}
-                <a href="/login" className="text-[#0021D1]">
+                <a href="/signup" className="text-[#0021D1]">
                   create an account
                 </a>
               </p>
