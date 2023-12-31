@@ -23,17 +23,16 @@ const Header = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [token, setToken] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   const handleMenuSelection = (menuItem) => {
     switch (menuItem) {
       case "Home":
-        console.log("You selected Home");
-        navigate("/");
+        navigate("/home");
         break;
 
       case "About Us":
-        console.log("You selected About Us");
-        // Add code for handling the "About Us" menu item
+        navigate("/about-us");
         break;
 
       case "Contact Us":
@@ -53,7 +52,6 @@ const Header = () => {
     }
   };
 
-  const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -70,25 +68,24 @@ const Header = () => {
   return (
     <>
       {token && (
-        <div>
+        <div className="">
           <div className="h-[80px] flex justify-between items-center px-[30px] xl:px-[100px]">
             <div
-              className={`w-[140px] h-[62px] ${openSearch ? "blur-sm" : ""}`}
+              className="w-[140px] h-[62px] flex flex-col justify-center items-center cursor-pointer"
+              onClick={() => navigate("/home")}
             >
-              <Link to={"/"}>
-                <p className="font-extrabold text-[28.61px] leading-[42.91px] tracking-[1.06px]">
-                  Alphabin
-                </p>
-                <p className="font-bold text-[12.5px] leading-[21.87px] tracking-[4.2px]">
-                  DEMO STORE
-                </p>
-              </Link>
+              <p className="font-extrabold text-[28.61px] leading-[42.91px] tracking-[1.06px] font-nunito">
+                Alphabin
+              </p>
+              <p className="font-normal text-[12.5px] leading-[21.87px] tracking-[4.2px] font-inter">
+                DEMO STORE
+              </p>
             </div>
             <div>
               <ul className="hidden lg:flex justify-center items-center gap-8 font-medium text-[16px] leading-5 font-inter">
                 {headerMenu.map((item) => (
                   <li
-                    className="cursor-pointer p-[2px]"
+                    className="cursor-pointer p-[6px]"
                     onClick={() => handleMenuSelection(item)}
                   >
                     {item}

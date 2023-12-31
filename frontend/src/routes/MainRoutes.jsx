@@ -1,11 +1,33 @@
-import Layout from "../layout/Layout";
 import { lazy } from "react";
 import Loadable from "../components/Loadable";
+import AboutUs from "../components/AboutUs";
+import ErrorPage from "../components/ErrorPage";
 const Home = Loadable(lazy(() => import("../components/Home")));
+const DefaultRoute = Loadable(
+  lazy(() => import("../DefaultRoute/DefaultRoute"))
+);
 
-const HomeRoutes = {
+const MainRoutes = {
   path: "/",
-  element: <Home />,
+  element: <DefaultRoute />,
+  children: [
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "home",
+      element: <Home />,
+    },
+    {
+      path: "about-us",
+      element: <AboutUs />,
+    },
+    {
+      path: "*",
+      element: <ErrorPage />,
+    },
+  ],
 };
 
-export default HomeRoutes;
+export default MainRoutes;

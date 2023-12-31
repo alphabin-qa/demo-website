@@ -5,12 +5,14 @@ module.exports = {
     extend: {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+        nunito: ["Nunito Sans", "sans-serif"],
       },
       screens: {
-        'sm': '350px',
-        'md': '623px',
-        'lg': '1024px',
-        'xl': '1280px',
+        sm: "350px",
+        md: "623px",
+        lg: "1024px",
+        xl: "1280px",
       },
     },
   },

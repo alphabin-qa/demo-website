@@ -6,10 +6,11 @@
 
 body {
   font-family: "Nunito Sans", sans-serif;
+  scroll-behavior: smooth;
 }
 
 .main {
-  background-image: url('./images/1.png');
+  background-image: url("./images/1.png");
   height: 80vh;
   position: relative;
   background-position: center;
@@ -21,16 +22,15 @@ body {
 }
 
 .camera {
-  background-image: url('./images/Audio__Camera.png');
+  background-image: url("./images/Audio__Camera.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .appliances {
-  background-image: url('./images/Appliances.png');
+  background-image: url("./images/Appliances.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
 }
-

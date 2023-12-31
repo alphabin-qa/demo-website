@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoginMutation } from "../services/authServices";
 import { useNavigate } from "react-router-dom";
-import { setUserAccessToken } from "../utils/localstorage.helper";
+import {
+  getUserAccessToken,
+  setUserAccessToken,
+} from "../utils/localstorage.helper";
 import toast from "react-hot-toast";
 import usePasswordToggle from "../services/usePasswordToggle";
-import Header from "./Header";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,20 +31,42 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const { data } = await login(formData);
-      setUserAccessToken(data?.user?.token);
-      toast.success("Login Succesfully", {
-        duration: 4000,
-      });
-      navigate("/");
-      setFormData({
-        email: "",
-        password: "",
-      });
+      if (data) {
+        setUserAccessToken(data?.user?.token);
+        toast.success("Login Succesfully", {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
+        navigate("/home");
+        setFormData({
+          email: "",
+          password: "",
+        });
+      } else {
+        toast.error("Something went wrong !", {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
+      }
     } catch (error) {
       console.error(error);
       toast.error(error, { duration: 4000 });
     }
   };
+
+  useEffect(() => {
+    if (getUserAccessToken()) {
+      navigate("/home");
+    }
+  }, []);
 
   return (
     <div>
@@ -59,7 +83,7 @@ const Login = () => {
                   EMAIL<sup className="text-red-600">*</sup>
                 </label>
                 <input
-                  className="w-[370px] h-[42px] rounded-[3px] border-gray-[#D0D0D0] border-[1px] mt-2 px-3"
+                  className="w-[370px] h-[42px] rounded-[3px] border-gray-[#D0D0D0] border-[1px] mt-2 px-3 font-semibold tracking-[1px]"
                   type="email"
                   name="email"
                   value={formData.email}
@@ -69,27 +93,31 @@ const Login = () => {
               <div className="pt-4 gap-3 relative">
                 <label className="font[500] size-3.5 leading-4 font-inter">
                   PASSWORD <sup className="text-red-600">*</sup>
-
-                  <a href="/login" className="float-end w-[400] text-[12px] cursor-pointer font-inter">
+                  <a
+                    href="/login"
+                    className="float-end w-[400] text-[12px] cursor-pointer font-inter"
+                  >
                     forgot password?
                   </a>
                 </label>
                 <div className="relative">
-                <input
-                  className="w-[370px] h-[42px] rounded-[3px] border-gray-[#D0D0D0] border-[1px] mt-2 px-3"
-                  type={InputType}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={toggleVisibility}>
-                  {Icon}
-                </span>
-
+                  <input
+                    className="w-[370px] h-[42px] rounded-[3px] border-gray-[#D0D0D0] border-[1px] mt-2 px-3 font-semibold tracking-[1.3px]"
+                    type={InputType}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                  />
+                  <span
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                    onClick={toggleVisibility}
+                  >
+                    {Icon}
+                  </span>
                 </div>
               </div>
               <div>
-                <button 
+                <button
                   className="font[700] leading-[18.8px] w-[370px] h-[46px] p-[10px] gap-[10px] bg-black text-white mt-6 align-center font-bold"
                   onClick={handleLogin}
                 >

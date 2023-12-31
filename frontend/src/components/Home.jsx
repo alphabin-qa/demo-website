@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import Image from "../assets/Image";
 import "../index.css";
+import { getUserAccessToken } from "../utils/localstorage.helper";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userToken = getUserAccessToken();
+    if (!userToken) {
+      navigate("/login");
+    }
+  }, []);
   return (
     <>
       <section className="hero-content sm:w-full">
