@@ -2,6 +2,7 @@ import { lazy } from "react";
 import Loadable from "../components/Loadable";
 import AboutUs from "../components/AboutUs";
 import ErrorPage from "../components/ErrorPage";
+import Contact from "../components/Contact";
 const Home = Loadable(lazy(() => import("../components/Home")));
 const DefaultRoute = Loadable(
   lazy(() => import("../DefaultRoute/DefaultRoute"))
@@ -22,6 +23,10 @@ const MainRoutes = {
     {
       path: "about-us",
       element: <AboutUs />,
+    },
+    {
+      path: "contact-us",
+      element: <Contact />,
     },
     {
       path: "*",

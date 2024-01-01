@@ -36,8 +36,7 @@ const Header = () => {
         break;
 
       case "Contact Us":
-        console.log("You selected Contact Us");
-        // Add code for handling the "Contact Us" menu item
+        navigate("/contact-us");
         break;
 
       case "All Products":

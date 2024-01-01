@@ -7,8 +7,8 @@ import Youtube from "../assets/youtube.png";
 
 const Footer = () => {
   return (
-    <div className="h-[481px] bg-black flex justify-center items-center text-white">
-      <div className="w-[1260px] flex justify-between items-start shrink mx-6">
+    <div className="h-[481px] bg-black flex flex-col justify-center items-center text-white">
+      <div className="w-[1260px] flex justify-between items-start shrink mx-[90px] mt-[54]">
         <div className=" flex flex-col  gap-[45px]">
           <div>
             <div className=" font-nunito text-white">
@@ -55,7 +55,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="">
+        <div>
           <div className="gap-4">
             <span className="font-inter text-xl font-medium tracking-[1px]">
               Costumer Policy
@@ -70,7 +70,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="">
+        <div>
           <div className="gap-4">
             <span className="font-inter text-xl font-medium tracking-[1px]">
               Follow Us
@@ -95,6 +95,10 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-[1260px] shrink-0 h-[1px] stroke-[1px] bg-[#4D4D4D] mb-8"></div>
+      <div className=" text-[14px] font-light tracking-[1px] font-inter mb-8">
+        Copyright © 2023 Alphabin Technology Consulting | Demo Store
       </div>
     </div>
   );
