@@ -1,24 +1,20 @@
 .main {
-  background-image: url("../images/1.png");
-  height: 80vh;
+  background-image: url("../assets/Home/1.png");
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  /* justify-content: center;
-    align-items: center;
-    display: flex; */
 }
 
 .camera {
-  background-image: url("../images/Audio__Camera.png");
+  background-image: url("../assets/Home/Audio__Camera.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .appliances {
-  background-image: url("../images/Appliances.png");
+  background-image: url("../assets/Home/Appliances.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
