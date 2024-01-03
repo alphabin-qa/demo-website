@@ -6,8 +6,6 @@ import {
 import WishList from '../assets/WishList'
 import Cart from '../assets/Cart'
 
-
-
 const FeatureCards = ({ img, header, price, reviewCount }) => {
   return (
     <div className="w-[320px] flex justify-center items-center mb-[20px] group hover:shadow-md hover:bg-[#fff] rounded-[5px] mt-[20px] mx-auto hover:cursor-pointer">

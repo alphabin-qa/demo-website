@@ -1,20 +1,24 @@
 import React, { useEffect } from "react";
-// import React, { useEffect } from "react";
-import Header from "./Header";
-import Image from "../assets/Image";
 import "../index.css";
 import "../components/home.css";
 import { getUserAccessToken } from "../utils/localstorage.helper";
 import { useNavigate } from "react-router-dom";
-import Microphone from "../assets/Home/Features/microphone-broadcasting-station.jpg";
-import Speaker from "../assets/Home/Features/speaker-2021-08-26-17-06-54-utc.jpg";
-import HardDrive from "../assets/Home/Features/hard-disk-drive-inside-2023-06-29-20-43-00-utc.jpg";
-import USB from "../assets/Home/Features/usb-flash-memory-isolated-2023-07-25-16-17-04-utc.jpg";
+import {
+  Microphone,
+  Speaker,
+  HardDisk,
+  USB,
+  Offer1,
+  Offer2,
+  Appliances,
+  Mobile,
+  Laptop,
+  Speaker1,
+} from "../assets/Home/HomeImages";
 import Slider from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import FeatureCards from "./FeatureCards";
-import Offer1 from "../assets/Home/Offers/offer1.jpg";
-import Offer2 from "../assets/Home/Offers/offer2.jpg";
+import CategoryCards from "./CategoryCards";
 
 const data = [
   {
@@ -30,7 +34,7 @@ const data = [
     reviewCount: "(97)",
   },
   {
-    img: HardDrive,
+    img: HardDisk,
     header: "Premium Vegan Leather Desk Mat - Black",
     price: "₹400",
     reviewCount: "(97)",
@@ -54,7 +58,7 @@ const data = [
     reviewCount: "(97)",
   },
   {
-    img: HardDrive,
+    img: HardDisk,
     header: "Premium Vegan Leather Desk Mat - Black ",
     price: "₹500",
     reviewCount: "(97)",
@@ -64,6 +68,41 @@ const data = [
     header: "Premium Vegan Leather Desk Mat - Black ",
     price: "₹500",
     reviewCount: "(97)",
+  },
+];
+
+const categoryProducts = [
+  {
+    img: Mobile,
+    product: "Mobile",
+  },
+  {
+    img: Laptop,
+    product: "Laptop",
+  },
+  {
+    img: Speaker1,
+    product: "Speaker",
+  },
+  {
+    img: Appliances,
+    product: "Appliances",
+  },
+  {
+    img: Laptop,
+    product: "Laptop ",
+  },
+  {
+    img: Appliances,
+    product: "Appliances",
+  },
+  {
+    img: Speaker1,
+    product: "Speaker",
+  },
+  {
+    img: Mobile,
+    product: "Mobile",
   },
 ];
 
@@ -99,7 +138,7 @@ const Home = () => {
 
   const settings = {
     arrows: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -150,7 +189,7 @@ const Home = () => {
 
       <section className="sm:mt-[10px] mt-[40px]">
         <div className="w-full lg:justify-center gap-[20px] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:items-center sm:p-[10px] p:-[15px]">
-          <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] camera">
+          <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] camera cursor-pointer">
             <div className="xl:mt-[150px] xl:ml-[3rem] lg:ml-[3rem] lg:mt-[150px] lg:leading-8 md:ml-[1px] md:pl-[10px] md:mt-[3rem] md:w-[200px] sm:w-[180px] sm:ml-[20px] sm:mt-[70px] ml-[50px] xl:w-[300px] lg:w-[280px]">
               <h1 className="xl:text-4xl lg:text-4xl md:text-3xl sm:text-[20px] text-[32px] font-inter font-[600] lg:mb-[15px] md:mb-[10px]">
                 Audio & Camera
@@ -166,7 +205,7 @@ const Home = () => {
               </a>
             </div>
           </div>
-          <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] appliances bg-[#EFF5F5]">
+          <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] appliances cursor-pointer bg-[#EFF5F5]">
             <div className="xl:mt-[150px] xl:ml-[3rem] lg:ml-[3rem] lg:mt-[150px] lg:leading-8 md:ml-[1px] md:pl-[10px] md:mt-[4rem] md:w-[200px] sm:w-[180px] sm:ml-[20px] sm:mt-[80px] ml-[50px] xl:w-[300px] lg:w-[280px]">
               <h1 className="xl:text-4xl lg:text-4xl sm:text-[20px] md:text-3xl text-[32px] font-inter font-[600] lg:mb-[15px] md:mb-[10px]">
                 Appliances
@@ -186,10 +225,10 @@ const Home = () => {
 
         <div className="xl:mt-[23px] lg:mt-[10px] md:mt-[8px]">
           <div className="w-full lg:justify-center gap-[20px] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:items-center sm:p-[10px] p:-[15px]">
-            <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] appliances bg-[#EFF5F5]">
+            <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] gadgets cursor-pointer bg-[#EFF5F5]">
               <div className="xl:mt-[150px] xl:ml-[3rem] lg:ml-[3rem] lg:mt-[150px] lg:leading-8 md:ml-[1px] md:pl-[10px] md:mt-[4rem] md:w-[200px] sm:w-[180px] sm:ml-[20px] sm:mt-[80px] ml-[50px] xl:w-[300px] lg:w-[280px]">
                 <h1 className="xl:text-4xl lg:text-4xl sm:text-[20px] md:text-3xl text-[32px] font-inter font-[600] lg:mb-[15px] md:mb-[10px]">
-                  Appliances
+                  Gadgets
                 </h1>
                 <p className=" xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[10px] font-inter font-[400] text-[16px] leading-[19.36px] mb-[5px]">
                   Lorem Ipsum Dolor Sit Amet Consectetur
@@ -202,10 +241,10 @@ const Home = () => {
                 </a>
               </div>
             </div>
-            <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] camera">
+            <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] cursor-pointer laptop">
               <div className="xl:mt-[150px] xl:ml-[3rem] lg:ml-[3rem] lg:mt-[150px] lg:leading-8 md:ml-[1px] md:pl-[10px] md:mt-[3rem] md:w-[200px] sm:w-[180px] sm:ml-[20px] sm:mt-[70px] ml-[50px] xl:w-[300px] lg:w-[280px]">
                 <h1 className="xl:text-4xl lg:text-4xl md:text-3xl sm:text-[20px] text-[32px] font-inter font-[600] lg:mb-[15px] md:mb-[10px]">
-                  Audio & Camera
+                  PC & Laptops
                 </h1>
                 <p className=" xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[10px] font-inter font-[400] text-[16px] leading-[19.36px] mb-[5px]">
                   Lorem Ipsum Dolor Sit Amet Consectetur
@@ -247,40 +286,121 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="mt-[30px] mb-[20px]">
-        <div className="xl:container lg:container md:container  mx-auto">
-          <div className="float-left w-[47%]  m-[10px]">
-            <div className="absolute">
-              <img
-                src={Offer1}
-                alt=""
-                className="xl:w-[800px] lg:w-[640px] md:w-[400px] md:h-[200px] sm:w-[600px] lg:h-[250px] xl:h-[300px]"
-              />
+      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="xl:container lg:container mx-auto">
+          <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
+            <div className="sm:mb-[10px] relative ">
+              <div className="relative">
+                {" "}
+                <img
+                  class="object-cover h-[210px] w-full rounded-[5px]"
+                  src={Offer1}
+                  alt=""
+                />
+              </div>
+              <div className="absolute top-0 text-white flex flex-col justify-center items-center h-full w-full">
+                <h1 className="xl:w-[40%] lg:w-[50%] text-center font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[2.5rem] text-white">
+                  Enjoy an Exclusive 20% Off on Laptops
+                </h1>
+                <button className="font-inter font-[400] text-[14px] leading-[16.94px] text-black bg-white px-[15px] py-[10px] mt-[10px] border-white border-[1px] hover:bg-transparent hover:text-white">
+                  Shop Now
+                </button>
+              </div>
             </div>
-            <div className="relative text-white text-center xl:my-[6rem] lg:my-[6rem] md:my-10 md:w-[400px] xl:mx-[9rem] lg:mr-[7rem]">
-              <h1 className=" font-inter font-[600] md:text-[20px] text-[32px] leading-[38.73px] mb-[10px]">
-                Enjoy an Exclusive 20% Off on Laptops
-              </h1>
-              <button className=" font-inter font-semibold text-[14px] leading-[16.94px] text-center px-[20px] py-[10px] bg-[#FFFFFF] border-white border-[1px] hover:bg-transparent hover:text-white text-black">
-                Show Now
-              </button>
+            <div className="sm:mb-[10px] relative ">
+              <div className="relative">
+                {" "}
+                <img
+                  class="object-cover h-[210px] w-full rounded-[5px]"
+                  src={Offer2}
+                  alt=""
+                />
+              </div>
+              <div className="absolute top-0 text-white flex flex-col justify-center items-center h-full w-full">
+                <h1 className="xl:w-[40%] lg:w-[50%] text-center font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[2.5rem] text-white">
+                  Watch the price drop by a whopping 20%!
+                </h1>
+                <button className="font-inter font-[400] text-[14px] leading-[16.94px] text-black bg-white px-[15px] py-[10px] mt-[10px] border-white border-[1px] hover:bg-transparent hover:text-white">
+                  Shop Now
+                </button>
+              </div>
             </div>
           </div>
-          <div className=" sm:float-none float-right w-[47%] m-[10px]">
-            <div className="absolute">
-              <img
-                src={Offer2}
-                alt=""
-                className="xl:w-[800px] lg:w-[640px] md:w-[400px] md:h-[200px] lg:h-[250px] xl:h-[300px]"
-              />
+        </div>
+      </section>
+
+      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
+          <div className="border-b-[1px] h-[50px]">
+            <div className="h-[39px]">
+              <div>
+                <h1 className="float-start font-roboto font-bold sm:text-[18px] xl:text-[24px] md:text-[20px] lg:text-[22px] leading-[28.13px]">
+                  New Arrivals
+                </h1>
+              </div>
             </div>
-            <div className="relative text-white text-center xl:my-[6rem] lg:my-[6rem] md:my-10 md:w-[400px] xl:mx-[9rem] lg:mr-[7rem]">
-              <h1 className=" font-inter font-[600] md:text-[20px] text-[32px] leading-[38.73px] mb-[10px]">
-                Enjoy an Exclusive 20% Off on Laptops
-              </h1>
-              <button className=" font-inter font-semibold text-[14px] leading-[16.94px] text-center px-[20px] py-[10px] bg-[#FFFFFF] border-white border-[1px] hover:bg-transparent hover:text-white text-black">
-                Show Now
-              </button>
+          </div>
+          <Slider {...settings}>
+            {data.map((el, index) => (
+              <FeatureCards
+                key={index}
+                img={el.img}
+                header={el.header}
+                price={el.price}
+                reviewCount={el.reviewCount}
+              />
+            ))}
+          </Slider>
+        </div>
+      </section>
+
+      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
+          <div className="border-b-[1px] h-[50px]">
+            <div className="h-[39px]">
+              <div>
+                <h1 className="float-start font-roboto font-bold sm:text-[18px] xl:text-[24px] md:text-[20px] lg:text-[22px] leading-[28.13px]">
+                  Category Product
+                </h1>
+              </div>
+            </div>
+          </div>
+          <Slider {...settings}>
+            {categoryProducts.map((el, index) => (
+              <CategoryCards key={index} img={el.img} productname={el.product} />
+            ))}
+          </Slider>
+        </div>
+      </section>
+
+      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="xl:container lg:container mx-auto">
+          <div class="grid grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[30px] sm:p-[8px]">
+            <div className="sm:mb-[10px] relative ">
+              <div className="relative">
+                {" "}
+                <img
+                  class="object-cover h-[210px] w-full"
+                  src={Offer1}
+                  alt=""
+                />
+              </div>
+              <div className="absolute top-0 text-white flex flex-col justify-center items-center h-full w-full">
+                <h1 className="xl:w-[40%] lg:w-[50%] md:w-[60%] sm:w-[90%] text-center font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[20px] leading-[2.5rem] text-white">
+                  Lorem ipsum dolor sit ametdolor sit amet dolor sit amet dolor
+                </h1>
+                <div className="mt-[20px]">
+                  <input
+                    className="xl:w-[372px] lg:w-[372px] md:w-[365px] sm:h-[35px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:w-[250px] text-black rounded-[2px] border-[1px] sm:text-[12px] xl:text-[18px] lg:text-[18px] md:text-[16px] pl-[15px] font-inter sm:mr-[2px] xl:mr-[10px] lg:mr-[10px] md:mr-[8px] gap-[96px]"
+                    type="email"
+                    name="email"
+                    placeholder="Your email"
+                  />
+                  <button className="xl:w-[100px] lg:w-[100px] md:w-[100px] sm:w-[80px] xl:text-[16px] lg:text-[16px] sm:text-[12px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:h-[35px]  rounded-[2px] sm:p-[7px] xl:p-[10px] lg:p-[10px] md:p-[10px] gap-[10px] text-white bg-[#353535] font-roboto ">
+                    Shop Now
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

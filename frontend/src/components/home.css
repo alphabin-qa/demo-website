@@ -1,5 +1,5 @@
 .main {
-  background-image: url("../assets/Home/1.png");
+  background-image: url("../assets/Home/bg.png");
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
@@ -15,6 +15,20 @@
 
 .appliances {
   background-image: url("../assets/Home/Appliances.png");
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.laptop {
+  background-image: url("../assets/Home/maxim-hopman-Hin-rzhOdWs-unsplash.jpg");
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.gadgets {
+  background-image: url("../assets/Home/Gadgets.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
