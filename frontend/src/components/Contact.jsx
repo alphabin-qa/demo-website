@@ -8,7 +8,16 @@ const Contact = () => {
           <div className=" w-full text-start text-[28px] font-bold leading-[18.5px] font-inter text-[#333333]">
             Contact Us
           </div>
-          <div className="w-[1260px] h-[510px]"></div>
+          <div className="w-[1260px] h-[510px]">
+            <iframe
+              src={`https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting`}
+              width="100%"
+              height="100%"
+              loading="lazy"
+              frameborder="0"
+              title="dnkjsahflosdhfg;osho"
+            ></iframe>
+          </div>
         </div>
         <div className="w-[1260px] flex gap-8 mt-[100px]">
           <div className="w-[557px] flex flex-col items-center gap-8 px-[30px] pb-[35px] bg-[#FBFBFB] rounded-[3px] py-5">

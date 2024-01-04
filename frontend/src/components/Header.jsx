@@ -43,16 +43,12 @@ const Header = () => {
         console.log("You selected All Products");
         // Add code for handling the "All Products" menu item
         break;
-
-      default:
-        console.log("Invalid menu selection");
-        // Add code for handling an invalid menu selection
-        break;
     }
   };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    navigate("/account");
   };
   const handleClose = () => {
     setAnchorEl(null);

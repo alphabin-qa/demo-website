@@ -4,6 +4,7 @@ import AboutUs from "../components/AboutUs";
 import ErrorPage from "../components/ErrorPage";
 import Contact from "../components/Contact";
 import ProductDetail from "../components/ProductDetail";
+import MyAccount from "../components/MyAccount";
 const Home = Loadable(lazy(() => import("../components/Home")));
 const DefaultRoute = Loadable(
   lazy(() => import("../DefaultRoute/DefaultRoute"))
@@ -32,6 +33,10 @@ const MainRoutes = {
     {
       path: "product-detail/:id",
       element: <ProductDetail />,
+    },
+    {
+      path: "account",
+      element: <MyAccount />,
     },
     {
       path: "*",
