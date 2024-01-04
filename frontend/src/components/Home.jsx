@@ -4,109 +4,17 @@ import "../components/home.css";
 import { getUserAccessToken } from "../utils/localstorage.helper";
 import { useNavigate } from "react-router-dom";
 import {
-  Microphone,
-  Speaker,
-  HardDisk,
-  USB,
   Offer1,
   Offer2,
-  Appliances,
-  Mobile,
-  Laptop,
-  Speaker1,
 } from "../assets/Home/HomeImages";
 import Slider from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import FeatureCards from "./FeatureCards";
 import CategoryCards from "./CategoryCards";
+import { Link } from "react-router-dom";
+import { FeatureProductsData, CategoryProductsData } from "../RawData/static";
 
-const data = [
-  {
-    img: Microphone,
-    header: "Premium Vegan Leather Desk Mat - Black",
-    price: "₹500",
-    reviewCount: "(97)",
-  },
-  {
-    img: Speaker,
-    header: "Premium Vegan Leather Desk Mat - Black ",
-    price: "₹300",
-    reviewCount: "(97)",
-  },
-  {
-    img: HardDisk,
-    header: "Premium Vegan Leather Desk Mat - Black",
-    price: "₹400",
-    reviewCount: "(97)",
-  },
-  {
-    img: USB,
-    header: "Premium vegan Leather Desk Mat - Black",
-    price: "₹450",
-    reviewCount: "(97)",
-  },
-  {
-    img: Speaker,
-    header: "Premium Vegan Leather Desk Mat - Black ",
-    price: "₹500",
-    reviewCount: "(97)",
-  },
-  {
-    img: Microphone,
-    header: "Premium Vegan Leather Desk Mat - Black ",
-    price: "₹500",
-    reviewCount: "(97)",
-  },
-  {
-    img: HardDisk,
-    header: "Premium Vegan Leather Desk Mat - Black ",
-    price: "₹500",
-    reviewCount: "(97)",
-  },
-  {
-    img: USB,
-    header: "Premium Vegan Leather Desk Mat - Black ",
-    price: "₹500",
-    reviewCount: "(97)",
-  },
-];
-
-const categoryProducts = [
-  {
-    img: Mobile,
-    product: "Mobile",
-  },
-  {
-    img: Laptop,
-    product: "Laptop",
-  },
-  {
-    img: Speaker1,
-    product: "Speaker",
-  },
-  {
-    img: Appliances,
-    product: "Appliances",
-  },
-  {
-    img: Laptop,
-    product: "Laptop ",
-  },
-  {
-    img: Appliances,
-    product: "Appliances",
-  },
-  {
-    img: Speaker1,
-    product: "Speaker",
-  },
-  {
-    img: Mobile,
-    product: "Mobile",
-  },
-];
-
-const Home = () => {
+const Home = (product) => {
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -272,17 +180,19 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <Slider {...settings}>
-            {data.map((el, index) => (
-              <FeatureCards
-                key={index}
-                img={el.img}
-                header={el.header}
-                price={el.price}
-                reviewCount={el.reviewCount}
-              />
-            ))}
-          </Slider>
+          <Link to={`/product-detail/:${product.id}`}>
+            <Slider {...settings}>
+              {FeatureProductsData.map((el, index) => (
+                <FeatureCards
+                  key={index}
+                  img={el.img}
+                  header={el.header}
+                  price={el.price}
+                  reviewCount={el.reviewCount}
+                />
+              ))}
+            </Slider>
+          </Link>
         </div>
       </section>
 
@@ -341,7 +251,7 @@ const Home = () => {
             </div>
           </div>
           <Slider {...settings}>
-            {data.map((el, index) => (
+            {FeatureProductsData.map((el, index) => (
               <FeatureCards
                 key={index}
                 img={el.img}
@@ -366,8 +276,12 @@ const Home = () => {
             </div>
           </div>
           <Slider {...settings}>
-            {categoryProducts.map((el, index) => (
-              <CategoryCards key={index} img={el.img} productname={el.product} />
+            {CategoryProductsData.map((el, index) => (
+              <CategoryCards
+                key={index}
+                img={el.img}
+                productname={el.product}
+              />
             ))}
           </Slider>
         </div>
