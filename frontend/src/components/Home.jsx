@@ -3,10 +3,7 @@ import "../index.css";
 import "../components/home.css";
 import { getUserAccessToken } from "../utils/localstorage.helper";
 import { useNavigate } from "react-router-dom";
-import {
-  Offer1,
-  Offer2,
-} from "../assets/Home/HomeImages";
+import { Offer1, Offer2 } from "../assets/Home/HomeImages";
 import Slider from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import FeatureCards from "./FeatureCards";
@@ -14,7 +11,7 @@ import CategoryCards from "./CategoryCards";
 import { Link } from "react-router-dom";
 import { FeatureProductsData, CategoryProductsData } from "../RawData/static";
 
-const Home = (product) => {
+const Home = () => {
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -180,19 +177,18 @@ const Home = (product) => {
               </div>
             </div>
           </div>
-          <Link to={`/product-detail/:${product.id}`}>
-            <Slider {...settings}>
-              {FeatureProductsData.map((el, index) => (
+          <Slider {...settings}>
+            {FeatureProductsData.map((product) => (
+              <Link to={`/product-detail/${product.id}`} key={product.id}>
                 <FeatureCards
-                  key={index}
-                  img={el.img}
-                  header={el.header}
-                  price={el.price}
-                  reviewCount={el.reviewCount}
+                  img={product.img}
+                  header={product.header}
+                  price={product.price}
+                  reviewCount={product.reviewCount}
                 />
-              ))}
-            </Slider>
-          </Link>
+              </Link>
+            ))}
+          </Slider>
         </div>
       </section>
 

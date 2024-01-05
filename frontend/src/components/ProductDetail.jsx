@@ -1,85 +1,334 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { StarFilled, StarOutlined } from "@ant-design/icons";
-import {
-  Microphone,
-  Speaker,
-  HardDisk,
-  Offer1,
-  Offer2,
-  USB,
-  Appliances,
-  Mobile,
-  Laptop,
-  Speaker1,
-} from "../assets/Home/HomeImages";
+import { FeatureProductsData } from "../RawData/static";
+import ReviewForm from "./ReviewForm";
+import ReviewList from "./ReviewList";
 
-function ProductDetail(product) {
+function ProductDetail() {
+  const [quantity, setQuantity] = useState(1);
+  const [activeTab, setActiveTab] = useState("description");
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviews, setReviews] = useState(() => {
+    const storedReviews = localStorage.getItem("reviews");
+    return storedReviews ? JSON.parse(storedReviews) : [];
+  });
+  const [visibleReview, setVisibleReview] = useState(2);
+  const { id } = useParams();
+
+  useEffect(() => {
+    localStorage.setItem("reviews", JSON.stringify(reviews), [reviews]);
+  });
+
+  const selectedProduct = FeatureProductsData.find(
+    (product) => product.id === id
+  );
+
+  if (!selectedProduct) {
+    return <div>Product not found</div>;
+  }
+  const { img, header, price, description, reviewCount } = selectedProduct;
+
+  const handleDecrement = () => {
+    if (quantity > 1) setQuantity((prevCount) => prevCount - 1);
+  };
+
+  const handleIncrement = () => {
+    if (quantity < 10) setQuantity((prevCount) => prevCount + 1);
+  };
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const handleReviewForm = () => {
+    setShowReviewForm(!showReviewForm);
+  };
+
+  const handleReviewSubmit = (newReview) => {
+    setReviews([...reviews, newReview]);
+    setShowReviewForm(false);
+  };
+
+  const handleLoadMoreReview = () => {
+    setVisibleReview((prevVisibleReviews) => prevVisibleReviews + 2);
+  };
   return (
-    <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
-      <div className="xl:container lg:container mx-auto">
-        <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
-          <div className="sm:mb-[10px] bg-yellow-200  ">
-            <div className="flex items-center justify-center">
-              {" "}
-              <img
-                class="object-cover h-[601px] w-[549px] rounded-[5px]"
-                src={Microphone}
-                alt=""
-              />
+    <>
+      {/* Product Details */}
+      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px] mb-[60px]">
+        <div className="xl:container lg:container mx-auto">
+          <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
+            <div className="sm:mb-[10px] ">
+              <div className="flex justify-center">
+                {" "}
+                <img
+                  class="object-cover h-[601px] w-[549px] rounded-[5px]"
+                  src={img}
+                  alt=""
+                />
+              </div>
             </div>
-          </div>
-          <div className="sm:mb-[10px] bg-gray-200 ">
-            <div className="top-0 h-full w-[596px]">
-              <h1 className="font-inter font-[700] text-[48px] leading-[58.09px] ">MicroPhone</h1>
-              <p className="w-[489px] h-[72px] font-inter font-[400] text-[16px] leading-[24px] tracking-[1px]">
-                The Most Powerful and Feature-Rich iPhone Ever Made, with a New
-                Design, a 48MP Camera, and an Always-On Display (512 GB)
-              </p>
-              <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between font-inter font-[400] size-[21.87px] tracking-[3.93px]">
-                <StarFilled />
-                <StarFilled />
-                <StarFilled />
-                <StarFilled />
-                <StarOutlined />
-                <p className="text-[12px] leading-[14.52px] font-[400] font-inter">
-                  (15)
+            <div className="sm:mb-[10px]  pl-[20px]">
+              <div className="top-0 h-full w-[500px] flex flex-col">
+                <h1 className="font-inter font-[700] text-[48px] leading-[58.09px] mb-2">
+                  {header}
+                </h1>
+                <p className="w-[489px] h-[72px] font-inter font-[400] text-[16px] leading-[24px] tracking-[1px] mb-3">
+                  {description}
                 </p>
-              </div>
-              <p className="font-inter font-[400] text-[20px] leading-[24px] tracking-[1px]">₹1,27,999</p>
-              <div className="grid-cols-4 gap-[24px] flex justify-between">
-                <div className=" w-full">
-                  <img
-                    src={Microphone}
-                    alt=""
-                    className="h-[120px] w-[140px] bg-[#E8E8E9]"
-                  />
+                <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between font-inter font-[400] size-[21.87px] tracking-[3.93px] mb-[15px]">
+                  <StarFilled />
+                  <StarFilled />
+                  <StarFilled />
+                  <StarFilled />
+                  <StarOutlined />
+                  <p className="text-[12px] leading-[14.52px] font-[400] font-inter">
+                    {reviewCount}
+                  </p>
                 </div>
-                <div className=" w-full">
-                  <img
-                    src={Microphone}
-                    alt=""
-                    className="h-[120px] w-[140px]"
-                  />
+                <p className="font-inter font-[400] text-[20px] leading-[24px] tracking-[1px] mb-[15px]">
+                  {price}
+                </p>
+                <div className="grid-cols-4 gap-[24px] flex justify-between mb-[15px]">
+                  <div className=" w-full">
+                    <img
+                      src={img}
+                      alt=""
+                      className="h-[120px] w-[140px] bg-[#E8E8E9]"
+                    />
+                  </div>
+                  <div className=" w-full">
+                    <img src={img} alt="" className="h-[120px] w-[140px]" />
+                  </div>
+                  <div className="w-full">
+                    <img src={img} alt="" className="h-[120px] w-[140px]" />
+                  </div>
+                  <div className="w-full"></div>
                 </div>
-                <div className="w-full">
-                  <img
-                    src={Microphone}
-                    alt=""
-                    className="h-[120px] w-[140px]"
-                  />
+                <div className="h-[80px] gap-[16px] mb-[15px]">
+                  <p className="w-[80px] h-[24px] font-inter font-[400] text-[18px] leading-[24px] tracking-[1px] mb-[3px]">
+                    Quantity
+                  </p>
+                  <div className=" p-[10px] border-[1px] w-[150px] rounded-[3px] border-black">
+                    <div className="grid-cols-3 flex justify-between">
+                      <div>
+                        <button
+                          className=" float-start w-[18px] h-[18px]"
+                          onClick={handleDecrement}
+                        >
+                          <span className="w-[13px] h-[2px] top-[8px] left-[2px] pr-[10px]">
+                            -
+                          </span>
+                        </button>
+                      </div>
+                      <div className="font-inter font-[400] text-[18px] leading-[24px] text-center">
+                        {quantity}
+                      </div>
+                      <button
+                        className="float-end w-[18px] h-[18px]"
+                        onClick={handleIncrement}
+                      >
+                        <span className="w-[13px] h-[2px] top-[8px] left-[2px] pl-[10px]">
+                          +
+                        </span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div className="w-full"></div>
-              </div>
-              <div className="w-[146px] h-[80px] gap-[16px]">
-                <p className="w-[80px] h-[24px] font-inter font-[400] text-[18px] leading-[24px] tracking-[1px]">Quantity</p>
-                
+                <div className="">
+                  <div className="text-center bg-[#181818] border-black hover:border-[2px] mb-[10px] cursor-pointer p-[10px] gap-[10px]">
+                    <button className="text-white font-inter font-[600] text-[16px] leading-[18.8px]">
+                      BUY NOW
+                    </button>
+                  </div>
+                  <div className="text-center border-[1px] p-[10px] gap-[10px] cursor-pointer hover:border-[2px] border-black">
+                    <button className="font-inter font-[600] text-[16px] leading-[18.8px]">
+                      ADD TO CART
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="mb-[10rem]">
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center">
+            <div className="">
+              <img
+                src={img}
+                alt=""
+                className="w-[253px] h-[237px] rounded-[5px]"
+              />
+            </div>
+            <div>
+              <img
+                src={img}
+                alt=""
+                className="w-[253px] h-[237px] rounded-[5px]"
+              />
+            </div>
+            <div>
+              <img
+                src={img}
+                alt=""
+                className="w-[253px] h-[237px] rounded-[5px]"
+              />
+            </div>
+            <div>
+              <img
+                src={img}
+                alt=""
+                className="w-[253px] h-[237px] rounded-[5px]"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container w-[60%] mx-auto">
+          <div className="flex justify-between">
+            <div>
+              <button
+                className={`font-inter font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
+                  activeTab === "description" ? "underline" : "no-underline"
+                }`}
+                onClick={() => handleTabClick("description")}
+              >
+                Description
+              </button>
+            </div>
+            <div>
+              <button
+                className={`font-inter font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
+                  activeTab === "additionalInfo" ? "underline" : "no-underline"
+                }`}
+                onClick={() => handleTabClick("additionalInfo")}
+              >
+                Additional Information
+              </button>
+            </div>
+            <div>
+              <button
+                className={`font-inter font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
+                  activeTab === "reviews" ? "underline" : "no-underline"
+                }`}
+                onClick={() => handleTabClick("reviews")}
+              >
+                Reviews
+              </button>
+            </div>
+          </div>
+          <div className="flex justify-center ">
+            <div className="mt-[20px] w-[100%] p-[50px] gap-[16px]">
+              {activeTab === "description" && (
+                <div className="tracking-[0.5px]">
+                  {" "}
+                  <p className="font-inter font-[400] text-[16px] leading-[1.5rem] mb-[10px]">
+                    Introducing the iPhone 14 Pro Max – a leap forward in
+                    innovation and technology that sets new standards for
+                    smartphones. Immerse yourself in a world of possibilities
+                    with this cutting-edge device, meticulously designed to
+                    exceed your expectations.
+                  </p>
+                  <p className="font-inter font-[400] text-[16px] leading-[24px] mb-[10px]">
+                    The Apple iPhone 14 Pro Max is the top-of-the-line model in
+                    Apple's 2023 iPhone lineup. It features a large 6.7-inch
+                    Super Retina XDR OLED display with a 120Hz refresh rate and
+                    ProMotion technology for smooth scrolling and animations.
+                    The display is also brighter and more energy-efficient than
+                    previous models, with a peak brightness of 2,000 nits.
+                  </p>
+                  <p className="font-inter font-[400] text-[16px] leading-[24px]">
+                    Overall, the iPhone 14 Pro Max is the most powerful and
+                    feature-rich iPhone that Apple has ever made. It is a great
+                    choice for users who want the best possible smartphone
+                    experience.
+                  </p>
+                </div>
+              )}
+              {activeTab === "additionalInfo" && (
+                <>
+                  <div className="mb-[15px]">
+                    <h1 className="font-inter font-bold text-[20px] leading-[24.2px] p-[5px]">
+                      Features of the iPhone 14 Pro Max include:
+                    </h1>
+                    <div>
+                      <ul className=" list-disc ml-[30px] gap-[12px] font-inter font-[400] text-[16px] leading-[32px]">
+                        <li className="">
+                          A new Emergency SOS feature that allows users to call
+                          for help by holding down a side button and the volume
+                          button
+                        </li>
+                        <li>
+                          A new Cinematic mode for video recording that
+                          automatically tracks and focuses on subjects in the
+                          frame
+                        </li>
+                        <li>
+                          A new ProRes video codec for higher-quality video
+                          recording and editing
+                        </li>
+                        <li>A new longer-lasting battery</li>
+                        <li>Support for 5G connectivity</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="mb-[15px]">
+                    <h1 className="font-inter font-bold text-[20px] leading-[24.2px] p-[5px]">
+                      Highlight
+                    </h1>
+                    <div>
+                      <ul className=" list-disc ml-[30px] gap-[12px] font-inter font-[400] text-[16px] leading-[32px]">
+                        <li className="">512 GB ROM</li>
+                        <li>17.02 cm (6.7 inch) Super Retina XDR Display</li>
+                        <li>48MP + 12MP + 12MP | 12MP Front Camera</li>
+                        <li>A16 Bionic Chip, 6 Core Processor Processor</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="mb-[15px]">
+                    <p className="font-inter font-[400] text-[16px] leading-[24px]">
+                      <span className=" font-inter font-[600] text-[16px] leading-[24px] ">
+                        Note:
+                      </span>{" "}
+                      Please allow for a brief processing time before your
+                      iPhone 14 Pro Max ships. Thank you for your patience!!
+                    </p>
+                  </div>
+                </>
+              )}
+              {activeTab === "reviews" && (
+                <div className="w-full flex justify-center">
+                  {/* {showReviewForm ? (
+                    <button>Back to Reviews</button>
+                  ) : (
+                    <button className="">Write a Review</button>
+                  )}
+                  <button>Load More Reviews</button> */}
+                  <button
+                    className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-inter font-[700] text-[18px] leading-[30px] text-center"
+                    onClick={handleReviewForm}
+                  >
+                    Write a Review
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div>
+            {activeTab === "reviews" && (
+              <div>{showReviewForm ? <ReviewForm /> : <ReviewList />}</div>
+            )}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
