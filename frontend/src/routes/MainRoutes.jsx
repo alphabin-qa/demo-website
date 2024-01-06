@@ -2,9 +2,10 @@ import { lazy } from "react";
 import Loadable from "../components/Loadable";
 import AboutUs from "../components/AboutUs";
 import ErrorPage from "../components/ErrorPage";
-import Contact from "../components/Contact";
+import Contact from "../components/ContactUs";
 import ProductDetail from "../components/ProductDetail";
 import MyAccount from "../components/MyAccount";
+import Wishlist from "../components/Wishlist";
 const Home = Loadable(lazy(() => import("../components/Home")));
 const DefaultRoute = Loadable(
   lazy(() => import("../DefaultRoute/DefaultRoute"))
@@ -37,6 +38,10 @@ const MainRoutes = {
     {
       path: "account",
       element: <MyAccount />,
+    },
+    {
+      path: "wishlist",
+      element: <Wishlist />,
     },
     {
       path: "*",

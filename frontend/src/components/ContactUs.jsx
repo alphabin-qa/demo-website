@@ -1,6 +1,13 @@
 import React from "react";
 
 const Contact = () => {
+  const loaderStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    display: "block",
+  };
   return (
     <>
       <div className="flex flex-col justify-center items-center my-[151px] ">
@@ -15,7 +22,7 @@ const Contact = () => {
               height="100%"
               loading="lazy"
               frameborder="0"
-              title="dnkjsahflosdhfg;osho"
+              title="Alphabin Technology"
             ></iframe>
           </div>
         </div>

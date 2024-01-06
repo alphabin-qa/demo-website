@@ -96,7 +96,12 @@ const Header = () => {
                     setOpenSearch(!openSearch);
                   }}
                 />
-                <WishList className="cursor-pointer" />
+                <WishList
+                  className="cursor-pointer"
+                  onClick={() => {
+                    navigate("/wishlist");
+                  }}
+                />
                 <Cart className="cursor-pointer" />
                 <User className="cursor-pointer" onClick={handleClick} />
               </div>
