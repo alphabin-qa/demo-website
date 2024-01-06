@@ -1,21 +1,138 @@
-import React from "react";
+import { StarFilled, StarOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
 
-const ReviewForm = () => {
+const ReviewForm = ({ onSubmit }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [title, setTitle] = useState("");
+  const [opinion, setOpinion] = useState("");
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+
+  const handlleHover = (hoveredRating) => {
+    setHoverRating(hoveredRating);
+  };
+
+  const handleRatingClick = (clickedRating) => {
+    setRating(clickedRating);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newReview = {
+      name,
+      email,
+      title,
+      rating,
+      opinion,
+    };
+    onSubmit(newReview);
+    setName("");
+    setEmail("");
+    setTitle("");
+    setRating(0);
+    setOpinion("");
+  };
+
   return (
-    <div>
-      <div className="bg-gray-200 px-[100px] p-[60px]">
-        <div className="flex justify-between">
+    <div className="">
+      <div className="p-[40px]">
+        {/* For Name & Email */}
+        <div className="flex justify-between gap-4 mb-[20px]">
           <div>
-            <div className="py-[8px]"><label htmlFor="" className="font-inter font-[500] text-[16px] leading-[19.36px]">Your Name</label></div>
-            <input type="text" className="w-[338px] h-[40px] rounded-[2.52px] border-[1px]" />
+            <div className="py-[8px]">
+              <label
+                htmlFor=""
+                className="font-inter font-[500] text-[16px] leading-[19.36px]"
+              >
+                Your Name
+              </label>
+            </div>
+            <input
+              type="text"
+              value={name}
+              className="xl:w-[300px] lg:w-[280px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div>
-          <div className="py-[8px]"><label htmlFor="" className="font-inter font-[500] text-[16px] leading-[19.36px]">Your Email</label></div>
-            <input type="email" className="w-[338px] h-[40px] rounded-[2.52px] border-[1px]" />
+            <div className="py-[8px]">
+              <label
+                htmlFor=""
+                className="font-inter font-[500] text-[16px] leading-[19.36px]"
+              >
+                Your Email
+              </label>
+            </div>
+            <input
+              type="email"
+              value={email}
+              className="xl:w-[300px] lg:w-[280px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
-          <div>
-            <p>Give Rating: </p>
+        </div>
+        {/* For Rating */}
+        <div className="flex gap-[7px] py-[10px] items-center mb-[20px]">
+          <div className="font-inter font-[500] text-[16px] leading-[19.36px]">
+            Give Rating:{" "}
           </div>
+          <div className="">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                className={`cursor-pointer px-[10px] text-2xl`}
+                onMouseEnter={() => handlleHover(star)}
+                onMouseLeave={() => handlleHover(0)}
+                onClick={() => handleRatingClick(star)}
+              >
+                {hoverRating >= star || rating >= star ? (
+                  <StarFilled />
+                ) : (
+                  <StarOutlined />
+                )}
+              </span>
+            ))}
+          </div>
+        </div>
+        {/* For Review Title */}
+        <div className="mb-[20px]">
+          <label
+            htmlFor=""
+            className="font-inter font-[500] text-[16px] leading-[19.36px]"
+          >
+            Review Title
+          </label>{" "}
+          <input
+            type="text"
+            value={title}
+            className="w-full mt-[10px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        {/* For Opinion */}
+        <div className=" mb-[20px]">
+          <label
+            htmlFor=""
+            className="font-inter font-[500] text-[16px] leading-[19.36px]"
+          >
+            Give Us Your Opinion
+          </label>{" "}
+          <input
+            type="text"
+            value={opinion}
+            className="w-full mt-[10px] h-[120px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
+            onChange={(e) => setOpinion(e.target.value)}
+          />
+        </div>
+        {/* For Submit Button */}
+        <div>
+          <button
+            className="px-[80px] py-[15px] border-[1px] rounded-[3px] bg-black text-white font-inter font-[400] text-[16px] leading-[19.36px] items-center"
+            onClick={handleSubmit}
+          >
+            SUBMIT
+          </button>
         </div>
       </div>
     </div>

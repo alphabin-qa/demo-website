@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { StarFilled, StarOutlined } from "@ant-design/icons";
+import { EditOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
 import { FeatureProductsData } from "../RawData/static";
 import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
+import FeatureCards from "./FeatureCards";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import Slider from "react-slick";
+import { Link } from "react-router-dom";
 
 function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
@@ -13,7 +17,6 @@ function ProductDetail() {
     const storedReviews = localStorage.getItem("reviews");
     return storedReviews ? JSON.parse(storedReviews) : [];
   });
-  const [visibleReview, setVisibleReview] = useState(2);
   const { id } = useParams();
 
   useEffect(() => {
@@ -50,9 +53,56 @@ function ProductDetail() {
     setShowReviewForm(false);
   };
 
-  const handleLoadMoreReview = () => {
-    setVisibleReview((prevVisibleReviews) => prevVisibleReviews + 2);
+  const NextArrow = ({ onClick }) => {
+    return (
+      <div className="absolute right-0 -top-[60px]" onClick={onClick}>
+        <div className="rounded-[50px] ml-[10px] bg-[#EEEFF3]">
+          <RightOutlined className="w-[39px] h-[39px] p-[12px] cursor-pointer" />
+        </div>
+      </div>
+    );
   };
+
+  const PrevArrow = ({ onClick }) => {
+    return (
+      <div className="absolute right-[80px] -top-[60px]" onClick={onClick}>
+        <div className="rounded-[50px] ml-[10px] bg-[#EEEFF3]">
+          <LeftOutlined className="w-[39px] h-[39px] p-[12px] cursor-pointer" />
+        </div>
+      </div>
+    );
+  };
+
+  const settings = {
+    arrows: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 650,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <>
       {/* Product Details */}
@@ -303,29 +353,71 @@ function ProductDetail() {
                 </>
               )}
               {activeTab === "reviews" && (
-                <div className="w-full flex justify-center">
-                  {/* {showReviewForm ? (
-                    <button>Back to Reviews</button>
+                <div>
+                  {showReviewForm ? (
+                    <>
+                      <div className="w-full flex justify-center items-center">
+                        <button
+                          className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-inter font-[700] text-[18px] leading-[30px]"
+                          onClick={handleReviewForm}
+                        >
+                          Back to Review
+                        </button>
+                      </div>
+                    </>
                   ) : (
-                    <button className="">Write a Review</button>
+                    <>
+                      <div className="w-full flex justify-center items-center">
+                        <button
+                          className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-inter font-[700] text-[18px] leading-[30px]"
+                          onClick={handleReviewForm}
+                        >
+                          <EditOutlined /> Write a Review
+                        </button>
+                      </div>
+                    </>
                   )}
-                  <button>Load More Reviews</button> */}
-                  <button
-                    className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-inter font-[700] text-[18px] leading-[30px] text-center"
-                    onClick={handleReviewForm}
-                  >
-                    Write a Review
-                  </button>
+                </div>
+              )}
+              {activeTab === "reviews" && (
+                <div>
+                  {showReviewForm ? (
+                    <ReviewForm onSubmit={handleReviewSubmit} />
+                  ) : (
+                    <ReviewList reviews={reviews} />
+                  )}
                 </div>
               )}
             </div>
           </div>
 
-          <div>
-            {activeTab === "reviews" && (
-              <div>{showReviewForm ? <ReviewForm /> : <ReviewList />}</div>
-            )}
+          <div></div>
+        </div>
+      </section>
+
+      <section className="mb-[5rem]">
+        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
+          <div className="border-b-[1px] h-[50px]">
+            <div className="h-[39px]">
+              <div>
+                <h1 className="float-start font-roboto font-[600] sm:text-[18px] xl:text-[24px] md:text-[20px] lg:text-[22px] leading-[28.13px]">
+                  Feature Product
+                </h1>
+              </div>
+            </div>
           </div>
+          <Slider {...settings}>
+            {FeatureProductsData.map((product) => (
+              <Link to={`/home`} key={product.id}>
+                <FeatureCards
+                  img={product.img}
+                  header={product.header}
+                  price={product.price}
+                  reviewCount={product.reviewCount}
+                />
+              </Link>
+            ))}
+          </Slider>
         </div>
       </section>
     </>
