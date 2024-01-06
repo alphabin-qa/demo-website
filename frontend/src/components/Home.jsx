@@ -84,9 +84,11 @@ const Home = () => {
               <p className="mt-5 text-[12px] md:text-[18px] lg:text-[18px] sm:mx-[50px] md:mx-[200px] lg:mx-[300px] font-inter leading-[21.78px] align-center text-white">
                 Lorem ipsum dolor sit amet consectetur amet consectetur.
               </p>
-              <button className="lg:w-[170px] lg:h-[48px] p-[5px] md:p-[7px] lg:p-[10px] font-inter font-[400] lg:text-[18px] leading-[21.78px] align-middle border-white bg-white mt-4 px-[20px] py-[10px] hover:bg-transparent hover:border-[1px] hover:text-white">
-                Shop Now
-              </button>
+              <Link to={`/products`}>
+                <button className="lg:w-[170px] lg:h-[48px] p-[5px] md:p-[7px] lg:p-[10px] font-inter font-[400] lg:text-[18px] leading-[21.78px] align-middle border-white bg-white mt-4 px-[20px] py-[10px] hover:bg-transparent hover:border-[1px] hover:text-white">
+                  Shop Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>

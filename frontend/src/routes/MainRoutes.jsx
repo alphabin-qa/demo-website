@@ -6,6 +6,7 @@ import Contact from "../components/ContactUs";
 import ProductDetail from "../components/ProductDetail";
 import MyAccount from "../components/MyAccount";
 import Wishlist from "../components/Wishlist";
+import AllProducts from "../components/AllProducts";
 const Home = Loadable(lazy(() => import("../components/Home")));
 const DefaultRoute = Loadable(
   lazy(() => import("../DefaultRoute/DefaultRoute"))
@@ -30,6 +31,10 @@ const MainRoutes = {
     {
       path: "contact-us",
       element: <Contact />,
+    },
+    {
+      path: "products",
+      element: <AllProducts />,
     },
     {
       path: "product-detail/:id",
