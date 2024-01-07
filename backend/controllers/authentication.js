@@ -58,13 +58,12 @@ exports.register = async (req, res) => {
       password: hashedPassword,
     });
 
-    console.log("USERRRR", user);
     return res.status(200).json({
       success: true,
       message: "USer Created Successfully",
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(500).json({
       success: false,
       message: "User Cannot be registered, please try again later",
@@ -94,7 +93,6 @@ exports.login = async (req, res) => {
     const payload = {
       email: user.email,
       id: user._id,
-      role: user.role,
     };
 
     if (await bcrypt.compare(password, user.password)) {
@@ -116,5 +114,85 @@ exports.login = async (req, res) => {
       success: false,
       message: "Login Failure",
     });
+  }
+};
+
+exports.addAddress = async (req, res) => {
+  try {
+    const { address } = req.body;
+    const authHeader = req.headers["authorization"];
+    const authToken = authHeader && authHeader.split(" ")[1];
+
+    const decodedToken = jwt.decode(authToken, { complete: true });
+
+    if (decodedToken && decodedToken.payload.email) {
+      const email = decodedToken.payload.email;
+
+      let user = await User.findOne({ email });
+      if (!user) {
+        return res.status(401).json({
+          success: false,
+          message: "User is not registered",
+        });
+      }
+      if (user?.addresses.length > 4) {
+        return res.status(401).json({
+          success: false,
+          message: "You can not add more than 4 addresses",
+        });
+      } else {
+        user.addresses.push({
+          city: address.city || "",
+          country: address.country || "",
+          email: address.email || "",
+          firstname: address.firstName || "",
+          state: address.state || "",
+          street: address.street || "",
+          zipCode: address.zipCode || "",
+        });
+        await user.save();
+      }
+
+      const payload = {
+        id: user._id,
+        fistname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        address: user.addresses,
+      };
+      return res.status(200).json({
+        data: { success: true, payload },
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+exports.userDetail = async (req, res) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    const authToken = authHeader && authHeader.split(" ")[1];
+
+    const decodedToken = jwt.decode(authToken, { complete: true });
+
+    if (decodedToken && decodedToken.payload.email) {
+      const email = decodedToken.payload.email;
+      let user = await User.findOne({ email });
+      if (!user) {
+        res.json({
+          data: {
+            status: "failure",
+            data: "User is not found",
+          },
+        });
+      } else {
+        return res.status(200).json({
+          data: { success: true, user },
+        });
+      }
+    }
+  } catch (error) {
+    console.error(error);
   }
 };

@@ -9,17 +9,20 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import FeatureCards from "./FeatureCards";
 import CategoryCards from "./CategoryCards";
 import { Link } from "react-router-dom";
-import { FeatureProductsData, CategoryProductsData } from "../RawData/static";
+import {
+  FeatureProductsData,
+  CategoryProductsData,
+} from "../StaticData/static";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const userToken = getUserAccessToken();
-  //   if (!userToken) {
-  //     navigate("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const userToken = getUserAccessToken();
+    if (!userToken) {
+      navigate("/login");
+    }
+  }, []);
 
   const NextArrow = ({ onClick }) => {
     return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EditOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
-import { FeatureProductsData } from "../RawData/static";
+import { FeatureProductsData } from "../StaticData/static";
 import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
 import FeatureCards from "./FeatureCards";

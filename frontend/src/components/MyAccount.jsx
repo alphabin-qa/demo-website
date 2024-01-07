@@ -2,24 +2,132 @@ import { Avatar, Hidden } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { removeUserAccessToken } from "../utils/localstorage.helper";
+import {
+  useAddAddressMutation,
+  useGetUserMutation,
+} from "../services/authServices";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 const MyAccount = () => {
   const menuItems = [
     { id: 1, label: "My Profile" },
     { id: 2, label: "My Order" },
-    { id: 4, label: "Wishlist" },
-    { id: 5, label: "Address" },
-    { id: 6, label: "Log out" },
+    { id: 3, label: "Wishlist" },
+    { id: 4, label: "Address" },
+    { id: 5, label: "Log out" },
   ];
+  const [addAddress] = useAddAddressMutation();
+  const [userDetail] = useGetUserMutation();
   const navigate = useNavigate();
   const [selection, setSelection] = useState(1);
+  const [userDetails, setUserDetails] = useState({});
   const [selectAddress, setSelectAddress] = useState(false);
+  const user = useSelector((state) => state?.userData);
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    email: "",
+    city: "",
+    street: "",
+    country: "",
+    state: "",
+    zipCode: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        const { data } = await addAddress({
+          id: user[0]?.user?._id,
+          address: formData,
+        });
+        if (data.success === true) {
+          toast.success(`Fill all the required fields`, {
+            duration: 4000,
+            style: {
+              border: "1px solid black",
+              backgroundColor: "black",
+              color: "white",
+            },
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      setFormData({
+        firstName: "",
+        email: "",
+        city: "",
+        street: "",
+        country: "",
+        state: "",
+        zipCode: "",
+      });
+    }
+  };
+
+  const validateForm = (data) => {
+    const errors = {};
+
+    if (!data.firstName.trim()) {
+      errors.firstName = "First Name is required";
+    }
+
+    if (!data.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!isValidEmail(data.email)) {
+      errors.email = "Invalid email address";
+    }
+    if (Object.keys(errors).length) {
+      toast.success(`Fill all the required fields`, {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    }
+    return errors;
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   useEffect(() => {
-    if (selection === 6) {
+    if (selection === 5) {
       removeUserAccessToken();
       navigate("/login");
+    } else if (selection === 3) {
+      navigate("/wishlist");
     }
   }, [selection]);
+
+  const fetchDetails = async () => {
+    try {
+      const { data } = await userDetail();
+      setUserDetails(data?.data?.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchDetails();
+  }, []);
 
   return (
     <div>
@@ -137,7 +245,7 @@ const MyAccount = () => {
           )}
 
           {/* Address */}
-          {selection === 5 && (
+          {selection === 4 && (
             <div
               className={`w-[963px] h-full border rounded-[5px] ${
                 selectAddress && "hidden"
@@ -154,32 +262,31 @@ const MyAccount = () => {
                   EDIT BUTTON IS PENDING
                 </div>
               </div>
-              <div className="flex justify-start items-center gap-8 mt-[30px] ml-[30px] mb-8">
-                <div className="w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
-                  <div className="p-[10px]">
-                    <p>Bhavin Gamit</p>
-                    <p>
-                      A/4, Industrial Society, Hari Ichchha Industrial Society
-                      Aanjada Nagar, Bhatena, Surat, Gujarat SURAT, GUJARAT
-                      395002
-                    </p>
-                  </div>
-                </div>
-                <div className="w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
-                  <div className="p-[10px]">
-                    <p>Bhavin Gamit</p>
-                    <p>
-                      A/4, Industrial Society, Hari Ichchha Industrial Society
-                      Aanjada Nagar, Bhatena, Surat, Gujarat SURAT, GUJARAT
-                      395002
-                    </p>
-                  </div>
-                </div>
-                <div></div>
+              <div className="grid grid-cols-2 justify-start items-center gap-8 mt-[30px] ml-[30px] mb-8">
+                {userDetails?.addresses.map((item) => {
+                  return (
+                    <div className="w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
+                      <div className="p-[10px]">
+                        <p>{item?.firstname}</p>
+                        <p>
+                          {item?.street +
+                            " " +
+                            item?.city +
+                            " " +
+                            item?.state +
+                            " " +
+                            item?.country +
+                            " " +
+                            item?.zipCode}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
-          {selectAddress && (
+          {selection === 4 && selectAddress && (
             <div
               className={`w-[963px] h-full border rounded-[5px] ${
                 !selectAddress && "hidden"
@@ -197,7 +304,7 @@ const MyAccount = () => {
                   </div>
                   <div
                     onClick={() => {
-                      setSelectAddress(false);
+                      handleSubmit();
                     }}
                   >
                     save your address
@@ -208,10 +315,13 @@ const MyAccount = () => {
                 <div className="w-full">
                   <label className="w-full flex flex-col gap-[13px]">
                     <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
-                      FIRST NAME
+                      FIRST NAME <sup className="text-red-600">*</sup>
                     </p>
                     <input
                       type="text"
+                      onChange={handleChange}
+                      value={formData.firstName}
+                      name="firstName"
                       className="border w-full h-[40.39px] pl-2 font-inter"
                     />
                   </label>
@@ -219,10 +329,13 @@ const MyAccount = () => {
                 <div className="flex justify-between items-center gap-[104px]">
                   <label className=" w-full flex flex-col gap-[13px]">
                     <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
-                      EMAIL
+                      EMAIL<sup className="text-red-600">*</sup>
                     </p>
                     <input
                       type="text"
+                      onChange={handleChange}
+                      value={formData.email}
+                      name="email"
                       className="border w-[370px] h-[40.39px] pl-2 font-inter"
                     />
                   </label>
@@ -232,6 +345,9 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
+                      onChange={handleChange}
+                      value={formData.city}
+                      name="city"
                       className="border w-[370px] h-[40.39px] pl-2 font-inter"
                     />
                   </label>
@@ -243,6 +359,9 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
+                      onChange={handleChange}
+                      value={formData.street}
+                      name="street"
                       className="border w-[370px] h-[40.39px] pl-2 font-inter"
                     />
                   </label>
@@ -252,6 +371,9 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
+                      onChange={handleChange}
+                      value={formData.country}
+                      name="country"
                       className="border w-[370px] h-[40.39px] pl-2 font-inter"
                     />
                   </label>
@@ -263,6 +385,9 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
+                      onChange={handleChange}
+                      value={formData.state}
+                      name="state"
                       className="border w-[370px] h-[40.39px] pl-2 font-inter"
                     />
                   </label>
@@ -272,6 +397,9 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
+                      value={formData.zipCode}
+                      name="zipCode"
+                      onChange={handleChange}
                       className="border w-[370px] h-[40.39px] pl-2 font-inter"
                     />
                   </label>

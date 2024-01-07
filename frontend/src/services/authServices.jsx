@@ -1,5 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../utils/base-query";
+import { getUserAccessToken } from "../utils/localstorage.helper";
 
 // Define a service using a base URL and expected endpoints
 export const authApi = createApi({
@@ -25,7 +26,36 @@ export const authApi = createApi({
         };
       },
     }),
+    addAddress: builder.mutation({
+      query: (data) => {
+        return {
+          method: "POST",
+          url: "/address",
+          body: data,
+          headers: {
+            authorization: `Bearer ${getUserAccessToken()}`,
+          },
+        };
+      },
+    }),
+    getUser: builder.mutation({
+      query: (data) => {
+        return {
+          method: "GET",
+          url: "/me",
+          body: data,
+          headers: {
+            authorization: `Bearer ${getUserAccessToken()}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useSignupMutation } = authApi;
+export const {
+  useLoginMutation,
+  useSignupMutation,
+  useAddAddressMutation,
+  useGetUserMutation,
+} = authApi;

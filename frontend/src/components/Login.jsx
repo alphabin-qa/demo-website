@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useLoginMutation } from "../services/authServices";
+import { useGetUserMutation, useLoginMutation } from "../services/authServices";
 import { useNavigate } from "react-router-dom";
 import {
   getUserAccessToken,
   setUserAccessToken,
 } from "../utils/localstorage.helper";
 import toast from "react-hot-toast";
-import usePasswordToggle from "../services/usePasswordToggle";
+import { usePasswordToggle } from "../utils/usePasswordToggle";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../store/reducers/userData";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [login] = useLoginMutation();
 
   const [formData, setFormData] = useState({
@@ -32,6 +35,7 @@ const Login = () => {
     try {
       const { data } = await login(formData);
       if (data) {
+        dispatch(setUser(data));
         setUserAccessToken(data?.user?.token);
         toast.success("Welcome to the Alphabin DEMO STORE", {
           duration: 4000,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Products } from "../RawData/static";
+import { Products } from "../StaticData/static";
 import { Link } from "react-router-dom";
 import { StarFilled, StarOutlined } from "@ant-design/icons";
 import WishList from "../assets/WishList";
@@ -9,7 +9,9 @@ function AllProducts() {
   return (
     <section className="mt-[10rem]">
       <div className="container mx-auto mb-[3rem]">
-        <h1 className="font-inter font-[700] text-[28px] leading-[18.5px]">Camera</h1>
+        <h1 className="font-inter font-[700] text-[28px] leading-[18.5px]">
+          Camera
+        </h1>
       </div>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
         {Products.map((product) => (
