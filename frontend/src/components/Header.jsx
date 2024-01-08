@@ -14,6 +14,7 @@ import {
   getUserAccessToken,
   removeUserAccessToken,
 } from "../utils/localstorage.helper";
+import { useSelector } from "react-redux";
 
 const headerMenu = ["Home", "About Us", "Contact Us", "All Products"];
 
@@ -24,6 +25,8 @@ const Header = () => {
   const [token, setToken] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const { wishlistItems } = useSelector((state) => state?.wishlists);
 
   const handleMenuSelection = (menuItem) => {
     switch (menuItem) {
@@ -102,6 +105,7 @@ const Header = () => {
                     navigate("/wishlist");
                   }}
                 />
+                ({wishlistItems?.length})
                 <Cart className="cursor-pointer" />
                 <User className="cursor-pointer" onClick={handleClick} />
               </div>

@@ -46,7 +46,7 @@ const Home = () => {
 
   const settings = {
     arrows: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -184,14 +184,14 @@ const Home = () => {
           </div>
           <Slider {...settings}>
             {FeatureProductsData.map((product) => (
-              <Link to={`/product-detail/${product.id}`} key={product.id}>
-                <FeatureCards
-                  img={product.img}
-                  header={product.header}
-                  price={product.price}
-                  reviewCount={product.reviewCount}
-                />
-              </Link>
+              <FeatureCards
+                key={product.id}
+                img={product.img}
+                header={product.header}
+                price={product.price}
+                reviewCount={product.reviewCount}
+                id={product.id}
+              />
             ))}
           </Slider>
         </div>
