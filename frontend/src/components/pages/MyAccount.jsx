@@ -128,6 +128,7 @@ const MyAccount = () => {
   useEffect(() => {
     fetchDetails();
   }, []);
+  console.log(userDetails);
 
   return (
     <div>

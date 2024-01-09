@@ -62,6 +62,11 @@ const userSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  phoneNumber: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   addresses: [addressSchema],
 });
 

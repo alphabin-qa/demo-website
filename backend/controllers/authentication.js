@@ -196,3 +196,35 @@ exports.userDetail = async (req, res) => {
     console.error(error);
   }
 };
+
+exports.updateUser = async (req, res) => {
+  try {
+    const { firstName, lastName, phoneNumber, password } = req.body;
+
+    const authHeader = req.headers["authorization"];
+    const authToken = authHeader && authHeader.split(" ")[1];
+
+    const decodedToken = jwt.decode(authToken, { complete: true });
+
+    if (decodedToken && decodedToken.payload.email) {
+      const email = decodedToken.payload.email;
+      let user = await User.findOne({ email });
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      if (user) {
+        await User.updateOne(user, {
+          fistname: firstName,
+          lastname: lastName,
+          phoneNumber,
+          password: hashedPassword,
+        });
+
+        let updatedUser = await User.findOne({ email });
+        return res.status(200).json({
+          data: { success: true, updatedUser },
+        });
+      }
+    }
+  } catch (error) {}
+};
