@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EditOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
-import { FeatureProductsData } from "../StaticData/static";
-import ReviewForm from "./ReviewForm";
-import ReviewList from "./ReviewList";
-import FeatureCards from "./FeatureCards";
+import { FeatureProductsData } from "../../StaticData/static";
+import ReviewForm from "../ReviewForm";
+import ReviewList from "../ReviewList";
+import FeatureCards from "../FeatureCards";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
 
 function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
@@ -17,7 +16,7 @@ function ProductDetail() {
     const storedReviews = localStorage.getItem("reviews");
     return storedReviews ? JSON.parse(storedReviews) : [];
   });
-  const { id } = useParams();
+  let { id } = useParams();
 
   useEffect(() => {
     localStorage.setItem("reviews", JSON.stringify(reviews), [reviews]);
@@ -408,14 +407,14 @@ function ProductDetail() {
           </div>
           <Slider {...settings}>
             {FeatureProductsData.map((product) => (
-              <Link to={`/home`} key={product.id}>
-                <FeatureCards
-                  img={product.img}
-                  header={product.header}
-                  price={product.price}
-                  reviewCount={product.reviewCount}
-                />
-              </Link>
+              <FeatureCards
+                key={product.id}
+                img={product.img}
+                header={product.header}
+                price={product.price}
+                reviewCount={product.reviewCount}
+                id={product.id}
+              />
             ))}
           </Slider>
         </div>

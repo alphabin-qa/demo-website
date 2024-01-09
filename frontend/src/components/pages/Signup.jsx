@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useSignupMutation } from "../services/authServices";
+import { useSignupMutation } from "../../services/authServices";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {

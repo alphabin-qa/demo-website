@@ -6,9 +6,9 @@ import {
   HeartFilled,
   HeartOutlined,
 } from "@ant-design/icons";
-import Cart from "../assets/Cart";
+import Cart from "../../assets/Cart";
 import "./home.css";
-import { removeFromWishlist } from "../store/reducers/wishListItems";
+import { removeFromWishlist } from "../../store/reducers/wishListItems";
 
 const Wishlist = () => {
   const { wishlistItems } = useSelector((state) => state?.wishlists);

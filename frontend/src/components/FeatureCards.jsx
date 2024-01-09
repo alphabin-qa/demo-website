@@ -7,18 +7,26 @@ import {
 } from "@ant-design/icons";
 import Cart from "../assets/Cart";
 import { Link } from "react-router-dom";
-import "./home.css";
-import { useDispatch } from "react-redux";
+import "./pages/home.css";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addToWishlist,
+  removeFromWishlist,
 } from "../store/reducers/wishListItems";
 
 const FeatureCards = ({ img, header, price, reviewCount, id }) => {
   const dispatch = useDispatch();
+  const wishlistItems = useSelector((state) => state?.wishlists?.wishlistItems);
   const [wishIcon, setWishIcon] = useState(false);
 
   const addToWishlistHandler = () => {
-    dispatch(addToWishlist({ id, img, header, price, reviewCount }));
+    const isInWishlist = wishlistItems.some((item) => item.id === id);
+
+    if (isInWishlist) {
+      dispatch(removeFromWishlist({ id, img, header, price, reviewCount }));
+    } else {
+      dispatch(addToWishlist({ id, img, header, price, reviewCount }));
+    }
     setWishIcon(!wishIcon);
   };
 
@@ -31,7 +39,7 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
           }}
           className="h-[45px] w-[45px]"
         >
-          {wishIcon ? (
+          {wishlistItems.some((item) => item.id === id) ? (
             <HeartFilled className="heart-icon" />
           ) : (
             <HeartOutlined className="heart-icon" />

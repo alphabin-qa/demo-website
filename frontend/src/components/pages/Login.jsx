@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useGetUserMutation, useLoginMutation } from "../services/authServices";
+import { useGetUserMutation, useLoginMutation } from "../../services/authServices";
 import { useNavigate } from "react-router-dom";
 import {
   getUserAccessToken,
   setUserAccessToken,
-} from "../utils/localstorage.helper";
+} from "../../utils/localstorage.helper";
 import toast from "react-hot-toast";
-import { usePasswordToggle } from "../utils/usePasswordToggle";
+import { usePasswordToggle } from "../../utils/usePasswordToggle";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../store/reducers/userData";
+import { setUser } from "../../store/reducers/userData";
 
 const Login = () => {
   const navigate = useNavigate();

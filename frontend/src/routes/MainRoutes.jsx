@@ -1,13 +1,13 @@
 import { lazy } from "react";
 import Loadable from "../components/Loadable";
-import AboutUs from "../components/AboutUs";
+import AboutUs from "../components/pages/AboutUs";
 import ErrorPage from "../components/ErrorPage";
-import Contact from "../components/ContactUs";
-import ProductDetail from "../components/ProductDetail";
-import MyAccount from "../components/MyAccount";
-import Wishlist from "../components/Wishlist";
-import AllProducts from "../components/AllProducts";
-const Home = Loadable(lazy(() => import("../components/Home")));
+import Contact from "../components/pages/ContactUs";
+import ProductDetail from "../components/pages/ProductDetail";
+import MyAccount from "../components/pages/MyAccount";
+import Wishlist from "../components/pages/Wishlist";
+import AllProducts from "../components/pages/AllProducts";
+const Home = Loadable(lazy(() => import("../components/pages/Home")));
 const DefaultRoute = Loadable(
   lazy(() => import("../DefaultRoute/DefaultRoute"))
 );

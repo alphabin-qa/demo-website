@@ -1,11 +1,11 @@
 import { Avatar, Hidden } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { removeUserAccessToken } from "../utils/localstorage.helper";
+import { removeUserAccessToken } from "../../utils/localstorage.helper";
 import {
   useAddAddressMutation,
   useGetUserMutation,
-} from "../services/authServices";
+} from "../../services/authServices";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 const MyAccount = () => {

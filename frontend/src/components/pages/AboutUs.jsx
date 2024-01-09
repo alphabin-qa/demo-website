@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
-import AboutUs1 from "../assets/aboutus-1.png";
-import AboutUs2 from "../assets/aboutus-2.png";
+import Header from "../Header";
+import AboutUs1 from "../../assets/aboutus-1.png";
+import AboutUs2 from "../../assets/aboutus-2.png";
 
 const AboutUs = () => {
   return (

@@ -1,5 +1,5 @@
 .main {
-  background-image: url("../assets/Home/bg.png");
+  background-image: url("../../assets/Home/bg.png");
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
@@ -7,28 +7,28 @@
 }
 
 .camera {
-  background-image: url("../assets/Home/Audio__Camera.png");
+  background-image: url("../../assets/Home/Audio__Camera.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .appliances {
-  background-image: url("../assets/Home/Appliances.png");
+  background-image: url("../../assets/Home/Appliances.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .laptop {
-  background-image: url("../assets/Home/maxim-hopman-Hin-rzhOdWs-unsplash.jpg");
+  background-image: url("../../assets/Home/maxim-hopman-Hin-rzhOdWs-unsplash.jpg");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .gadgets {
-  background-image: url("../assets/Home/Gadgets.png");
+  background-image: url("../../assets/Home/Gadgets.png");
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;

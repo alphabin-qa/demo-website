@@ -1,28 +1,28 @@
 import React, { useEffect } from "react";
-import "../index.css";
-import "../components/home.css";
-import { getUserAccessToken } from "../utils/localstorage.helper";
+import "../../index.css";
+import "./home.css";
+import { getUserAccessToken } from "../../utils/localstorage.helper";
 import { useNavigate } from "react-router-dom";
-import { Offer1, Offer2 } from "../assets/Home/HomeImages";
+import { Offer1, Offer2 } from "../../assets/Home/HomeImages";
 import Slider from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import FeatureCards from "./FeatureCards";
-import CategoryCards from "./CategoryCards";
+import FeatureCards from "../FeatureCards";
+import CategoryCards from "../CategoryCards";
 import { Link } from "react-router-dom";
 import {
   FeatureProductsData,
   CategoryProductsData,
-} from "../StaticData/static";
+} from "../../StaticData/static";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const userToken = getUserAccessToken();
-    if (!userToken) {
-      navigate("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userToken = getUserAccessToken();
+  //   if (!userToken) {
+  //     navigate("/login");
+  //   }
+  // }, []);
 
   const NextArrow = ({ onClick }) => {
     return (
@@ -252,13 +252,14 @@ const Home = () => {
             </div>
           </div>
           <Slider {...settings}>
-            {FeatureProductsData.map((el, index) => (
+            {FeatureProductsData.map((product) => (
               <FeatureCards
-                key={index}
-                img={el.img}
-                header={el.header}
-                price={el.price}
-                reviewCount={el.reviewCount}
+                key={product.id}
+                img={product.img}
+                header={product.header}
+                price={product.price}
+                reviewCount={product.reviewCount}
+                id={product.id}
               />
             ))}
           </Slider>
