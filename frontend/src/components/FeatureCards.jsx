@@ -4,6 +4,8 @@ import {
   StarOutlined,
   HeartFilled,
   HeartOutlined,
+  ShoppingOutlined,
+  ShoppingFilled,
 } from "@ant-design/icons";
 import Cart from "../assets/Cart";
 import { Link } from "react-router-dom";
@@ -13,11 +15,14 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "../store/reducers/wishListItems";
+import { addToCart, removeFromCart } from "../store/reducers/cartItems";
 
 const FeatureCards = ({ img, header, price, reviewCount, id }) => {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state?.wishlists?.wishlistItems);
+  const cartItems = useSelector((state) => state?.cartlists?.cartItems);
   const [wishIcon, setWishIcon] = useState(false);
+  const [cartIcon, setCartIcon] = useState(false);
 
   const addToWishlistHandler = () => {
     const isInWishlist = wishlistItems.some((item) => item.id === id);
@@ -28,6 +33,17 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
       dispatch(addToWishlist({ id, img, header, price, reviewCount }));
     }
     setWishIcon(!wishIcon);
+  };
+
+  const addToCartHandler = () => {
+    const isInCart = cartItems.some((item) => item.id === id);
+
+    if (isInCart) {
+      dispatch(removeFromCart({ id, img, header, price, reviewCount }));
+    } else {
+      dispatch(addToCart({ id, img, header, price, reviewCount }));
+    }
+    setCartIcon(!cartIcon);
   };
 
   return (
@@ -47,8 +63,15 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
         </button>
       </div>
       <div className="absolute top-0 right-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] mr-[16px] mt-[14px]">
-        <button className="text-white">
-          <Cart />
+        <button
+          onClick={() => addToCartHandler()}
+          className="h-[45px] w-[45px]"
+        >
+          {cartItems.some((item) => item.id === id) ? (
+            <ShoppingFilled className="heart-icon" />
+          ) : (
+            <ShoppingOutlined className="heart-icon" />
+          )}
         </button>
       </div>
       <Link to={`/product-detail/${id}`}>

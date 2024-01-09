@@ -7,6 +7,7 @@ import ProductDetail from "../components/pages/ProductDetail";
 import MyAccount from "../components/pages/MyAccount";
 import Wishlist from "../components/pages/Wishlist";
 import AllProducts from "../components/pages/AllProducts";
+import Cart from "../components/pages/Cart";
 const Home = Loadable(lazy(() => import("../components/pages/Home")));
 const DefaultRoute = Loadable(
   lazy(() => import("../DefaultRoute/DefaultRoute"))
@@ -47,6 +48,10 @@ const MainRoutes = {
     {
       path: "wishlist",
       element: <Wishlist />,
+    },
+    {
+      path: "cart",
+      element: <Cart />,
     },
     {
       path: "*",
