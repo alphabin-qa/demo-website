@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { EditOutlined, StarFilled, StarOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  MinusOutlined,
+  PlusOutlined,
+  StarFilled,
+  StarOutlined,
+} from "@ant-design/icons";
 import { FeatureProductsData } from "../../StaticData/static";
 import ReviewForm from "../ReviewForm";
 import ReviewList from "../ReviewList";
 import FeatureCards from "../FeatureCards";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../store/reducers/cartItems";
 
 function ProductDetail() {
-  const [quantity, setQuantity] = useState(1);
+  let [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((state) => state.cartlists?.cartItems);
   const [activeTab, setActiveTab] = useState("description");
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState(() => {
@@ -32,11 +42,21 @@ function ProductDetail() {
   const { img, header, price, description, reviewCount } = selectedProduct;
 
   const handleDecrement = () => {
-    if (quantity > 1) setQuantity((prevCount) => prevCount - 1);
+    if (quantity > 1) {
+      quantity = setQuantity((prevCount) => prevCount - 1);
+      console.log("Quantity after decrement---", quantity);
+    }
   };
 
   const handleIncrement = () => {
-    if (quantity < 10) setQuantity((prevCount) => prevCount + 1);
+    if (quantity < 10) {
+      quantity = setQuantity((prevCount) => prevCount + 1);
+      console.log("Quantity after increment---", quantity);
+    }
+  };
+
+  const addToCartHandler = () => {
+    dispatch(addToCart({ id, img, header, price, reviewCount, quantity }));
   };
 
   const handleTabClick = (tab) => {
@@ -159,29 +179,31 @@ function ProductDetail() {
                   <p className="w-[80px] h-[24px] font-inter font-[400] text-[18px] leading-[24px] tracking-[1px] mb-[3px]">
                     Quantity
                   </p>
-                  <div className=" p-[10px] border-[1px] w-[150px] rounded-[3px] border-black">
-                    <div className="grid-cols-3 flex justify-between">
+                  <div className="flex items-center mt-2">
+                    <div className="border-[1px] w-[150px] border-black flex justify-between py-[6px] px-[10px]">
                       <div>
                         <button
-                          className=" float-start w-[18px] h-[18px]"
-                          onClick={handleDecrement}
+                          className="float-start"
+                          onClick={() => handleDecrement()}
                         >
-                          <span className="w-[13px] h-[2px] top-[8px] left-[2px] pr-[10px]">
-                            -
+                          <span className="">
+                            <MinusOutlined />
                           </span>
                         </button>
                       </div>
-                      <div className="font-inter font-[400] text-[18px] leading-[24px] text-center">
+                      <div className="font-inter font-[400] text-[18px] leading-[24px]">
                         {quantity}
                       </div>
-                      <button
-                        className="float-end w-[18px] h-[18px]"
-                        onClick={handleIncrement}
-                      >
-                        <span className="w-[13px] h-[2px] top-[8px] left-[2px] pl-[10px]">
-                          +
-                        </span>
-                      </button>
+                      <div>
+                        <button
+                          className="float-end"
+                          onClick={() => handleIncrement()}
+                        >
+                          <span className="">
+                            <PlusOutlined />
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -192,7 +214,10 @@ function ProductDetail() {
                     </button>
                   </div>
                   <div className="text-center border-[1px] p-[10px] gap-[10px] cursor-pointer hover:border-[2px] border-black">
-                    <button className="font-inter font-[600] text-[16px] leading-[18.8px]">
+                    <button
+                      onClick={() => addToCartHandler()}
+                      className="font-inter font-[600] text-[16px] leading-[18.8px]"
+                    >
                       ADD TO CART
                     </button>
                   </div>
