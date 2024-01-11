@@ -41,8 +41,8 @@ export const authApi = createApi({
     getUser: builder.mutation({
       query: (data) => {
         return {
-          method: "PUT",
-          url: "/updateUser",
+          method: "GET",
+          url: "/me",
           body: data,
           headers: {
             authorization: `Bearer ${getUserAccessToken()}`,
@@ -53,8 +53,8 @@ export const authApi = createApi({
     updateUser: builder.mutation({
       query: (data) => {
         return {
-          method: "GET",
-          url: "/me",
+          method: "PUT",
+          url: "/updateUser",
           body: data,
           headers: {
             authorization: `Bearer ${getUserAccessToken()}`,

@@ -5,10 +5,7 @@ import User from "../assets/User";
 import WishList from "../assets/WishList";
 import { MdOutlineStorage } from "react-icons/md";
 import { TextField } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 import {
   getUserAccessToken,
@@ -106,7 +103,12 @@ const Header = () => {
                   }}
                 />
                 ({wishlistItems?.length})
-                <Cart className="cursor-pointer" />
+                <Cart
+                  className="cursor-pointer"
+                  onClick={() => {
+                    navigate("/cart");
+                  }}
+                />
                 <User className="cursor-pointer" onClick={handleClick} />
               </div>
               <div

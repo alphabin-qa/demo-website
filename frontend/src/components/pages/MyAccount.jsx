@@ -108,6 +108,15 @@ const MyAccount = () => {
     return emailRegex.test(email);
   };
 
+  const fetchDetails = async () => {
+    try {
+      const { data } = await userDetail();
+      setUserDetails(data?.data?.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (selection === 5) {
       removeUserAccessToken();
@@ -117,14 +126,6 @@ const MyAccount = () => {
     }
   }, [selection]);
 
-  const fetchDetails = async () => {
-    try {
-      const { data } = await userDetail();
-      setUserDetails(data?.data?.user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
     fetchDetails();
   }, []);
@@ -142,7 +143,7 @@ const MyAccount = () => {
               <p className="font-inter font-normal text-2xl">Bhavin Gamit</p>
             </div>
             <div className="w-[273px] px-[15px] py-5 flex flex-col gap-8">
-              {menuItems.map((item) => {
+              {menuItems?.map((item) => {
                 return (
                   <div
                     key={item.id}

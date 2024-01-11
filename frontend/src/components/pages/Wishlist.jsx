@@ -21,67 +21,75 @@ const Wishlist = () => {
 
   return (
     <>
-      <div className="mt-[30px] xl:container lg:container md:container sm:container sm:p-[7px] md:p-[12px] mx-auto">
-        <div className="border-b-[1px] h-[50px]">
-          <div className="h-[39px]">
-            <div>
-              <h1 className="float-start font-roboto font-[600] sm:text-[18px] xl:text-[24px] md:text-[20px] lg:text-[22px] leading-[28.13px]">
-                Wishlist
-              </h1>
+      {!wishlistItems.length ? (
+        <div className="h-screen flex justify-center items-center">
+          <p className="text-[#333] w-full font-inter text-[36px] font-bold leading-[18.5px] text-center">
+            Add products into wishlist
+          </p>
+        </div>
+      ) : (
+        <div className="mt-[227px]">
+          <div className="shrink-0 mx-[90px] flex flex-col gap-16">
+            <p className="text-[#333] w-full xl:w-[1270px] font-inter text-[36px] font-bold leading-[18.5px] text-left ml-9">
+              Wishlist
+            </p>
+            <div className="grid grid-cols-4">
+              {wishlistItems?.map((item) => (
+                <div
+                  className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 ml-9 mb-[149px] justify-center items-center relative hover:shadow-md group "
+                  key={item?.id}
+                >
+                  <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px] z-10">
+                    <button
+                      className="h-[45px] w-[45px]"
+                      onClick={() => removeWishlistHandler(item.id)}
+                    >
+                      {item.id ? (
+                        <HeartFilled className="heart-icon" />
+                      ) : (
+                        <HeartOutlined className="heart-icon" />
+                      )}
+                    </button>
+                  </div>
+                  <div className="absolute top-0 right-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] mr-[16px] mt-[14px] z-10">
+                    <button className="text-white">
+                      <Cart />
+                    </button>
+                  </div>
+                  <div className="w-full flex flex-col justify-start items-start">
+                    <div
+                      className=" w-[233px] h-[253px] container my-[31px] ml-[28px] mr-[31px]"
+                      style={{ position: "relative", overflow: "hidden" }}
+                    >
+                      <img
+                        src={item?.img}
+                        className="object-cover w-full h-full"
+                        alt="Product Image"
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
+
+                    <div>
+                      <div className="w-[290px] pl-5 pb-5 flex flex-col gap-2">
+                        <div className="w-[251px] text-base font-semibold font-inter text-[#222]">
+                          {item?.header}
+                        </div>
+                        <div className="flex gap-3">
+                          <div>★★★★★</div>
+                          <div>(97)</div>
+                        </div>
+                        <div className="text-base font-normal font-inter text-[#222]">
+                          {item?.price}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 mt-[20px]">
-          {wishlistItems.map((item) => (
-            <div
-              key={item.id}
-              className="hover:shadow-md group xl:w-[80%] sm:w-[100%] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative"
-            >
-              <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px]">
-                <button
-                  className="h-[45px] w-[45px]"
-                  onClick={() => removeWishlistHandler(item.id)}
-                >
-                  {item.id ? (
-                    <HeartFilled className="heart-icon" />
-                  ) : (
-                    <HeartOutlined className="heart-icon" />
-                  )}
-                </button>
-              </div>
-              <div className="absolute top-0 right-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] mr-[16px] mt-[14px]">
-                <button className="text-white">
-                  <Cart />
-                </button>
-              </div>
-
-              <div className="mt-[4rem]">
-                <img
-                  src={item.img}
-                  className="h-[253px] w-[233px] object-cover"
-                  alt="dp"
-                />
-                <div className="px-[20px]">
-                  <h1 className="font-inter font-bold text-[18px] leading-[21.78px] w-[280px] mt-[10px] h-[44px]">
-                    {item.header}
-                  </h1>
-                  <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between">
-                    <StarFilled />
-                    <StarFilled />
-                    <StarFilled />
-                    <StarFilled />
-                    <StarOutlined />
-                    <p className="text-[12px] leading-[14.52px] font-[400] font-inter">
-                      {item.reviewCount}
-                    </p>
-                  </div>
-                  <p className="mt-[10px]">{item.price}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      )}
     </>
   );
 };

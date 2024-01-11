@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useGetUserMutation, useLoginMutation } from "../../services/authServices";
+import { useLoginMutation } from "../../services/authServices";
 import { useNavigate } from "react-router-dom";
 import {
   getUserAccessToken,
