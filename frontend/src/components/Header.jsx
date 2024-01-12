@@ -6,6 +6,7 @@ import WishList from "../assets/WishList";
 import { MdOutlineStorage } from "react-icons/md";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { IoSearchOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa6";
 
 import {
@@ -50,9 +51,6 @@ const Header = () => {
     setAnchorEl(event.currentTarget);
     navigate("/account");
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     if (!token) {
@@ -91,7 +89,7 @@ const Header = () => {
             <div className="flex justify-center items-center gap-7">
               <div className="flex justify-center items-center gap-2">
                 <Search
-                  className="cursor-pointer"
+                  className="cursor-pointer bg-white"
                   onClick={() => {
                     setOpenSearch(!openSearch);
                   }}
@@ -142,18 +140,25 @@ const Header = () => {
                 )}
               </div>
               {openSearch && (
-                <div className="w-full absolute top-20 inset-x-9 ">
-                  <TextField
-                    sx={{
-                      width: "100%",
-                      "& .MuiInputBase-root": {
+                <div className="flex justify-center items-center drop-container absolute top-0 z-20 bg-white px-5 mx-0 -mt-5 h-[80px]">
+                  <div className="flex items-center justify-center font-inter px-[30px] border-b py-[15px]">
+                    <input
+                      type="text"
+                      style={{
+                        width: "1145px",
+                        height: "43px",
                         paddingLeft: "10px",
-                      },
-                    }}
-                    id="standard-basic"
-                    label="Search"
-                    variant="standard"
-                  />
+                        outline: "none",
+                      }}
+                      className="border-b text-lg"
+                      id="standard-basic"
+                      placeholder="Search..."
+                    />
+                    <IoSearchOutline
+                      className="w-[21px] h-[21px] cursor-pointer"
+                      onClick={() => setOpenSearch(false)}
+                    />
+                  </div>
                 </div>
               )}
             </div>

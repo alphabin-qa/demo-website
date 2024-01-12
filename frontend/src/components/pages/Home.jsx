@@ -17,12 +17,12 @@ import {
 const Home = () => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const userToken = getUserAccessToken();
-  //   if (!userToken) {
-  //     navigate("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const userToken = getUserAccessToken();
+    if (!userToken) {
+      navigate("/login");
+    }
+  }, []);
 
   const NextArrow = ({ onClick }) => {
     return (

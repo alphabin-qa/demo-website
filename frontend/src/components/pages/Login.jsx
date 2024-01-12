@@ -130,11 +130,14 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <p className="font[400] leading-[20px] tracking-[0.6px] mt-4 w-[370px] h-[46px] font-inter">
+              <p className=" flex  justify-center items-center gap-2 font[400] leading-[20px] tracking-[0.4px] mt-4 font-inter">
                 Haven't create an account?{" "}
-                <a href="/signup" className="text-[#0021D1]">
+                <div
+                  className="text-[#0021D1] leading-[0.4px] font-inter"
+                  onClick={() => navigate("/signup")}
+                >
                   create an account
-                </a>
+                </div>
               </p>
             </div>
           </div>

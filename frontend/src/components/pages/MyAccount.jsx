@@ -1,6 +1,14 @@
 import { Avatar, Hidden } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
+import { FaSave } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import { FaRegHeart } from "react-icons/fa";
+import { MdOutlineLocationOn } from "react-icons/md";
+import { IoMdLogOut } from "react-icons/io";
+
 import { removeUserAccessToken } from "../../utils/localstorage.helper";
 import {
   useAddAddressMutation,
@@ -10,11 +18,23 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 const MyAccount = () => {
   const menuItems = [
-    { id: 1, label: "My Profile" },
-    { id: 2, label: "My Order" },
-    { id: 3, label: "Wishlist" },
-    { id: 4, label: "Address" },
-    { id: 5, label: "Log out" },
+    {
+      id: 1,
+      label: "My Profile",
+      icon: <FaRegUser className="w-5 h-5 font-bold" />,
+    },
+    {
+      id: 2,
+      label: "My Order",
+      icon: <HiOutlineShoppingBag className="w-6 h-6" />,
+    },
+    { id: 3, label: "Wishlist", icon: <FaRegHeart className="w-6 h-6" /> },
+    {
+      id: 4,
+      label: "Address",
+      icon: <MdOutlineLocationOn className="w-6 h-6" />,
+    },
+    { id: 5, label: "Log out", icon: <IoMdLogOut className="w-6 h-6" /> },
   ];
   const [addAddress] = useAddAddressMutation();
   const [userDetail] = useGetUserMutation();
@@ -150,7 +170,7 @@ const MyAccount = () => {
                     className={`flex justify-start items-center gap-[10px] pl-[25px] pr-[5px] py-[10px] text-base font-normal font-inter cursor-pointer hover:bg-slate-100/80 transition duration-500`}
                     onClick={() => setSelection(item.id)}
                   >
-                    <div>{item.id}</div>
+                    <div>{item?.icon}</div>
                     <div className={`${item.id === selection && "font-bold"}`}>
                       {item.label}
                     </div>
@@ -168,8 +188,8 @@ const MyAccount = () => {
                 <div className="text-2xl font-bold font-inter uppercase">
                   My Profile
                 </div>
-                <div className="text-xs font-normal font-inter underline underline-offset-4 uppercase">
-                  *
+                <div className="text-xs font-normal font-inter underline underline-offset-4 uppercase cursor-pointer">
+                  <FaSave className="w-7 h-7" />
                 </div>
               </div>
               <div className="flex flex-col h-full justify-start items-center gap-7 mt-[30px] ml-[60px] mr-[59px]">
@@ -261,7 +281,7 @@ const MyAccount = () => {
                     setSelectAddress(true);
                   }}
                 >
-                  EDIT BUTTON IS PENDING
+                  <FaEdit className="w-[21px] h-[21px]" />
                 </div>
               </div>
               <div className="grid grid-cols-2 justify-start items-center gap-8 mt-[30px] ml-[30px] mb-8">

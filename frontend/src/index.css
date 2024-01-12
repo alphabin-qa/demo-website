@@ -8,3 +8,21 @@ body {
   font-family: "Nunito Sans", sans-serif;
   scroll-behavior: smooth;
 }
+
+@keyframes dropAnimation {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.drop-container {
+  position: absolute;
+  top: 20px; /* Adjust the initial top position */
+  left: 0;
+  right: 0;
+  animation: dropAnimation cubic-bezier(0.68, -0.55, 0.27, 1.55); /* You can adjust the cubic-bezier values */
+  animation-duration: 1s; /* Adjust the duration of the animation */
+}

@@ -73,7 +73,7 @@ const Signup = () => {
     if (validateForm()) {
       const response = await signup(formData);
       if (response?.data?.success === true) {
-        navigate("/home");
+        navigate("/login");
       }
     } else {
       for (let item of Object.entries(formErrors)) {
