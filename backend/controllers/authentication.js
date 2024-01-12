@@ -60,7 +60,8 @@ exports.register = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "USer Created Successfully",
+      user,
+      message: "User Created Successfully",
     });
   } catch (error) {
     console.error(error);
@@ -153,7 +154,7 @@ exports.addAddress = async (req, res) => {
         await user.save();
       }
 
-      const payload = {
+      const address = {
         id: user._id,
         fistname: user.firstname,
         lastname: user.lastname,
@@ -161,7 +162,7 @@ exports.addAddress = async (req, res) => {
         address: user.addresses,
       };
       return res.status(200).json({
-        data: { success: true, payload },
+        data: { success: true, address },
       });
     }
   } catch (error) {
@@ -223,6 +224,37 @@ exports.updateUser = async (req, res) => {
         let updatedUser = await User.findOne({ email });
         return res.status(200).json({
           data: { success: true, updatedUser },
+        });
+      }
+    }
+  } catch (error) {}
+};
+
+exports.updateAddress = async (req, res) => {
+  try {
+    const { city, country, email, firstname, state, street, zipCode, id } =
+      req.body;
+    const authHeader = req.headers["authorization"];
+    const authToken = authHeader && authHeader.split(" ")[1];
+
+    const decodedToken = jwt.decode(authToken, { complete: true });
+
+    if (decodedToken && decodedToken.payload.email) {
+      const email = decodedToken.payload.email;
+      let user = await User.findOne({ email });
+      let address = user.addresses.find({
+        _id: "659ab7f8b74d8d434ed75372",
+      });
+
+      console.log(address);
+      if (!user) {
+        return res.status(401).json({
+          success: false,
+          message: "User is not registered",
+        });
+      } else {
+        return res.status(200).json({
+          data: { success: true, user },
         });
       }
     }

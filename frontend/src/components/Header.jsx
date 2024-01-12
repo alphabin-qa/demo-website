@@ -6,6 +6,7 @@ import WishList from "../assets/WishList";
 import { MdOutlineStorage } from "react-icons/md";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { FaHeart } from "react-icons/fa6";
 
 import {
   getUserAccessToken,
@@ -24,7 +25,7 @@ const Header = () => {
   const open = Boolean(anchorEl);
 
   const { wishlistItems } = useSelector((state) => state?.wishlists);
-
+  console.log(wishlistItems);
   const handleMenuSelection = (menuItem) => {
     switch (menuItem) {
       case "Home":
@@ -40,8 +41,7 @@ const Header = () => {
         break;
 
       case "All Products":
-        console.log("You selected All Products");
-        // Add code for handling the "All Products" menu item
+        navigate("/products");
         break;
     }
   };
@@ -96,13 +96,18 @@ const Header = () => {
                     setOpenSearch(!openSearch);
                   }}
                 />
-                <WishList
+                <div
                   className="cursor-pointer"
                   onClick={() => {
                     navigate("/wishlist");
                   }}
-                />
-                ({wishlistItems?.length})
+                >
+                  {wishlistItems.length ? (
+                    <FaHeart className="w-[20px] h-[20px]" />
+                  ) : (
+                    <WishList className="cursor-pointer" />
+                  )}
+                </div>
                 <Cart
                   className="cursor-pointer"
                   onClick={() => {
@@ -121,7 +126,7 @@ const Header = () => {
                 {toggle && (
                   <div
                     className="w-full sm:w-[20rem] h-[12rem] flex justify-start items-center p-2 rounded-lg bg-[#F0F0F0] absolute top-[80px] 
-                right-0 sm:right-9 border gap-5 pl-3"
+                right-0 sm:right-9 border gap-5 pl-3 z-10"
                   >
                     <ul className="w-full h-full flex flex-col justify-around font-medium text-[16px] leading-5 font-inter gap-[3px]">
                       {headerMenu.map((item) => (

@@ -9,10 +9,14 @@ import {
   bob,
 } from "../../assets/Checkout/CheckoutImages";
 import { DownOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import OrderConfirmModel from "../OrderConfirmModel";
 
 function Checkout() {
+  const navigate = useNavigate();
   const [billingTab, setBillingTab] = useState("credit");
   const [visibleBanks, setVisibleBanks] = useState(6);
+  const [open, setOpen] = useState(false);
   const { cartItems } = useSelector((state) => state?.cartlists);
   console.log("Cart Items on Checkout Page", cartItems);
 
@@ -260,7 +264,10 @@ function Checkout() {
                             </p>
                           </div>
                         </div>
-                        <div className="mt-[28px] mb-[1rem]">
+                        <div
+                          className="mt-[28px] mb-[1rem]"
+                          onClick={() => setOpen(true)}
+                        >
                           <button className="px-[35px] py-[15px] bg-black text-white font-inter font-[400] text-[16px] leading-[19.36px]">
                             Order Now
                           </button>
@@ -474,6 +481,8 @@ function Checkout() {
           </div>
         </div>
       </div>
+
+      <OrderConfirmModel open={open} setOpen={setOpen} />
     </>
   );
 }

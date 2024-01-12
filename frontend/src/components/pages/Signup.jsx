@@ -71,7 +71,10 @@ const Signup = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      await signup(formData);
+      const response = await signup(formData);
+      if (response?.data?.success === true) {
+        navigate("/home");
+      }
     } else {
       for (let item of Object.entries(formErrors)) {
         if (item[1].length > 0) {

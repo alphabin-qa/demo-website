@@ -46,11 +46,11 @@ const Contact = () => {
                 <p className="text-[18px] font-medium font-inter tracking-[0.36px]">
                   Address 1:
                 </p>
-                <span className="text-[16px] font-normal font-inter tracking-[0.36px]">
+                <p className="text-[16px] font-normal font-inter tracking-[0.36px]">
                   India: Alphabin Technology Consulting (Headquarters) Silver
                   Business Point, 1st Floor, 1100, Utran, Surat, Gujarat -
                   395101
-                </span>
+                </p>
               </div>
               <div className="flex gap-4">
                 <p className="text-[18px] font-medium font-inter tracking-[0.36px]">

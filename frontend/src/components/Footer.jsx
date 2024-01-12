@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Facebook from "../assets/facebook.png";
 import Instagram from "../assets/instagram.png";
 import TwitterX from "../assets/twitter.png";
 import Youtube from "../assets/youtube.png";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <div className="h-[481px] bg-black flex flex-col justify-center items-center text-white">
       <div className="w-[1260px] flex justify-between items-start shrink mx-[90px] mt-[54]">
@@ -48,10 +49,30 @@ const Footer = () => {
           </div>
           <div>
             <ul className="gap-4">
-              <li className="p-[2px] cursor-pointer">Home</li>
-              <li className="p-[2px] cursor-pointer">About Us</li>
-              <li className="p-[2px] cursor-pointer">Contact Us</li>
-              <li className="p-[2px] cursor-pointer">All Products</li>
+              <li
+                className="p-[2px] cursor-pointer"
+                onClick={() => navigate("/")}
+              >
+                Home
+              </li>
+              <li
+                className="p-[2px] cursor-pointer"
+                onClick={() => navigate("/about-us")}
+              >
+                About Us
+              </li>
+              <li
+                className="p-[2px] cursor-pointer"
+                onClick={() => navigate("/contact-us")}
+              >
+                Contact Us
+              </li>
+              <li
+                className="p-[2px] cursor-pointer"
+                onClick={() => navigate("")}
+              >
+                All Products
+              </li>
             </ul>
           </div>
         </div>
