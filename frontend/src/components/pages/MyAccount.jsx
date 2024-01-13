@@ -43,7 +43,6 @@ const MyAccount = () => {
   const [userDetails, setUserDetails] = useState({});
   const [selectAddress, setSelectAddress] = useState(false);
   const user = useSelector((state) => state?.userData);
-
   const [formData, setFormData] = useState({
     firstName: "",
     email: "",
@@ -131,9 +130,9 @@ const MyAccount = () => {
   const fetchDetails = async () => {
     try {
       const { data } = await userDetail();
-      setUserDetails(data?.data?.user);
+      setUserDetails(data?.data?.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -147,9 +146,10 @@ const MyAccount = () => {
   }, [selection]);
 
   useEffect(() => {
-    fetchDetails();
+    if (!userDetails.length) {
+      fetchDetails();
+    }
   }, []);
-  console.log(userDetails);
 
   return (
     <div>
@@ -158,9 +158,12 @@ const MyAccount = () => {
           <div className="border h-full rounded-b-[8px] border-t-0">
             <div className="w-[273px] flex justify-start items-center gap-[13px] p-[14px] border rounded-t-[8px] bg-[#FBFBFB]">
               <Avatar sx={{ width: "75px", height: "75px", bgcolor: "black" }}>
-                OP
+                {userDetails?.firstname?.charAt(0) +
+                  userDetails?.lastname?.charAt(0)}
               </Avatar>
-              <p className="font-inter font-normal text-2xl">Bhavin Gamit</p>
+              <p className="font-inter font-normal text-2xl">
+                {userDetails?.firstname + " " + userDetails?.lastname}
+              </p>
             </div>
             <div className="w-[273px] px-[15px] py-5 flex flex-col gap-8">
               {menuItems?.map((item) => {
@@ -284,27 +287,33 @@ const MyAccount = () => {
                   <FaEdit className="w-[21px] h-[21px]" />
                 </div>
               </div>
-              <div className="grid grid-cols-2 justify-start items-center gap-8 mt-[30px] ml-[30px] mb-8">
-                {userDetails?.addresses.map((item) => {
-                  return (
-                    <div className="w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
-                      <div className="p-[10px]">
-                        <p>{item?.firstname}</p>
-                        <p>
-                          {item?.street +
-                            " " +
-                            item?.city +
-                            " " +
-                            item?.state +
-                            " " +
-                            item?.country +
-                            " " +
-                            item?.zipCode}
-                        </p>
+              <div className="h-96 border grid grid-cols-2 justify-start items-center gap-8 mt-[30px] ml-[30px] mb-8">
+                {!userDetails?.addresses?.length ? (
+                  <div className="flex border justify-center items-center p-[10px] font-inter">
+                    ADDRESS NOT FOUND
+                  </div>
+                ) : (
+                  userDetails?.addresses?.map((item) => {
+                    return (
+                      <div className="w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
+                        <div className="p-[10px]">
+                          <p>{item?.firstname}</p>
+                          <p>
+                            {item?.street +
+                              " " +
+                              item?.city +
+                              " " +
+                              item?.state +
+                              " " +
+                              item?.country +
+                              " " +
+                              item?.zipCode}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                )}
               </div>
             </div>
           )}

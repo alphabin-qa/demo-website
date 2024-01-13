@@ -188,8 +188,14 @@ exports.userDetail = async (req, res) => {
           },
         });
       } else {
+        let data = {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+          address: user.addresses,
+        };
         return res.status(200).json({
-          data: { success: true, user },
+          data: { success: true, data },
         });
       }
     }
@@ -246,7 +252,6 @@ exports.updateAddress = async (req, res) => {
         _id: "659ab7f8b74d8d434ed75372",
       });
 
-      console.log(address);
       if (!user) {
         return res.status(401).json({
           success: false,

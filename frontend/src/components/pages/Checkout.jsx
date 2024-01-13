@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   axis,
@@ -18,6 +18,8 @@ function Checkout() {
   const [visibleBanks, setVisibleBanks] = useState(6);
   const [open, setOpen] = useState(false);
   const { cartItems } = useSelector((state) => state?.cartlists);
+  const [totalValue, setTotalvalue] = useState();
+
   console.log("Cart Items on Checkout Page", cartItems);
 
   const banks = [
@@ -38,6 +40,20 @@ function Checkout() {
   const handleBillingTab = (tab) => {
     setBillingTab(tab);
   };
+
+  useEffect(() => {
+    if (cartItems) {
+      let totalSum = 0;
+      cartItems.forEach((obj) => {
+        const priceValue = parseFloat(obj.price.slice(1) * obj?.quantity);
+        if (!isNaN(priceValue)) {
+          totalSum += priceValue;
+        }
+      });
+      setTotalvalue(totalSum);
+    }
+  }, [cartItems]);
+
   return (
     <>
       <div className="container mx-auto mt-[10rem] w-[80%]">
@@ -260,7 +276,7 @@ function Checkout() {
                           </div>
                           <div>
                             <p className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                              Price
+                              ₹{totalValue}
                             </p>
                           </div>
                         </div>
@@ -348,7 +364,7 @@ function Checkout() {
                           </div>
                           <div>
                             <p className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                              Price
+                              ₹{totalValue}
                             </p>
                           </div>
                         </div>
@@ -402,7 +418,7 @@ function Checkout() {
                           </div>
                           <div>
                             <p className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                              Price
+                              ₹{totalValue}
                             </p>
                           </div>
                         </div>
@@ -425,7 +441,7 @@ function Checkout() {
           </div>
 
           {/* Product Details */}
-          <div className="w-[100%]">
+          <div className="w-[469px] h-[632px]">
             <div className="grid grid-cols-1 border-2">
               {cartItems.map((item) => (
                 <>
@@ -457,7 +473,7 @@ function Checkout() {
                     Subtotal
                   </div>
                   <div className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                    Price
+                    ₹{totalValue}
                   </div>
                 </div>
                 <div className="flex justify-between px-[15px] py-[5px] border-b-2">
@@ -473,7 +489,7 @@ function Checkout() {
                     Total
                   </div>
                   <div className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                    Total Price
+                    ₹{totalValue}
                   </div>
                 </div>
               </div>

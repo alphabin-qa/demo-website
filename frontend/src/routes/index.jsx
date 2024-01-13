@@ -1,11 +1,15 @@
-import { useLocation, useRoutes } from "react-router-dom";
+import { useLocation, useNavigate, useRoutes } from "react-router-dom";
 import { useEffect } from "react";
 import LoginRoutes from "./LoginRoutes";
-import { removeAuthToken } from "../utils/localstorage.helper";
+import {
+  getUserAccessToken,
+  removeAuthToken,
+} from "../utils/localstorage.helper";
 import toast from "react-hot-toast";
 import MainRoutes from "./MainRoutes";
 
 export default function ThemeRoutes() {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo({
@@ -14,6 +18,12 @@ export default function ThemeRoutes() {
       behavior: "smooth",
     });
   }, [pathname]);
+
+  useEffect(() => {
+    if (!getUserAccessToken()) {
+      navigate("/login");
+    }
+  }, []);
 
   useEffect(() => {
     let timeout;

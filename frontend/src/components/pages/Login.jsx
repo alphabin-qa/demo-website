@@ -133,7 +133,7 @@ const Login = () => {
               <p className=" flex  justify-center items-center gap-2 font[400] leading-[20px] tracking-[0.4px] mt-4 font-inter">
                 Haven't create an account?{" "}
                 <div
-                  className="text-[#0021D1] leading-[0.4px] font-inter"
+                  className="text-[#0021D1] leading-[0.4px] font-inter cursor-pointer"
                   onClick={() => navigate("/signup")}
                 >
                   create an account

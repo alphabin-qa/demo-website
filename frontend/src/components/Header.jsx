@@ -26,7 +26,6 @@ const Header = () => {
   const open = Boolean(anchorEl);
 
   const { wishlistItems } = useSelector((state) => state?.wishlists);
-  console.log(wishlistItems);
   const handleMenuSelection = (menuItem) => {
     switch (menuItem) {
       case "Home":
