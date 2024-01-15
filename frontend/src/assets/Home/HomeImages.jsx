@@ -1,3 +1,9 @@
+// --------- Category ------
+import Camera from '../Home/Audio__Camera.png'
+import Appliances1 from '../Home/Appliances.png'
+import Gadgets from '../Home/Gadgets.png'
+import Laptop1 from '../Home/LT.png'
+
 // ------- Features --------
 import HardDisk from '../Home/Features/hard-disk-drive-inside-2023-06-29-20-43-00-utc.jpg'
 import Microphone from '../Home/Features/microphone-broadcasting-station.jpg'
@@ -14,4 +20,4 @@ import Speaker1 from '../Home/Category/speaker.png'
 import Mobile from '../Home/Category/mobile.png'
 import Laptop from '../Home/Category/laptop.png'
 
-export {HardDisk, Microphone, Speaker, USB, Offer1, Offer2, Appliances, Speaker1, Mobile, Laptop} 
+export {HardDisk, Microphone, Speaker, USB, Offer1, Offer2, Appliances, Speaker1, Mobile, Laptop, Camera, Appliances1, Gadgets, Laptop1} 

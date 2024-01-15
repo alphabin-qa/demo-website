@@ -3,9 +3,20 @@ import "../../index.css";
 import "./home.css";
 import { getUserAccessToken } from "../../utils/localstorage.helper";
 import { useNavigate } from "react-router-dom";
-import { Offer1, Offer2 } from "../../assets/Home/HomeImages";
+import {
+  Appliances1,
+  Camera,
+  Gadgets,
+  Laptop1,
+  Offer1,
+  Offer2,
+} from "../../assets/Home/HomeImages";
 import Slider from "react-slick";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import {
+  LeftOutlined,
+  RightOutlined,
+  ArrowRightOutlined,
+} from "@ant-design/icons";
 import FeatureCards from "../FeatureCards";
 import CategoryCards from "../CategoryCards";
 import { Link } from "react-router-dom";
@@ -97,73 +108,110 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[10px] mt-[40px]">
-        <div className="w-full lg:justify-center gap-[20px] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:items-center sm:p-[10px] p:-[15px]">
-          <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] camera cursor-pointer">
-            <div className="xl:mt-[150px] xl:ml-[3rem] lg:ml-[3rem] lg:mt-[150px] lg:leading-8 md:ml-[1px] md:pl-[10px] md:mt-[3rem] md:w-[200px] sm:w-[180px] sm:ml-[20px] sm:mt-[70px] ml-[50px] xl:w-[300px] lg:w-[280px]">
-              <h1 className="xl:text-4xl lg:text-4xl md:text-3xl sm:text-[20px] text-[32px] font-inter font-[600] lg:mb-[15px] md:mb-[10px]">
-                Audio & Camera
-              </h1>
-              <p className=" xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[10px] font-inter font-[400] text-[16px] leading-[19.36px] mb-[5px]">
-                Lorem Ipsum Dolor Sit Amet Consectetur
-              </p>
-              <a
-                href=""
-                className="font-inter xl:text-[13px] lg:text-[13px] md:text-[12px] sm:text-[8px] font-[600] leading-[14.52px] border-b-[1px] border-black"
-              >
-                Explore More{" "}
-              </a>
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div class="xl:w-[1260px] lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
+          <div className="sm:mb-[10px] relative">
+            <div className="relative">
+              {" "}
+              <img
+                class="object-cover h-[342px] w-[695px] rounded-[5px]"
+                src={Camera}
+                alt=""
+              />
             </div>
-          </div>
-          <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] appliances cursor-pointer bg-[#EFF5F5]">
-            <div className="xl:mt-[150px] xl:ml-[3rem] lg:ml-[3rem] lg:mt-[150px] lg:leading-8 md:ml-[1px] md:pl-[10px] md:mt-[4rem] md:w-[200px] sm:w-[180px] sm:ml-[20px] sm:mt-[80px] ml-[50px] xl:w-[300px] lg:w-[280px]">
-              <h1 className="xl:text-4xl lg:text-4xl sm:text-[20px] md:text-3xl text-[32px] font-inter font-[600] lg:mb-[15px] md:mb-[10px]">
-                Appliances
+            <div className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[249px]">
+              <h1 className="font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
+                Audio & camera
               </h1>
-              <p className=" xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[10px] font-inter font-[400] text-[16px] leading-[19.36px] mb-[5px]">
-                Lorem Ipsum Dolor Sit Amet Consectetur
+              <p className="font-inter font-[400] text-[16px] leading-[19.36px] tracking-[1px] xl:w-[200px] lg:w-[190px] md:w-[140px]">
+                Lorem ipsum dolor sit amet consectetur
               </p>
-              <a
-                href=""
-                className="font-inter xl:text-[13px] lg:text-[13px] md:text-[12px] sm:text-[8px] font-[600] leading-[14.52px] border-b-[1px] border-black"
-              >
-                Explore More{" "}
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="xl:mt-[23px] lg:mt-[10px] md:mt-[8px]">
-          <div className="w-full lg:justify-center gap-[20px] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:items-center sm:p-[10px] p:-[15px]">
-            <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] gadgets cursor-pointer bg-[#EFF5F5]">
-              <div className="xl:mt-[150px] xl:ml-[3rem] lg:ml-[3rem] lg:mt-[150px] lg:leading-8 md:ml-[1px] md:pl-[10px] md:mt-[4rem] md:w-[200px] sm:w-[180px] sm:ml-[20px] sm:mt-[80px] ml-[50px] xl:w-[300px] lg:w-[280px]">
-                <h1 className="xl:text-4xl lg:text-4xl sm:text-[20px] md:text-3xl text-[32px] font-inter font-[600] lg:mb-[15px] md:mb-[10px]">
-                  Gadgets
-                </h1>
-                <p className=" xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[10px] font-inter font-[400] text-[16px] leading-[19.36px] mb-[5px]">
-                  Lorem Ipsum Dolor Sit Amet Consectetur
-                </p>
+              <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
-                  href=""
-                  className="font-inter xl:text-[13px] lg:text-[13px] md:text-[12px] sm:text-[8px] font-[600] leading-[14.52px] border-b-[1px] border-black"
+                  href="#"
+                  className="font-inter font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black"
                 >
-                  Explore More{" "}
+                  Explore More <ArrowRightOutlined />
                 </a>
               </div>
             </div>
-            <div className="xl:max-w-[800px] xl:h-[450px] xl:ml-[5rem] lg:pl-[2rem] sm:h-[270px] lg:h-[450px] sm:w-[100%] cursor-pointer laptop">
-              <div className="xl:mt-[150px] xl:ml-[3rem] lg:ml-[3rem] lg:mt-[150px] lg:leading-8 md:ml-[1px] md:pl-[10px] md:mt-[3rem] md:w-[200px] sm:w-[180px] sm:ml-[20px] sm:mt-[70px] ml-[50px] xl:w-[300px] lg:w-[280px]">
-                <h1 className="xl:text-4xl lg:text-4xl md:text-3xl sm:text-[20px] text-[32px] font-inter font-[600] lg:mb-[15px] md:mb-[10px]">
-                  PC & Laptops
-                </h1>
-                <p className=" xl:text-[16px] lg:text-[15px] md:text-[14px] sm:text-[10px] font-inter font-[400] text-[16px] leading-[19.36px] mb-[5px]">
-                  Lorem Ipsum Dolor Sit Amet Consectetur
-                </p>
+          </div>
+          <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px]">
+            <div className="relative">
+              {" "}
+              <img
+                class="object-cover h-[342px] w-[531px] rounded-[5px]"
+                src={Appliances1}
+                alt=""
+              />
+            </div>
+            <div className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[200px] lg:w-[180px] md:w-[140px]">
+              <h1 className="font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
+                Appliances
+              </h1>
+              <p className="font-inter font-[400] text-[16px] leading-[19.36px] tracking-[1px]">
+                Lorem ipsum dolor sit amet consectetur
+              </p>
+              <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
-                  href=""
-                  className="font-inter xl:text-[13px] lg:text-[13px] md:text-[12px] sm:text-[8px] font-[600] leading-[14.52px] border-b-[1px] border-black"
+                  href="#"
+                  className="font-inter font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black"
                 >
-                  Explore More{" "}
+                  Explore More <ArrowRightOutlined />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="xl:w-[1260px] lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
+          <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px]">
+            <div className="relative">
+              {" "}
+              <img
+                class="object-cover h-[342px] w-[531px] rounded-[5px]"
+                src={Gadgets}
+                alt=""
+              />
+            </div>
+            <div className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[200px] lg:w-[180px] md:w-[150px]">
+              <h1 className="font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
+                Gadgets
+              </h1>
+              <p className="font-inter font-[400] text-[16px] leading-[19.36px] tracking-[1px]">
+                Lorem ipsum dolor sit amet consectetur
+              </p>
+              <div className="w-[100px] h-[17px] gap-[10px]">
+                <a
+                  href="#"
+                  className="font-inter font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black"
+                >
+                  Explore More <ArrowRightOutlined />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="sm:mb-[10px] relative bg-[#F0F0F0] rounded-[5px]">
+            <div className="relative">
+              {" "}
+              <img
+                class="object-cover h-[342px] w-[695px] rounded-[5px]"
+                src={Laptop1}
+                alt=""
+              />
+            </div>
+            <div className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[249px]">
+              <h1 className="font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
+                PC & Laptops
+              </h1>
+              <p className="font-inter font-[400] text-[16px] leading-[19.36px] tracking-[1px] xl:w-[200px] lg:w-[190px] md:w-[140px]">
+                Lorem ipsum dolor sit amet consectetur
+              </p>
+              <div className="w-[100px] h-[17px] gap-[10px]">
+                <a
+                  href="#"
+                  className="font-inter font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black"
+                >
+                  Explore More <ArrowRightOutlined />
                 </a>
               </div>
             </div>
@@ -171,8 +219,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section>
-        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="mt-[30px] xl:container lg:container xl:w-[1260px] sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
               <div>
@@ -197,8 +245,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="xl:container lg:container mx-auto">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="xl:container lg:container xl:w-[1260px] mx-auto">
           <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
             <div className="sm:mb-[10px] relative ">
               <div className="relative">
@@ -240,8 +288,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="mt-[30px] xl:container lg:container xl:w-[1260px] sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
               <div>
@@ -266,8 +314,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="mt-[30px] xl:container lg:container xl:w-[1260px] sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
               <div>
@@ -289,8 +337,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="xl:container lg:container mx-auto">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div className="xl:container lg:container xl:w-[1260px] mx-auto">
           <div class="grid grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[30px] sm:p-[8px]">
             <div className="sm:mb-[10px] relative ">
               <div className="relative">

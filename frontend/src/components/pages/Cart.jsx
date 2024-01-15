@@ -9,7 +9,7 @@ function Cart() {
   const [totalValue, setTotalvalue] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("Cart Items-----", cartItems);
+  // console.log("Cart Items-----", cartItems);
 
   const removeCartItemHandler = (itemId) => {
     dispatch(removeFromCart({ id: itemId }));

@@ -16,6 +16,7 @@ import {
   removeFromWishlist,
 } from "../../store/reducers/wishListItems";
 import { addToCart, removeFromCart } from "../../store/reducers/cartItems";
+import toast from "react-hot-toast";
 
 function AllProducts() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function AllProducts() {
     const isInCart = cartItems.some((item) => item.id === product.id);
 
     if (isInCart) {
-      alert("Already added!");
+      toast.error("Already added!");
     } else {
       dispatch(addToCart(product));
     }

@@ -28,15 +28,15 @@ const Wishlist = () => {
           </p>
         </div>
       ) : (
-        <div className="mt-[227px]">
+        <div className="mt-[120px] w-[1440px] mx-auto">
           <div className="shrink-0 mx-[90px] flex flex-col gap-16">
             <p className="text-[#333] w-full xl:w-[1270px] font-inter text-[36px] font-bold leading-[18.5px] text-left ml-9">
               Wishlist
             </p>
-            <div className="grid grid-cols-4">
+            <div className="grid grid-cols-4 w-[1262px] gap-[32px]">
               {wishlistItems?.map((item) => (
                 <div
-                  className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 ml-9 mb-[149px] justify-center items-center relative hover:shadow-md group "
+                  className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 ml-9 mb-[20px] justify-center items-center relative hover:shadow-md group "
                   key={item?.id}
                 >
                   <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px] z-10">

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const initialState = {
   cartItems: localStorage.getItem("cartItems")
@@ -18,13 +19,13 @@ const cartItems = createSlice({
       );
 
       if (existsItemIndex >= 0) {
-        alert("This product already added in your cart");
+        toast.error("This product already added in your cart");
       } else {
         let buildCartlistItem = { ...action.payload, quantity: 1 };
         state.cartItems?.push(buildCartlistItem);
 
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-        alert("Added to the cart");
+        toast.success("Added to the cart");
       }
     },
 

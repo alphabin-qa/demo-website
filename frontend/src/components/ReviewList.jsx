@@ -22,8 +22,8 @@ const ReviewList = ({ reviews }) => {
     );
   }
 
-  console.log("visibleReviews", visibleReviews);
-  console.log("Reviews Length", reviews.length);
+  // console.log("visibleReviews", visibleReviews);
+  // console.log("Reviews Length", reviews.length);
 
   const handleLoadMoreReviews = () => {
     setVisibleReviews((prevVisibleReviews) => prevVisibleReviews + 2);

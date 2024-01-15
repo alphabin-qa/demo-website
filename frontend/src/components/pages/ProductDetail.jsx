@@ -44,14 +44,14 @@ function ProductDetail() {
   const handleDecrement = () => {
     if (quantity > 1) {
       quantity = setQuantity((prevCount) => prevCount - 1);
-      console.log("Quantity after decrement---", quantity);
+      // console.log("Quantity after decrement---", quantity);
     }
   };
 
   const handleIncrement = () => {
     if (quantity < 10) {
       quantity = setQuantity((prevCount) => prevCount + 1);
-      console.log("Quantity after increment---", quantity);
+      // console.log("Quantity after increment---", quantity);
     }
   };
 
@@ -125,7 +125,7 @@ function ProductDetail() {
   return (
     <>
       {/* Product Details */}
-      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[80px] mb-[60px]">
+      <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[120px] mb-[60px]">
         <div className="xl:container lg:container mx-auto">
           <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
             <div className="sm:mb-[10px] ">
