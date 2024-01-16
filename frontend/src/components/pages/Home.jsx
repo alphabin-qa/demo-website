@@ -108,11 +108,10 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+      <section className="sm:dmt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
         <div class="xl:w-[1260px] lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
           <div className="sm:mb-[10px] relative">
             <div className="relative">
-              {" "}
               <img
                 class="object-cover h-[342px] w-[695px] rounded-[5px]"
                 src={Camera}
@@ -138,7 +137,6 @@ const Home = () => {
           </div>
           <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px]">
             <div className="relative">
-              {" "}
               <img
                 class="object-cover h-[342px] w-[531px] rounded-[5px]"
                 src={Appliances1}
@@ -166,7 +164,6 @@ const Home = () => {
         <div class="xl:w-[1260px] lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
           <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px]">
             <div className="relative">
-              {" "}
               <img
                 class="object-cover h-[342px] w-[531px] rounded-[5px]"
                 src={Gadgets}
@@ -192,7 +189,6 @@ const Home = () => {
           </div>
           <div className="sm:mb-[10px] relative bg-[#F0F0F0] rounded-[5px]">
             <div className="relative">
-              {" "}
               <img
                 class="object-cover h-[342px] w-[695px] rounded-[5px]"
                 src={Laptop1}

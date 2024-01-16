@@ -1,6 +1,17 @@
-import React from "react";
+import { CircularProgress } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 const Contact = () => {
+  const [isMap, setIsMap] = useState(true);
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setIsMap(false);
+    }, 3000);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, []);
+
   return (
     <>
       <div className="flex flex-col justify-center items-center my-[151px] ">
@@ -9,14 +20,20 @@ const Contact = () => {
             Contact Us
           </div>
           <div className="w-[1260px] h-[510px]">
-            <iframe
-              src={`https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting`}
-              width="100%"
-              height="100%"
-              loading="lazy"
-              frameborder="0"
-              title="Alphabin Technology"
-            ></iframe>
+            {isMap ? (
+              <div className="w-full h-full flex justify-center items-center">
+                <CircularProgress color="success" size={60} />
+              </div>
+            ) : (
+              <iframe
+                src={`https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting`}
+                width="100%"
+                height="100%"
+                loading="lazy"
+                frameborder="0"
+                title="Alphabin Technology"
+              ></iframe>
+            )}
           </div>
         </div>
         <div className="w-[1260px] flex gap-8 mt-[100px]">

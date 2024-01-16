@@ -66,11 +66,11 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    if (getUserAccessToken()) {
-      navigate("/home");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (getUserAccessToken()) {
+  //     navigate("/home");
+  //   }
+  // }, []);
 
   return (
     <div>

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSignupMutation } from "../../services/authServices";
 import { useNavigate } from "react-router-dom";
+import { usePasswordToggle } from "../../utils/usePasswordToggle";
 
 const Signup = () => {
   const [signup] = useSignupMutation();
   const navigate = useNavigate();
+  const { InputType, Icon, toggleVisibility } = usePasswordToggle();
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -140,19 +142,28 @@ const Signup = () => {
               className="h-[42px] w-[370px] border font-inter pl-2"
             />
           </label>
-          <label className="flex flex-col gap-[13px]">
+          <div className="flex flex-col gap-[13px] relative">
             <p className="text-[14px] font-medium font-inter">
               PASSWORD<sup className="text-red-500">*</sup>
             </p>
+
             <input
-              type="password"
+              type={InputType}
               name="password"
               value={formData.password}
               onChange={handleInputChange}
               className="h-[42px] w-[370px] border font-inter pl-2"
             />
-            <span className="error">{formErrors.password}</span>
-          </label>
+            <span
+              className="absolute right-3 top-[46%] transform -translate-y-1/2 cursor-pointer"
+              onClick={toggleVisibility}
+            >
+              {Icon}
+            </span>
+            <span className="error">
+              Password must be at least 6 characters
+            </span>
+          </div>
           <button
             className="leading-[18.8px] w-[370px] h-[46px] p-[10px] gap-[10px] bg-black text-white align-center font-bold"
             onClick={handleSubmit}

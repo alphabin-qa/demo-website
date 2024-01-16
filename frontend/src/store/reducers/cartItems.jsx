@@ -23,9 +23,15 @@ const cartItems = createSlice({
       } else {
         let buildCartlistItem = { ...action.payload, quantity: 1 };
         state.cartItems?.push(buildCartlistItem);
-
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-        toast.success("Added to the cart");
+        toast.success("Added to the cart", {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
       }
     },
 
