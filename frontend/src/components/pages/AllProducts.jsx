@@ -49,12 +49,12 @@ function AllProducts() {
 
   return (
     <section className="xl:mt-[10rem]">
-      <div className="mt-[30px] xl:container lg:container md:container sm:container sm:p-[7px] md:p-[12px] mx-auto">
-        <div className="border-b-[1px] h-[50px]">
+      <div className="mt-[30px] xl:w-[1440px] lg:w-[1440px] xl:container lg:container md:container sm:container sm:p-[7px] md:p-[12px] mx-auto">
+        <div className="h-[50px]">
           <div className="h-[39px]">
             <div>
-              <h1 className="float-start font-roboto font-[600] sm:text-[18px] xl:text-[24px] md:text-[20px] lg:text-[22px] leading-[28.13px]">
-                Wishlist
+              <h1 className="float-start font-inter font-[700] sm:text-[18px] xl:text-[28px] md:text-[20px] lg:text-[26px] leading-[18.5px]">
+                All Products
               </h1>
             </div>
           </div>
@@ -63,7 +63,7 @@ function AllProducts() {
           {Products.map((product) => (
             <div
               key={product.id}
-              className="hover:shadow-md group w-[80%] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative"
+              className="hover:shadow-md group w-[90%] mt-[2rem] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative"
             >
               <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px]">
                 <button

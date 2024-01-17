@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   StarFilled,
   StarOutlined,
   HeartFilled,
   HeartOutlined,
+  ShoppingFilled,
+  ShoppingOutlined
 } from "@ant-design/icons";
 import Cart from "../../assets/Cart";
 import "./home.css";
 import { removeFromWishlist } from "../../store/reducers/wishListItems";
+import toast from "react-hot-toast";
+import { addToCart } from "../../store/reducers/cartItems";
 
 const Wishlist = () => {
   const { wishlistItems } = useSelector((state) => state?.wishlists);
-  const dispatch = useDispatch();
   // console.log("Wishlist Items----", wishlistItems);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state?.cartlists?.cartItems);
+  const [cartIcon, setCartIcon] = useState(false);
 
   const removeWishlistHandler = (itemId) => {
     dispatch(removeFromWishlist({ id: itemId }));
+  };
+
+  const addToCartHandler = (product) => {
+    const isInCart = cartItems.some((item) => item.id === product.id);
+
+    if (isInCart) {
+      toast.error("Already added!");
+    } else {
+      dispatch(addToCart(product));
+    }
+    setCartIcon(!cartIcon);
   };
 
   return (
@@ -28,15 +45,15 @@ const Wishlist = () => {
           </p>
         </div>
       ) : (
-        <div className="mt-[120px] w-[1440px] mx-auto">
-          <div className="shrink-0 mx-[90px] flex flex-col gap-16">
-            <p className="text-[#333] w-full xl:w-[1270px] font-inter text-[36px] font-bold leading-[18.5px] text-left ml-9">
+        <div className="mt-[120px] xl:w-[1440px] lg:w-[1440px] md:container sm:container mx-auto">
+          <div className="shrink-0 flex flex-col gap-16">
+            <p className="text-[#333] w-full xl:w-[1270px] font-inter text-[36px] font-bold leading-[18.5px] text-left">
               Wishlist
             </p>
-            <div className="grid grid-cols-4 w-[1262px] gap-[32px]">
+            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[32px]">
               {wishlistItems?.map((item) => (
                 <div
-                  className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 ml-9 mb-[20px] justify-center items-center relative hover:shadow-md group "
+                  className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 mb-[20px] justify-center items-center relative hover:shadow-md group "
                   key={item?.id}
                 >
                   <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px] z-10">
@@ -52,8 +69,17 @@ const Wishlist = () => {
                     </button>
                   </div>
                   <div className="absolute top-0 right-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] mr-[16px] mt-[14px] z-10">
-                    <button className="text-white">
-                      <Cart />
+                    <button
+                      onClick={() => {
+                        addToCartHandler(item);
+                      }}
+                      className="h-[45px] w-[45px]"
+                    >
+                      {cartItems.some((product) => product.id === item.id) ? (
+                        <ShoppingFilled className="heart-icon" />
+                      ) : (
+                        <ShoppingOutlined className="heart-icon" />
+                      )}
                     </button>
                   </div>
                   <div className="w-full flex flex-col justify-start items-start">

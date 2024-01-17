@@ -71,73 +71,73 @@ function Checkout() {
                   Billing Information
                 </h1>
               </div>
-              <div className="w-[556px] h-[355px] mx-auto gap-[10px] mt-[20px]">
+              <div className="font-inter w-[556px] h-[355px] mx-auto gap-[10px] mt-[20px]">
                 <div className="w-[556px] h-[63px] gap-[8px]">
-                  <p className="font-inter font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                  <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                     First Name
                   </p>
                   <input
                     type="text"
-                    className="border-[0.94px] pl-[5px] border-black w-[556px] h-[38px] rounded-[3px]"
+                    className="border-[0.94px] pl-[8px] border-black w-[556px] h-[38px] rounded-[3px]"
                   />
                 </div>
                 <div className="my-[15px] w-[307px] h-[63px] gap-[8px]">
-                  <p className="font-inter font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                  <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                     Email
                   </p>
                   <input
                     type="email"
-                    className="border-[0.94px] pl-[5px] border-black h-[38px] w-[307px] rounded-[3px]"
+                    className="border-[0.94px] pl-[8px] border-black h-[38px] w-[307px] rounded-[3px]"
                   />
                 </div>
                 <div className="flex justify-between my-[15px] gap-[26px] w-[556px] h-[63px]">
                   <div className="w-[307px] h-[63px] gap-[8px]">
-                    <p className="font-inter font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                    <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                       Town / City
                     </p>
                     <input
                       type="text"
-                      className="border-[0.94px] pl-[5px] border-black w-[307px] h-[38px] rounded-[3px]"
+                      className="border-[0.94px] pl-[8px] border-black w-[307px] h-[38px] rounded-[3px]"
                     />
                   </div>
                   <div className="w-[223px] h-[63px] gap-[8px]">
-                    <p className="font-inter font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                    <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                       State
                     </p>
                     <input
                       type="text"
-                      className="border-[0.94px] pl-[5px] border-black w-[223px] h-[38px] rounded-[3px]"
+                      className="border-[0.94px] pl-[8px] border-black w-[223px] h-[38px] rounded-[3px]"
                     />
                   </div>
                 </div>
                 <div className="flex justify-between my-[15px] gap-[26px] w-[556px] h-[63px]">
                   <div className="w-[307px] h-[63px] gap-[8px]">
-                    <p className="font-inter font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                    <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                       Street
                     </p>
                     <input
                       type="text"
-                      className="border-[0.94px] pl-[5px] border-black w-[307px] h-[38px] rounded-[3px]"
+                      className="border-[0.94px] pl-[8px] border-black w-[307px] h-[38px] rounded-[3px]"
                     />
                   </div>
                   <div className="w-[223px] h-[63px] gap-[8px]">
-                    <p className="font-inter font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                    <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                       Zip code
                     </p>
                     <input
                       type="text"
-                      className="border-[0.94px] pl-[5px] border-black w-[223px] h-[38px] rounded-[3px]"
+                      className="border-[0.94px] pl-[8px] border-black w-[223px] h-[38px] rounded-[3px]"
                     />
                   </div>
                 </div>
                 <div className="flex w-[556px] h-[63px] gap-[26px]">
                   <div className="my-[15px] w-[307px] h-[63px] gap-[8px]">
-                    <p className="font-inter font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                    <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                       Country / Region
                     </p>
                     <input
                       type="text"
-                      className="border-[0.94px] pl-[5px] border-black rounded-[3px] h-[37px] w-[307px]"
+                      className="border-[0.94px] pl-[8px] border-black rounded-[3px] h-[37px] w-[307px]"
                     />
                   </div>
                   <div className="my-[35px] w-[223px] h-[37px] gap-[10px] flex items-center text-center justify-center">
@@ -150,7 +150,7 @@ function Checkout() {
             </div>
 
             {/* Payment Information */}
-            <div className="border-[0.84px] w-[635px] h-[570px] mt-[5rem] mb-[5rem]">
+            <div className="font-inter border-[0.84px] w-[635px] h-[570px] mt-[5rem] mb-[5rem]">
               <div className="h-[44px] flex text-center justify-center items-center bg-black">
                 <h1 className="text-white font-inter font-[400] text-[18px] leading-[21.78px]">
                   Billing Information
@@ -160,7 +160,7 @@ function Checkout() {
                 <div className="flex justify-between">
                   <div>
                     <button
-                      className={`font-inter font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[1px] ${
+                      className={`font-inter font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.21px] ${
                         billingTab === "credit"
                           ? "bg-black text-white"
                           : "bg-none"
@@ -172,7 +172,7 @@ function Checkout() {
                   </div>
                   <div>
                     <button
-                      className={`font-inter font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[1px] ${
+                      className={`font-inter font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.21px] ${
                         billingTab === "debit"
                           ? "bg-black text-white"
                           : "bg-none"
@@ -184,7 +184,7 @@ function Checkout() {
                   </div>
                   <div>
                     <button
-                      className={`font-inter font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[1px] ${
+                      className={`font-inter font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.21px] ${
                         billingTab === "netbanking"
                           ? "bg-black text-white"
                           : "bg-none"
@@ -196,7 +196,7 @@ function Checkout() {
                   </div>
                   <div>
                     <button
-                      className={`font-inter font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[1px] ${
+                      className={`font-inter font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.21px] ${
                         billingTab === "cod" ? "bg-black text-white" : "bg-none"
                       }`}
                       onClick={() => handleBillingTab("cod")}
@@ -244,11 +244,11 @@ function Checkout() {
                             Card Number
                           </p>
                           <p className="font-inter font-[400] text-[10.09px] leading-[12.21px] mb-[5px]">
-                            Enter the 16-degit card number on the card
+                            Enter the 16-digit card number on the card
                           </p>
                           <input
                             type="text"
-                            className="rounded-[3px] border-[1px] w-[544px] h-[36px]"
+                            className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px]"
                           />
                         </div>
                         <div className="mt-[15px]">
@@ -257,7 +257,7 @@ function Checkout() {
                           </p>
                           <input
                             type="text"
-                            className="rounded-[3px] border-[1px] w-[544px] h-[36px]"
+                            className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px]"
                           />
                         </div>
                         <div className="flex justify-between w-[560px] h-[32px] mt-[15px]">
@@ -268,12 +268,12 @@ function Checkout() {
                             <div className="w-[197.53px] h-[32px] gap-[2px] ">
                               <input
                                 type="text"
-                                className="border-[1px] w-[77px] h-[32px] rounded-[3px]"
+                                className="border-[1px] w-[77px] h-[32px] rounded-[3px] text-center"
                               />
                               <label htmlFor=""> / </label>
                               <input
                                 type="text"
-                                className="border-[1px] w-[77px] h-[32px] rounded-[3px]"
+                                className="border-[1px] w-[77px] h-[32px] rounded-[3px] text-center"
                               />
                             </div>
                           </div>
@@ -283,7 +283,7 @@ function Checkout() {
                             </p>
                             <input
                               type="text"
-                              className="w-[77px] h-[32px] rounded-[3px] border-[1px]"
+                              className="w-[77px] h-[32px] rounded-[3px] border-[1px] text-center"
                             />
                           </div>
                         </div>
@@ -332,7 +332,7 @@ function Checkout() {
                           </p>
                           <input
                             type="text"
-                            className="rounded-[3px] border-[1px] w-[544px] h-[36px]"
+                            className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px]"
                           />
                         </div>
                         <div className="mt-[15px]">
@@ -341,7 +341,7 @@ function Checkout() {
                           </p>
                           <input
                             type="text"
-                            className="rounded-[3px] border-[1px] w-[544px] h-[36px]"
+                            className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px]"
                           />
                         </div>
                         <div className="flex justify-between w-[560px] h-[32px] mt-[15px]">
@@ -352,12 +352,12 @@ function Checkout() {
                             <div className="w-[197.53px] h-[32px] gap-[2px] ">
                               <input
                                 type="text"
-                                className="border-[1px] w-[77px] h-[32px] rounded-[3px]"
+                                className="border-[1px] w-[77px] h-[32px] rounded-[3px] text-center"
                               />
                               <label htmlFor=""> / </label>
                               <input
                                 type="text"
-                                className="border-[1px] w-[77px] h-[32px] rounded-[3px]"
+                                className="border-[1px] w-[77px] h-[32px] rounded-[3px] text-center"
                               />
                             </div>
                           </div>
@@ -367,7 +367,7 @@ function Checkout() {
                             </p>
                             <input
                               type="text"
-                              className="w-[77px] h-[32px] rounded-[3px] border-[1px]"
+                              className="w-[77px] h-[32px] rounded-[3px] border-[1px] text-center"
                             />
                           </div>
                         </div>
@@ -446,7 +446,7 @@ function Checkout() {
 
           {/* Product Details */}
           <div className="w-[469px]">
-            <div className="grid grid-cols-1 border-[1px] border-black">
+            <div className="font-inter grid grid-cols-1 border-[1px] border-black">
               {cartItems.map((item) => (
                 <>
                   <div className="border-b-2 p-[1rem] flex justify-between">

@@ -60,8 +60,8 @@ const Header = () => {
   return (
     <>
       {token && (
-        <div className="">
-          <div className="h-[80px] flex justify-between items-center px-[30px] xl:px-[100px]">
+        <div className="xl:w-[1440px] lg:w-[1440px] mx-auto">
+          <div className="h-[80px] flex justify-between items-center">
             <div
               className="w-[140px] h-[62px] flex flex-col justify-center items-center cursor-pointer"
               onClick={() => navigate("/home")}
