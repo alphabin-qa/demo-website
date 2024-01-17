@@ -8,12 +8,12 @@ module.exports = {
         roboto: ["Roboto", "sans-serif"],
         nunito: ["Nunito Sans", "sans-serif"],
       },
-      screens: {
-        sm: "280px",
-        md: "800px",
-        lg: "1280px",
-        xl: "1700px",
-      },
+      // screens: {
+      //   sm: "280px",
+      //   md: "800px",
+      //   lg: "1280px",
+      //   xl: "1700px",
+      // },
     },
   },
   plugins: [],

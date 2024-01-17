@@ -140,7 +140,7 @@ const Header = () => {
               </div>
               {openSearch && (
                 <div className="flex justify-center items-center drop-container absolute top-0 z-20 bg-white px-5 mx-0 -mt-5 h-[80px]">
-                  <div className="flex items-center justify-center font-inter px-[30px] border-b py-[15px]">
+                  <div className="flex items-center justify-center font-inter px-[30px] py-[15px]">
                     <input
                       type="text"
                       style={{

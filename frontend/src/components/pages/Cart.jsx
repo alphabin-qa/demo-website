@@ -79,7 +79,7 @@ function Cart() {
               <>
                 <div className="h-[175px] my-[14px] ml-[33px] mr-[14px] flex items-center gap-[265px] border-t border-b">
                   <div className="flex items-center gap-3">
-                    <div className="w-[99px] h-[148px] border border-red-600">
+                    <div className="w-[99px] h-[148px] ">
                       <img src={item?.img} alt="item"></img>
                     </div>
                     <div className="font-inter text-[18px font-semibold text-[#333]">
