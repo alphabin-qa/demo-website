@@ -120,7 +120,6 @@ exports.login = async (req, res) => {
 
 exports.addAddress = async (req, res) => {
   try {
-    const { address } = req.body;
     const authHeader = req.headers["authorization"];
     const authToken = authHeader && authHeader.split(" ")[1];
 
@@ -142,8 +141,9 @@ exports.addAddress = async (req, res) => {
           message: "You can not add more than 4 addresses",
         });
       } else {
+        const { address } = req.body;
         user.addresses.push({
-          city: address.city || "",
+          city: address?.city || "",
           country: address.country || "",
           email: address.email || "",
           firstname: address.firstName || "",

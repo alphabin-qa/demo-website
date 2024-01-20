@@ -21,6 +21,7 @@ import {
   useGetUserMutation,
 } from "../../services/authServices";
 import toast from "react-hot-toast";
+import AddressModel from "../AddressModel";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -31,16 +32,100 @@ function Checkout() {
   const [totalValue, setTotalvalue] = useState();
   const [userDetails, setUserDetails] = useState({});
   const [changeAddress, setChangeAddress] = useState(false);
+  const [openAddressModel, setOpenAddressModel] = useState(false);
+  const [address, setAddress] = useState({});
   const [addAddress] = useAddAddressMutation();
   const [userDetail] = useGetUserMutation();
+  const user = useSelector((state) => state?.userData);
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    email: "",
+    city: "",
+    street: "",
+    country: "",
+    state: "",
+    zipCode: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    const validationErrors = validateForm(formData);
+    // setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        const { data } = await addAddress({
+          id: user[0]?.user?._id,
+          address: formData,
+        });
+        if (data.success === true) {
+          toast.success(`Fill all the required fields`, {
+            duration: 4000,
+            style: {
+              border: "1px solid black",
+              backgroundColor: "black",
+              color: "white",
+            },
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      setFormData({
+        firstName: "",
+        email: "",
+        city: "",
+        street: "",
+        country: "",
+        state: "",
+        zipCode: "",
+      });
+    }
+  };
+
+  const validateForm = (data) => {
+    const errors = {};
+
+    if (!data.firstName.trim()) {
+      errors.firstName = "First Name is required";
+    }
+
+    if (!data.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!isValidEmail(data.email)) {
+      errors.email = "Invalid email address";
+    }
+    if (Object.keys(errors).length) {
+      toast.success(`Fill all the required fields`, {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    }
+    return errors;
+  };
 
   const fetchDetails = async () => {
     try {
       const { data } = await userDetail();
       setUserDetails(data?.data?.data);
+      setAddress(data.data.data.address[0]);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   useEffect(() => {
@@ -48,8 +133,6 @@ function Checkout() {
       fetchDetails();
     }
   }, []);
-
-  // console.log("Cart Items on Checkout Page", cartItems);
 
   const cardDetails = {
     cardNo: "1212121212121212",
@@ -105,7 +188,6 @@ function Checkout() {
     }
   }, [cartItems]);
 
-  console.log(userDetails);
   return (
     <>
       <div className="mx-auto mt-[120px] w-[1168px]">
@@ -113,31 +195,8 @@ function Checkout() {
           <div className="col-span-2">
             {/* Billing Information */}
             {Object.keys(userDetails).length &&
-              (!changeAddress ? (
-                !userDetails?.address.length ? (
-                  "Add your address"
-                ) : (
-                  <div className="w-[635px] border border-[#B0B0B0] p-5 flex justify-between align-top font-inter">
-                    <div className="flex flex-col">
-                      <div>{userDetails?.address[0]?.firstname}</div>
-                      <div>{userDetails?.address[0]?.street}</div>
-                      <div>
-                        {userDetails?.address[0]?.city +
-                          ", " +
-                          userDetails?.address[0]?.state +
-                          ", " +
-                          userDetails?.address[0]?.zipCode}
-                      </div>
-                    </div>
-                    <div
-                      className="underline underline-offset-4 cursor-pointer"
-                      onClick={handleAddressClick}
-                    >
-                      Change
-                    </div>
-                  </div>
-                )
-              ) : (
+              !changeAddress &&
+              (!userDetails?.address.length ? (
                 <div className="border-[1px] w-[635px] h-[489px]">
                   <div className="h-[44px] flex text-center justify-center items-center bg-black">
                     <h1 className="text-white font-inter font-[400] text-[18px] leading-[21.78px]">
@@ -151,6 +210,9 @@ function Checkout() {
                       </p>
                       <input
                         type="text"
+                        onChange={handleChange}
+                        value={formData.firstName}
+                        name="firstName"
                         className="border-[0.94px] pl-[8px] border-black w-[556px] h-[38px] rounded-[3px] font-inter"
                       />
                     </div>
@@ -160,6 +222,9 @@ function Checkout() {
                       </p>
                       <input
                         type="email"
+                        onChange={handleChange}
+                        value={formData.email}
+                        name="email"
                         className="border-[0.94px] pl-[8px] font-inter border-black h-[38px] w-[307px] rounded-[3px]"
                       />
                     </div>
@@ -170,6 +235,9 @@ function Checkout() {
                         </p>
                         <input
                           type="text"
+                          onChange={handleChange}
+                          value={formData.city}
+                          name="city"
                           className="border-[0.94px]  pl-[8px] font-inter border-black w-[307px] h-[38px] rounded-[3px]"
                         />
                       </div>
@@ -179,6 +247,9 @@ function Checkout() {
                         </p>
                         <input
                           type="text"
+                          onChange={handleChange}
+                          value={formData.state}
+                          name="state"
                           className="border-[0.94px] pl-[8px] font-inter border-black w-[223px] h-[38px] rounded-[3px]"
                         />
                       </div>
@@ -190,6 +261,9 @@ function Checkout() {
                         </p>
                         <input
                           type="text"
+                          onChange={handleChange}
+                          value={formData.street}
+                          name="street"
                           className="border-[0.94px] pl-[8px] font-inter border-black w-[307px] h-[38px] rounded-[3px]"
                         />
                       </div>
@@ -199,6 +273,9 @@ function Checkout() {
                         </p>
                         <input
                           type="text"
+                          value={formData.zipCode}
+                          name="zipCode"
+                          onChange={handleChange}
                           className="border-[0.94px] pl-[8px] font-inter border-black w-[223px] h-[38px] rounded-[3px]"
                         />
                       </div>
@@ -209,16 +286,43 @@ function Checkout() {
                           Country / Region
                         </p>
                         <input
+                          value={formData.country}
+                          name="country"
+                          onChange={handleChange}
                           type="text"
                           className="border-[0.94px] pl-[8px] font-inter border-black rounded-[3px] h-[37px] w-[307px]"
                         />
                       </div>
                       <div className="my-[35px] w-[223px] h-[37px] gap-[10px] flex items-center text-center justify-center">
-                        <button className="px-[40px] py-[10px] bg-black text-white font-inter font-[400] text-[14px] leading-[16.94px] text-center">
+                        <button
+                          className="px-[40px] py-[10px] bg-black text-white font-inter font-[400] text-[14px] leading-[16.94px] text-center"
+                          onClick={() => handleSubmit()}
+                        >
                           Save Your Address
                         </button>
                       </div>
                     </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="w-[635px] border border-[#B0B0B0] p-5 flex justify-between align-top font-inter">
+                  <div className="flex flex-col">
+                    <div>{address?.firstname}</div>
+                    <div>{address?.street}</div>
+                    <div>
+                      {address?.city +
+                        ", " +
+                        address?.state +
+                        ", " +
+                        address?.zipCode}
+                    </div>
+                  </div>
+                  <div
+                    className="underline underline-offset-4 cursor-pointer"
+                    // onClick={handleAddressClick}
+                    onClick={() => setOpenAddressModel(true)}
+                  >
+                    Change
                   </div>
                 </div>
               ))}
@@ -580,6 +684,12 @@ function Checkout() {
       </div>
 
       <OrderConfirmModel open={open} setOpen={setOpen} />
+      <AddressModel
+        openAddressModel={openAddressModel}
+        setOpenAddressModel={setOpenAddressModel}
+        userDetails={userDetails}
+        setAddress={setAddress}
+      />
     </>
   );
 }

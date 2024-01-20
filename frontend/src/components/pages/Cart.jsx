@@ -50,15 +50,15 @@ function Cart() {
 
   return (
     <>
-      <div className="mt-[144px] gap-16 mb-[157px]">
+      <div className="flex flex-col mt-[144px] gap-16 mb-[157px]">
         <div className="shrink-0 mx-[90px] flex flex-col gap-16">
           <p className="text-[#333] w-full xl:w-[1270px] font-inter text-[36px] font-bold leading-[18.5px] text-left ml-9">
             Cart
           </p>
         </div>
         <div className="flex flex-col gap-8 mx-[90px]">
-          <div className="flex gap-6 text-center ml-[30px] mt-[30px] w-[1029px] ">
-            <div className="col-span-2 font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%] pl-[8rem]">
+          <div className="flex gap-6 text-center ml-56 mt-[30px] w-[1029px]">
+            <div className="col-span-2 font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
               Product
             </div>
             <div className="w-full flex justify-end">
@@ -86,7 +86,7 @@ function Cart() {
                       {item?.header}
                     </div>
                   </div>
-                  <div className="flex gap-[90px] justify-center items-center font-inter font-semibold text-base pl-12">
+                  <div className="flex gap-28 justify-center items-center font-inter font-semibold text-base pl-12">
                     <div>{item?.price}</div>
                     <div className="w-[136px] h-[40px] flex justify-between items-center p-[10px] border rounded-md">
                       <div

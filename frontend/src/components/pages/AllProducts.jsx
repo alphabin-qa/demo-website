@@ -40,7 +40,14 @@ function AllProducts() {
     const isInCart = cartItems.some((item) => item.id === product.id);
 
     if (isInCart) {
-      toast.error("Already added!");
+      toast.error("Already added!", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     } else {
       dispatch(addToCart(product));
     }
@@ -48,7 +55,7 @@ function AllProducts() {
   };
 
   return (
-    <section className="xl:mt-[10rem]">
+    <section className="xl:my-[10rem]">
       <div className="mt-[30px] xl:w-[1440px] lg:w-[1440px] xl:container lg:container md:container sm:container sm:p-[7px] md:p-[12px] mx-auto">
         <div className="h-[50px]">
           <div className="h-[39px]">

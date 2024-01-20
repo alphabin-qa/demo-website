@@ -6,7 +6,7 @@ import {
   HeartFilled,
   HeartOutlined,
   ShoppingFilled,
-  ShoppingOutlined
+  ShoppingOutlined,
 } from "@ant-design/icons";
 import Cart from "../../assets/Cart";
 import "./home.css";
@@ -29,7 +29,14 @@ const Wishlist = () => {
     const isInCart = cartItems.some((item) => item.id === product.id);
 
     if (isInCart) {
-      toast.error("Already added!");
+      toast.error("Already added!", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     } else {
       dispatch(addToCart(product));
     }
