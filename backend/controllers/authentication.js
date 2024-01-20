@@ -154,7 +154,7 @@ exports.addAddress = async (req, res) => {
         await user.save();
       }
 
-      const address = {
+      const userAddress = {
         id: user._id,
         fistname: user.firstname,
         lastname: user.lastname,
@@ -162,7 +162,7 @@ exports.addAddress = async (req, res) => {
         address: user.addresses,
       };
       return res.status(200).json({
-        data: { success: true, address },
+        data: { success: true, userAddress },
       });
     }
   } catch (error) {

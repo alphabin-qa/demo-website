@@ -82,7 +82,7 @@ function Cart() {
                     <div className="w-[99px] h-[148px] ">
                       <img src={item?.img} alt="item"></img>
                     </div>
-                    <div className="font-inter text-[18px font-semibold text-[#333]">
+                    <div className="font-inter text-[18px] font-semibold text-[#333]">
                       {item?.header}
                     </div>
                   </div>
