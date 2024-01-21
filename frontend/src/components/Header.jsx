@@ -8,7 +8,7 @@ import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaHeart, FaCartShopping } from "react-icons/fa6";
-import CartModel from "./CartModel";
+// import CartModel from "../components/pages/";
 
 import {
   getUserAccessToken,
@@ -24,11 +24,11 @@ const Header = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [token, setToken] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isCartOpen, setIsCartOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const open = Boolean(anchorEl);
 
   const { wishlistItems } = useSelector((state) => state?.wishlists);
-  const { cartItems } = useSelector((state) => state?.cartlists)
+  const { cartItems } = useSelector((state) => state?.cartlists);
   const handleMenuSelection = (menuItem) => {
     switch (menuItem) {
       case "Home":
@@ -55,8 +55,8 @@ const Header = () => {
   };
 
   const toggleCart = () => {
-    setIsCartOpen(!isCartOpen)
-  }
+    setIsCartOpen(!isCartOpen);
+  };
 
   useEffect(() => {
     if (!token) {
@@ -112,19 +112,17 @@ const Header = () => {
                     <WishList className="cursor-pointer" />
                   )}
                 </div>
-                <div
-                  className="cursor-pointer"
-                >
+                <div className="cursor-pointer">
                   {cartItems.length ? (
-                    <FaCartShopping className="w-[30px] h-[20px]" onClick={toggleCart} />
+                    <FaCartShopping
+                      className="w-[30px] h-[20px]"
+                      onClick={toggleCart}
+                    />
                   ) : (
-                    <Cart
-                    className="cursor-pointer"
-                    onClick={toggleCart}
-                  />  
+                    <Cart className="cursor-pointer" onClick={toggleCart} />
                   )}
                 </div>
-                <CartModel isOpen={isCartOpen} toggleCart={toggleCart} />
+                {/* <CartModel isOpen={isCartOpen} toggleCart={toggleCart} /> */}
                 <User className="cursor-pointer" onClick={handleClick} />
               </div>
               <div

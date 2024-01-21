@@ -67,6 +67,7 @@ const userSchema = mongoose.Schema({
     trim: true,
   },
   addresses: [addressSchema],
+  orders: [],
 });
 
 module.exports = mongoose.model("user", userSchema);

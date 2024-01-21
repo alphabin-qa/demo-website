@@ -8,8 +8,8 @@ import Youtube from "../assets/youtube.png";
 const Footer = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-[481px] bg-black flex flex-col justify-center items-center text-white">
-      <div className="w-[1260px] flex justify-between items-start shrink mx-[90px] mt-[54]">
+    <div className="h-full pt-[54px] px-[90px] bg-black flex flex-col justify-center items-center text-white">
+      <div className="w-[1260px] flex justify-between items-start shrink">
         <div className=" flex flex-col  gap-[45px]">
           <div>
             <div className=" font-nunito text-white">
@@ -48,7 +48,7 @@ const Footer = () => {
             </span>
           </div>
           <div>
-            <ul className="gap-4">
+            <ul className="flex flex-col gap-4">
               <li
                 className="p-[2px] cursor-pointer"
                 onClick={() => navigate("/")}
@@ -81,7 +81,7 @@ const Footer = () => {
             <span className="font-inter text-xl font-medium tracking-[1px]">
               Costumer Policy
             </span>
-            <ul>
+            <ul className="flex flex-col gap-4">
               <li className="p-[2px] cursor-pointer">Privacy Policy</li>
               <li className="p-[2px] cursor-pointer">Terms & Conditions</li>
               <li className="p-[2px] cursor-pointer">Shipping Policy</li>
@@ -117,8 +117,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="w-[1260px] shrink-0 h-[1px] stroke-[1px] bg-[#4D4D4D] mb-8"></div>
-      <div className=" text-[14px] font-light tracking-[1px] font-inter mb-8">
+      <div className="w-[1260px] shrink-0 h-[1px] stroke-[1px] bg-[#4D4D4D] mt-16"></div>
+      <div className=" text-[14px] font-light tracking-[1px] font-inter py-[29px] mx-[479px]">
         Copyright © 2023 Alphabin Technology Consulting | Demo Store
       </div>
     </div>

@@ -62,12 +62,31 @@ export const authApi = createApi({
         };
       },
     }),
+    createOrder: builder.mutation({
+      query: (data) => {
+        return {
+          method: "POST",
+          url: "/createOrder",
+          body: data,
+        };
+      },
+    }),
+    getOrderDetails: builder.mutation({
+      query: (id) => {
+        return {
+          method: "GET",
+          url: `/findOrder/${id}`,
+        };
+      },
+    }),
   }),
 });
 
 export const {
   useLoginMutation,
   useSignupMutation,
+  useCreateOrderMutation,
+  useGetOrderDetailsMutation,
   useAddAddressMutation,
   useGetUserMutation,
   useGetUpdateUserMutation,

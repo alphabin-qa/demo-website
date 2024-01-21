@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import OrderConfirmModel from "../OrderConfirmModel";
 import {
   useAddAddressMutation,
+  useCreateOrderMutation,
   useGetUserMutation,
 } from "../../services/authServices";
 import toast from "react-hot-toast";
@@ -25,6 +26,7 @@ import AddressModel from "../AddressModel";
 
 function Checkout() {
   const navigate = useNavigate();
+  const [createOrder] = useCreateOrderMutation();
   const [billingTab, setBillingTab] = useState("credit");
   const [visibleBanks, setVisibleBanks] = useState(6);
   const [open, setOpen] = useState(false);
@@ -32,11 +34,34 @@ function Checkout() {
   const [totalValue, setTotalvalue] = useState();
   const [userDetails, setUserDetails] = useState({});
   const [changeAddress, setChangeAddress] = useState(false);
+  const [cardData, setCardData] = useState({
+    cardNo: "",
+    cvv: "",
+    expiredMonth: "",
+    expiredYear: "",
+  });
   const [openAddressModel, setOpenAddressModel] = useState(false);
   const [address, setAddress] = useState({});
   const [addAddress] = useAddAddressMutation();
   const [userDetail] = useGetUserMutation();
   const user = useSelector((state) => state?.userData);
+  const banks = [
+    { name: "AXIS", logo: axis },
+    { name: "HDFC", logo: hdfc },
+    { name: "SBI", logo: sbi },
+    { name: "Kotak", logo: kotak },
+    { name: "ICICI", logo: icici },
+    { name: "BOB", logo: bob },
+    { name: "Punjab", logo: punjab },
+    { name: "BOI", logo: boi },
+  ];
+
+  const cardDetails = {
+    cardNo: "1212121212121212",
+    cvv: "123",
+    expiredMonth: "02",
+    expiredYear: "30",
+  };
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -47,6 +72,7 @@ function Checkout() {
     state: "",
     zipCode: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -128,17 +154,35 @@ function Checkout() {
     return emailRegex.test(email);
   };
 
-  useEffect(() => {
-    if (!Object.keys(userDetails).length) {
-      fetchDetails();
-    }
-  }, []);
+  const handleCreditCardChange = (e) => {
+    const { name, value } = e.target;
+    setCardData((prevCardData) => ({
+      ...prevCardData,
+      [name]: value,
+    }));
+  };
 
-  const cardDetails = {
-    cardNo: "1212121212121212",
-    cvv: "123",
-    expiredMonth: "02",
-    expiredYear: "30",
+  const handleOrderNow = async () => {
+    const areEqual = JSON.stringify(cardData) === JSON.stringify(cardDetails);
+    if (areEqual) {
+      const { id } = await createOrder({
+        address: address,
+        paymentMethod: billingTab,
+        totalAmount: totalValue,
+        orderDate: Date.now(),
+        id: user[0]?.user?._id,
+      });
+      // setOpen(true);
+    } else {
+      toast.error("Enter valid card details", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    }
   };
 
   const handleAddressClick = () => {
@@ -156,17 +200,6 @@ function Checkout() {
     }
   };
 
-  const banks = [
-    { name: "AXIS", logo: axis },
-    { name: "HDFC", logo: hdfc },
-    { name: "SBI", logo: sbi },
-    { name: "Kotak", logo: kotak },
-    { name: "ICICI", logo: icici },
-    { name: "BOB", logo: bob },
-    { name: "Punjab", logo: punjab },
-    { name: "BOI", logo: boi },
-  ];
-
   const showMoreBanks = () => {
     setVisibleBanks((prevVisibleBanks) => prevVisibleBanks + 3);
   };
@@ -174,6 +207,12 @@ function Checkout() {
   const handleBillingTab = (tab) => {
     setBillingTab(tab);
   };
+
+  useEffect(() => {
+    if (!Object.keys(userDetails).length) {
+      fetchDetails();
+    }
+  }, []);
 
   useEffect(() => {
     if (cartItems) {
@@ -194,138 +233,136 @@ function Checkout() {
         <div className="grid grid-cols-3 gap-12">
           <div className="col-span-2">
             {/* Billing Information */}
-            {Object.keys(userDetails).length &&
-              !changeAddress &&
-              (!userDetails?.address.length ? (
-                <div className="border-[1px] w-[635px] h-[489px]">
-                  <div className="h-[44px] flex text-center justify-center items-center bg-black">
-                    <h1 className="text-white font-inter font-[400] text-[18px] leading-[21.78px]">
-                      Billing Information
-                    </h1>
+            {!changeAddress ? (
+              <div className="border-[1px] w-[635px] h-[489px]">
+                <div className="h-[44px] flex text-center justify-center items-center bg-black">
+                  <h1 className="text-white font-inter font-[400] text-[18px] leading-[21.78px]">
+                    Billing Information
+                  </h1>
+                </div>
+                <div className="font-inter w-[556px] h-[355px] mx-auto gap-[10px] mt-[20px]">
+                  <div className="w-[556px] h-[63px] gap-[8px]">
+                    <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                      First Name
+                    </p>
+                    <input
+                      type="text"
+                      onChange={handleChange}
+                      value={formData.firstName}
+                      name="firstName"
+                      className="border-[0.94px] pl-[8px] border-black w-[556px] h-[38px] rounded-[3px] font-inter"
+                    />
                   </div>
-                  <div className="font-inter w-[556px] h-[355px] mx-auto gap-[10px] mt-[20px]">
-                    <div className="w-[556px] h-[63px] gap-[8px]">
+                  <div className="my-[15px] w-[307px] h-[63px] gap-[8px]">
+                    <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                      Email
+                    </p>
+                    <input
+                      type="email"
+                      onChange={handleChange}
+                      value={formData.email}
+                      name="email"
+                      className="border-[0.94px] pl-[8px] font-inter border-black h-[38px] w-[307px] rounded-[3px]"
+                    />
+                  </div>
+                  <div className="flex justify-between my-[15px] gap-[26px] w-[556px] h-[63px]">
+                    <div className="w-[307px] h-[63px] gap-[8px]">
                       <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
-                        First Name
+                        Town / City
                       </p>
                       <input
                         type="text"
                         onChange={handleChange}
-                        value={formData.firstName}
-                        name="firstName"
-                        className="border-[0.94px] pl-[8px] border-black w-[556px] h-[38px] rounded-[3px] font-inter"
+                        value={formData.city}
+                        name="city"
+                        className="border-[0.94px]  pl-[8px] font-inter border-black w-[307px] h-[38px] rounded-[3px]"
                       />
                     </div>
-                    <div className="my-[15px] w-[307px] h-[63px] gap-[8px]">
+                    <div className="w-[223px] h-[63px] gap-[8px]">
                       <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
-                        Email
+                        State
                       </p>
                       <input
-                        type="email"
+                        type="text"
                         onChange={handleChange}
-                        value={formData.email}
-                        name="email"
-                        className="border-[0.94px] pl-[8px] font-inter border-black h-[38px] w-[307px] rounded-[3px]"
+                        value={formData.state}
+                        name="state"
+                        className="border-[0.94px] pl-[8px] font-inter border-black w-[223px] h-[38px] rounded-[3px]"
                       />
                     </div>
-                    <div className="flex justify-between my-[15px] gap-[26px] w-[556px] h-[63px]">
-                      <div className="w-[307px] h-[63px] gap-[8px]">
-                        <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
-                          Town / City
-                        </p>
-                        <input
-                          type="text"
-                          onChange={handleChange}
-                          value={formData.city}
-                          name="city"
-                          className="border-[0.94px]  pl-[8px] font-inter border-black w-[307px] h-[38px] rounded-[3px]"
-                        />
-                      </div>
-                      <div className="w-[223px] h-[63px] gap-[8px]">
-                        <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
-                          State
-                        </p>
-                        <input
-                          type="text"
-                          onChange={handleChange}
-                          value={formData.state}
-                          name="state"
-                          className="border-[0.94px] pl-[8px] font-inter border-black w-[223px] h-[38px] rounded-[3px]"
-                        />
-                      </div>
+                  </div>
+                  <div className="flex justify-between my-[15px] gap-[26px] w-[556px] h-[63px]">
+                    <div className="w-[307px] h-[63px] gap-[8px]">
+                      <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                        Street
+                      </p>
+                      <input
+                        type="text"
+                        onChange={handleChange}
+                        value={formData.street}
+                        name="street"
+                        className="border-[0.94px] pl-[8px] font-inter border-black w-[307px] h-[38px] rounded-[3px]"
+                      />
                     </div>
-                    <div className="flex justify-between my-[15px] gap-[26px] w-[556px] h-[63px]">
-                      <div className="w-[307px] h-[63px] gap-[8px]">
-                        <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
-                          Street
-                        </p>
-                        <input
-                          type="text"
-                          onChange={handleChange}
-                          value={formData.street}
-                          name="street"
-                          className="border-[0.94px] pl-[8px] font-inter border-black w-[307px] h-[38px] rounded-[3px]"
-                        />
-                      </div>
-                      <div className="w-[223px] h-[63px] gap-[8px]">
-                        <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
-                          Zip code
-                        </p>
-                        <input
-                          type="text"
-                          value={formData.zipCode}
-                          name="zipCode"
-                          onChange={handleChange}
-                          className="border-[0.94px] pl-[8px] font-inter border-black w-[223px] h-[38px] rounded-[3px]"
-                        />
-                      </div>
+                    <div className="w-[223px] h-[63px] gap-[8px]">
+                      <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                        Zip code
+                      </p>
+                      <input
+                        type="text"
+                        value={formData.zipCode}
+                        name="zipCode"
+                        onChange={handleChange}
+                        className="border-[0.94px] pl-[8px] font-inter border-black w-[223px] h-[38px] rounded-[3px]"
+                      />
                     </div>
-                    <div className="flex w-[556px] h-[63px] gap-[26px]">
-                      <div className="my-[15px] w-[307px] h-[63px] gap-[8px]">
-                        <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
-                          Country / Region
-                        </p>
-                        <input
-                          value={formData.country}
-                          name="country"
-                          onChange={handleChange}
-                          type="text"
-                          className="border-[0.94px] pl-[8px] font-inter border-black rounded-[3px] h-[37px] w-[307px]"
-                        />
-                      </div>
-                      <div className="my-[35px] w-[223px] h-[37px] gap-[10px] flex items-center text-center justify-center">
-                        <button
-                          className="px-[40px] py-[10px] bg-black text-white font-inter font-[400] text-[14px] leading-[16.94px] text-center"
-                          onClick={() => handleSubmit()}
-                        >
-                          Save Your Address
-                        </button>
-                      </div>
+                  </div>
+                  <div className="flex w-[556px] h-[63px] gap-[26px]">
+                    <div className="my-[15px] w-[307px] h-[63px] gap-[8px]">
+                      <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
+                        Country / Region
+                      </p>
+                      <input
+                        value={formData.country}
+                        name="country"
+                        onChange={handleChange}
+                        type="text"
+                        className="border-[0.94px] pl-[8px] font-inter border-black rounded-[3px] h-[37px] w-[307px]"
+                      />
+                    </div>
+                    <div className="my-[35px] w-[223px] h-[37px] gap-[10px] flex items-center text-center justify-center">
+                      <button
+                        className="px-[40px] py-[10px] bg-black text-white font-inter font-[400] text-[14px] leading-[16.94px] text-center"
+                        onClick={() => handleSubmit()}
+                      >
+                        Save Your Address
+                      </button>
                     </div>
                   </div>
                 </div>
-              ) : (
-                <div className="w-[635px] border border-[#B0B0B0] p-5 flex justify-between align-top font-inter">
-                  <div className="flex flex-col">
-                    <div>{address?.firstname}</div>
-                    <div>{address?.street}</div>
-                    <div>
-                      {address?.city +
-                        ", " +
-                        address?.state +
-                        ", " +
-                        address?.zipCode}
-                    </div>
-                  </div>
-                  <div
-                    className="underline underline-offset-4 cursor-pointer"
-                    // onClick={handleAddressClick}
-                    onClick={() => setOpenAddressModel(true)}
-                  >
-                    Change
+              </div>
+            ) : (
+              <div className="w-[635px] border border-[#B0B0B0] p-5 flex justify-between align-top font-inter">
+                <div className="flex flex-col">
+                  <div>{address?.firstname}</div>
+                  <div>{address?.street}</div>
+                  <div>
+                    {address?.city +
+                      ", " +
+                      address?.state +
+                      ", " +
+                      address?.zipCode}
                   </div>
                 </div>
-              ))}
+                <div
+                  className="underline underline-offset-4 cursor-pointer"
+                  // onClick={handleAddressClick}
+                  onClick={() => setOpenAddressModel(true)}
+                >
+                  Change
+                </div>
+              </div>
+            )}
 
             {/* Payment Information */}
             <div className="font-inter border-[0.84px] w-[635px] h-[570px] mt-[5rem] mb-[5rem]">
@@ -426,6 +463,9 @@ function Checkout() {
                           </p>
                           <input
                             type="text"
+                            onChange={handleCreditCardChange}
+                            value={cardData.cardNo}
+                            name="cardNo"
                             className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px] font-inter"
                           />
                         </div>
@@ -446,11 +486,17 @@ function Checkout() {
                             <div className="w-[197.53px] h-[32px] gap-[2px] ">
                               <input
                                 type="text"
+                                onChange={handleCreditCardChange}
+                                value={cardData.expiredMonth}
+                                name="expiredMonth"
                                 className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-inter"
                               />
                               <label htmlFor=""> / </label>
                               <input
                                 type="text"
+                                onChange={handleCreditCardChange}
+                                value={cardData.expiredYear}
+                                name="expiredYear"
                                 className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-inter"
                               />
                             </div>
@@ -461,6 +507,9 @@ function Checkout() {
                             </p>
                             <input
                               type="text"
+                              onChange={handleCreditCardChange}
+                              value={cardData.cvv}
+                              name="cvv"
                               className="w-[77px] h-[32px] rounded-[3px] border-[1px] pl-[8px] font-inter"
                             />
                           </div>
@@ -469,90 +518,7 @@ function Checkout() {
                     </div>
                   </>
                 )}
-                {/* {billingTab === "debit" && (
-                  <>
-                    <div className="w-[560px] h-[300px] mx-auto">
-                      <div className="flex justify-between mt-[10px] w-[339px] h-[40px]">
-                        <div className="">
-                          <p className="font-inter font-[400] text-[16px] leading-[19.36px] w-[91px] h-[19px]">
-                            We Accept:{" "}
-                          </p>
-                        </div>
-                        <div>
-                          <img
-                            src={mastercard}
-                            alt=""
-                            className="w-[38px] h-[21px]"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src={rupay}
-                            alt=""
-                            className="w-[44px] h-[21px]"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src={visa}
-                            alt=""
-                            className="w-[38px] h-[21px]"
-                          />
-                        </div>
-                      </div>
-                      <div className="mt-[10px] w-[560px] h-[75px] gap-[4px]">
-                        <div>
-                          <p className="font-inter font-[400] text-[16px] leading-[19.36px] ">
-                            Card Number
-                          </p>
-                          <p className="font-inter font-[400] text-[10.09px] leading-[12.21px] mb-[5px]">
-                            Enter the 16-degit card number on the card
-                          </p>
-                          <input
-                            type="text"
-                            className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px] font-inter"
-                          />
-                        </div>
-                        <div className="mt-[15px]">
-                          <p className="font-inter font-[400] text-[16px] leading-[19.36px] mb-[5px]">
-                            Card Name
-                          </p>
-                          <input
-                            type="text"
-                            className="rounded-[3px] border-[1px] w-[544px] h-[36px pl-[8px] font-inter]"
-                          />
-                        </div>
-                        <div className="flex justify-between w-[560px] h-[32px] mt-[15px]">
-                          <div className="w-[341.53px] h-[32px] gap-[14px] flex justify-between items-center">
-                            <p className="font-inter font-[400] text-[16px] leading-[19.36px] w-[114px] h-[19px] gap-[4.21px]">
-                              Expiration date
-                            </p>
-                            <div className="w-[197.53px] h-[32px] gap-[2px] ">
-                              <input
-                                type="text"
-                                className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-inter"
-                              />
-                              <label htmlFor=""> / </label>
-                              <input
-                                type="text"
-                                className="border-[1px] w-[77px] h-[32px] rounded-[3px] text-center"
-                              />
-                            </div>
-                          </div>
-                          <div className="w-[184px] h-[32px] gap-[8px] flex justify-between mr-[1rem] items-baseline">
-                            <p className="w-[184px] h-[32px] gap-[8px] font-inter">
-                              CVV Number
-                            </p>
-                            <input
-                              type="text"
-                              className="w-[77px] h-[32px] rounded-[3px] border-[1px] pl-[8px] font-inter"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )} */}
+
                 {billingTab === "netbanking" && (
                   <>
                     <div className="">
@@ -592,7 +558,32 @@ function Checkout() {
                 )}
                 {billingTab === "cod" && (
                   <>
-                    <div>Cash On Delivery Info</div>
+                    <div className="w-[539px] border border-[#B0B0B0] p-[8.41px] mb-52 flex justify-between align-top font-inter">
+                      {userDetails?.address?.length === 0 ? (
+                        "Add your address"
+                      ) : (
+                        <div className="flex flex-col">
+                          <div>{address?.firstname}</div>
+                          <div>{address?.street}</div>
+                          <div>
+                            {address?.city +
+                              ", " +
+                              address?.state +
+                              ", " +
+                              address?.zipCode}
+                          </div>
+                        </div>
+                      )}
+                      <div
+                        className="underline underline-offset-4 cursor-pointer"
+                        // onClick={handleAddressClick}
+                        onClick={() => setOpenAddressModel(true)}
+                      >
+                        {userDetails?.address?.length === 0
+                          ? "Add address"
+                          : "Change"}
+                      </div>
+                    </div>
                   </>
                 )}
 
@@ -617,7 +608,9 @@ function Checkout() {
                 </div>
                 <button
                   className="w-[190px] h-[40px] p-[10px] gap-[10px] font-inter font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white mt-[24px]"
-                  onClick={() => setOpen(true)}
+                  onClick={() => {
+                    handleOrderNow();
+                  }}
                 >
                   Order Now
                 </button>
@@ -689,6 +682,7 @@ function Checkout() {
         setOpenAddressModel={setOpenAddressModel}
         userDetails={userDetails}
         setAddress={setAddress}
+        setChangeAddress={setChangeAddress}
       />
     </>
   );

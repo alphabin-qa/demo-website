@@ -53,7 +53,6 @@ const MyAccount = () => {
     zipCode: "",
   });
   const [errors, setErrors] = useState({});
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -67,12 +66,23 @@ const MyAccount = () => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const { data } = await addAddress({
-          id: user[0]?.user?._id,
-          address: formData,
-        });
-        if (data.success === true) {
-          toast.success(`Fill all the required fields..`, {
+        if (userDetails.address.length <= 4) {
+          const { data } = await addAddress({
+            id: user[0]?.user?._id,
+            address: formData,
+          });
+          if (data.success === true) {
+            toast.success(`Fill all the required fields..`, {
+              duration: 4000,
+              style: {
+                border: "1px solid black",
+                backgroundColor: "black",
+                color: "white",
+              },
+            });
+          }
+        } else {
+          toast.error(`You can not add more than 4 addresses`, {
             duration: 4000,
             style: {
               border: "1px solid black",
@@ -151,7 +161,7 @@ const MyAccount = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <div className="flex justify-center items-center mt-[144px] mb-[302px]">
         <div className="flex justify-center items-start w-[1260px] h-[534px] gap-6">
           <div className="border h-full rounded-b-[8px] border-t-0">
@@ -183,7 +193,6 @@ const MyAccount = () => {
           </div>
 
           {/* My profile  */}
-
           {selection === 1 && (
             <div className="w-[963px] h-full border rounded-[5px]">
               <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
@@ -286,13 +295,13 @@ const MyAccount = () => {
                   <FaEdit className="w-[21px] h-[21px]" />
                 </div>
               </div>
-              <div className="h-96 border grid grid-cols-2 justify-start items-center gap-8 mt-[30px] ml-[30px] mb-8">
-                {!userDetails?.addresses?.length ? (
-                  <div className="flex border justify-center items-center p-[10px] font-inter">
+              <div className="h-96 grid grid-cols-2 justify-start items-center gap-8 mt-[30px] ml-[30px] mb-8">
+                {!userDetails?.address?.length ? (
+                  <div className="w-full ml-[50%] flex border justify-center items-center p-[10px] font-inter">
                     ADDRESS NOT FOUND
                   </div>
                 ) : (
-                  userDetails?.addresses?.map((item) => {
+                  userDetails?.address?.map((item) => {
                     return (
                       <div className="w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
                         <div className="p-[10px]">
@@ -446,9 +455,6 @@ const MyAccount = () => {
                   <div className="text-2xl font-bold font-inter uppercase">
                     My Order
                   </div>
-                  <div className="text-xs font-normal font-inter underline underline-offset-4 uppercase">
-                    *
-                  </div>
                 </div>
                 <div className=" flex flex-col gap-8 mb-[86px]">
                   {/* Add Card Here */}
@@ -463,7 +469,7 @@ const MyAccount = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="w-[97px] h-[28px] p-[10px] flex justify-between items-center border border-[#909090] rounded-[3px]">
+                    {/* <div className="w-[97px] h-[28px] p-[10px] flex justify-between items-center border border-[#909090] rounded-[3px]">
                       <div className="cursor-pointer">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -499,7 +505,7 @@ const MyAccount = () => {
                           />
                         </svg>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="w-[152.5px] flex flex-col justify-end items-end gap-3">
                       <div className="flex justify-end items-center underline underline-offset-4 cursor-pointer">
                         <div className="text-base font-normal font-inter">
@@ -540,7 +546,7 @@ const MyAccount = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
