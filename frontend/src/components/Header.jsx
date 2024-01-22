@@ -8,7 +8,7 @@ import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaHeart, FaCartShopping } from "react-icons/fa6";
-// import CartModel from "../components/pages/";
+import CartModel from "../components/CartModel";
 
 import {
   getUserAccessToken,
@@ -122,7 +122,7 @@ const Header = () => {
                     <Cart className="cursor-pointer" onClick={toggleCart} />
                   )}
                 </div>
-                {/* <CartModel isOpen={isCartOpen} toggleCart={toggleCart} /> */}
+                <CartModel isOpen={isCartOpen} toggleCart={toggleCart} />
                 <User className="cursor-pointer" onClick={handleClick} />
               </div>
               <div
