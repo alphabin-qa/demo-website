@@ -6,6 +6,7 @@ import Contact from "../components/pages/ContactUs";
 import ProductDetail from "../components/pages/ProductDetail";
 import MyAccount from "../components/pages/MyAccount";
 import Wishlist from "../components/pages/Wishlist";
+import OrderDetail from "../components/pages/OrderDetail"
 import AllProducts from "../components/pages/AllProducts";
 import Cart from "../components/pages/Cart";
 import Checkout from "../components/pages/Checkout";
@@ -57,6 +58,10 @@ const MainRoutes = {
     {
       path: "checkout",
       element: <Checkout />,
+    },
+    {
+      path: "order-detail",
+      element: <OrderDetail />,
     },
     {
       path: "*",

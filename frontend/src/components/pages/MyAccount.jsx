@@ -527,7 +527,7 @@ const MyAccount = () => {
                         </div>
                       </div>
                       <div className="font-normal font-inter text-base cursor-pointer">
-                        Cancle
+                        Cancel
                       </div>
                     </div>
                   </div>
