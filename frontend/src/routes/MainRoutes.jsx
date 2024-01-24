@@ -6,10 +6,10 @@ import Contact from "../components/pages/ContactUs";
 import ProductDetail from "../components/pages/ProductDetail";
 import MyAccount from "../components/pages/MyAccount";
 import Wishlist from "../components/pages/Wishlist";
-import OrderDetail from "../components/pages/OrderDetail"
 import AllProducts from "../components/pages/AllProducts";
 import Cart from "../components/pages/Cart";
 import Checkout from "../components/pages/Checkout";
+import OrderDetail from "../components/pages/OrderDetail";
 const Home = Loadable(lazy(() => import("../components/pages/Home")));
 const DefaultRoute = Loadable(
   lazy(() => import("../DefaultRoute/DefaultRoute"))
@@ -60,7 +60,7 @@ const MainRoutes = {
       element: <Checkout />,
     },
     {
-      path: "order-detail",
+      path: "status/:id",
       element: <OrderDetail />,
     },
     {

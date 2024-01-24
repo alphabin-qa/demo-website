@@ -24,6 +24,7 @@ const AddressModel = ({
   userDetails,
   setAddress,
   setChangeAddress,
+  handleAddressClick,
 }) => {
   const handleClose = () => setOpenAddressModel(false);
 
@@ -52,8 +53,7 @@ const AddressModel = ({
             <div
               className="text-xl font-bold font-inter mr-14 border p-2 rounded-lg bg-slate-500 text-white cursor-pointer"
               onClick={() => {
-                setChangeAddress(true);
-                handleClose();
+                handleAddressClick();
               }}
             >
               Add new address

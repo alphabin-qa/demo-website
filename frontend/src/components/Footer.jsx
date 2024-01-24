@@ -41,7 +41,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" gap-2">
+        <div className="flex flex-col gap-4">
           <div>
             <span className="font-inter text-xl font-medium tracking-[1px]">
               Useful Links
@@ -77,7 +77,7 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <div className="gap-4">
+          <div className="flex flex-col gap-4">
             <span className="font-inter text-xl font-medium tracking-[1px]">
               Costumer Policy
             </span>
@@ -92,7 +92,7 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <div className="gap-4">
+          <div className="flex flex-col gap-4">
             <span className="font-inter text-xl font-medium tracking-[1px]">
               Follow Us
             </span>

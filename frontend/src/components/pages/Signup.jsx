@@ -76,6 +76,15 @@ const Signup = () => {
       const response = await signup(formData);
       if (response?.data?.success === true) {
         navigate("/login");
+      } else {
+        toast.error(response?.error?.data?.message, {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
       }
     } else {
       for (let item of Object.entries(formErrors)) {

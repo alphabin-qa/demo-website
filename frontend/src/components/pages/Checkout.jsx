@@ -30,6 +30,7 @@ function Checkout() {
   const [billingTab, setBillingTab] = useState("credit");
   const [visibleBanks, setVisibleBanks] = useState(6);
   const [open, setOpen] = useState(false);
+  const [order, setOrder] = useState({});
   const { cartItems } = useSelector((state) => state?.cartlists);
   const [totalValue, setTotalvalue] = useState();
   const [userDetails, setUserDetails] = useState({});
@@ -42,6 +43,7 @@ function Checkout() {
   });
   const [openAddressModel, setOpenAddressModel] = useState(false);
   const [address, setAddress] = useState({});
+  const [refetch, setRefetch] = useState(false);
   const [addAddress] = useAddAddressMutation();
   const [userDetail] = useGetUserMutation();
   const user = useSelector((state) => state?.userData);
@@ -83,7 +85,7 @@ function Checkout() {
   const handleSubmit = async (e) => {
     const validationErrors = validateForm(formData);
     // setErrors(validationErrors);
-    if (Object.keys(validationErrors).length === 0) {
+    if (Object?.keys(validationErrors)?.length === 0) {
       try {
         const { data } = await addAddress({
           id: user[0]?.user?._id,
@@ -98,6 +100,8 @@ function Checkout() {
               color: "white",
             },
           });
+        } else if (data?.data?.success === true) {
+          setRefetch(true);
         }
       } catch (error) {
         console.error(error);
@@ -143,7 +147,11 @@ function Checkout() {
     try {
       const { data } = await userDetail();
       setUserDetails(data?.data?.data);
-      setAddress(data.data.data.address[0]);
+      if (!data.data.data.address.length) {
+        setChangeAddress(true);
+      } else {
+        setAddress(data.data.data.address[0]);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -165,14 +173,15 @@ function Checkout() {
   const handleOrderNow = async () => {
     const areEqual = JSON.stringify(cardData) === JSON.stringify(cardDetails);
     if (areEqual) {
-      const { id } = await createOrder({
+      const { data } = await createOrder({
         address: address,
         paymentMethod: billingTab,
         totalAmount: totalValue,
         orderDate: Date.now(),
-        id: user[0]?.user?._id,
+        email: userDetails?.email,
       });
-      // setOpen(true);
+      setOpen(true);
+      setOrder(data);
     } else {
       toast.error("Enter valid card details", {
         duration: 4000,
@@ -209,10 +218,10 @@ function Checkout() {
   };
 
   useEffect(() => {
-    if (!Object.keys(userDetails).length) {
+    if (!Object.keys(userDetails).length || refetch) {
       fetchDetails();
     }
-  }, []);
+  }, [refetch]);
 
   useEffect(() => {
     if (cartItems) {
@@ -233,7 +242,7 @@ function Checkout() {
         <div className="grid grid-cols-3 gap-12">
           <div className="col-span-2">
             {/* Billing Information */}
-            {!changeAddress ? (
+            {changeAddress ? (
               <div className="border-[1px] w-[635px] h-[489px]">
                 <div className="h-[44px] flex text-center justify-center items-center bg-black">
                   <h1 className="text-white font-inter font-[400] text-[18px] leading-[21.78px]">
@@ -357,7 +366,9 @@ function Checkout() {
                 <div
                   className="underline underline-offset-4 cursor-pointer"
                   // onClick={handleAddressClick}
-                  onClick={() => setOpenAddressModel(true)}
+                  onClick={() => {
+                    setOpenAddressModel(true);
+                  }}
                 >
                   Change
                 </div>
@@ -676,13 +687,14 @@ function Checkout() {
         </div>
       </div>
 
-      <OrderConfirmModel open={open} setOpen={setOpen} />
+      <OrderConfirmModel open={open} setOpen={setOpen} order={order} />
       <AddressModel
         openAddressModel={openAddressModel}
         setOpenAddressModel={setOpenAddressModel}
         userDetails={userDetails}
         setAddress={setAddress}
         setChangeAddress={setChangeAddress}
+        handleAddressClick={handleAddressClick}
       />
     </>
   );

@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Circle from "../assets/CheckCircle.png";
+import { useNavigate, useParams } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -18,8 +19,13 @@ const style = {
   pl: "180px",
 };
 
-export default function OrderConfirmModel({ open, setOpen }) {
+export default function OrderConfirmModel({ open, setOpen, order }) {
+  const navigate = useNavigate();
+
   const handleClose = () => setOpen(false);
+  const handleStatus = (id) => {
+    navigate(`/status/${id}`);
+  };
 
   return (
     <Modal
@@ -45,14 +51,14 @@ export default function OrderConfirmModel({ open, setOpen }) {
             Your order is successfully placed
           </Typography>
           <Typography className="font-inter font-normal text-xs">
-            Order ID - {Math.floor(100000 + Math.random() * 900000)}
+            Order ID - {order?.orderId}
           </Typography>
         </Box>
         <Box>
           <button
             className="h-[40px] w-[193px] -[10px] bg-black font-normal font-inter text-base text-white"
             onClick={() => {
-              setOpen(false);
+              handleStatus(order?.orderId);
             }}
           >
             Check Status

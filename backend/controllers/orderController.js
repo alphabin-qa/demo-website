@@ -1,12 +1,10 @@
 require("dotenv").config();
-const { default: mongoose } = require("mongoose");
 const Order = require("../models/orderSchema");
 const User = require("../models/userSchema.js");
 
 exports.createOrder = async (req, res) => {
   try {
-    const { address, paymentMethod, totalAmount, orderDate, id } = req.body;
-
+    const { address, paymentMethod, totalAmount, orderDate, email } = req.body;
     const newOrder = {
       address,
       paymentMethod,
@@ -14,7 +12,7 @@ exports.createOrder = async (req, res) => {
       orderDate,
     };
     const result = await Order.create(newOrder);
-    const userDetails = await User.findById(id);
+    const userDetails = await User.findOne({ email });
 
     if (userDetails) {
       userDetails.orders.push(result._id);
