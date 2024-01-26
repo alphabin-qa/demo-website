@@ -28,6 +28,14 @@ const wishlistItems = createSlice({
           "wishlistItems",
           JSON.stringify(state.wishlistItems)
         );
+        toast.success("Added to the wishlist", {
+          duration: 2000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
       }
     },
 
@@ -44,6 +52,14 @@ const wishlistItems = createSlice({
         "wishlistItems",
         JSON.stringify(state.wishlistItems)
       );
+      toast.success("Removed from wishlist", {
+        duration: 2000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     },
   },
 });

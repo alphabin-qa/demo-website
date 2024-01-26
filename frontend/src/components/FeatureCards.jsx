@@ -16,6 +16,7 @@ import {
   removeFromWishlist,
 } from "../store/reducers/wishListItems";
 import { addToCart, removeFromCart } from "../store/reducers/cartItems";
+import { toast } from "react-hot-toast";
 
 const FeatureCards = ({ img, header, price, reviewCount, id }) => {
   const dispatch = useDispatch();
@@ -39,7 +40,14 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
     const isInCart = cartItems.some((item) => item.id === id);
 
     if (isInCart) {
-      dispatch(removeFromCart({ id, img, header, price, reviewCount }));
+      toast.error("Already added!", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     } else {
       dispatch(addToCart({ id, img, header, price, reviewCount }));
     }

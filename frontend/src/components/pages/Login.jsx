@@ -30,6 +30,13 @@ const Login = () => {
     });
   };
 
+  // Function to handle Enter key press
+  const handleKeyPress = async (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   // Function to handle the login button click
   const handleLogin = async () => {
     try {
@@ -92,6 +99,7 @@ const Login = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
                 />
               </div>
               <div className="pt-4 gap-3 relative">
@@ -111,6 +119,7 @@ const Login = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
+                    onKeyPress={handleKeyPress}
                   />
                   <span
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"

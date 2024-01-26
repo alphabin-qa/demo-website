@@ -25,7 +25,7 @@ const cartItems = createSlice({
         state.cartItems?.push(buildCartlistItem);
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         toast.success("Added to the cart", {
-          duration: 4000,
+          duration: 2000,
           style: {
             border: "1px solid black",
             backgroundColor: "black",
@@ -45,6 +45,14 @@ const cartItems = createSlice({
       );
       state.cartItems = filteredItems;
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      toast.success("Removed from cart", {
+        duration: 2000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     },
 
     adjustQuantity: (state, action) => {

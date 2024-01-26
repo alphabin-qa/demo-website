@@ -69,12 +69,27 @@ const Signup = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Function to handle Enter key press
+  const handleKeyPress = async (e) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       const response = await signup(formData);
       if (response?.data?.success === true) {
+        toast.success("Created account successfully!", {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
         navigate("/login");
       } else {
         toast.error(response?.error?.data?.message, {
@@ -124,6 +139,7 @@ const Signup = () => {
               name="firstname"
               value={formData.firstname}
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
               className="h-[42px] w-[370px] border font-inter pl-2"
             />
           </label>
@@ -136,6 +152,7 @@ const Signup = () => {
               name="lastname"
               value={formData.lastname}
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
               className="h-[42px] w-[370px] border font-inter pl-2"
             />
           </label>
@@ -148,6 +165,7 @@ const Signup = () => {
               name="email"
               value={formData.email}
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
               className="h-[42px] w-[370px] border font-inter pl-2"
             />
           </label>
@@ -161,6 +179,7 @@ const Signup = () => {
               name="password"
               value={formData.password}
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
               className="h-[42px] w-[370px] border font-inter pl-2"
             />
             <span
