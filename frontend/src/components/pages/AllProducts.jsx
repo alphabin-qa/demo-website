@@ -113,16 +113,17 @@ function AllProducts() {
                       {product.header}
                     </h1>
                     <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between">
-                      <StarFilled />
-                      <StarFilled />
-                      <StarFilled />
-                      <StarFilled />
+                      {[...Array(4)].map(() => (
+                        <StarFilled />
+                      ))}
                       <StarOutlined />
                       <p className="text-[12px] leading-[14.52px] font-[400] font-inter">
                         {product.reviewCount}
                       </p>
                     </div>
-                    <p className="mt-[10px]">{product.price}</p>
+                    <p className="my-5 font-normal text-base font-inter ">
+                      {product.price}
+                    </p>
                   </div>
                 </div>
               </Link>

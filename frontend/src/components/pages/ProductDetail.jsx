@@ -130,7 +130,6 @@ function ProductDetail() {
           <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
             <div className="sm:mb-[10px] ">
               <div className="flex justify-center">
-                {" "}
                 <img
                   class="object-cover h-[601px] w-[549px] rounded-[5px]"
                   src={img}
@@ -208,12 +207,12 @@ function ProductDetail() {
                   </div>
                 </div>
                 <div className="">
-                  <div className="text-center bg-[#181818] border-black hover:border-[2px] mb-[10px] cursor-pointer p-[10px] gap-[10px]">
+                  <div className="text-center bg-[#181818] border-black mb-[10px] cursor-pointer p-[10px] gap-[10px]">
                     <button className="text-white font-inter font-[600] text-[16px] leading-[18.8px]">
                       BUY NOW
                     </button>
                   </div>
-                  <div className="text-center border-[1px] p-[10px] gap-[10px] cursor-pointer hover:border-[2px] border-black">
+                  <div className="text-center border-[1px] p-[10px] gap-[10px] cursor-pointer border-black">
                     <button
                       onClick={() => addToCartHandler()}
                       className="font-inter font-[600] text-[16px] leading-[18.8px]"
@@ -419,13 +418,13 @@ function ProductDetail() {
         </div>
       </section>
 
-      <section className="mb-[5rem]">
+      <section className="mb-20">
         <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
               <div>
-                <h1 className="float-start font-roboto font-[600] sm:text-[18px] xl:text-[24px] md:text-[20px] lg:text-[22px] leading-[28.13px]">
-                  Feature Product
+                <h1 className="float-start font-roboto font-semibold sm:text-[18px] lg:text-[24px] leading-[28.13px]">
+                  You may also like
                 </h1>
               </div>
             </div>

@@ -109,7 +109,7 @@ const Home = () => {
       </section>
 
       <section className="sm:dmt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div class="xl:w-[1260px] lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
+        <div class="lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
           <div className="sm:mb-[10px] relative">
             <div className="relative">
               <img
@@ -161,7 +161,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div class="xl:w-[1260px] lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
+        <div class="lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
           <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px]">
             <div className="relative">
               <img
@@ -216,7 +216,7 @@ const Home = () => {
       </section>
 
       <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="mt-[30px] xl:container lg:container xl:w-[1260px] sm:p-[7px] md:p-[12px] mx-auto">
+        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
               <div>
@@ -242,7 +242,7 @@ const Home = () => {
       </section>
 
       <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="xl:container lg:container xl:w-[1260px] mx-auto">
+        <div className="xl:container lg:container mx-auto">
           <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
             <div className="sm:mb-[10px] relative ">
               <div className="relative">
@@ -285,7 +285,7 @@ const Home = () => {
       </section>
 
       <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="mt-[30px] xl:container lg:container xl:w-[1260px] sm:p-[7px] md:p-[12px] mx-auto">
+        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
               <div>
@@ -311,7 +311,7 @@ const Home = () => {
       </section>
 
       <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="mt-[30px] xl:container lg:container xl:w-[1260px] sm:p-[7px] md:p-[12px] mx-auto">
+        <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
               <div>
@@ -333,8 +333,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div className="xl:container lg:container xl:w-[1260px] mx-auto">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] mb-[150px]">
+        <div className="xl:container lg:container mx-auto">
           <div class="grid grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[30px] sm:p-[8px]">
             <div className="sm:mb-[10px] relative ">
               <div className="relative">

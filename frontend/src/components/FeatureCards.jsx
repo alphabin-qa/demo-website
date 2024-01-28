@@ -83,23 +83,22 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
         </button>
       </div>
       <Link to={`/product-detail/${id}`}>
-        <div className="">
+        <div className="pb-5">
           <img src={img} className="h-[253px] w-[233px] mx-auto" alt="dp" />
           <div className="h-[116px] w-[292px] px-[20px] mt-[20px]">
             <h1 className="font-inter font-bold text-[18px] leading-[21.78px] w-[251px] h-[44px]">
               {header}
             </h1>
             <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between">
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
+              {[...Array(4)].map(() => (
+                <StarFilled />
+              ))}
               <StarOutlined />
               <p className="text-[12px] leading-[14.52px] font-[400] font-inter">
                 {reviewCount}
               </p>
             </div>
-            <p className="mt-[10px]">{price}</p>
+            <p className="my-5 font-normal text-base font-inter ">{price}</p>
           </div>
         </div>
       </Link>

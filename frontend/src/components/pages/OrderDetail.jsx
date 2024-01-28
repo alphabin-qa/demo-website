@@ -105,15 +105,15 @@ function OrderDetail() {
                 </h3>
                 <p className="font-inter font-[400] text-[15px] leading-[19.58px]">
                   {orderDetail?.address?.firstname +
-                    " " +
+                    ", " +
                     orderDetail?.address?.street +
-                    " " +
+                    ", " +
                     orderDetail?.address?.city +
-                    " " +
+                    ", " +
                     orderDetail?.address?.state +
-                    " " +
+                    ", " +
                     orderDetail?.address?.country +
-                    " " +
+                    ", " +
                     orderDetail?.address?.zipCode}
                 </p>
               </div>

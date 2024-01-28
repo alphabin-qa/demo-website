@@ -84,7 +84,6 @@ function Checkout() {
   };
   const handleSubmit = async (e) => {
     const validationErrors = validateForm(formData);
-    // setErrors(validationErrors);
     if (Object?.keys(validationErrors)?.length === 0) {
       try {
         const { data } = await addAddress({
@@ -147,10 +146,11 @@ function Checkout() {
     try {
       const { data } = await userDetail();
       setUserDetails(data?.data?.data);
-      if (!data.data.data.address.length) {
+      if (!data?.data?.data?.address?.length) {
         setChangeAddress(true);
       } else {
-        setAddress(data.data.data.address[0]);
+        setAddress(data?.data?.data?.address[0]);
+        setChangeAddress(false);
       }
     } catch (error) {
       console.error(error);
@@ -171,17 +171,33 @@ function Checkout() {
   };
 
   const handleOrderNow = async () => {
-    const areEqual = JSON.stringify(cardData) === JSON.stringify(cardDetails);
-    if (areEqual) {
-      const { data } = await createOrder({
-        address: address,
-        paymentMethod: billingTab,
-        totalAmount: totalValue,
-        orderDate: Date.now(),
-        email: userDetails?.email,
-      });
-      setOpen(true);
-      setOrder(data);
+    if (
+      typeof cardData?.cardNo === "string" &&
+      typeof parseInt(cardData?.cvv) === "number" &&
+      typeof parseInt(cardData?.expiredMonth) === "number" &&
+      typeof parseInt(cardData?.expiredYear) === "number"
+    ) {
+      const areEqual = JSON.stringify(cardData) === JSON.stringify(cardDetails);
+      if (areEqual) {
+        const { data } = await createOrder({
+          address: address,
+          paymentMethod: billingTab,
+          totalAmount: totalValue,
+          orderDate: Date.now(),
+          email: userDetails?.email,
+        });
+        setOpen(true);
+        setOrder(data);
+      } else {
+        toast.error("Enter valid card details", {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
+      }
     } else {
       toast.error("Enter valid card details", {
         duration: 4000,
@@ -218,10 +234,10 @@ function Checkout() {
   };
 
   useEffect(() => {
-    if (!Object.keys(userDetails).length || refetch) {
+    if (!Object.keys(userDetails).length || refetch || changeAddress) {
       fetchDetails();
     }
-  }, [refetch]);
+  }, [refetch, changeAddress]);
 
   useEffect(() => {
     if (cartItems) {
@@ -476,6 +492,8 @@ function Checkout() {
                             type="text"
                             onChange={handleCreditCardChange}
                             value={cardData.cardNo}
+                            maxLength={16}
+                            minLength={16}
                             name="cardNo"
                             className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px] font-inter"
                           />
@@ -500,6 +518,8 @@ function Checkout() {
                                 onChange={handleCreditCardChange}
                                 value={cardData.expiredMonth}
                                 name="expiredMonth"
+                                minLength={2}
+                                maxLength={2}
                                 className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-inter"
                               />
                               <label htmlFor=""> / </label>
@@ -508,6 +528,8 @@ function Checkout() {
                                 onChange={handleCreditCardChange}
                                 value={cardData.expiredYear}
                                 name="expiredYear"
+                                minLength={2}
+                                maxLength={2}
                                 className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-inter"
                               />
                             </div>
@@ -521,6 +543,9 @@ function Checkout() {
                               onChange={handleCreditCardChange}
                               value={cardData.cvv}
                               name="cvv"
+                              minLength={3}
+                              maxLength={3}
+                              aria-errormessage="enter number"
                               className="w-[77px] h-[32px] rounded-[3px] border-[1px] pl-[8px] font-inter"
                             />
                           </div>

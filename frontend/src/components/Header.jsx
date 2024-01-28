@@ -4,16 +4,13 @@ import Cart from "../assets/Cart";
 import User from "../assets/User";
 import WishList from "../assets/WishList";
 import { MdOutlineStorage } from "react-icons/md";
-import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaHeart, FaCartShopping } from "react-icons/fa6";
 import CartModel from "../components/CartModel";
+import { IoMdClose } from "react-icons/io";
 
-import {
-  getUserAccessToken,
-  removeUserAccessToken,
-} from "../utils/localstorage.helper";
+import { getUserAccessToken } from "../utils/localstorage.helper";
 import { useSelector } from "react-redux";
 
 const headerMenu = ["Home", "About Us", "Contact Us", "All Products"];
@@ -25,7 +22,6 @@ const Header = () => {
   const [token, setToken] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const open = Boolean(anchorEl);
 
   const { wishlistItems } = useSelector((state) => state?.wishlists);
   const { cartItems } = useSelector((state) => state?.cartlists);
@@ -46,6 +42,8 @@ const Header = () => {
       case "All Products":
         navigate("/products");
         break;
+      default:
+        console.error("Something went wrong");
     }
   };
 
@@ -65,12 +63,12 @@ const Header = () => {
   }, [token, anchorEl]);
 
   return (
-    <>
+    <div className="">
       {token && (
-        <div className="xl:w-[1440px] lg:w-[1440px] mx-auto">
+        <div className="mx-[100px]">
           <div className="h-[80px] flex justify-between items-center">
             <div
-              className="w-[140px] h-[62px] flex flex-col justify-center items-center cursor-pointer"
+              className="h-[62px] flex flex-col justify-center items-center cursor-pointer"
               onClick={() => navigate("/home")}
             >
               <p className="font-extrabold text-[28.61px] leading-[42.91px] tracking-[1.06px] font-nunito">
@@ -151,12 +149,12 @@ const Header = () => {
                 )}
               </div>
               {openSearch && (
-                <div className="flex justify-center items-center drop-container absolute top-0 z-20 bg-white px-5 mx-0 -mt-5 h-[80px]">
+                <div className="flex justify-center items-center drop-container absolute top-0 z-10 bg-white px-5 mx-0 -mt-5 h-[80px]">
                   <div className="flex items-center justify-center font-inter px-[30px] py-[15px]">
                     <input
                       type="text"
                       style={{
-                        width: "1145px",
+                        width: "50vw",
                         height: "43px",
                         paddingLeft: "10px",
                         outline: "none",
@@ -165,10 +163,13 @@ const Header = () => {
                       id="standard-basic"
                       placeholder="Search..."
                     />
-                    <IoSearchOutline
-                      className="w-[21px] h-[21px] cursor-pointer"
-                      onClick={() => setOpenSearch(false)}
-                    />
+                    <div className="flex gap-3">
+                      <IoMdClose
+                        className="h-6 w-6 -ml-6 cursor-pointer"
+                        onClick={() => setOpenSearch(false)}
+                      />
+                      <IoSearchOutline className="w-[21px] h-[21px] cursor-pointer" />
+                    </div>
                   </div>
                 </div>
               )}
@@ -176,7 +177,7 @@ const Header = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -295,7 +295,7 @@ const MyAccount = () => {
                   <FaEdit className="w-[21px] h-[21px]" />
                 </div>
               </div>
-              <div className="h-96 grid grid-cols-2 justify-start items-center gap-8 mt-[30px] ml-[30px] mb-8">
+              <div className="h-96 grid grid-cols-2 justify-center items-start gap-8 mt-[30px] ml-[30px] mb-8">
                 {!userDetails?.address?.length ? (
                   <div className="w-full ml-[50%] flex border justify-center items-center p-[10px] font-inter">
                     ADDRESS NOT FOUND
