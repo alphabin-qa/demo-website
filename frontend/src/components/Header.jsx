@@ -25,6 +25,11 @@ const Header = () => {
 
   const { wishlistItems } = useSelector((state) => state?.wishlists);
   const { cartItems } = useSelector((state) => state?.cartlists);
+
+  const countItems = (items) => items.length;
+  const cartItemCount = countItems(cartItems);
+  const wishlistItemCount = countItems(wishlistItems);
+
   const handleMenuSelection = (menuItem) => {
     switch (menuItem) {
       case "Home":
@@ -105,17 +110,28 @@ const Header = () => {
                   }}
                 >
                   {wishlistItems.length ? (
-                    <FaHeart className="w-[30px] h-[20px]" />
+                    <div className="xl:mt-[-25px] flex flex-col">
+                      <span className="text-[13px] px-[12px] ml-4 bg-orange-200 rounded-full">
+                        {wishlistItemCount}
+                      </span>
+                      <FaHeart className="w-[30px] h-[24px]" />
+                    </div>
                   ) : (
                     <WishList className="cursor-pointer" />
                   )}
                 </div>
                 <div className="cursor-pointer">
                   {cartItems.length ? (
-                    <FaCartShopping
-                      className="w-[30px] h-[20px]"
-                      onClick={toggleCart}
-                    />
+                    <div className="flex flex-col xl:mt-[-25px]">
+                      <span className="text-[13px] px-[12px] ml-4 bg-orange-200 rounded-full">
+                        {cartItemCount}
+                      </span>
+
+                      <FaCartShopping
+                        className="w-[30px] h-[22px]"
+                        onClick={toggleCart}
+                      />
+                    </div>
                   ) : (
                     <Cart className="cursor-pointer" onClick={toggleCart} />
                   )}

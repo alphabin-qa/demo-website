@@ -66,11 +66,11 @@ function AllProducts() {
             </div>
           </div>
         </div>
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 xl:mt-[20px]">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[32px] xl:mt-[20px]">
           {Products.map((product) => (
             <div
               key={product.id}
-              className="hover:shadow-md group w-[90%] mt-[2rem] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative"
+              className="hover:shadow-md group w-[300px] h-[447px] mt-[2rem] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative"
             >
               <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px]">
                 <button
