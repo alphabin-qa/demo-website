@@ -111,7 +111,7 @@ const Header = () => {
                 >
                   {wishlistItems.length ? (
                     <div className="xl:mt-[-25px] flex flex-col">
-                      <span className="text-[13px] px-[12px] ml-4 bg-orange-200 rounded-full">
+                      <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
                         {wishlistItemCount}
                       </span>
                       <FaHeart className="w-[30px] h-[24px]" />
@@ -123,7 +123,7 @@ const Header = () => {
                 <div className="cursor-pointer">
                   {cartItems.length ? (
                     <div className="flex flex-col xl:mt-[-25px]">
-                      <span className="text-[13px] px-[12px] ml-4 bg-orange-200 rounded-full">
+                      <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
                         {cartItemCount}
                       </span>
 

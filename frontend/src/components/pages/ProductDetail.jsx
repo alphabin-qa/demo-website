@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   EditOutlined,
   MinusOutlined,
@@ -15,8 +15,10 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/reducers/cartItems";
+import toast from "react-hot-toast";
 
 function ProductDetail() {
+  const navigate = useNavigate()
   let [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartlists?.cartItems);
@@ -57,6 +59,12 @@ function ProductDetail() {
 
   const addToCartHandler = () => {
     dispatch(addToCart({ id, img, header, price, reviewCount, quantity }));
+  };
+
+  const buyNowHandler = () => {
+    console.log("Quantity before clicking on Buy Now", quantity);
+    dispatch(addToCart({ id, img, header, price, reviewCount, quantity }));
+    navigate("/checkout")
   };
 
   const handleTabClick = (tab) => {
@@ -156,7 +164,7 @@ function ProductDetail() {
                   </p>
                 </div>
                 <p className="font-inter font-[400] text-[20px] leading-[24px] tracking-[1px] mb-[15px]">
-                  {price}
+                ₹{parseFloat(price.slice(1)) * quantity}
                 </p>
                 <div className="grid-cols-4 gap-[24px] flex justify-between mb-[15px]">
                   <div className=" w-full">
@@ -208,7 +216,7 @@ function ProductDetail() {
                 </div>
                 <div className="">
                   <div className="text-center bg-[#181818] border-black mb-[10px] cursor-pointer p-[10px] gap-[10px]">
-                    <button className="text-white font-inter font-[600] text-[16px] leading-[18.8px]">
+                    <button onClick={() => buyNowHandler()} className="text-white font-inter font-[600] text-[16px] leading-[18.8px]">
                       BUY NOW
                     </button>
                   </div>
