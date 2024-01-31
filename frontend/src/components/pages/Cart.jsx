@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, adjustQuantity } from "../../store/reducers/cartItems";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { DeleteOutlined } from "@ant-design/icons";
 
 function Cart() {
   const { cartItems } = useSelector((state) => state?.cartlists);
@@ -79,7 +80,7 @@ function Cart() {
               <>
                 <div className="h-[175px] my-[14px] ml-[33px] mr-[14px] flex items-center gap-[265px] border-t border-b">
                   <div className="flex items-center gap-3">
-                    <div className="w-[99px] h-[148px] ">
+                    <div className="w-[99px] flex justify-center items-center h-[148px] ">
                       <img src={item?.img} alt="item"></img>
                     </div>
                     <div className="font-inter text-[18px] font-semibold text-[#333]">
@@ -133,6 +134,12 @@ function Cart() {
                     </div>
                     <div>
                       ₹{parseFloat(item?.price.slice(1)) * item?.quantity}
+                    </div>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => removeCartItemHandler(item?.id)}
+                    >
+                      <DeleteOutlined />
                     </div>
                   </div>
                 </div>

@@ -36,14 +36,14 @@ function CartModel({ isOpen, toggleCart }) {
   };
 
   const handleCheckout = () => {
-    navigate("/checkout")
-    toggleCart()
-  }
+    navigate("/checkout");
+    toggleCart();
+  };
 
   const handleViewCart = () => {
-    navigate("/cart")
-    toggleCart()
-  }
+    navigate("/cart");
+    toggleCart();
+  };
 
   useEffect(() => {
     if (cartItems) {
@@ -78,8 +78,14 @@ function CartModel({ isOpen, toggleCart }) {
           return (
             <>
               <div className="flex justify-between mx-[40px] mt-[36px] gap-[25px]">
-                <div>
-                  <img src={item?.img} alt="" className="w-[85px] h-[125px]" />
+                <div className="flex justify-center items-center w-auto h-auto bg-pink-200">
+                  <div className="flex justify-center items-center">
+                    <img
+                      src={item?.img}
+                      alt=""
+                      className="w-[130px] h-[130px]"
+                    />
+                  </div>
                 </div>
                 <div className="w-[347px] h-[87px] gap-[12px] font-inter">
                   <h2 className="mb-[8px] font-inter font-[600] text-[18px] leading-[21.78px]">
