@@ -357,7 +357,7 @@ const Home = () => {
                     placeholder="Your email"
                   />
                   <button className="xl:w-[100px] lg:w-[100px] md:w-[100px] sm:w-[80px] xl:text-[16px] lg:text-[16px] sm:text-[12px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:h-[35px]  rounded-[2px] sm:p-[7px] xl:p-[10px] lg:p-[10px] md:p-[10px] gap-[10px] text-white bg-[#353535] font-roboto ">
-                    Shop Now
+                    Subscribe
                   </button>
                 </div>
               </div>

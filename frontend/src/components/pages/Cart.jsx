@@ -78,7 +78,7 @@ function Cart() {
           {cartItems?.map((item) => {
             return (
               <>
-                <div className="h-[175px] my-[14px] ml-[33px] mr-[14px] flex items-center gap-[265px] border-t border-b">
+                <div className="h-[175px] my-[14px] ml-[33px] mr-[14px] flex items-center gap-[265px]">
                   <div className="flex items-center gap-3">
                     <div className="w-[99px] flex justify-center items-center h-[148px] ">
                       <img src={item?.img} alt="item"></img>

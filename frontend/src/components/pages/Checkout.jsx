@@ -130,7 +130,7 @@ function Checkout() {
       errors.email = "Invalid email address";
     }
     if (Object.keys(errors).length) {
-      toast.success(`Fill all the required fields`, {
+      toast.error(`Fill all the required fields`, {
         duration: 4000,
         style: {
           border: "1px solid black",
