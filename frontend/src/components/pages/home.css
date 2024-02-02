@@ -6,34 +6,6 @@
   background-size: cover;
 }
 
-.camera {
-  background-image: url("../../assets/Home/Audio__Camera.png");
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.appliances {
-  background-image: url("../../assets/Home/Appliances.png");
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.laptop {
-  background-image: url("../../assets/Home/maxim-hopman-Hin-rzhOdWs-unsplash.jpg");
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.gadgets {
-  background-image: url("../../assets/Home/Gadgets.png");
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 /* ======= Wishlist Icons ======= */
 .heart-icon {
   font-size: 21px;
