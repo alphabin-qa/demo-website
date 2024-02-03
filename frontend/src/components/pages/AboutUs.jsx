@@ -9,7 +9,7 @@ const AboutUs = () => {
       <div>
         <div className="my-[144px]">
           <div className="h-auto flex flex-col gap-[64px] justify-center items-center self-stretch">
-            <p className="text-[#333] w-full xl:w-[1270px] font-inter text-[36px] font-bold leading-[18.5px] text-left ml-9">
+            <p className="text-[#333] w-full xl:w-[1270px] font-dmsans text-[36px] font-bold leading-[18.5px] text-left ml-9">
               About Us
             </p>
 
@@ -20,10 +20,10 @@ const AboutUs = () => {
 
             <div className="xl:w-[1260px] min-h-[305px] flex flex-col xl:flex-row justify-center items-start gap-6 ml-9">
               <div className="xl:w-full flex-grow">
-                <p className="font-inter text-[32px] font-semibold">
+                <p className="font-dmsans text-[32px] font-semibold">
                   Our Mission
                 </p>
-                <div className="flex flex-col text-base font-normal font-inter tracking-[0.32px] gap-2 mt-4 mr-6">
+                <div className="flex flex-col text-base font-normal font-dmsans tracking-[0.32px] gap-2 mt-4 mr-6">
                   <span className="xl:h-[78px]">
                     At Alphabin Demo Store, our mission is clear and unwavering:
                     to empower individuals and households with the finest
@@ -45,10 +45,10 @@ const AboutUs = () => {
                 </div>
               </div>
               <div className="xl:w-full flex-grow">
-                <p className="font-inter text-[32px] font-semibold">
+                <p className="font-dmsans text-[32px] font-semibold">
                   Our Story
                 </p>
-                <div className="flex flex-col text-base font-normal font-inter tracking-[0.32px] gap-2 mt-4 mr-6 xl:mr-0">
+                <div className="flex flex-col text-base font-normal font-dmsans tracking-[0.32px] gap-2 mt-4 mr-6 xl:mr-0">
                   <span>
                     our story is one of passion, innovation, and a relentless
                     pursuit of excellence in the world of technology. It all

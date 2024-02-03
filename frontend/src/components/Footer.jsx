@@ -4,6 +4,7 @@ import Facebook from "../assets/facebook.png";
 import Instagram from "../assets/instagram.png";
 import TwitterX from "../assets/twitter.png";
 import Youtube from "../assets/youtube.png";
+import FooterLogo from "../assets/footer-logo.png"
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -12,28 +13,23 @@ const Footer = () => {
       <div className="w-[1260px] flex justify-between items-start shrink">
         <div className=" flex flex-col  gap-[45px]">
           <div>
-            <div className=" font-nunito text-white">
+            <div className="font-nunito text-white">
               <Link to={"/home"}>
-                <p className="font-extrabold text-[30.654px] leading-[49.047px] tracking-[1.135px]">
-                  Alphabin
-                </p>
-                <p className="font-400 text-[15.62px] leading-[49.047px] tracking-[4.5px]">
-                  DEMO STORE
-                </p>
+                <img src={FooterLogo} alt="" />
               </Link>
             </div>
           </div>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
-              <span className="text-xl font-medium tracking-[1px] font-inter">
+              <span className="text-xl font-medium tracking-[1px] font-dmsans">
                 Address
               </span>
-              <span className="w-[296px]">
+              <span className="w-[296px] font-dmsans">
                 Lorem ipsum dolor sit amet consectetur. Viverra platea nulla{" "}
               </span>
             </div>
             <div className="flex flex-col gap-2">
-              <span className="text-xl font-medium tracking-[1px] font-inter">
+              <span className="text-xl font-medium tracking-[1px] font-dmsans">
                 Contact
               </span>
               <span>+91 123 456 7890</span>
@@ -43,7 +39,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-4">
           <div>
-            <span className="font-inter text-xl font-medium tracking-[1px]">
+            <span className="font-dmsans text-xl font-medium tracking-[1px]">
               Useful Links
             </span>
           </div>
@@ -78,7 +74,7 @@ const Footer = () => {
         </div>
         <div>
           <div className="flex flex-col gap-4">
-            <span className="font-inter text-xl font-medium tracking-[1px]">
+            <span className="font-dmsans text-xl font-medium tracking-[1px]">
               Costumer Policy
             </span>
             <ul className="flex flex-col gap-4">
@@ -93,7 +89,7 @@ const Footer = () => {
         </div>
         <div>
           <div className="flex flex-col gap-4">
-            <span className="font-inter text-xl font-medium tracking-[1px]">
+            <span className="font-dmsans text-xl font-medium tracking-[1px]">
               Follow Us
             </span>
             <div>
@@ -118,7 +114,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="w-[1260px] shrink-0 h-[1px] stroke-[1px] bg-[#4D4D4D] mt-16"></div>
-      <div className=" text-[14px] font-light tracking-[1px] font-inter py-[29px] mx-[479px]">
+      <div className=" text-[14px] font-light tracking-[1px] font-dmsans py-[29px] mx-[479px]">
         Copyright © 2023 Alphabin Technology Consulting | Demo Store
       </div>
     </div>

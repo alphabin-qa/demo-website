@@ -47,16 +47,16 @@ export default function OrderConfirmModel({ open, setOpen, order }) {
           />
         </Box>
         <Box className="flex flex-col justify-center items-center">
-          <Typography className="font-inter font-normal text-2xl text-[#000]">
+          <Typography className="font-dmsans font-normal text-2xl text-[#000]">
             Your order is successfully placed
           </Typography>
-          <Typography className="font-inter font-normal text-xs">
+          <Typography className="font-dmsans font-normal text-xs">
             Order ID - {order?.orderId}
           </Typography>
         </Box>
         <Box>
           <button
-            className="h-[40px] w-[193px] -[10px] bg-black font-normal font-inter text-base text-white"
+            className="h-[40px] w-[193px] -[10px] bg-black font-normal font-dmsans text-base text-white"
             onClick={() => {
               handleStatus(order?.orderId);
             }}

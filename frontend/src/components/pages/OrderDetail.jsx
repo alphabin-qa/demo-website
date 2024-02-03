@@ -54,10 +54,10 @@ function OrderDetail() {
               />
             </Box>
             <div className="flex justify-center flex-col">
-              <h1 className="font-inter font-[500] text-[32px] leading-[24px] mb-[6px]">
+              <h1 className="font-dmsans font-[500] text-[32px] leading-[24px] mb-[6px]">
                 Thank You, {orderDetail?.address?.firstname}
               </h1>
-              <p className="flex font-inter font-normal text-[18x] leading-[28.8px]">
+              <p className="flex font-dmsans font-normal text-[18x] leading-[28.8px]">
                 Your Order ID -
                 <p className="ml-1 font-semibold">{orderDetail?._id}</p>
               </p>
@@ -68,42 +68,42 @@ function OrderDetail() {
         <div className="flex justify-between mt-[32px]">
           <div className="flex flex-col w-[658px] border-[1px] p-[20px] gap-8">
             <div className="w-[618px] h-[84px] border-b-[1px] pl-[12px]">
-              <h3 className="font-inter font-[500] text-[20px] leading-[24.2px] tracking-[2.5%] mb-[10px]">
+              <h3 className="font-dmsans font-[500] text-[20px] leading-[24.2px] tracking-[2.5%] mb-[10px]">
                 Your order is confirmed
               </h3>
-              <p className="font-inter font-[400] text-[14px] leading-[18.9px] tracking-[1.5%] mb-3">
+              <p className="font-dmsans font-[400] text-[14px] leading-[18.9px] tracking-[1.5%] mb-3">
                 Your order confirmation page includes your purchase of the
                 iPhone 14 Pro Max, confirming your selection of this premium
                 smartphone.
               </p>
             </div>
             <div className="flex flex-col w-[618px] gap-[16px]">
-              <h1 className="font-inter font-[700] text-[24px] leading-[29.5px] tracking-[2.5%]">
+              <h1 className="font-dmsans font-[700] text-[24px] leading-[29.5px] tracking-[2.5%]">
                 Shipping Detail
               </h1>
               <div className="w-full gap-3 flex mt-[20px]">
                 <div className="w-[50%]">
-                  <p className="font-inter font-[500] text-[20px] leading-[24.2px]">
+                  <p className="font-dmsans font-[500] text-[20px] leading-[24.2px]">
                     Email
                   </p>
-                  <p className="font-inter font-[400] text-[16px] leading-[32px]">
+                  <p className="font-dmsans font-[400] text-[16px] leading-[32px]">
                     {orderDetail?.address?.email}
                   </p>
                 </div>
                 <div>
-                  <p className="font-inter font-[500] text-[20px] leading-[24.2px]">
+                  <p className="font-dmsans font-[500] text-[20px] leading-[24.2px]">
                     Payment Method
                   </p>
-                  <p className="font-inter font-[400] text-[16px] leading-[32px]">
+                  <p className="font-dmsans font-[400] text-[16px] leading-[32px]">
                     cash on delivery - {orderDetail?.totalAmount}
                   </p>
                 </div>
               </div>
               <div className="h-[92px] w-[618px] mt-[16px]">
-                <h3 className="font-inter font-[500] text-[20px] leading-[24.2px] mb-[10px]">
+                <h3 className="font-dmsans font-[500] text-[20px] leading-[24.2px] mb-[10px]">
                   Address
                 </h3>
-                <p className="font-inter font-[400] text-[15px] leading-[19.58px]">
+                <p className="font-dmsans font-[400] text-[15px] leading-[19.58px]">
                   {orderDetail?.address?.firstname +
                     ", " +
                     orderDetail?.address?.street +
@@ -120,7 +120,7 @@ function OrderDetail() {
             </div>
             <div className="flex flex-col justify-center w-[618px] h-[48px] p-[10px] gap-[10px] text-center bg-black text-white cursor-pointer">
               <button
-                className="font-inter font-[400] text-[16px] leading-[19.36px] text-center"
+                className="font-dmsans font-[400] text-[16px] leading-[19.36px] text-center"
                 onClick={() => {
                   navigate("/");
                 }}
@@ -130,7 +130,7 @@ function OrderDetail() {
             </div>
           </div>
 
-          <div className="font-inter grid grid-cols-1 w-[469px] border-[1px] justify-between pt-[40px]">
+          <div className="font-dmsans grid grid-cols-1 w-[469px] border-[1px] justify-between pt-[40px]">
             {cartItems.map((item) => (
               <>
                 <div className="border-b-[1px] w-[469px] p-[10px] flex justify-between">
@@ -142,13 +142,13 @@ function OrderDetail() {
                     />
                   </div>
                   <div className="">
-                    <p className="font-inter font-[500] text-[16px] mb-[10px]">
+                    <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
                       {item.header}
                     </p>
-                    <p className="font-inter font-[500] text-[14px] mb-[8px] leading-[16.94px]">
+                    <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
                       Quantity: {item.quantity}
                     </p>
-                    <p className="font-inter font-[600] text-[16px] tracking-[1px]">
+                    <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
                       {item.price}
                     </p>
                   </div>
@@ -157,26 +157,26 @@ function OrderDetail() {
             ))}
             <div className="mt-[32px]">
               <div className="flex justify-between px-[15px] py-[5px] mt-[2rem]">
-                <div className="font-inter font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
                   Subtotal
                 </div>
-                <div className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
                   ₹{totalValue}
                 </div>
               </div>
               <div className="flex justify-between px-[15px] py-[5px] border-b-[1px]">
-                <div className="font-inter font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
                   Shipping Charge
                 </div>
-                <div className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
                   Free Shipping
                 </div>
               </div>
               <div className="flex justify-between p-[15px]">
-                <div className="font-inter font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
                   Total
                 </div>
-                <div className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
                   ₹{totalValue}
                 </div>
               </div>

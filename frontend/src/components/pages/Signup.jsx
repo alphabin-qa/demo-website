@@ -125,13 +125,13 @@ const Signup = () => {
     <>
       <div className="h-[100vh] flex flex-col justify-center items-center gap-8">
         <div className="w-[316.58px] h-[49px]">
-          <p className="text-[30px] font-inter font-semibold leading-9 uppercase">
+          <p className="text-[30px] font-dmsans font-semibold leading-9 uppercase">
             Create Account
           </p>
         </div>
         <div className="flex flex-col gap-[26px]">
           <label className="flex flex-col gap-[13px]">
-            <p className="text-[14px] font-medium font-inter">
+            <p className="text-[14px] font-medium font-dmsans">
               FIRST NAME<sup className="text-red-500">*</sup>
             </p>
             <input
@@ -140,11 +140,11 @@ const Signup = () => {
               value={formData.firstname}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
-              className="h-[42px] w-[370px] border font-inter pl-2"
+              className="h-[42px] w-[370px] border font-dmsans pl-2"
             />
           </label>
           <label className="flex flex-col gap-[13px]">
-            <p className="text-[14px] font-medium font-inter">
+            <p className="text-[14px] font-medium font-dmsans">
               LAST NAME<sup className="text-red-500">*</sup>
             </p>
             <input
@@ -153,11 +153,11 @@ const Signup = () => {
               value={formData.lastname}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
-              className="h-[42px] w-[370px] border font-inter pl-2"
+              className="h-[42px] w-[370px] border font-dmsans pl-2"
             />
           </label>
           <label className="flex flex-col gap-[13px]">
-            <p className="text-[14px] font-medium font-inter">
+            <p className="text-[14px] font-medium font-dmsans">
               EMAIL<sup className="text-red-500">*</sup>
             </p>
             <input
@@ -166,11 +166,11 @@ const Signup = () => {
               value={formData.email}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
-              className="h-[42px] w-[370px] border font-inter pl-2"
+              className="h-[42px] w-[370px] border font-dmsans pl-2"
             />
           </label>
           <div className="flex flex-col gap-[13px] relative">
-            <p className="text-[14px] font-medium font-inter">
+            <p className="text-[14px] font-medium font-dmsans">
               PASSWORD<sup className="text-red-500">*</sup>
             </p>
 
@@ -180,7 +180,7 @@ const Signup = () => {
               value={formData.password}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
-              className="h-[42px] w-[370px] border font-inter pl-2"
+              className="h-[42px] w-[370px] border font-dmsans pl-2"
             />
             <span
               className="absolute right-3 top-[46%] transform -translate-y-1/2 cursor-pointer"
@@ -200,7 +200,7 @@ const Signup = () => {
           </button>
         </div>
         <div className="">
-          <p className="text-[16px] font-normal leading-5 tracking-[0.4px] font-inter">
+          <p className="text-[16px] font-normal leading-5 tracking-[0.4px] font-dmsans">
             already have an account ?
             <span
               className="ml-1 text-[#0031D7] cursor-pointer"

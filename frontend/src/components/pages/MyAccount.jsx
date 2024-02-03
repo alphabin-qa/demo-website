@@ -170,7 +170,7 @@ const MyAccount = () => {
                 {userDetails?.firstname?.charAt(0) +
                   userDetails?.lastname?.charAt(0)}
               </Avatar>
-              <p className="font-inter font-normal text-2xl">
+              <p className="font-dmsans font-normal text-2xl">
                 {userDetails?.firstname + " " + userDetails?.lastname}
               </p>
             </div>
@@ -179,7 +179,7 @@ const MyAccount = () => {
                 return (
                   <div
                     key={item.id}
-                    className={`flex justify-start items-center gap-[10px] pl-[25px] pr-[5px] py-[10px] text-base font-normal font-inter cursor-pointer hover:bg-slate-100/80 transition duration-500`}
+                    className={`flex justify-start items-center gap-[10px] pl-[25px] pr-[5px] py-[10px] text-base font-normal font-dmsans cursor-pointer hover:bg-slate-100/80 transition duration-500`}
                     onClick={() => setSelection(item.id)}
                   >
                     <div>{item?.icon}</div>
@@ -196,10 +196,10 @@ const MyAccount = () => {
           {selection === 1 && (
             <div className="w-[963px] h-full border rounded-[5px]">
               <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
-                <div className="text-2xl font-bold font-inter uppercase">
+                <div className="text-2xl font-bold font-dmsans uppercase">
                   My Profile
                 </div>
-                <div className="text-xs font-normal font-inter underline underline-offset-4 uppercase cursor-pointer">
+                <div className="text-xs font-normal font-dmsans underline underline-offset-4 uppercase cursor-pointer">
                   <FaSave className="w-7 h-7" />
                 </div>
               </div>
@@ -211,7 +211,7 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
-                      className="border w-full h-[40.39px] pl-2 font-inter"
+                      className="border w-full h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                   <label className=" w-full flex flex-col gap-[13px]">
@@ -220,7 +220,7 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                 </div>
@@ -231,7 +231,7 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                   <label className=" w-full flex flex-col gap-[13px]">
@@ -240,12 +240,12 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                 </div>
                 <div className="w-full">
-                  <div className="flex font-bold text-lg justify-start leading-[17.92px] capitalize font-inter">
+                  <div className="flex font-bold text-lg justify-start leading-[17.92px] capitalize font-dmsans">
                     reset your password
                   </div>
                 </div>
@@ -256,7 +256,7 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                   <label className=" w-full flex flex-col gap-[13px]">
@@ -265,11 +265,11 @@ const MyAccount = () => {
                     </p>
                     <input
                       type="text"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                 </div>
-                <div className=" w-full text-[11px] font-medium text-start font-inter text-[#404040] -translate-[0.2px] -mt-5">
+                <div className=" w-full text-[11px] font-medium text-start font-dmsans text-[#404040] -translate-[0.2px] -mt-5">
                   Password should be more than 8 characters including special
                   characters
                 </div>
@@ -285,9 +285,9 @@ const MyAccount = () => {
               }`}
             >
               <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
-                <div className="text-2xl font-bold font-inter">Address</div>
+                <div className="text-2xl font-bold font-dmsans">Address</div>
                 <div
-                  className="text-xs uppercase font-normal font-inter underline underline-offset-4 cursor-pointer"
+                  className="text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer"
                   onClick={() => {
                     setSelectAddress(true);
                   }}
@@ -297,7 +297,7 @@ const MyAccount = () => {
               </div>
               <div className="h-96 grid grid-cols-2 justify-center items-start gap-8 mt-[30px] ml-[30px] mb-8">
                 {!userDetails?.address?.length ? (
-                  <div className="w-full ml-[50%] flex border justify-center items-center p-[10px] font-inter">
+                  <div className="w-full ml-[50%] flex border justify-center items-center p-[10px] font-dmsans">
                     ADDRESS NOT FOUND
                   </div>
                 ) : (
@@ -332,8 +332,8 @@ const MyAccount = () => {
               }`}
             >
               <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
-                <div className="text-2xl font-bold font-inter">Address</div>
-                <div className="flex gap-9 text-xs uppercase font-normal font-inter underline underline-offset-4 cursor-pointer">
+                <div className="text-2xl font-bold font-dmsans">Address</div>
+                <div className="flex gap-9 text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer">
                   <div
                     onClick={() => {
                       setSelectAddress(false);
@@ -361,7 +361,7 @@ const MyAccount = () => {
                       onChange={handleChange}
                       value={formData.firstName}
                       name="firstName"
-                      className="border w-full h-[40.39px] pl-2 font-inter"
+                      className="border w-full h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                 </div>
@@ -375,7 +375,7 @@ const MyAccount = () => {
                       onChange={handleChange}
                       value={formData.email}
                       name="email"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                   <label className=" w-full flex flex-col gap-[13px]">
@@ -387,7 +387,7 @@ const MyAccount = () => {
                       onChange={handleChange}
                       value={formData.city}
                       name="city"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                 </div>
@@ -401,7 +401,7 @@ const MyAccount = () => {
                       onChange={handleChange}
                       value={formData.street}
                       name="street"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                   <label className=" w-full flex flex-col gap-[13px]">
@@ -413,7 +413,7 @@ const MyAccount = () => {
                       onChange={handleChange}
                       value={formData.country}
                       name="country"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                 </div>
@@ -427,7 +427,7 @@ const MyAccount = () => {
                       onChange={handleChange}
                       value={formData.state}
                       name="state"
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                   <label className=" w-full flex flex-col gap-[13px]">
@@ -439,7 +439,7 @@ const MyAccount = () => {
                       value={formData.zipCode}
                       name="zipCode"
                       onChange={handleChange}
-                      className="border w-[370px] h-[40.39px] pl-2 font-inter"
+                      className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
                     />
                   </label>
                 </div>
@@ -452,7 +452,7 @@ const MyAccount = () => {
             <div className="flex flex-col">
               <div className="w-[963px] h-max border rounded-[5px]">
                 <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b border-[#E0E0E0]">
-                  <div className="text-2xl font-bold font-inter uppercase">
+                  <div className="text-2xl font-bold font-dmsans uppercase">
                     My Order
                   </div>
                 </div>
@@ -461,10 +461,10 @@ const MyAccount = () => {
                   <div className="flex justify-between items-center mt-8 ml-[30px] mr-[278px] h-[115px]  self-stretch">
                     <div className="flex justify-between items-center gap-4">
                       <div className="w-[100px] h-[115px] border border-red-800"></div>
-                      <div className="flex flex-col justify-center items-center gap-2 text-base font-medium font-inter text-[#222]">
+                      <div className="flex flex-col justify-center items-center gap-2 text-base font-medium font-dmsans text-[#222]">
                         <div>iPhone 14 Pro Max</div>
                         <div>Mobile</div>
-                        <div className="text-base font-semibold font-inter text-[#333]">
+                        <div className="text-base font-semibold font-dmsans text-[#333]">
                           ₹1,27,999
                         </div>
                       </div>
@@ -484,7 +484,7 @@ const MyAccount = () => {
                           />
                         </svg>
                       </div>
-                      <div className="flex justify-center items-center font-inter font-normal text-[18px] leading-6 tracking-[24px]">
+                      <div className="flex justify-center items-center font-dmsans font-normal text-[18px] leading-6 tracking-[24px]">
                         1
                       </div>
                       <div className="cursor-pointer">
@@ -508,7 +508,7 @@ const MyAccount = () => {
                     </div> */}
                     <div className="w-[152.5px] flex flex-col justify-end items-end gap-3">
                       <div className="flex justify-end items-center underline underline-offset-4 cursor-pointer">
-                        <div className="text-base font-normal font-inter">
+                        <div className="text-base font-normal font-dmsans">
                           View detail
                         </div>
                         <div>
@@ -526,7 +526,7 @@ const MyAccount = () => {
                           </svg>
                         </div>
                       </div>
-                      <div className="font-normal font-inter text-base cursor-pointer">
+                      <div className="font-normal font-dmsans text-base cursor-pointer">
                         Cancel
                       </div>
                     </div>
@@ -535,10 +535,10 @@ const MyAccount = () => {
               </div>
               <div className="w-full flex justify-end items-center mt-5">
                 <div className="w-[175px] h-[25px] flex justify-between items-center shrink-0 border border-[#8A8A8A] rounded-[14px] p-4">
-                  <div className="text-sm font-normal font-inter text-[#8A8A8A] cursor-pointer">
+                  <div className="text-sm font-normal font-dmsans text-[#8A8A8A] cursor-pointer">
                     Previous
                   </div>
-                  <div className="text-[#303030] text-base font-inter">1</div>
+                  <div className="text-[#303030] text-base font-dmsans">1</div>
                   <div className="cursor-pointer">Next</div>
                 </div>
               </div>

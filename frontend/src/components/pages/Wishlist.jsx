@@ -47,14 +47,14 @@ const Wishlist = () => {
     <>
       {!wishlistItems.length ? (
         <div className="h-screen flex justify-center items-center">
-          <p className="text-[#333] w-full font-inter text-[36px] font-bold leading-[18.5px] text-center">
+          <p className="text-[#333] w-full font-dmsans text-[36px] font-bold leading-[18.5px] text-center">
             Add products into wishlist
           </p>
         </div>
       ) : (
         <div className="mt-[120px] xl:w-[1440px] lg:w-[1440px] md:container sm:container mx-auto">
           <div className="shrink-0 flex flex-col gap-16">
-            <p className="text-[#333] w-full xl:w-[1270px] font-inter text-[36px] font-bold leading-[18.5px] text-left">
+            <p className="text-[#333] w-full xl:w-[1270px] font-dmsans text-[36px] font-bold leading-[18.5px] text-left">
               Wishlist
             </p>
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[32px]">
@@ -104,14 +104,14 @@ const Wishlist = () => {
 
                     <div>
                       <div className="w-[290px] pl-5 pb-5 flex flex-col gap-2">
-                        <div className="w-[251px] text-base font-semibold font-inter text-[#222]">
+                        <div className="w-[251px] text-base font-semibold font-dmsans text-[#222]">
                           {item?.header}
                         </div>
                         <div className="flex gap-3">
                           <div>★★★★★</div>
                           <div>(97)</div>
                         </div>
-                        <div className="text-base font-normal font-inter text-[#222]">
+                        <div className="text-base font-normal font-dmsans text-[#222]">
                           {item?.price}
                         </div>
                       </div>

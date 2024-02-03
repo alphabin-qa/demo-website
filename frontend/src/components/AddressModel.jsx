@@ -49,9 +49,9 @@ const AddressModel = ({
       >
         <div className={`w-[963px] h-full rounded-[5px] `}>
           <div className="flex justify-between">
-            <div className="text-2xl font-bold font-inter">Address</div>
+            <div className="text-2xl font-bold font-dmsans">Address</div>
             <div
-              className="text-xl font-bold font-inter mr-14 border p-2 rounded-lg bg-slate-500 text-white cursor-pointer"
+              className="text-xl font-bold font-dmsans mr-14 border p-2 rounded-lg bg-slate-500 text-white cursor-pointer"
               onClick={() => {
                 handleAddressClick();
               }}
@@ -61,7 +61,7 @@ const AddressModel = ({
           </div>
           <div className="h-fit flex justify-center items-center  mt-[30px] ml-[30px] mb-8">
             {!userDetails?.address?.length ? (
-              <div className="flex border justify-center items-center p-[10px] px-32 rounded-lg font-inter">
+              <div className="flex border justify-center items-center p-[10px] px-32 rounded-lg font-dmsans">
                 ADDRESS NOT FOUND
               </div>
             ) : (
@@ -69,7 +69,7 @@ const AddressModel = ({
                 {userDetails?.address?.map((item) => {
                   return (
                     <div
-                      className="w-[394px] h-[139px] p-[10px] border-2 border-gray-600 rounded-lg font-inter text-sm leading-[22.4px] font-medium cursor-pointer"
+                      className="w-[394px] h-[139px] p-[10px] border-2 border-gray-600 rounded-lg font-dmsans text-sm leading-[22.4px] font-medium cursor-pointer"
                       onClick={() => handleAddressSelect(item?._id)}
                     >
                       <div className="p-[10px]">

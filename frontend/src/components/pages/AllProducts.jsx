@@ -60,7 +60,7 @@ function AllProducts() {
         <div className="h-[50px]">
           <div className="h-[39px]">
             <div>
-              <h1 className="float-start font-inter font-[700] sm:text-[18px] xl:text-[28px] md:text-[20px] lg:text-[26px] leading-[18.5px]">
+              <h1 className="float-start font-dmsans font-[700] sm:text-[18px] xl:text-[28px] md:text-[20px] lg:text-[26px] leading-[18.5px]">
                 All Products
               </h1>
             </div>
@@ -109,7 +109,7 @@ function AllProducts() {
                     alt="dp"
                   />
                   <div className="px-[20px]">
-                    <h1 className="font-inter font-bold text-[18px] leading-[21.78px] w-[280px] mt-[10px] h-[44px]">
+                    <h1 className="font-dmsans text-[18px] leading-[21.78px] w-[280px] mt-[10px] h-[44px]">
                       {product.header}
                     </h1>
                     <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between">
@@ -117,11 +117,11 @@ function AllProducts() {
                         <StarFilled />
                       ))}
                       <StarOutlined />
-                      <p className="text-[12px] leading-[14.52px] font-[400] font-inter">
+                      <p className="text-[12px] leading-[14.52px] font-dmsans">
                         {product.reviewCount}
                       </p>
                     </div>
-                    <p className="my-5 font-normal text-base font-inter ">
+                    <p className="my-5 font-normal text-base font-dmsan">
                       {product.price}
                     </p>
                   </div>

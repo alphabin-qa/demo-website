@@ -147,23 +147,23 @@ function ProductDetail() {
             </div>
             <div className="sm:mb-[10px]  pl-[20px]">
               <div className="top-0 h-full w-[500px] flex flex-col">
-                <h1 className="font-inter font-[700] text-[48px] leading-[58.09px] mb-2">
+                <h1 className="font-[700] font-dmsans text-[48px] leading-[58.09px] mb-2">
                   {header}
                 </h1>
-                <p className="w-[489px] h-[72px] font-inter font-[400] text-[16px] leading-[24px] tracking-[1px] mb-3">
+                <p className="w-[489px] h-[72px] font-dmsans font-[400] text-[16px] leading-[24px] tracking-[1px] mb-3">
                   {description}
                 </p>
-                <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between font-inter font-[400] size-[21.87px] tracking-[3.93px] mb-[15px]">
+                <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between font-dmsans font-[400] size-[21.87px] tracking-[3.93px] mb-[15px]">
                   <StarFilled />
                   <StarFilled />
                   <StarFilled />
                   <StarFilled />
                   <StarOutlined />
-                  <p className="text-[12px] leading-[14.52px] font-[400] font-inter">
+                  <p className="text-[12px] leading-[14.52px] font-[400] font-dmsans">
                     {reviewCount}
                   </p>
                 </div>
-                <p className="font-inter font-[400] text-[20px] leading-[24px] tracking-[1px] mb-[15px]">
+                <p className="font-dmsans font-[400] text-[20px] leading-[24px] tracking-[1px] mb-[15px]">
                 ₹{parseFloat(price.slice(1)) * quantity}
                 </p>
                 <div className="grid-cols-4 gap-[24px] flex justify-between mb-[15px]">
@@ -183,7 +183,7 @@ function ProductDetail() {
                   <div className="w-full"></div>
                 </div>
                 <div className="h-[80px] gap-[16px] mb-[15px]">
-                  <p className="w-[80px] h-[24px] font-inter font-[400] text-[18px] leading-[24px] tracking-[1px] mb-[3px]">
+                  <p className="w-[80px] h-[24px] font-dmsans font-[400] text-[18px] leading-[24px] tracking-[1px] mb-[3px]">
                     Quantity
                   </p>
                   <div className="flex items-center mt-2">
@@ -198,7 +198,7 @@ function ProductDetail() {
                           </span>
                         </button>
                       </div>
-                      <div className="font-inter font-[400] text-[18px] leading-[24px]">
+                      <div className="font-dmsans font-[400] text-[18px] leading-[24px]">
                         {quantity}
                       </div>
                       <div>
@@ -216,14 +216,14 @@ function ProductDetail() {
                 </div>
                 <div className="">
                   <div className="text-center bg-[#181818] border-black mb-[10px] cursor-pointer p-[10px] gap-[10px]">
-                    <button onClick={() => buyNowHandler()} className="text-white font-inter font-[600] text-[16px] leading-[18.8px]">
+                    <button onClick={() => buyNowHandler()} className="text-white font-dmsans font-[600] text-[16px] leading-[18.8px]">
                       BUY NOW
                     </button>
                   </div>
                   <div className="text-center border-[1px] p-[10px] gap-[10px] cursor-pointer border-black">
                     <button
                       onClick={() => addToCartHandler()}
-                      className="font-inter font-[600] text-[16px] leading-[18.8px]"
+                      className="font-dmsans font-[600] text-[16px] leading-[18.8px]"
                     >
                       ADD TO CART
                     </button>
@@ -275,7 +275,7 @@ function ProductDetail() {
           <div className="flex justify-between">
             <div>
               <button
-                className={`font-inter font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
+                className={`font-dmsans font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
                   activeTab === "description" ? "underline" : "no-underline"
                 }`}
                 onClick={() => handleTabClick("description")}
@@ -285,7 +285,7 @@ function ProductDetail() {
             </div>
             <div>
               <button
-                className={`font-inter font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
+                className={`font-dmsans font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
                   activeTab === "additionalInfo" ? "underline" : "no-underline"
                 }`}
                 onClick={() => handleTabClick("additionalInfo")}
@@ -295,7 +295,7 @@ function ProductDetail() {
             </div>
             <div>
               <button
-                className={`font-inter font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
+                className={`font-dmsans font-[600] text-[24px] leading-[29.05px] tracking-[1%] ${
                   activeTab === "reviews" ? "underline" : "no-underline"
                 }`}
                 onClick={() => handleTabClick("reviews")}
@@ -309,14 +309,14 @@ function ProductDetail() {
               {activeTab === "description" && (
                 <div className="tracking-[0.5px]">
                   {" "}
-                  <p className="font-inter font-[400] text-[16px] leading-[1.5rem] mb-[10px]">
+                  <p className="font-dmsans font-[400] text-[16px] leading-[1.5rem] mb-[10px]">
                     Introducing the iPhone 14 Pro Max – a leap forward in
                     innovation and technology that sets new standards for
                     smartphones. Immerse yourself in a world of possibilities
                     with this cutting-edge device, meticulously designed to
                     exceed your expectations.
                   </p>
-                  <p className="font-inter font-[400] text-[16px] leading-[24px] mb-[10px]">
+                  <p className="font-dmsans font-[400] text-[16px] leading-[24px] mb-[10px]">
                     The Apple iPhone 14 Pro Max is the top-of-the-line model in
                     Apple's 2023 iPhone lineup. It features a large 6.7-inch
                     Super Retina XDR OLED display with a 120Hz refresh rate and
@@ -324,7 +324,7 @@ function ProductDetail() {
                     The display is also brighter and more energy-efficient than
                     previous models, with a peak brightness of 2,000 nits.
                   </p>
-                  <p className="font-inter font-[400] text-[16px] leading-[24px]">
+                  <p className="font-dmsans font-[400] text-[16px] leading-[24px]">
                     Overall, the iPhone 14 Pro Max is the most powerful and
                     feature-rich iPhone that Apple has ever made. It is a great
                     choice for users who want the best possible smartphone
@@ -335,11 +335,11 @@ function ProductDetail() {
               {activeTab === "additionalInfo" && (
                 <>
                   <div className="mb-[15px]">
-                    <h1 className="font-inter font-bold text-[20px] leading-[24.2px] p-[5px]">
+                    <h1 className="font-dmsans font-bold text-[20px] leading-[24.2px] p-[5px]">
                       Features of the iPhone 14 Pro Max include:
                     </h1>
                     <div>
-                      <ul className=" list-disc ml-[30px] gap-[12px] font-inter font-[400] text-[16px] leading-[32px]">
+                      <ul className=" list-disc ml-[30px] gap-[12px] font-dmsans font-[400] text-[16px] leading-[32px]">
                         <li className="">
                           A new Emergency SOS feature that allows users to call
                           for help by holding down a side button and the volume
@@ -360,11 +360,11 @@ function ProductDetail() {
                     </div>
                   </div>
                   <div className="mb-[15px]">
-                    <h1 className="font-inter font-bold text-[20px] leading-[24.2px] p-[5px]">
+                    <h1 className="font-dmsans font-bold text-[20px] leading-[24.2px] p-[5px]">
                       Highlight
                     </h1>
                     <div>
-                      <ul className=" list-disc ml-[30px] gap-[12px] font-inter font-[400] text-[16px] leading-[32px]">
+                      <ul className=" list-disc ml-[30px] gap-[12px] font-dmsans font-[400] text-[16px] leading-[32px]">
                         <li className="">512 GB ROM</li>
                         <li>17.02 cm (6.7 inch) Super Retina XDR Display</li>
                         <li>48MP + 12MP + 12MP | 12MP Front Camera</li>
@@ -373,8 +373,8 @@ function ProductDetail() {
                     </div>
                   </div>
                   <div className="mb-[15px]">
-                    <p className="font-inter font-[400] text-[16px] leading-[24px]">
-                      <span className=" font-inter font-[600] text-[16px] leading-[24px] ">
+                    <p className="font-dmsans font-[400] text-[16px] leading-[24px]">
+                      <span className=" font-dmsans font-[600] text-[16px] leading-[24px] ">
                         Note:
                       </span>{" "}
                       Please allow for a brief processing time before your
@@ -389,7 +389,7 @@ function ProductDetail() {
                     <>
                       <div className="w-full flex justify-center items-center">
                         <button
-                          className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-inter font-[700] text-[18px] leading-[30px]"
+                          className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-dmsans font-[700] text-[18px] leading-[30px]"
                           onClick={handleReviewForm}
                         >
                           Back to Review
@@ -400,7 +400,7 @@ function ProductDetail() {
                     <>
                       <div className="w-full flex justify-center items-center">
                         <button
-                          className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-inter font-[700] text-[18px] leading-[30px]"
+                          className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-dmsans font-[700] text-[18px] leading-[30px]"
                           onClick={handleReviewForm}
                         >
                           <EditOutlined /> Write a Review
@@ -431,7 +431,7 @@ function ProductDetail() {
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
               <div>
-                <h1 className="float-start font-roboto font-semibold sm:text-[18px] lg:text-[24px] leading-[28.13px]">
+                <h1 className="float-start font-dmsans font-semibold sm:text-[18px] lg:text-[24px] leading-[28.13px]">
                   You may also like
                 </h1>
               </div>

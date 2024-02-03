@@ -51,11 +51,11 @@ function Cart() {
 
   return (
     <>
-      <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
-        <div className="border-b-[1px] h-[50px]">
+      <div className="mt-[30px] xl:container lg:container xl:mt-[150px] lg:mt-[150px] xl:mb-[150px] lg:mb-[150px] sm:p-[7px] md:p-[12px] mx-auto">
+        <div className="h-[50px]">
           <div className="h-[39px]">
             <div>
-              <h1 className="float-start font-inter font-[700] sm:text-[18px] xl:text-[36px] md:text-[20px] lg:text-[22px] leading-[18.5px]">
+              <h1 className="float-start font-dmsans font-[700] sm:text-[18px] xl:text-[36px] md:text-[20px] lg:text-[22px] leading-[18.5px]">
                 Cart
               </h1>
             </div>
@@ -63,16 +63,16 @@ function Cart() {
         </div>
         <div className="grid xl:grid-cols-1 gap-6 mt-[20px]">
           <div className="grid grid-cols-6 gap-6 my-[30px]">
-            <div className="col-span-2 ml-[30px] font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
+            <div className="col-span-2 ml-[30px] font-dmsans font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
               Product
             </div>
-            <div className="font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
+            <div className="font-dmsans font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
               Price
             </div>
-            <div className="font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
+            <div className="font-dmsans font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
               Quantity
             </div>
-            <div className="font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
+            <div className="font-dmsans font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
               Subtotal
             </div>
             <div className=""></div>
@@ -83,12 +83,12 @@ function Cart() {
               <>
                 <div className="col-span-2 flex items-center">
                   <img src={item.img} className="w-[150px] h-[160px]" alt="" />
-                  <p className="font-inter ml-[10px] font-[600] w-[55%] text-[18px] leading-[26.78px]">
+                  <p className="font-dmsans ml-[10px] font-[600] w-[55%] text-[18px] leading-[26.78px]">
                     {item.header}
                   </p>
                 </div>
                 <div className="flex items-center">
-                  <p className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                  <p className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
                     {item.price}
                   </p>
                 </div>
@@ -113,7 +113,7 @@ function Cart() {
                         </svg>
                       </button>
                     </div>
-                    <div className="font-inter font-[400] text-[18px] leading-[24px]">
+                    <div className="font-dmsans font-[400] text-[18px] leading-[24px]">
                       {item.quantity}
                     </div>
                     <div>
@@ -142,7 +142,7 @@ function Cart() {
                   </div>
                 </div>
                 <div className="flex items-center ">
-                  <p className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                  <p className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
                     ₹{parseFloat(item?.price.slice(1)) * item?.quantity}
                   </p>
                 </div>
@@ -157,31 +157,31 @@ function Cart() {
               </>
             ))}
           </div>
-          <div className="grid xl:grid-cols-2 gap-6 mt-[5rem]">
+          <div className="grid xl:grid-cols-2 gap-6 mt-[34px]">
             <div></div>
             <div className="w-[80%]">
-              <div className="border-2">
+              <div className="border-[1px]">
                 <div className="p-[16px]">
-                  <strong className="font-inter font-[400] text-[16px]">
+                  <strong className="font-dmsans font-[400] text-[16px]">
                     Subtotal
                   </strong>
-                  <p className="float-end font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                  <p className="float-end font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
                     ₹{totalValue}
                   </p>
                 </div>
                 <div className="p-[16px]">
-                  <strong className="font-inter font-[400] text-[16px]">
+                  <strong className="font-dmsans font-[400] text-[16px]">
                     Shipping Charge
                   </strong>
-                  <p className="float-end font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                  <p className="float-end font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
                     Free Shipping
                   </p>
                 </div>
-                <div className="p-[16px] border-t-2">
-                  <strong className="font-inter font-[400] text-[16px]">
+                <div className="p-[16px] border-t-[1px]">
+                  <strong className="font-dmsans font-[400] text-[16px]">
                     Total
                   </strong>
-                  <p className="float-end font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                  <p className="float-end font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
                     ₹{totalValue}
                   </p>
                 </div>
@@ -189,7 +189,7 @@ function Cart() {
               <div className="flex justify-between mt-[1.5rem]">
                 <div>
                   <button
-                    className="border-[1px] border-black px-[20px] py-[10px] font-sans font-[400] text-[16px] leading-[18.8px] text-center"
+                    className="border-[1px] border-black px-[50px] py-[15px] font-sans font-[400] text-[16px] leading-[18.8px] text-center"
                     onClick={() => navigate("/products")}
                   >
                     Continue Shopping
@@ -197,7 +197,7 @@ function Cart() {
                 </div>
                 <div>
                   <button
-                    className="border-[1px] px-[50px] bg-black text-white py-[10px] font-sans font-[400] text-[16px] leading-[18.8px] text-center"
+                    className="border-[1px] px-[80px] bg-black text-white py-[15px] font-sans font-[400] text-[16px] leading-[18.8px] text-center"
                     onClick={() => navigate("/checkout")}
                   >
                     Checkout

@@ -87,8 +87,8 @@ function CartModel({ isOpen, toggleCart }) {
                     />
                   </div>
                 </div>
-                <div className="w-[347px] h-[87px] gap-[12px] font-inter">
-                  <h2 className="mb-[8px] font-inter font-[600] text-[18px] leading-[21.78px]">
+                <div className="w-[347px] h-[87px] gap-[12px] font-dmsans">
+                  <h2 className="mb-[8px] font-dmsans font-[600] text-[18px] leading-[21.78px]">
                     {item?.header}
                   </h2>
                   <div className="flex items-center text-base mb-[8px]">
@@ -110,7 +110,7 @@ function CartModel({ isOpen, toggleCart }) {
                           />
                         </svg>
                       </div>
-                      <div className="flex justify-center items-center font-inter font-normal text-[18px] leading-6 tracking-[24px] pl-[25px]">
+                      <div className="flex justify-center items-center font-dmsans font-normal text-[18px] leading-6 tracking-[24px] pl-[25px]">
                         <span>{item?.quantity}</span>
                       </div>
                       <div
@@ -150,7 +150,7 @@ function CartModel({ isOpen, toggleCart }) {
             </>
           );
         })}
-        <div className="mt-[48px] flex flex-col items-end font-inter">
+        <div className="mt-[48px] flex flex-col items-end font-dmsans">
           <div className="w-[531px] px-[20px] py-[10px] flex flex-col mb-[26px] text-base leading-6 font-normal">
             <div className="h-[40px] flex gap-[60px]">
               <div className="h-[30.88px] p-[10px]">Subtotal</div>
@@ -179,7 +179,7 @@ function CartModel({ isOpen, toggleCart }) {
             className="w-[481px] h-[40px] text-center text-white p-[10px] gap-[10px] bg-[#111111] mb-[1rem] cursor-pointer"
             onClick={() => handleCheckout()}
           >
-            <button className="font-inter font-[400] text-[14px] leading-[16.45px]">
+            <button className="font-dmsans font-[400] text-[14px] leading-[16.45px]">
               CHECKOUT
             </button>
           </div>
@@ -187,7 +187,7 @@ function CartModel({ isOpen, toggleCart }) {
             className="w-[481px] h-[40px] text-center text-white p-[10px] gap-[10px] bg-[#111111] cursor-pointer"
             onClick={() => handleViewCart()}
           >
-            <button className="font-inter font-[400] text-[14px] leading-[16.45px]">
+            <button className="font-dmsans font-[400] text-[14px] leading-[16.45px]">
               VIEW CART
             </button>
           </div>

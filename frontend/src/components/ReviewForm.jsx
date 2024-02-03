@@ -44,7 +44,7 @@ const ReviewForm = ({ onSubmit }) => {
               <div className="py-[8px]">
                 <label
                   htmlFor=""
-                  className="font-inter font-[500] text-[16px] leading-[19.36px]"
+                  className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
                 >
                   Your Name
                 </label>
@@ -52,7 +52,7 @@ const ReviewForm = ({ onSubmit }) => {
               <input
                 type="text"
                 value={name}
-                className="xl:w-[300px] lg:w-[280px] h-[40px] font-inter rounded-[2.52px] border-[1px] border-black pl-[8px]"
+                className="xl:w-[300px] lg:w-[280px] h-[40px] font-dmsans rounded-[2.52px] border-[1px] border-black pl-[8px]"
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -60,7 +60,7 @@ const ReviewForm = ({ onSubmit }) => {
               <div className="py-[8px]">
                 <label
                   htmlFor=""
-                  className="font-inter font-[500] text-[16px] leading-[19.36px]"
+                  className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
                 >
                   Your Email
                 </label>
@@ -68,14 +68,14 @@ const ReviewForm = ({ onSubmit }) => {
               <input
                 type="email"
                 value={email}
-                className="font-inter xl:w-[300px] lg:w-[280px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
+                className="font-dmsans xl:w-[300px] lg:w-[280px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
           {/* For Rating */}
           <div className="flex gap-[7px] py-[10px] items-center mb-[20px]">
-            <div className="font-inter font-[500] text-[16px] leading-[19.36px]">
+            <div className="font-dmsans font-[500] text-[16px] leading-[19.36px]">
               Give Rating:{" "}
             </div>
             <div className="">
@@ -100,14 +100,14 @@ const ReviewForm = ({ onSubmit }) => {
           <div className="mb-[20px]">
             <label
               htmlFor=""
-              className="font-inter font-[500] text-[16px] leading-[19.36px]"
+              className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
             >
               Review Title
             </label>{" "}
             <input
               type="text"
               value={title}
-              className="font-inter w-full mt-[10px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
+              className="font-dmsans w-full mt-[10px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
@@ -115,21 +115,21 @@ const ReviewForm = ({ onSubmit }) => {
           <div className=" mb-[20px]">
             <label
               htmlFor=""
-              className="font-inter font-[500] text-[16px] leading-[19.36px]"
+              className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
             >
               Give Us Your Opinion
             </label>{" "}
             <textarea
               type="text"
               value={opinion}
-              className="font-inter w-full mt-[10px] h-[120px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
+              className="font-dmsans w-full mt-[10px] h-[120px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
               onChange={(e) => setOpinion(e.target.value)}
             />
           </div>
           {/* For Submit Button */}
           <div>
             <button
-              className="px-[80px] py-[15px] border-[1px] rounded-[3px] bg-black text-white font-inter font-[400] text-[16px] leading-[19.36px] items-center"
+              className="px-[80px] py-[15px] border-[1px] rounded-[3px] bg-black text-white font-dmsans font-[400] text-[16px] leading-[19.36px] items-center"
               onClick={handleSubmit}
             >
               SUBMIT

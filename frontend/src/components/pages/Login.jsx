@@ -84,13 +84,13 @@ const Login = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center justify-center max-w-[450px] max-h-[407px]">
           <div className="p-4">
-            <h2 className="text-[30px] text-center font-bold font-inter pb-4 leading-9">
+            <h2 className="text-[30px] text-center font-bold font-dmsans pb-4 leading-9">
               LOG IN
             </h2>
 
             <div className="w-[370px] h-[236px] gap-6 mt-5">
               <div className="gap-3">
-                <label className="font[500] size-3.5 leading-4 font-inter">
+                <label className="font[500] size-3.5 leading-4 font-dmsans">
                   EMAIL<sup className="text-red-600">*</sup>
                 </label>
                 <input
@@ -103,11 +103,11 @@ const Login = () => {
                 />
               </div>
               <div className="pt-4 gap-3 relative">
-                <label className="font[500] size-3.5 leading-4 font-inter">
+                <label className="font[500] size-3.5 leading-4 font-dmsans">
                   PASSWORD <sup className="text-red-600">*</sup>
                   <a
                     href="/login"
-                    className="float-end w-[400] text-[12px] cursor-pointer font-inter"
+                    className="float-end w-[400] text-[12px] cursor-pointer font-dmsans"
                   >
                     forgot password?
                   </a>
@@ -139,10 +139,10 @@ const Login = () => {
               </div>
             </div>
             <div>
-              <p className=" flex  justify-center items-center gap-2 font[400] leading-[20px] tracking-[0.4px] mt-4 font-inter">
+              <p className=" flex  justify-center items-center gap-2 font[400] leading-[20px] tracking-[0.4px] mt-4 font-dmsans">
                 Haven't create an account?{" "}
                 <div
-                  className="text-[#0021D1] leading-[0.4px] font-inter cursor-pointer"
+                  className="text-[#0021D1] leading-[0.4px] font-dmsans cursor-pointer"
                   onClick={() => navigate("/signup")}
                 >
                   create an account
