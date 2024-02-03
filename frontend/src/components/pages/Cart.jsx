@@ -51,47 +51,52 @@ function Cart() {
 
   return (
     <>
-      <div className="flex flex-col mt-[144px] gap-16 mb-[157px]">
-        <div className="shrink-0 mx-[90px] flex flex-col gap-16">
-          <p className="text-[#333] w-full xl:w-[1270px] font-inter text-[36px] font-bold leading-[18.5px] text-left ml-9">
-            Cart
-          </p>
-        </div>
-        <div className="flex flex-col gap-8 mx-[90px]">
-          <div className="flex gap-6 text-center ml-56 mt-[30px] w-[1029px]">
-            <div className="col-span-2 font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
-              Product
-            </div>
-            <div className="w-full flex justify-end">
-              <div className="font-inter mr-[138px] font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
-                Price
-              </div>
-              <div className="font-inter mr-[161px] font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
-                Quantity
-              </div>
-              <div className="font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
-                Subtotal
-              </div>
+      <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
+        <div className="border-b-[1px] h-[50px]">
+          <div className="h-[39px]">
+            <div>
+              <h1 className="float-start font-inter font-[700] sm:text-[18px] xl:text-[36px] md:text-[20px] lg:text-[22px] leading-[18.5px]">
+                Cart
+              </h1>
             </div>
           </div>
+        </div>
+        <div className="grid xl:grid-cols-1 gap-6 mt-[20px]">
+          <div className="grid grid-cols-6 gap-6 my-[30px]">
+            <div className="col-span-2 ml-[30px] font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
+              Product
+            </div>
+            <div className="font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
+              Price
+            </div>
+            <div className="font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
+              Quantity
+            </div>
+            <div className="font-inter font-[500] text-[18px] leading-[21.78px] tracking-[1%]">
+              Subtotal
+            </div>
+            <div className=""></div>
+          </div>
 
-          {cartItems?.map((item) => {
-            return (
+          <div className="grid grid-cols-6 gap-8">
+            {cartItems.map((item) => (
               <>
-                <div className="h-[175px] my-[14px] ml-[33px] mr-[14px] flex items-center gap-[265px]">
-                  <div className="flex items-center gap-3">
-                    <div className="w-[99px] flex justify-center items-center h-[148px] ">
-                      <img src={item?.img} alt="item"></img>
-                    </div>
-                    <div className="font-inter text-[18px] font-semibold text-[#333]">
-                      {item?.header}
-                    </div>
-                  </div>
-                  <div className="flex gap-28 justify-center items-center font-inter font-semibold text-base pl-12">
-                    <div>{item?.price}</div>
-                    <div className="w-[136px] h-[40px] flex justify-between items-center p-[10px] border rounded-md">
-                      <div
-                        className="cursor-pointer"
+                <div className="col-span-2 flex items-center">
+                  <img src={item.img} className="w-[150px] h-[160px]" alt="" />
+                  <p className="font-inter ml-[10px] font-[600] w-[55%] text-[18px] leading-[26.78px]">
+                    {item.header}
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <p className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                    {item.price}
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <div className="border-[1px] w-[150px] border-black flex justify-between items-center py-[6px] px-[10px]">
+                    <div>
+                      <button
+                        className="float-start"
                         onClick={() => handleDecrement(item?.id)}
                       >
                         <svg
@@ -106,12 +111,14 @@ function Cart() {
                             fill="#151515"
                           />
                         </svg>
-                      </div>
-                      <div className="flex justify-center items-center font-inter font-normal text-[18px] leading-6 tracking-[24px] pl-[25px]">
-                        <span>{item?.quantity}</span>
-                      </div>
-                      <div
-                        className="cursor-pointer"
+                      </button>
+                    </div>
+                    <div className="font-inter font-[400] text-[18px] leading-[24px]">
+                      {item.quantity}
+                    </div>
+                    <div>
+                      <button
+                        className="float-start"
                         onClick={() => handleIncrement(item?.id)}
                       >
                         <svg
@@ -130,58 +137,73 @@ function Cart() {
                             stroke="#151515"
                           />
                         </svg>
-                      </div>
-                    </div>
-                    <div>
-                      ₹{parseFloat(item?.price.slice(1)) * item?.quantity}
-                    </div>
-                    <div
-                      className="cursor-pointer"
-                      onClick={() => removeCartItemHandler(item?.id)}
-                    >
-                      <DeleteOutlined />
+                      </button>
                     </div>
                   </div>
                 </div>
+                <div className="flex items-center ">
+                  <p className="font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                    ₹{parseFloat(item?.price.slice(1)) * item?.quantity}
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => removeCartItemHandler(item.id)}
+                  >
+                    <DeleteOutlined />
+                  </div>
+                </div>
               </>
-            );
-          })}
-          <div className="mt-[48px] flex flex-col items-end font-inter">
-            <div className="w-[531px] px-[20px] py-[10px] flex flex-col border mb-[26px] text-base leading-6 font-normal">
-              <div className="h-[40px] flex gap-[60px]">
-                <div className="h-[30.88px] p-[10px]">Subtotal</div>
-                <div className="w-full font-semibold text-end pl-[50px] py-[10px] pr-[10px]">
-                  ₹{totalValue}
+            ))}
+          </div>
+          <div className="grid xl:grid-cols-2 gap-6 mt-[5rem]">
+            <div></div>
+            <div className="w-[80%]">
+              <div className="border-2">
+                <div className="p-[16px]">
+                  <strong className="font-inter font-[400] text-[16px]">
+                    Subtotal
+                  </strong>
+                  <p className="float-end font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                    ₹{totalValue}
+                  </p>
+                </div>
+                <div className="p-[16px]">
+                  <strong className="font-inter font-[400] text-[16px]">
+                    Shipping Charge
+                  </strong>
+                  <p className="float-end font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                    Free Shipping
+                  </p>
+                </div>
+                <div className="p-[16px] border-t-2">
+                  <strong className="font-inter font-[400] text-[16px]">
+                    Total
+                  </strong>
+                  <p className="float-end font-inter font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                    ₹{totalValue}
+                  </p>
                 </div>
               </div>
-              <div className="h-[40px] flex justify-center items-center gap-[60px]">
-                <div className="h-[30.88px] w-full text-base p-[10px] flex justify-start items-center ">
-                  Shipping Charge
+              <div className="flex justify-between mt-[1.5rem]">
+                <div>
+                  <button
+                    className="border-[1px] border-black px-[20px] py-[10px] font-sans font-[400] text-[16px] leading-[18.8px] text-center"
+                    onClick={() => navigate("/products")}
+                  >
+                    Continue Shopping
+                  </button>
                 </div>
-                <div className="w-full font-medium text-end pl-[50px] py-[10px] pr-[10px]">
-                  Free shipping
+                <div>
+                  <button
+                    className="border-[1px] px-[50px] bg-black text-white py-[10px] font-sans font-[400] text-[16px] leading-[18.8px] text-center"
+                    onClick={() => navigate("/checkout")}
+                  >
+                    Checkout
+                  </button>
                 </div>
               </div>
-              <div className="h-[40px] flex gap-[60px] border-t">
-                <div className="h-[30.88px] p-[10px]">Total</div>
-                <div className="w-full font-semibold text-end pl-[50px] py-[10px] pr-[10px]">
-                  ₹{totalValue}
-                </div>
-              </div>
-            </div>
-            <div className="flex w-[531px] gap-[21px]">
-              <button
-                className="w-full p-[8px] h-[50px] border"
-                onClick={() => navigate("/products")}
-              >
-                Continue Shopping
-              </button>
-              <button
-                className="w-full [10px] h-[50px] text-white bg-[#181818]"
-                onClick={() => navigate("/checkout")}
-              >
-                Checkout
-              </button>
             </div>
           </div>
         </div>

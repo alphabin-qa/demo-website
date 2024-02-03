@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://demo.alphabin.co",
+    origin: "https://demo.alphabin.co", // http://localhost:3000 OR https://demo.alphabin.co
     credentials: true,
   })
 );

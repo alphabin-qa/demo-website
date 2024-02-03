@@ -110,13 +110,15 @@ const Home = () => {
 
       <section className="sm:dmt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
         <div class="lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
-          <div className="sm:mb-[10px] relative">
+          <div className="sm:mb-[10px] relative hover:cursor-pointer">
             <div className="relative">
-              <img
-                class="object-cover h-[342px] w-[695px] rounded-[5px]"
-                src={Camera}
-                alt=""
-              />
+              <div className="overflow-hidden">
+                <img
+                  class="object-cover h-[342px] w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
+                  src={Camera}
+                  alt=""
+                />
+              </div>
             </div>
             <div className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[249px]">
               <h1 className="font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
@@ -135,13 +137,15 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px]">
+          <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer">
             <div className="relative">
-              <img
-                class="object-cover h-[342px] w-[531px] rounded-[5px]"
-                src={Appliances1}
-                alt=""
-              />
+              <div className="overflow-hidden">
+                <img
+                  class="object-cover h-[342px] w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
+                  src={Appliances1}
+                  alt=""
+                />
+              </div>
             </div>
             <div className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[200px] lg:w-[180px] md:w-[140px]">
               <h1 className="font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
@@ -162,13 +166,15 @@ const Home = () => {
           </div>
         </div>
         <div class="lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
-          <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px]">
+          <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer">
             <div className="relative">
-              <img
-                class="object-cover h-[342px] w-[531px] rounded-[5px]"
-                src={Gadgets}
-                alt=""
-              />
+              <div className="overflow-hidden">
+                <img
+                  class="object-cover h-[342px] w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
+                  src={Gadgets}
+                  alt=""
+                />
+              </div>
             </div>
             <div className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[200px] lg:w-[180px] md:w-[150px]">
               <h1 className="font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
@@ -187,13 +193,15 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="sm:mb-[10px] relative bg-[#F0F0F0] rounded-[5px]">
+          <div className="sm:mb-[10px] relative bg-[#F0F0F0] rounded-[5px] hover:cursor-pointer">
             <div className="relative">
-              <img
-                class="object-cover h-[342px] w-[695px] rounded-[5px]"
-                src={Laptop1}
-                alt=""
-              />
+              <div className="overflow-hidden">
+                <img
+                  class="object-cover h-[342px] w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-y-1 hover:scale-110 duration-700"
+                  src={Laptop1}
+                  alt=""
+                />
+              </div>
             </div>
             <div className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[249px]">
               <h1 className="font-inter font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
