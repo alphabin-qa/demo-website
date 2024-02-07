@@ -131,7 +131,7 @@ const Signup = () => {
         </div>
         <div className="flex flex-col gap-[26px]">
           <label className="flex flex-col gap-[13px]">
-            <p className="text-[14px] font-medium font-dmsans">
+            <p className="text-[14px] font-[600] font-dmsans">
               FIRST NAME<sup className="text-red-500">*</sup>
             </p>
             <input
@@ -144,7 +144,7 @@ const Signup = () => {
             />
           </label>
           <label className="flex flex-col gap-[13px]">
-            <p className="text-[14px] font-medium font-dmsans">
+            <p className="text-[14px] font-[600] font-dmsans">
               LAST NAME<sup className="text-red-500">*</sup>
             </p>
             <input
@@ -157,7 +157,7 @@ const Signup = () => {
             />
           </label>
           <label className="flex flex-col gap-[13px]">
-            <p className="text-[14px] font-medium font-dmsans">
+            <p className="text-[14px] font-[600] font-dmsans">
               EMAIL<sup className="text-red-500">*</sup>
             </p>
             <input
@@ -170,7 +170,7 @@ const Signup = () => {
             />
           </label>
           <div className="flex flex-col gap-[13px] relative">
-            <p className="text-[14px] font-medium font-dmsans">
+            <p className="text-[14px] font-[600] font-dmsans">
               PASSWORD<sup className="text-red-500">*</sup>
             </p>
 
