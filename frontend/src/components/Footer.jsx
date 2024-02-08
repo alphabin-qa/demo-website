@@ -1,13 +1,29 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Facebook from "../assets/facebook.png";
-import Instagram from "../assets/instagram.png";
-import TwitterX from "../assets/twitter.png";
-import Youtube from "../assets/youtube.png";
+import Facebook from "../assets/Facebook";
+import Instagram from "../assets/Instagram";
+import TwitterX from "../assets/Twitter";
+import Youtube from "../assets/Youtube";
 import FooterLogo from "../assets/footer-logo.png";
 
 const Footer = () => {
   const navigate = useNavigate();
+  const openTwitterAccount = () => {
+    window.open("https://twitter.com/alphabin_", "_blank");
+  };
+
+  const openInstagramAccount = () => {
+    window.open("https://www.instagram.com/alphabin_consulting/", "_black")
+  }
+
+  const openYoutubeAccount = () => {
+    window.open("https://www.youtube.com/@alphabin-your-qa-partner/featured", "_blank")
+  }
+
+  const openFacebookAccount = () => {
+    window.open("https://www.facebook.com/people/Alphabin-Technology-Consulting/100081731796422/", "_blank")
+  }
+
   return (
     <div className="h-full pt-[54px] px-[90px] bg-black flex flex-col justify-center items-center text-white">
       <div className="w-[1260px] flex justify-between items-start shrink">
@@ -106,22 +122,23 @@ const Footer = () => {
               FOLLOW US
             </span>
             <div className="">
-              <img
-                src={Facebook}
-                alt=""
-                className="p-[2px] cursor-pointer mb-[14px]"
-              />
-              <img
-                src={Instagram}
-                alt=""
-                className="p-[2px] cursor-pointer mb-[14px]"
-              />
-              <img
+              <div className="p-[2px] cursor-pointer mb-[14px]" onClick={openFacebookAccount}>
+                <Facebook />
+              </div>
+              <div className="p-[2px] cursor-pointer mb-[14px]" onClick={openInstagramAccount}>
+                <Instagram />
+              </div>
+              <div className="p-[2px] cursor-pointer mb-[14px]" onClick={openTwitterAccount}>
+                <TwitterX />
+              </div>
+              {/* <img
                 src={TwitterX}
                 alt=""
                 className="p-[2px] cursor-pointer mb-[14px]"
-              />
-              <img src={Youtube} alt="" className="p-[2px] cursor-pointer" />
+              /> */}
+              <div className="p-[2px] cursor-pointer mb-[14px]" onClick={openYoutubeAccount}>
+                <Youtube />
+              </div>
             </div>
           </div>
         </div>
@@ -129,9 +146,14 @@ const Footer = () => {
       <div className="w-[1260px] shrink-0 h-[1px] stroke-[1px] bg-[#4D4D4D] mt-8"></div>
       <div className="flex w-[1260px] justify-between font-dmsans font-[500] text-[16px] leading-[24px] text-[#A1A1A1] mt-8 mb-4">
         <div className="flex justify-between gap-2">
-          <div className="hover:cursor-pointer hover:text-white">Privacy Policy</div> |
-          <div className="hover:cursor-pointer hover:text-white">GDPR Policy</div> |
-          <div className="hover:cursor-pointer hover:text-white">T&C</div>
+          <div className="hover:cursor-pointer hover:text-white">
+            Privacy Policy
+          </div>{" "}
+          |
+          <div className="hover:cursor-pointer hover:text-white">
+            GDPR Policy
+          </div>{" "}
+          |<div className="hover:cursor-pointer hover:text-white">T&C</div>
         </div>
         <div className="hover:cursor-pointer hover:text-white">
           info@alphabin.co
