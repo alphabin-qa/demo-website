@@ -44,7 +44,7 @@ const Login = () => {
       if (data) {
         dispatch(setUser(data));
         setUserAccessToken(data?.user?.token);
-        toast.success("Welcome to Alphabin DEMO STORE", {
+        toast.success("Logged in Successfully", {
           duration: 4000,
           style: {
             border: "1px solid black",
@@ -52,7 +52,7 @@ const Login = () => {
             color: "white",
           },
         });
-        navigate("/home");
+        navigate("/checkout");
         setFormData({
           email: "",
           password: "",
@@ -75,7 +75,7 @@ const Login = () => {
 
   // useEffect(() => {
   //   if (getUserAccessToken()) {
-  //     navigate("/home");
+  //     navigate("/checkout");
   //   }
   // }, []);
 

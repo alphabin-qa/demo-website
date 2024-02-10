@@ -95,7 +95,7 @@ function OrderDetail() {
                     Payment Method
                   </p>
                   <p className="font-dmsans font-[400] text-[16px] leading-[32px]">
-                    cash on delivery - {orderDetail?.totalAmount}
+                    {orderDetail?.paymentMethod} - ₹{orderDetail?.totalAmount}
                   </p>
                 </div>
               </div>
