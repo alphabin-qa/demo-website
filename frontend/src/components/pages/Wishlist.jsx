@@ -13,8 +13,10 @@ import "./home.css";
 import { removeFromWishlist } from "../../store/reducers/wishListItems";
 import toast from "react-hot-toast";
 import { addToCart } from "../../store/reducers/cartItems";
+import { useNavigate } from "react-router-dom";
 
 const Wishlist = () => {
+  const navigate = useNavigate();
   const { wishlistItems } = useSelector((state) => state?.wishlists);
   // console.log("Wishlist Items----", wishlistItems);
   const dispatch = useDispatch();
@@ -62,6 +64,7 @@ const Wishlist = () => {
                 <div
                   className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 mb-[20px] justify-center items-center relative hover:shadow-md group "
                   key={item?.id}
+                  onClick={() => navigate(`/product-detail/${item.id}`)}
                 >
                   <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px] z-10">
                     <button

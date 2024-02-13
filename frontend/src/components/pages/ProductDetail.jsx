@@ -185,17 +185,15 @@ function ProductDetail() {
                   <p className="w-[80px] h-[24px] font-dmsans font-[400] text-[18px] leading-[24px] tracking-[1px] mb-[3px]">
                     Quantity
                   </p>
-                  <div className="flex items-center mt-2">
-                    <div className="border w-[150px] border-black flex justify-between py-[6px] px-[10px]">
-                      <MinusOutlined onClick={() => handleDecrement()} />
-                      <div className="font-dmsans font-[400] text-[18px] leading-[24px]">
-                        {quantity}
-                      </div>
-                      <PlusOutlined onClick={() => handleIncrement()} />
+                  <div className="border w-[150px] border-black flex items-center justify-between py-[6px] px-[10px] mt-2">
+                    <MinusOutlined onClick={() => handleDecrement()} />
+                    <div className="font-dmsans font-[400] text-[18px] leading-[24px]">
+                      {quantity}
                     </div>
+                    <PlusOutlined onClick={() => handleIncrement()} />
                   </div>
                 </div>
-                <div className="">
+                <div>
                   <div
                     className="text-center bg-[#181818] border-black mb-[10px] cursor-pointer p-[10px] gap-[10px]"
                     onClick={() => buyNowHandler()}
