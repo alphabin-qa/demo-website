@@ -15,10 +15,9 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/reducers/cartItems";
-import toast from "react-hot-toast";
 
 function ProductDetail() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   let [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cartlists?.cartItems);
@@ -28,7 +27,7 @@ function ProductDetail() {
     const storedReviews = localStorage.getItem("reviews");
     return storedReviews ? JSON.parse(storedReviews) : [];
   });
-  let { id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     localStorage.setItem("reviews", JSON.stringify(reviews), [reviews]);
@@ -64,7 +63,7 @@ function ProductDetail() {
   const buyNowHandler = () => {
     console.log("Quantity before clicking on Buy Now", quantity);
     dispatch(addToCart({ id, img, header, price, reviewCount, quantity }));
-    navigate("/checkout")
+    navigate("/checkout");
   };
 
   const handleTabClick = (tab) => {
@@ -164,7 +163,7 @@ function ProductDetail() {
                   </p>
                 </div>
                 <p className="font-dmsans font-[400] text-[20px] leading-[24px] tracking-[1px] mb-[15px]">
-                ₹{parseFloat(price.slice(1)) * quantity}
+                  ₹{parseFloat(price.slice(1)) * quantity}
                 </p>
                 <div className="grid-cols-4 gap-[24px] flex justify-between mb-[15px]">
                   <div className=" w-full">
@@ -187,44 +186,29 @@ function ProductDetail() {
                     Quantity
                   </p>
                   <div className="flex items-center mt-2">
-                    <div className="border-[1px] w-[150px] border-black flex justify-between py-[6px] px-[10px]">
-                      <div>
-                        <button
-                          className="float-start"
-                          onClick={() => handleDecrement()}
-                        >
-                          <span className="">
-                            <MinusOutlined />
-                          </span>
-                        </button>
-                      </div>
+                    <div className="border w-[150px] border-black flex justify-between py-[6px] px-[10px]">
+                      <MinusOutlined onClick={() => handleDecrement()} />
                       <div className="font-dmsans font-[400] text-[18px] leading-[24px]">
                         {quantity}
                       </div>
-                      <div>
-                        <button
-                          className="float-end"
-                          onClick={() => handleIncrement()}
-                        >
-                          <span className="">
-                            <PlusOutlined />
-                          </span>
-                        </button>
-                      </div>
+                      <PlusOutlined onClick={() => handleIncrement()} />
                     </div>
                   </div>
                 </div>
                 <div className="">
-                  <div className="text-center bg-[#181818] border-black mb-[10px] cursor-pointer p-[10px] gap-[10px]">
-                    <button onClick={() => buyNowHandler()} className="text-white font-dmsans font-[600] text-[16px] leading-[18.8px]">
+                  <div
+                    className="text-center bg-[#181818] border-black mb-[10px] cursor-pointer p-[10px] gap-[10px]"
+                    onClick={() => buyNowHandler()}
+                  >
+                    <button className="text-white font-dmsans font-[600] text-[16px] leading-[18.8px]">
                       BUY NOW
                     </button>
                   </div>
-                  <div className="text-center border-[1px] p-[10px] gap-[10px] cursor-pointer border-black">
-                    <button
-                      onClick={() => addToCartHandler()}
-                      className="font-dmsans font-[600] text-[16px] leading-[18.8px]"
-                    >
+                  <div
+                    className="text-center border-[1px] p-[10px] gap-[10px] cursor-pointer border-black"
+                    onClick={() => addToCartHandler()}
+                  >
+                    <button className="font-dmsans font-[600] text-[16px] leading-[18.8px]">
                       ADD TO CART
                     </button>
                   </div>

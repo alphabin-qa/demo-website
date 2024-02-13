@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Circle from "../assets/CheckCircle.png";
 import { useNavigate, useParams } from "react-router-dom";
+import { clearCart } from "../store/reducers/cartItems";
+import { useDispatch } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -21,9 +23,11 @@ const style = {
 
 export default function OrderConfirmModel({ open, setOpen, order }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClose = () => setOpen(false);
   const handleStatus = (id) => {
+    dispatch(clearCart());
     navigate(`/status/${id}`);
   };
 

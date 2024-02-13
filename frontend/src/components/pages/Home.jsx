@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../../index.css";
 import "./home.css";
-import { getUserAccessToken } from "../../utils/localstorage.helper";
-import { useNavigate } from "react-router-dom";
 import {
   Appliances1,
   Camera,
@@ -26,15 +24,6 @@ import {
 } from "../../StaticData/static";
 
 const Home = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const userToken = getUserAccessToken();
-    if (!userToken) {
-      navigate("/login");
-    }
-  }, []);
-
   const NextArrow = ({ onClick }) => {
     return (
       <div className="absolute right-0 -top-[60px]" onClick={onClick}>
@@ -91,7 +80,7 @@ const Home = () => {
         <div className="lg:w-full">
           <div className="flex justify-center items-center xl:w-full lg:w-full sm:w-full md:w-full sm:h-[40vh] md:h-[50vh] xl:h-[80vh] lg:h-[80vh] main">
             <div className="text-center md:w-[800px] md:h-[300px] lg:w-[976px] xl:w-[975px] lg:h-[319px] sm:p-[20px] ">
-              <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] lg:h-[195px] text-white lg:leading-[4rem]">
+              <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] font-[900] lg:h-[195px] text-white lg:leading-[4rem]">
                 Alphabin Demo Store Electronics Where Innovation Meets Quality
                 Explore Now
               </h1>
@@ -193,7 +182,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="sm:mb-[10px] relative bg-[#F0F0F0] rounded-[5px] hover:cursor-pointer">
+          <div className="relative bg-[#F0F0F0] rounded-[5px] hover:cursor-pointer">
             <div className="relative">
               <div className="overflow-hidden">
                 <img

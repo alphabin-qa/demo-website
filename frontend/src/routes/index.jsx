@@ -20,7 +20,8 @@ export default function ThemeRoutes() {
   }, [pathname]);
 
   useEffect(() => {
-    if (!getUserAccessToken()) {
+    const path = window.location.pathname;
+    if (path.includes("/checkout") && !getUserAccessToken()) {
       navigate("/login");
     }
   }, []);

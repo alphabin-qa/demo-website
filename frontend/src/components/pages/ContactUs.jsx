@@ -20,20 +20,14 @@ const Contact = () => {
             Contact Us
           </div>
           <div className="w-[1260px] h-[510px]">
-            {isMap ? (
-              <div className="w-full h-full flex justify-center items-center">
-                <CircularProgress color="success" size={60} />
-              </div>
-            ) : (
-              <iframe
-                src={`https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting`}
-                width="100%"
-                height="100%"
-                loading="lazy"
-                frameborder="0"
-                title="Alphabin Technology"
-              ></iframe>
-            )}
+            <iframe
+              src={`https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting`}
+              width="100%"
+              height="100%"
+              loading="lazy"
+              frameborder="0"
+              title="Alphabin Technology"
+            ></iframe>
           </div>
         </div>
         <div className="w-[1260px] flex gap-8 mt-[100px]">

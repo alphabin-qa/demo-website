@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { getUserAccessToken } from "../../utils/localstorage.helper";
+import { useDispatch } from "react-redux";
 import {
   axis,
   hdfc,
@@ -26,14 +28,24 @@ import AddressModel from "../AddressModel";
 
 function Checkout() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userToken = getUserAccessToken();
+    if (!userToken && window.location.pathname.includes("/checkout")) {
+      navigate("/login");
+    }
+  }, [getUserAccessToken()]);
+
   const [createOrder] = useCreateOrderMutation();
   const [billingTab, setBillingTab] = useState("credit");
   const [visibleBanks, setVisibleBanks] = useState(6);
+  const [selectedBank, setSelectedBank] = useState(null);
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState({});
   const { cartItems } = useSelector((state) => state?.cartlists);
   const [totalValue, setTotalvalue] = useState();
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState([]);
   const [changeAddress, setChangeAddress] = useState(false);
   const [cardData, setCardData] = useState({
     cardNo: "",
@@ -171,14 +183,8 @@ function Checkout() {
   };
 
   const handleOrderNow = async () => {
-    if (
-      typeof cardData?.cardNo === "string" &&
-      typeof parseInt(cardData?.cvv) === "number" &&
-      typeof parseInt(cardData?.expiredMonth) === "number" &&
-      typeof parseInt(cardData?.expiredYear) === "number"
-    ) {
-      const areEqual = JSON.stringify(cardData) === JSON.stringify(cardDetails);
-      if (areEqual) {
+    if (address && billingTab === "cod") {
+      try {
         const { data } = await createOrder({
           address: address,
           paymentMethod: billingTab,
@@ -188,6 +194,60 @@ function Checkout() {
         });
         setOpen(true);
         setOrder(data);
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (billingTab === "netbanking") {
+      try {
+        const { data } = await createOrder({
+          address: address,
+          paymentMethod: selectedBank,
+          totalAmount: totalValue,
+          orderDate: Date.now(),
+          email: userDetails?.email,
+        });
+        setOpen(true);
+        setOrder(data);
+        console.log("Before Cart Items", cartItems);
+        console.log("Affter Cart Items", cartItems);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      // Payment method is not COD, proceed with credit card validation
+      if (
+        typeof cardData?.cardNo === "string" &&
+        typeof parseInt(cardData?.cvv) === "number" &&
+        typeof parseInt(cardData?.expiredMonth) === "number" &&
+        typeof parseInt(cardData?.expiredYear) === "number"
+      ) {
+        const areEqual =
+          JSON.stringify(cardData) === JSON.stringify(cardDetails);
+        if (areEqual) {
+          try {
+            const { data } = await createOrder({
+              address: address,
+              paymentMethod: billingTab,
+              totalAmount: totalValue,
+              orderDate: Date.now(),
+              email: userDetails?.email,
+            });
+            setOpen(true);
+            setOrder(data);
+          } catch (error) {
+            console.error(error);
+            // Handle error appropriately
+          }
+        } else {
+          toast.error("Enter valid card details", {
+            duration: 4000,
+            style: {
+              border: "1px solid black",
+              backgroundColor: "black",
+              color: "white",
+            },
+          });
+        }
       } else {
         toast.error("Enter valid card details", {
           duration: 4000,
@@ -198,15 +258,6 @@ function Checkout() {
           },
         });
       }
-    } else {
-      toast.error("Enter valid card details", {
-        duration: 4000,
-        style: {
-          border: "1px solid black",
-          backgroundColor: "black",
-          color: "white",
-        },
-      });
     }
   };
 
@@ -225,6 +276,10 @@ function Checkout() {
     }
   };
 
+  const handleBankSelection = (bankName) => {
+    setSelectedBank(bankName);
+  };
+
   const showMoreBanks = () => {
     setVisibleBanks((prevVisibleBanks) => prevVisibleBanks + 3);
   };
@@ -234,7 +289,7 @@ function Checkout() {
   };
 
   useEffect(() => {
-    if (!Object.keys(userDetails).length || refetch || changeAddress) {
+    if (!userDetails?.length || refetch || changeAddress) {
       fetchDetails();
     }
   }, [refetch, changeAddress]);
@@ -563,10 +618,11 @@ function Checkout() {
                           <div
                             key={index}
                             className="w-full flex flex-col items-center justify-center"
+                            onClick={() => handleBankSelection(bank.name)}
                           >
                             <img
                               src={bank.logo}
-                              className="w-[50.46px] h-[50.46px] font-dmsans"
+                              className="w-[50.46px] h-[50.46px] font-dmsans hover:cursor-pointer"
                               alt=""
                             />
                             <p>{bank.name}</p>
@@ -592,6 +648,7 @@ function Checkout() {
                     </div>
                   </>
                 )}
+
                 {billingTab === "cod" && (
                   <>
                     <div className="w-[539px] border border-[#B0B0B0] p-[8.41px] mb-52 flex justify-between align-top font-dmsans">

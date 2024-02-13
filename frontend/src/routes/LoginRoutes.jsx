@@ -6,6 +6,7 @@ const AuthRegister = Loadable(lazy(() => import("../components/pages/Signup")));
 
 const LoginRoutes = {
   path: "/",
+  element: <DefaultRoute />,
   children: [
     {
       path: "login",
