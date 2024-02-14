@@ -163,7 +163,7 @@ function ProductDetail() {
                   </p>
                 </div>
                 <p className="font-dmsans font-[400] text-[20px] leading-[24px] tracking-[1px] mb-[15px]">
-                  ₹{parseFloat(price.slice(1)) * quantity}
+                  {price}
                 </p>
                 <div className="grid-cols-4 gap-[24px] flex justify-between mb-[15px]">
                   <div className=" w-full">
