@@ -192,7 +192,9 @@ exports.userDetail = async (req, res) => {
           firstname: user.firstname,
           lastname: user.lastname,
           email: user.email,
+          contactNumber: user.phoneNumber,
           address: user.addresses,
+          userId: user._id,
         };
         return res.status(200).json({
           data: { success: true, data },

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getUserAccessToken,
   setUserAccessToken,
+  setUserData,
 } from "../../utils/localstorage.helper";
 import toast from "react-hot-toast";
 import { usePasswordToggle } from "../../utils/usePasswordToggle";
