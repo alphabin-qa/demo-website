@@ -75,7 +75,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-3 md:gap-0">
       <section className="hero-content sm:w-full">
         <div className="lg:w-full">
           <div className="flex justify-center items-center xl:w-full lg:w-full sm:w-full md:w-full sm:h-[40vh] md:h-[50vh] xl:h-[80vh] lg:h-[80vh] main">
@@ -97,15 +97,15 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:dmt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
-        <div class="lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+        <div class="flex flex-col xl:flex-row justify-center xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
           <div className="sm:mb-[10px] relative hover:cursor-pointer">
             <div className="relative">
               <div className="overflow-hidden">
                 <img
-                  class="object-cover h-[342px] w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
+                  class="object-cover h-[342px] xl:w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700 w-full"
                   src={Camera}
-                  alt=""
+                  alt="camera"
                 />
               </div>
             </div>
@@ -126,11 +126,11 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer">
+          <div className="sm:mb-[10px] relative h-[342px] bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer">
             <div className="relative">
               <div className="overflow-hidden">
                 <img
-                  class="object-cover h-[342px] w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
+                  className="object-cover h-[342px] w-full xl:w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
                   src={Appliances1}
                   alt=""
                 />
@@ -154,14 +154,14 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div class="lg:w-[1260px] md:w-[800px] h-[342px] flex justify-between xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
-          <div className="sm:mb-[10px] relative w-[531px] h-[342px] bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer">
+        <div class="flex flex-col xl:flex-row justify-center xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
+          <div className="relative bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer">
             <div className="relative">
               <div className="overflow-hidden">
                 <img
-                  class="object-cover h-[342px] w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
+                  class="object-cover h-[342px] w-full xl:w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
                   src={Gadgets}
-                  alt=""
+                  alt="Gadgets"
                 />
               </div>
             </div>
@@ -186,7 +186,7 @@ const Home = () => {
             <div className="relative">
               <div className="overflow-hidden">
                 <img
-                  class="object-cover h-[342px] w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-y-1 hover:scale-110 duration-700"
+                  class="object-cover h-[342px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-y-1 hover:scale-110 duration-700"
                   src={Laptop1}
                   alt=""
                 />
@@ -240,8 +240,8 @@ const Home = () => {
 
       <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
         <div className="xl:container lg:container mx-auto">
-          <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
-            <div className="sm:mb-[10px] relative ">
+          <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-2 md:gap-0">
+            <div className="relative ">
               <div className="relative">
                 {" "}
                 <img
@@ -259,7 +259,7 @@ const Home = () => {
                 </button>
               </div>
             </div>
-            <div className="sm:mb-[10px] relative ">
+            <div className="relative ">
               <div className="relative">
                 {" "}
                 <img
@@ -362,7 +362,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

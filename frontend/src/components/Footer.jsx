@@ -13,21 +13,27 @@ const Footer = () => {
   };
 
   const openInstagramAccount = () => {
-    window.open("https://www.instagram.com/alphabin_consulting/", "_black")
-  }
+    window.open("https://www.instagram.com/alphabin_consulting/", "_black");
+  };
 
   const openYoutubeAccount = () => {
-    window.open("https://www.youtube.com/@alphabin-your-qa-partner/featured", "_blank")
-  }
+    window.open(
+      "https://www.youtube.com/@alphabin-your-qa-partner/featured",
+      "_blank"
+    );
+  };
 
   const openFacebookAccount = () => {
-    window.open("https://www.facebook.com/people/Alphabin-Technology-Consulting/100081731796422/", "_blank")
-  }
+    window.open(
+      "https://www.facebook.com/people/Alphabin-Technology-Consulting/100081731796422/",
+      "_blank"
+    );
+  };
 
   return (
     <div className="h-full pt-[54px] px-[90px] bg-black flex flex-col justify-center items-center text-white">
-      <div className="w-[1260px] flex justify-between items-start shrink">
-        <div className=" flex flex-col  gap-[45px]">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 justify-between gap-8 w-full">
+        <div className="flex flex-col gap-4">
           <div>
             <div className="font-nunito text-white">
               <Link to={"/home"}>
@@ -61,90 +67,94 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col gap-4">
-          <div>
-            <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
-              USEFUL LINKS
-            </span>
-          </div>
-          <div>
-            <ul className="flex flex-col gap-4">
-              <li
-                className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white"
-                onClick={() => navigate("/")}
-              >
-                Home
-              </li>
-              <li
-                className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white"
-                onClick={() => navigate("/about-us")}
-              >
-                About Us
-              </li>
-              <li
-                className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white"
-                onClick={() => navigate("/contact-us")}
-              >
-                Contact Us
-              </li>
-              <li
-                className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white"
-                onClick={() => navigate("/products")}
-              >
-                All Products
-              </li>
-            </ul>
-          </div>
+          <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
+            USEFUL LINKS
+          </span>
+          <ul className="flex flex-col gap-4">
+            <li
+              className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white"
+              onClick={() => navigate("/")}
+            >
+              Home
+            </li>
+            <li
+              className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white"
+              onClick={() => navigate("/about-us")}
+            >
+              About Us
+            </li>
+            <li
+              className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white"
+              onClick={() => navigate("/contact-us")}
+            >
+              Contact Us
+            </li>
+            <li
+              className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white"
+              onClick={() => navigate("/products")}
+            >
+              All Products
+            </li>
+          </ul>
         </div>
-        <div>
-          <div className="flex flex-col gap-4">
-            <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
-              CUSTOMER POLICY
-            </span>
-            <ul className="flex flex-col gap-4">
-              <li className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white">
-                Shipping Policy
-              </li>
-              <li className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white">
-                Return Policy
-              </li>
-              <li className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white">
-                Cancellation
-              </li>
-              <li className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white">
-                FAQ
-              </li>
-            </ul>
-          </div>
+        <div className="flex flex-col gap-4">
+          <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
+            CUSTOMER POLICY
+          </span>
+          <ul className="flex flex-col gap-4">
+            <li className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white">
+              Shipping Policy
+            </li>
+            <li className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white">
+              Return Policy
+            </li>
+            <li className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white">
+              Cancellation
+            </li>
+            <li className="p-[2px] cursor-pointer font-dmsans font-[400] text-[16px] leading-[20.83px] text-[#A1A1A1] hover:cursor-pointer hover:text-white">
+              FAQ
+            </li>
+          </ul>
         </div>
-        <div>
-          <div className="flex flex-col gap-4">
-            <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
-              FOLLOW US
-            </span>
-            <div className="">
-              <div className="p-[2px] cursor-pointer mb-[14px]" onClick={openFacebookAccount}>
-                <Facebook />
-              </div>
-              <div className="p-[2px] cursor-pointer mb-[14px]" onClick={openInstagramAccount}>
-                <Instagram />
-              </div>
-              <div className="p-[2px] cursor-pointer mb-[14px]" onClick={openTwitterAccount}>
-                <TwitterX />
-              </div>
-              {/* <img
-                src={TwitterX}
-                alt=""
-                className="p-[2px] cursor-pointer mb-[14px]"
-              /> */}
-              <div className="p-[2px] cursor-pointer mb-[14px]" onClick={openYoutubeAccount}>
-                <Youtube />
-              </div>
+        <div className="flex flex-col gap-4">
+          <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
+            FOLLOW US
+          </span>
+          <div className=" flex justify-between md:justify-normal md:flex-col">
+            <div
+              className="p-[2px] cursor-pointer mb-[14px]"
+              onClick={openFacebookAccount}
+            >
+              <Facebook />
+            </div>
+            <div
+              className="p-[2px] cursor-pointer mb-[14px]"
+              onClick={openInstagramAccount}
+            >
+              <Instagram />
+            </div>
+            <div
+              className="p-[2px] cursor-pointer mb-[14px]"
+              onClick={openTwitterAccount}
+            >
+              <TwitterX />
+            </div>
+            {/* <img
+          src={TwitterX}
+          alt=""
+          className="p-[2px] cursor-pointer mb-[14px]"
+        /> */}
+            <div
+              className="p-[2px] cursor-pointer mb-[14px]"
+              onClick={openYoutubeAccount}
+            >
+              <Youtube />
             </div>
           </div>
         </div>
       </div>
-      <div className="w-[1260px] shrink-0 h-[1px] stroke-[1px] bg-[#4D4D4D] mt-8"></div>
-      <div className="flex w-[1260px] justify-between font-dmsans font-[500] text-[16px] leading-[24px] text-[#A1A1A1] mt-8 mb-4">
+      <div className="w-full shrink-0 h-[1px] stroke-[1px] bg-[#4D4D4D] mt-8"></div>
+      <div className="flex flex-col md:flex-row w-full items-center justify-around font-dmsans font-[500] text-[16px] leading-[24px] text-[#A1A1A1] mt-8 mb-4">
         <div className="flex justify-between gap-2">
           <div className="hover:cursor-pointer hover:text-white">
             Privacy Policy
@@ -158,7 +168,9 @@ const Footer = () => {
         <div className="hover:cursor-pointer hover:text-white">
           info@alphabin.co
         </div>
-        <div>© 2024 Alphabin Technology Consulting</div>
+        <div className="text-center sm:text-start">
+          © 2024 Alphabin Technology Consulting
+        </div>
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ const headerMenu = ["Home", "About Us", "Contact Us", "All Products"];
 const Header = () => {
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
+  const [isSelectedTab, setIsSelectedTab] = useState("");
   const [openSearch, setOpenSearch] = useState(false);
   const [token, setToken] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -32,18 +33,25 @@ const Header = () => {
   const handleMenuSelection = (menuItem) => {
     switch (menuItem) {
       case "Home":
+        setIsSelectedTab("Home");
         navigate("/home");
         break;
 
       case "About Us":
+        setIsSelectedTab("About Us");
+
         navigate("/about-us");
         break;
 
       case "Contact Us":
+        setIsSelectedTab("Contact Us");
+
         navigate("/contact-us");
         break;
 
       case "All Products":
+        setIsSelectedTab("All Products");
+
         navigate("/products");
         break;
       default:
@@ -74,7 +82,9 @@ const Header = () => {
             <ul className="hidden lg:flex justify-center items-center gap-8 font-medium text-[16px] leading-5 font-dmsans">
               {headerMenu.map((item) => (
                 <li
-                  className="cursor-pointer p-[6px]"
+                  className={`cursor-pointer p-[6px] hover:underline underline-offset-4 ${
+                    item === isSelectedTab ? "underline underline-offset-4" : ""
+                  }`}
                   onClick={() => handleMenuSelection(item)}
                 >
                   {item}
