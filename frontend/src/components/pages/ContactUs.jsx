@@ -2,15 +2,7 @@ import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 const Contact = () => {
-  const [isMap, setIsMap] = useState(true);
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setIsMap(false);
-    }, 3000);
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <>
@@ -19,19 +11,29 @@ const Contact = () => {
           <div className=" w-full text-start text-[28px] font-bold leading-[18.5px] font-dmsans text-[#333333]">
             Contact Us
           </div>
-          <div className="w-[1260px] h-[510px]">
-            <iframe
-              src={`https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting`}
-              width="100%"
-              height="100%"
-              loading="lazy"
-              frameborder="0"
-              title="Alphabin Technology"
-            ></iframe>
+          <div className="w-[98vw] max-w-[1210px] pb-3">
+            <div className="relative h-[500px] w-full">
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center opacity-75">
+                  <CircularProgress />
+                </div>
+              )}
+              <iframe
+                src={`https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting`}
+                width="100%"
+                height="100%"
+                loading="lazy"
+                title="Alphabin Technology"
+                onLoad={() => {
+                  setIsLoading(false);
+                  console.log("After called hello");
+                }}
+              ></iframe>
+            </div>
           </div>
         </div>
-        <div className="w-[1260px] flex gap-8 mt-[100px]">
-          <div className="w-[557px] flex flex-col items-center gap-8 px-[30px] pb-[35px] bg-[#FBFBFB] rounded-[3px] py-5">
+        <div className="xl:w-[1260px] flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col items-center gap-8 px-2 sm:px-[30px] pb-[35px] bg-[#FBFBFB] rounded-[3px] py-5">
             <p className="w-full text-start text-[28px] font-bold leading-[23.1px] font-dmsans tracking-[0.56px]">
               Contact info
             </p>
@@ -54,7 +56,7 @@ const Contact = () => {
                 </p>
               </div>
               <div className="flex gap-4">
-                <p className="text-[18px] font-medium font-dmsans tracking-[0.36px]">
+                <p className="shrink-0 text-[18px] font-medium font-dmsans tracking-[0.36px]">
                   Address 1:
                 </p>
                 <p className="text-[16px] font-normal font-dmsans tracking-[0.36px]">
@@ -64,7 +66,7 @@ const Contact = () => {
                 </p>
               </div>
               <div className="flex gap-4">
-                <p className="text-[18px] font-medium font-dmsans tracking-[0.36px]">
+                <p className="shrink-0 text-[18px] font-medium font-dmsans tracking-[0.36px]">
                   Address 2:
                 </p>
                 <p className="text-[16px] font-normal font-dmsans tracking-[0.36px]">
@@ -73,13 +75,13 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          <div className="grow h-[476px] flex flex-col items-center gap-8 p-[30px] bg-[#FBFBFB] rounded-[3px]">
+          <div className="grow flex flex-col items-center gap-8 sm:p-[30px] bg-[#FBFBFB] rounded-[3px] px-2">
             <p className=" w-full text-start font-dmsans text-[28px] font-bold leading-[23.1px] tracking-[0.556px]">
               Get in touch
             </p>
             <div className=" w-full flex flex-col gap-4">
-              <div className="w-full flex-grow flex justify-start items-center gap-4">
-                <label className="flex flex-col gap-2 flex-grow">
+              <div className="w-full flex-grow flex justify-start items-center flex-col sm:flex-row gap-4">
+                <label className="flex flex-col w-full gap-2 flex-grow">
                   <p className="text-[14px] font-normal font-dmsans text-[#333333]">
                     First Name
                   </p>
@@ -88,7 +90,7 @@ const Contact = () => {
                     className="h-[38px] self-stretch font-dmsans pl-2 rounded-[3px] border-[0.941px] border-[#CFCFCF] flex-grow"
                   />
                 </label>
-                <label className="flex flex-col gap-2 flex-grow">
+                <label className="flex flex-col w-full gap-2 flex-grow">
                   <p className="text-[14px] font-normal font-dmsans text-[#333333]">
                     Last Name
                   </p>
@@ -118,7 +120,7 @@ const Contact = () => {
                   />
                 </label>
               </div>
-              <button className="w-full leading-[18.8px] w-[370px] h-[46px] p-[10px] gap-[10px] bg-black text-white align-center font-bold uppercase">
+              <button className="w-full leading-[18.8px] h-[46px] p-[10px] gap-[10px] bg-black text-white align-center font-bold uppercase">
                 Send message
               </button>
             </div>

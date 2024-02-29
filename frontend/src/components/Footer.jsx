@@ -32,7 +32,8 @@ const Footer = () => {
 
   return (
     <div className="h-full pt-[54px] px-[90px] bg-black flex flex-col justify-center items-center text-white">
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 justify-between gap-8 w-full">
+      <div className="grid lg:grid-cols-4 sm:grid-cols-2 justify-between gap-8 w-full">
+        {/* <div className="flex justify-between border"> */}
         <div className="flex flex-col gap-4">
           <div>
             <div className="font-nunito text-white">
@@ -66,7 +67,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 mt-3">
           <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
             USEFUL LINKS
           </span>
@@ -97,7 +98,8 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col gap-4">
+        {/* </div> */}
+        <div className="flex flex-col gap-4 mt-3">
           <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
             CUSTOMER POLICY
           </span>
@@ -116,11 +118,11 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col gap-4">
-          <span className="font-dmsans text-[16px]] font-medium tracking-[1px]">
+        <div className="flex flex-col gap-4 mt-3">
+          <span className="font-dmsans text-[16px] font-medium tracking-[1px]">
             FOLLOW US
           </span>
-          <div className=" flex justify-between md:justify-normal md:flex-col">
+          <div className=" flex justify-between md:justify-normal sm:flex-col">
             <div
               className="p-[2px] cursor-pointer mb-[14px]"
               onClick={openFacebookAccount}

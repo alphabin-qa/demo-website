@@ -76,23 +76,21 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-3 md:gap-0">
-      <section className="hero-content sm:w-full">
-        <div className="lg:w-full">
-          <div className="flex justify-center items-center xl:w-full lg:w-full sm:w-full md:w-full sm:h-[40vh] md:h-[50vh] xl:h-[80vh] lg:h-[80vh] main">
-            <div className="text-center md:w-[800px] md:h-[300px] lg:w-[976px] xl:w-[975px] lg:h-[319px] sm:p-[20px] ">
-              <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] font-[900] lg:h-[195px] text-white lg:leading-[4rem]">
-                Alphabin Demo Store Electronics Where Innovation Meets Quality
-                Explore Now
-              </h1>
-              <p className="mt-5 text-[12px] md:text-[18px] lg:text-[18px] sm:mx-[50px] md:mx-[200px] lg:mx-[300px] font-dmsans leading-[21.78px] align-center text-white">
-                Lorem ipsum dolor sit amet consectetur amet consectetur.
-              </p>
-              <Link to={`/products`}>
-                <button className="lg:w-[170px] lg:h-[48px] p-[5px] md:p-[7px] lg:p-[10px] font-dmsans font-[400] lg:text-[18px] leading-[21.78px] align-middle border-white bg-white mt-4 px-[20px] py-[10px] hover:bg-transparent hover:border-[1px] hover:text-white">
-                  Shop Now
-                </button>
-              </Link>
-            </div>
+      <section>
+        <div className="flex justify-center items-center h-[35vh] sm:h-[50vh] lg:h-[80vh] main">
+          <div className="text-center md:w-[800px] md:h-[300px] lg:w-[976px] lg:h-[319px] sm:p-[20px] ">
+            <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] font-[900] lg:h-[195px] text-white lg:leading-[4rem]">
+              Alphabin Demo Store Electronics Where Innovation Meets Quality
+              Explore Now
+            </h1>
+            <p className="mt-5 text-[12px] md:text-[18px] lg:text-[18px] sm:mx-[50px] md:mx-[200px] lg:mx-[300px] font-dmsans leading-[21.78px] align-center text-white">
+              Lorem ipsum dolor sit amet consectetur amet consectetur.
+            </p>
+            <Link to={`/products`}>
+              <button className="lg:w-[170px] lg:h-[48px] p-[5px] md:p-[7px] lg:p-[10px] font-dmsans font-[400] lg:text-[18px] leading-[21.78px] align-middle border-white bg-white mt-4 px-[20px] py-[10px] hover:bg-transparent hover:border-[1px] hover:text-white">
+                Shop Now
+              </button>
+            </Link>
           </div>
         </div>
       </section>

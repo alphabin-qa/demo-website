@@ -69,14 +69,14 @@ const Header = () => {
   };
 
   return (
-    <div className="">
-      <div className="mx-[100px]">
+    <>
+      <div>
         <div className="h-[80px] flex justify-between items-center">
           <div
             className="h-[62px] flex flex-col justify-center items-center cursor-pointer"
             onClick={() => navigate("/home")}
           >
-            <img src={HeaderLogo} alt="" />
+            <img src={HeaderLogo} alt="logo" />
           </div>
           <div>
             <ul className="hidden lg:flex justify-center items-center gap-8 font-medium text-[16px] leading-5 font-dmsans">
@@ -119,7 +119,7 @@ const Header = () => {
               </div>
               <div className="cursor-pointer">
                 {cartItems.length ? (
-                  <div className="flex flex-col xl:mt-[-25px] lg:mt-[-20px] md:mt-[-16px]">
+                  <div className="flex flex-col xl:mt-[-25px] lg:mt-[-20px] md:mt-[-16px] shrink">
                     <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
                       {cartItemCount}
                     </span>
@@ -144,14 +144,11 @@ const Header = () => {
             >
               <MdOutlineStorage className="w-[25px] h-[25px] text-gray-600" />
               {toggle && (
-                <div
-                  className="w-full sm:w-[20rem] h-[12rem] flex justify-start items-center p-2 rounded-lg bg-[#F0F0F0] absolute top-[80px] 
-                right-0 sm:right-9 border gap-5 pl-3 z-10"
-                >
+                <div className="w-full h-[12rem] flex justify-start items-center p-2 rounded-lg bg-[#f7fbff] absolute top-[80px] right-0 border gap-5 pl-3 z-10">
                   <ul className="w-full h-full flex flex-col justify-around font-medium text-[16px] leading-5 font-dmsans gap-[3px]">
                     {headerMenu.map((item) => (
                       <li
-                        className="cursor-pointer p-[6px] pl-4 border rounded-lg bg-slate-200"
+                        className="cursor-pointer p-[6px] pl-4 border rounded-lg bg-black text-white text-center"
                         onClick={() => handleMenuSelection(item)}
                       >
                         {item}
@@ -189,7 +186,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
