@@ -98,7 +98,7 @@ const MyAccount = () => {
 
           {selection === 1 && <MyProfile />}
           {selection === 2 && <MyOrder />}
-          {selection === 4 && <Address />}
+          {selection === 4 && <Address userDetails={userDetails} />}
         </div>
       </div>
     </>

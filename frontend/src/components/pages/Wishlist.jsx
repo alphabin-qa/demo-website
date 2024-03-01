@@ -18,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 const Wishlist = () => {
   const navigate = useNavigate();
   const { wishlistItems } = useSelector((state) => state?.wishlists);
-  // console.log("Wishlist Items----", wishlistItems);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state?.cartlists?.cartItems);
   const [cartIcon, setCartIcon] = useState(false);
@@ -56,10 +55,10 @@ const Wishlist = () => {
       ) : (
         <div className="mt-[120px] xl:w-[1440px] lg:w-[1440px] md:container sm:container mx-auto">
           <div className="shrink-0 flex flex-col gap-16">
-            <p className="text-[#333] w-full xl:w-[1270px] font-dmsans text-[36px] font-bold leading-[18.5px] text-left">
+            <p className="pl-4 text-[#333] w-full font-dmsans text-[36px] font-bold leading-[18.5px]">
               Wishlist
             </p>
-            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-[32px]">
+            <div className="grid justify-center xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-[32px]">
               {wishlistItems?.map((item) => (
                 <div
                   className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 mb-[20px] justify-center items-center relative hover:shadow-md group "

@@ -94,7 +94,7 @@ function Checkout() {
       [name]: value,
     });
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     const validationErrors = validateForm(formData);
     if (Object?.keys(validationErrors)?.length === 0) {
       try {
@@ -208,8 +208,6 @@ function Checkout() {
         });
         setOpen(true);
         setOrder(data);
-        console.log("Before Cart Items", cartItems);
-        console.log("Affter Cart Items", cartItems);
       } catch (error) {
         console.error(error);
       }
@@ -274,6 +272,7 @@ function Checkout() {
         },
       });
     }
+    setOpenAddressModel(false);
   };
 
   const handleBankSelection = (bankName) => {
@@ -289,10 +288,10 @@ function Checkout() {
   };
 
   useEffect(() => {
-    if (!userDetails?.length || refetch || changeAddress) {
+    if (!userDetails?.length || refetch) {
       fetchDetails();
     }
-  }, [refetch, changeAddress]);
+  }, [refetch]);
 
   useEffect(() => {
     if (cartItems) {
@@ -413,7 +412,7 @@ function Checkout() {
                     <div className="my-[35px] w-[223px] h-[37px] gap-[10px] flex items-center text-center justify-center">
                       <button
                         className="px-[40px] py-[10px] bg-black text-white font-dmsans font-[400] text-[14px] leading-[16.94px] text-center"
-                        onClick={() => handleSubmit()}
+                        onClick={handleSubmit}
                       >
                         Save Your Address
                       </button>

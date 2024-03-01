@@ -4,19 +4,20 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
 
+const formsData = {
+  firstName: "",
+  email: "",
+  city: "",
+  street: "",
+  country: "",
+  state: "",
+  zipCode: "",
+};
 const Address = ({ userDetails }) => {
   const [addAddress] = useAddAddressMutation();
   const { data: userData } = useSelector((state) => state?.userData);
   const [selectAddress, setSelectAddress] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    email: "",
-    city: "",
-    street: "",
-    country: "",
-    state: "",
-    zipCode: "",
-  });
+  const [formData, setFormData] = useState(formsData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +56,7 @@ const Address = ({ userDetails }) => {
   };
   const handleSubmit = async (e) => {
     const validationErrors = validateForm(formData);
-    if (Object.keys(validationErrors).length === 0) {
+    if (Object.keys(validationErrors)?.length === 0) {
       try {
         if (userDetails.address.length <= 4) {
           const { data } = await addAddress({
@@ -85,15 +86,7 @@ const Address = ({ userDetails }) => {
       } catch (error) {
         console.error(error);
       }
-      setFormData({
-        firstName: "",
-        email: "",
-        city: "",
-        street: "",
-        country: "",
-        state: "",
-        zipCode: "",
-      });
+      setFormData(formsData);
     }
   };
   return (

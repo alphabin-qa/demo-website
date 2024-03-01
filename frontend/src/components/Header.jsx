@@ -11,6 +11,7 @@ import CartModel from "../components/CartModel";
 import { IoMdClose } from "react-icons/io";
 import HeaderLogo from "../assets/header-logo.png";
 import { useSelector } from "react-redux";
+import { getUserAccessToken } from "../utils/localstorage.helper";
 
 const headerMenu = ["Home", "About Us", "Contact Us", "All Products"];
 
@@ -39,19 +40,16 @@ const Header = () => {
 
       case "About Us":
         setIsSelectedTab("About Us");
-
         navigate("/about-us");
         break;
 
       case "Contact Us":
         setIsSelectedTab("Contact Us");
-
         navigate("/contact-us");
         break;
 
       case "All Products":
         setIsSelectedTab("All Products");
-
         navigate("/products");
         break;
       default:
@@ -60,8 +58,12 @@ const Header = () => {
   };
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-    navigate("/account");
+    if (getUserAccessToken()) {
+      setAnchorEl(event.currentTarget);
+      navigate("/account");
+    } else {
+      navigate("/login");
+    }
   };
 
   const toggleCart = () => {
@@ -71,9 +73,9 @@ const Header = () => {
   return (
     <>
       <div>
-        <div className="h-[80px] flex justify-between items-center">
+        <div className="h-[80px] flex justify-between items-center px-[8px]">
           <div
-            className="h-[62px] flex flex-col justify-center items-center cursor-pointer"
+            className="sm:w-[200px] h-[62px] flex flex-col justify-center items-center cursor-pointer ml-2 sm:ml-10"
             onClick={() => navigate("/home")}
           >
             <img src={HeaderLogo} alt="logo" />
@@ -144,8 +146,8 @@ const Header = () => {
             >
               <MdOutlineStorage className="w-[25px] h-[25px] text-gray-600" />
               {toggle && (
-                <div className="w-full h-[12rem] flex justify-start items-center p-2 rounded-lg bg-[#f7fbff] absolute top-[80px] right-0 border gap-5 pl-3 z-10">
-                  <ul className="w-full h-full flex flex-col justify-around font-medium text-[16px] leading-5 font-dmsans gap-[3px]">
+                <div className="w-full flex justify-start items-center p-2 bg-[#f7fbff] absolute top-[80px] right-0 border gap-5 pl-3 z-10">
+                  <ul className="w-full h-full flex flex-col font-medium text-[16px] leading-5 font-dmsans gap-[3px]">
                     {headerMenu.map((item) => (
                       <li
                         className="cursor-pointer p-[6px] pl-4 border rounded-lg bg-black text-white text-center"
