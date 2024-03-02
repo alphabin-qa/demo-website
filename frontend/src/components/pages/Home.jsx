@@ -79,12 +79,11 @@ const Home = () => {
       <section>
         <div className="flex justify-center items-center h-[35vh] sm:h-[50vh] lg:h-[80vh] main">
           <div className="text-center md:w-[800px] md:h-[300px] lg:w-[976px] lg:h-[319px] sm:p-[20px] ">
-            <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] font-[900] lg:h-[195px] text-white lg:leading-[4rem]">
-              Alphabin Demo Store Electronics Where Innovation Meets Quality
-              Explore Now
+            <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] font-[900]  text-white lg:leading-[4rem]">
+              Demo E-commerce Testing Store
             </h1>
-            <p className="mt-5 text-[12px] md:text-[18px] lg:text-[18px] sm:mx-[50px] md:mx-[200px] lg:mx-[300px] font-dmsans leading-[21.78px] align-center text-white">
-              Lorem ipsum dolor sit amet consectetur amet consectetur.
+            <p className="mt-5 text-[12px] md:text-[18px] lg:text-[18px] sm:mx-[50px] md:mx-[200px] font-dmsans leading-[21.78px] align-center text-white">
+              Embark on an electronic journey. Dive into our shop now!
             </p>
             <Link to={`/products`}>
               <button className="lg:w-[170px] lg:h-[48px] p-[5px] md:p-[7px] lg:p-[10px] font-dmsans font-[400] lg:text-[18px] leading-[21.78px] align-middle border-white bg-white mt-4 px-[20px] py-[10px] hover:bg-transparent hover:border-[1px] hover:text-white">
@@ -111,8 +110,8 @@ const Home = () => {
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Audio & Camera
               </h1>
-              <p className="font-dmsans text-[16px] leading-[19.36px] tracking-[1px] xl:w-[200px] lg:w-[190px] md:w-[140px]">
-                Lorem ipsum dolor sit amet consectetur
+              <p className="font-dmsans text-[14px] leading-[19.36px] tracking-[1px] xl:w-[280px] font-[100] text-gray-600 lg:w-[190px] md:w-[140px]">
+                Unlock reliability and unmatched video, Audio and photo quality.
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
@@ -138,8 +137,8 @@ const Home = () => {
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Appliances
               </h1>
-              <p className="font-dmsans text-[16px] leading-[19.36px] tracking-[1px]">
-                Lorem ipsum dolor sit amet consectetur
+              <p className="font-dmsans text-[16px]  xl:w-[280px] font-[100] text-gray-600 leading-[19.36px] tracking-[1px]">
+                Explore advance tech for enhanced workspace productivity
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
@@ -167,8 +166,8 @@ const Home = () => {
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Gadgets
               </h1>
-              <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[1px]">
-                Lorem ipsum dolor sit amet consectetur
+              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] font-[100] text-gray-600 tracking-[1px]">
+                Get your hands on the newest groundbreaking innovation
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
@@ -194,8 +193,9 @@ const Home = () => {
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 PC & Laptops
               </h1>
-              <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[1px] xl:w-[200px] lg:w-[190px] md:w-[140px]">
-                Lorem ipsum dolor sit amet consectetur
+              <p className="font-dmsans text-[16px] leading-[19.36px]  xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[190px] md:w-[140px]">
+                Potent PCs & laptops optimized for gaming & development
+                purposes.
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
@@ -243,7 +243,7 @@ const Home = () => {
               <div className="relative">
                 {" "}
                 <img
-                  class="object-cover h-[210px] w-full rounded-[5px]"
+                  class="object-cover h-[210px] w-[95%] rounded-[5px]"
                   src={Offer1}
                   alt=""
                 />
@@ -261,7 +261,7 @@ const Home = () => {
               <div className="relative">
                 {" "}
                 <img
-                  class="object-cover h-[210px] w-full rounded-[5px]"
+                  class="object-cover h-[210px] w-[95%] rounded-[5px]"
                   src={Offer2}
                   alt=""
                 />
@@ -342,14 +342,14 @@ const Home = () => {
               </div>
               <div className="absolute top-0 text-white flex flex-col justify-center items-center h-full w-full">
                 <h1 className="xl:w-[40%] lg:w-[50%] md:w-[60%] sm:w-[90%] text-center font-dmsans font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[20px] leading-[2.5rem] text-white">
-                  Lorem ipsum dolor sit ametdolor sit amet dolor sit amet dolor
+                Pick a Subscription that fits you and give you daily update of our product
                 </h1>
                 <div className="mt-[20px]">
                   <input
-                    className="xl:w-[372px] lg:w-[372px] md:w-[365px] sm:h-[35px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:w-[250px] text-black rounded-[2px] border-[1px] sm:text-[12px] xl:text-[18px] lg:text-[18px] md:text-[16px] pl-[15px] font-dmsans sm:mr-[2px] xl:mr-[10px] lg:mr-[10px] md:mr-[8px] gap-[96px]"
+                    className="xl:w-[372px] lg:w-[372px] md:w-[365px] sm:h-[35px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:w-[250px] text-black placeholder-black rounded-[2px] border-[1px] sm:text-[12px] xl:text-[18px] lg:text-[18px] md:text-[16px] pl-[15px] font-dmsans sm:mr-[2px] xl:mr-[10px] lg:mr-[10px] md:mr-[8px] gap-[96px]"
                     type="email"
                     name="email"
-                    placeholder="Your email"
+                    placeholder="Your Email"
                   />
                   <button className="xl:w-[100px] lg:w-[100px] md:w-[100px] sm:w-[80px] xl:text-[16px] lg:text-[16px] sm:text-[12px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:h-[35px]  rounded-[2px] sm:p-[7px] xl:p-[10px] lg:p-[10px] md:p-[10px] gap-[10px] text-white bg-[#353535] font-roboto ">
                     Subscribe

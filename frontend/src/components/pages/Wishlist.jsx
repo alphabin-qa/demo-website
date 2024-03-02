@@ -60,11 +60,7 @@ const Wishlist = () => {
             </p>
             <div className="grid justify-center xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-[32px]">
               {wishlistItems?.map((item) => (
-                <div
-                  className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 mb-[20px] justify-center items-center relative hover:shadow-md group "
-                  key={item?.id}
-                  onClick={() => navigate(`/product-detail/${item.id}`)}
-                >
+                <div className="w-[292px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer gap-4 mb-[20px] justify-center items-center relative hover:shadow-md group">
                   <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px] z-10">
                     <button
                       className="h-[45px] w-[45px]"
@@ -91,7 +87,11 @@ const Wishlist = () => {
                       )}
                     </button>
                   </div>
-                  <div className="w-full flex flex-col justify-start items-start">
+                  <div
+                    className="w-full flex flex-col justify-start items-start"
+                    key={item?.id}
+                    onClick={() => navigate(`/product-detail/${item.id}`)}
+                  >
                     <div
                       className=" w-[233px] h-[253px] container my-[31px] ml-[28px] mr-[31px]"
                       style={{ position: "relative", overflow: "hidden" }}

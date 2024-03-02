@@ -109,7 +109,7 @@ function AllProducts() {
                     alt="dp"
                   />
                   <div className="px-[20px]">
-                    <h1 className="font-dmsans text-[18px] leading-[21.78px] w-[280px] mt-[10px] h-[44px]">
+                    <h1 className="font-dmsans mt-[20px] text-[18px] leading-[21.78px] w-[280px] h-[24px]">
                       {product.header}
                     </h1>
                     <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between">

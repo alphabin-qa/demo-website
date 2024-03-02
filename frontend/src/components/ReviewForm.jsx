@@ -1,5 +1,6 @@
 import { StarFilled, StarOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const ReviewForm = ({ onSubmit }) => {
   const [name, setName] = useState("");
@@ -19,6 +20,35 @@ const ReviewForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!name || !email || !title || !opinion || rating === 0) {
+      toast.error("Fill all the required field!", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Enter valid email address");
+      return;
+    }
+
+    if (title.length < 10) {
+      toast.error("Enter title atleast 10 characters long.");
+      return;
+    }
+
+    if (opinion.length < 20) {
+      toast.error("Enter opinion atleast 20 characters long.");
+      return;
+    }
+
     const newReview = {
       name,
       email,
