@@ -103,7 +103,7 @@ const Header = () => {
                 }}
               />
               <div
-                className="cursor-pointer"
+                className="cursor-pointer hidden lg:flex"
                 onClick={() => {
                   navigate("/wishlist");
                 }}
@@ -119,7 +119,7 @@ const Header = () => {
                   <WishList className="cursor-pointer" />
                 )}
               </div>
-              <div className="cursor-pointer">
+              <div className="cursor-pointer hidden lg:flex">
                 {cartItems.length ? (
                   <div className="flex flex-col xl:mt-[-25px] lg:mt-[-20px] md:mt-[-16px] shrink">
                     <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
@@ -136,7 +136,10 @@ const Header = () => {
                 )}
               </div>
               <CartModel isOpen={isCartOpen} toggleCart={toggleCart} />
-              <User className="cursor-pointer" onClick={handleClick} />
+              <User
+                className="cursor-pointer hidden lg:flex"
+                onClick={handleClick}
+              />
             </div>
             <div
               className="w-[44px] h-[44px] flex justify-center items-center lg:hidden"
@@ -146,16 +149,68 @@ const Header = () => {
             >
               <MdOutlineStorage className="w-[25px] h-[25px] text-gray-600" />
               {toggle && (
-                <div className="w-full flex justify-start items-center p-2 bg-[#f7fbff] absolute top-[80px] right-0 border gap-5 pl-3 z-10">
-                  <ul className="w-full h-full flex flex-col font-medium text-[16px] leading-5 font-dmsans gap-[3px]">
+                <div className="w-full flex justify-start items-center p-2 bg-[#ffffff] absolute top-[80px] right-0 border gap-5 pl-3 z-10">
+                  <ul className="w-full h-full flex flex-col font-medium text-[16px] text-black leading-5 font-dmsans gap-[3px]">
                     {headerMenu.map((item) => (
-                      <li
-                        className="cursor-pointer p-[6px] pl-4 border rounded-lg bg-black text-white text-center"
-                        onClick={() => handleMenuSelection(item)}
-                      >
-                        {item}
-                      </li>
+                      <>
+                        <li
+                          className="cursor-pointer py-[6px] ml-2 sm:ml-10 rounded-lg"
+                          onClick={() => handleMenuSelection(item)}
+                        >
+                          {item}
+                        </li>
+                      </>
                     ))}
+                    <li className="flex py-[6px] pt-[15px] ml-2 sm:ml-10">
+                      <div
+                        className="cursor-pointer bg-white"
+                        onClick={() => {
+                          navigate("/wishlist");
+                        }}
+                      >
+                        <div className="flex text-center">
+                          {wishlistItems.length ? (
+                            <div className="mt-[-10px] flex flex-col">
+                              <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
+                                {wishlistItemCount}
+                              </span>
+                              <FaHeart className="w-[24px] h-[22px] border-white" />
+                            </div>
+                          ) : (
+                            <WishList className="cursor-pointer" />
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="cursor-pointer">
+                        <div className="flex">
+                          {cartItems.length ? (
+                            <div className="flex flex-col mt-[-10px] shrink px-[10px]">
+                              <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
+                                {cartItemCount}
+                              </span>
+
+                              <FaCartShopping
+                                className="w-[24px] h-[22px]"
+                                onClick={toggleCart}
+                              />
+                            </div>
+                          ) : (
+                            <Cart
+                              className="cursor-pointer"
+                              onClick={toggleCart}
+                            />
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex">
+                        <User
+                          className="cursor-pointer"
+                          onClick={handleClick}
+                        />
+                      </div>
+                    </li>
                   </ul>
                 </div>
               )}
