@@ -549,27 +549,23 @@ function Checkout() {
                 </button>
               </div>
             </div>
-            <div className="w-full md:w-[570px] px-3 md:px-0">
+            <div className="w-full px-4">
               {(billingTab === "credit" || billingTab === "debit") && (
                 <>
                   <div className="w-full h-[300px] mx-auto">
-                    <div className="flex justify-between mt-[10px] w-full h-[40px]">
+                    <div className="flex mt-[10px] w-full h-[40px]">
                       <div className="">
                         <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] w-[91px] h-[19px]">
                           We Accept:{" "}
                         </p>
                       </div>
-                      <div>
+                      <div className="flex gap-[32px] ml-4">
                         <img
                           src={mastercard}
                           alt=""
                           className="w-[38px] h-[21px]"
                         />
-                      </div>
-                      <div>
                         <img src={rupay} alt="" className="w-[44px] h-[21px]" />
-                      </div>
-                      <div>
                         <img src={visa} alt="" className="w-[38px] h-[21px]" />
                       </div>
                     </div>
@@ -727,7 +723,7 @@ function Checkout() {
                         </button>
                       </div> */}
             </div>
-            <div className="w-full md:w-[563px] px-3 md:px-0 h-[99px] gap-[24px] mx-auto">
+            <div className="w-full px-4 h-[99px] gap-[24px]">
               <div className="h-[35px] px-[16px] py-[6px] flex justify-between bg-[#ECECEC]">
                 <p className="font-dmsans font-[400] text-[16px] leading-[19.36px]">
                   Total Amount

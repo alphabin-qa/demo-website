@@ -3,7 +3,6 @@ import React from "react";
 const MyOrder = () => {
   return (
     <div>
-      {" "}
       <div className="flex flex-col">
         <div className="w-[963px] h-max border rounded-[5px]">
           <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b border-[#E0E0E0]">
