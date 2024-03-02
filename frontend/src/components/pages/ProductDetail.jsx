@@ -40,7 +40,17 @@ function ProductDetail() {
   if (!selectedProduct) {
     return <div>Product not found</div>;
   }
-  const { img, header, price, description, reviewCount } = selectedProduct;
+  const {
+    img,
+    header,
+    price,
+    subdescription,
+    reviewCount,
+    description1,
+    description2,
+    additionalInfoFeatures,
+    additionalInfoHighlight,
+  } = selectedProduct;
 
   const handleDecrement = () => {
     if (quantity > 1) {
@@ -150,7 +160,7 @@ function ProductDetail() {
                   {header}
                 </h1>
                 <p className="w-[489px] h-[72px] font-dmsans font-[400] text-[16px] leading-[24px] tracking-[1px] mb-3">
-                  {description}
+                  {subdescription}
                 </p>
                 <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between font-dmsans font-[400] size-[21.87px] tracking-[3.93px] mb-[15px]">
                   <StarFilled />
@@ -292,52 +302,30 @@ function ProductDetail() {
                 <div className="tracking-[0.5px]">
                   {" "}
                   <p className="font-dmsans font-[400] text-[16px] leading-[1.5rem] mb-[10px]">
-                    Introducing the iPhone 14 Pro Max – a leap forward in
-                    innovation and technology that sets new standards for
-                    smartphones. Immerse yourself in a world of possibilities
-                    with this cutting-edge device, meticulously designed to
-                    exceed your expectations.
+                    {description1}
                   </p>
                   <p className="font-dmsans font-[400] text-[16px] leading-[24px] mb-[10px]">
-                    The Apple iPhone 14 Pro Max is the top-of-the-line model in
-                    Apple's 2023 iPhone lineup. It features a large 6.7-inch
-                    Super Retina XDR OLED display with a 120Hz refresh rate and
-                    ProMotion technology for smooth scrolling and animations.
-                    The display is also brighter and more energy-efficient than
-                    previous models, with a peak brightness of 2,000 nits.
+                    {description2}
                   </p>
-                  <p className="font-dmsans font-[400] text-[16px] leading-[24px]">
+                  {/* <p className="font-dmsans font-[400] text-[16px] leading-[24px]">
                     Overall, the iPhone 14 Pro Max is the most powerful and
                     feature-rich iPhone that Apple has ever made. It is a great
                     choice for users who want the best possible smartphone
                     experience.
-                  </p>
+                  </p> */}
                 </div>
               )}
               {activeTab === "additionalInfo" && (
                 <>
                   <div className="mb-[15px]">
                     <h1 className="font-dmsans font-bold text-[20px] leading-[24.2px] p-[5px]">
-                      Features of the iPhone 14 Pro Max include:
+                      Features of the {header} include:
                     </h1>
                     <div>
                       <ul className=" list-disc ml-[30px] gap-[12px] font-dmsans font-[400] text-[16px] leading-[32px]">
-                        <li className="">
-                          A new Emergency SOS feature that allows users to call
-                          for help by holding down a side button and the volume
-                          button
-                        </li>
-                        <li>
-                          A new Cinematic mode for video recording that
-                          automatically tracks and focuses on subjects in the
-                          frame
-                        </li>
-                        <li>
-                          A new ProRes video codec for higher-quality video
-                          recording and editing
-                        </li>
-                        <li>A new longer-lasting battery</li>
-                        <li>Support for 5G connectivity</li>
+                        {additionalInfoFeatures.map((info, index) => (
+                          <li key={index}>{info}</li>
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -347,10 +335,9 @@ function ProductDetail() {
                     </h1>
                     <div>
                       <ul className=" list-disc ml-[30px] gap-[12px] font-dmsans font-[400] text-[16px] leading-[32px]">
-                        <li className="">512 GB ROM</li>
-                        <li>17.02 cm (6.7 inch) Super Retina XDR Display</li>
-                        <li>48MP + 12MP + 12MP | 12MP Front Camera</li>
-                        <li>A16 Bionic Chip, 6 Core Processor Processor</li>
+                        {additionalInfoHighlight.map((info, index) => (
+                          <li key={index}>{info}</li>
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -359,8 +346,8 @@ function ProductDetail() {
                       <span className=" font-dmsans font-[600] text-[16px] leading-[24px] ">
                         Note:
                       </span>{" "}
-                      Please allow for a brief processing time before your
-                      iPhone 14 Pro Max ships. Thank you for your patience!!
+                      Please allow for a brief processing time before your{" "}
+                      {header} ships. Thank you for your patience!!
                     </p>
                   </div>
                 </>

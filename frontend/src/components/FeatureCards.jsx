@@ -86,7 +86,7 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
         <div className="pb-5">
           <img src={img} className="h-[253px] w-[233px] mx-auto" alt="dp" />
           <div className="h-[116px] w-[292px] px-[20px] mt-[20px]">
-            <h1 className="text-[18px] font-dmsans leading-[21.78px] w-[251px] h-[44px]">
+            <h1 className="text-[18px] font-[550] font-dmsans leading-[21.78px] w-[251px] h-[24px]">
               {header}
             </h1>
             <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between">
@@ -98,7 +98,7 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
                 {reviewCount}
               </p>
             </div>
-            <p className="my-5 font-normal text-base font-dmsans ">{price}</p>
+            <p className="my-3 font-normal text-base font-dmsans ">{price}</p>
           </div>
         </div>
       </Link>
