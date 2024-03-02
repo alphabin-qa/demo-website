@@ -42,7 +42,7 @@ function OrderDetail() {
 
   return (
     <>
-      <div className="w-[1183px] h-[581px] mx-auto mt-[40px]  mb-[175px]">
+      <div className="w-[1183px]  mx-auto mt-[40px]  mb-[175px]">
         <div className="flex items-center justify-center">
           <div className="flex justify-between gap-[16px]">
             <Box>
@@ -66,7 +66,7 @@ function OrderDetail() {
         </div>
 
         <div className="flex justify-between mt-[32px]">
-          <div className="flex flex-col w-[658px] border-[1px] p-[20px] gap-8">
+          <div className="flex flex-col w-[658px] border-[1px] p-[20px] gap-8 h-fit">
             <div className="w-[618px] h-[84px] border-b-[1px] pl-[12px]">
               <h3 className="font-dmsans font-[500] text-[20px] leading-[24.2px] tracking-[2.5%] mb-[10px]">
                 Your order is confirmed
@@ -130,18 +130,16 @@ function OrderDetail() {
             </div>
           </div>
 
-          <div className="font-dmsans grid grid-cols-1 w-[469px] border-[1px] justify-between pt-[40px]">
-            {cartItems.map((item) => (
+          <div className="font-dmsans grid grid-cols-1 w-[469px] border justify-between pt-[24px] h-fit">
+            {orderDetail?.product?.map((item) => (
               <>
-                <div className="border-b-[1px] w-[469px] p-[10px] flex justify-between">
-                  <div className="">
-                    <img
-                      src={item.img}
-                      className="w-[100px] h-[115px]"
-                      alt=""
-                    />
-                  </div>
-                  <div className="">
+                <div className="border-b-[1px] w-[469px] h-[135px] p-[10px] flex justify-between">
+                  <img
+                    src={item.img}
+                    className="w-[100px] h-[115px]"
+                    alt="product"
+                  />
+                  <div>
                     <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
                       {item.header}
                     </p>
@@ -155,13 +153,13 @@ function OrderDetail() {
                 </div>
               </>
             ))}
-            <div className="mt-[32px]">
-              <div className="flex justify-between px-[15px] py-[5px] mt-[2rem]">
+            <div className="flex justify-end flex-col py-3">
+              <div className="flex justify-between px-[15px] py-[5px]">
                 <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
                   Subtotal
                 </div>
                 <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                  ₹{totalValue}
+                  ₹{orderDetail?.totalAmount}
                 </div>
               </div>
               <div className="flex justify-between px-[15px] py-[5px] border-b-[1px]">
@@ -177,7 +175,7 @@ function OrderDetail() {
                   Total
                 </div>
                 <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                  ₹{totalValue}
+                  ₹{orderDetail?.totalAmount}
                 </div>
               </div>
             </div>

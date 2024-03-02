@@ -4,8 +4,18 @@ const User = require("../models/userSchema.js");
 
 exports.createOrder = async (req, res) => {
   try {
-    const { address, paymentMethod, totalAmount, orderDate, email } = req.body;
+    const {
+      product,
+      quntity,
+      address,
+      paymentMethod,
+      totalAmount,
+      orderDate,
+      email,
+    } = req.body;
     const newOrder = {
+      product,
+      quntity,
       address,
       paymentMethod,
       totalAmount,

@@ -26,17 +26,44 @@ import {
 import toast from "react-hot-toast";
 import AddressModel from "../AddressModel";
 
+const banks = [
+  { name: "AXIS", logo: axis },
+  { name: "HDFC", logo: hdfc },
+  { name: "SBI", logo: sbi },
+  { name: "Kotak", logo: kotak },
+  { name: "ICICI", logo: icici },
+  { name: "BOB", logo: bob },
+  { name: "Punjab", logo: punjab },
+  { name: "BOI", logo: boi },
+];
+
+const cardDetails = {
+  cardNo: "1111111111111111",
+  cvv: "111",
+  expiredMonth: "11",
+  expiredYear: "11",
+};
+
+const formdata = {
+  firstName: "",
+  email: "",
+  city: "",
+  street: "",
+  country: "",
+  state: "",
+  zipCode: "",
+};
+
+const cardDetail = {
+  cardNo: "",
+  cvv: "",
+  expiredMonth: "",
+  expiredYear: "",
+};
+
 function Checkout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const userToken = getUserAccessToken();
-    if (!userToken && window.location.pathname.includes("/checkout")) {
-      navigate("/login");
-    }
-  }, [getUserAccessToken()]);
-
   const [createOrder] = useCreateOrderMutation();
   const [billingTab, setBillingTab] = useState("credit");
   const [visibleBanks, setVisibleBanks] = useState(6);
@@ -47,46 +74,14 @@ function Checkout() {
   const [totalValue, setTotalvalue] = useState();
   const [userDetails, setUserDetails] = useState([]);
   const [changeAddress, setChangeAddress] = useState(false);
-  const [cardData, setCardData] = useState({
-    cardNo: "",
-    cvv: "",
-    expiredMonth: "",
-    expiredYear: "",
-  });
+  const [cardData, setCardData] = useState(cardDetail);
   const [openAddressModel, setOpenAddressModel] = useState(false);
   const [address, setAddress] = useState({});
   const [refetch, setRefetch] = useState(false);
   const [addAddress] = useAddAddressMutation();
   const [userDetail] = useGetUserMutation();
   const user = useSelector((state) => state?.userData);
-  const banks = [
-    { name: "AXIS", logo: axis },
-    { name: "HDFC", logo: hdfc },
-    { name: "SBI", logo: sbi },
-    { name: "Kotak", logo: kotak },
-    { name: "ICICI", logo: icici },
-    { name: "BOB", logo: bob },
-    { name: "Punjab", logo: punjab },
-    { name: "BOI", logo: boi },
-  ];
-
-  const cardDetails = {
-    cardNo: "1212121212121212",
-    cvv: "123",
-    expiredMonth: "02",
-    expiredYear: "30",
-  };
-
-  const [formData, setFormData] = useState({
-    firstName: "",
-    email: "",
-    city: "",
-    street: "",
-    country: "",
-    state: "",
-    zipCode: "",
-  });
-
+  const [formData, setFormData] = useState(formdata);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -117,15 +112,7 @@ function Checkout() {
       } catch (error) {
         console.error(error);
       }
-      setFormData({
-        firstName: "",
-        email: "",
-        city: "",
-        street: "",
-        country: "",
-        state: "",
-        zipCode: "",
-      });
+      setFormData(formdata);
     }
   };
 
@@ -183,58 +170,75 @@ function Checkout() {
   };
 
   const handleOrderNow = async () => {
-    if (address && billingTab === "cod") {
-      try {
-        const { data } = await createOrder({
-          address: address,
-          paymentMethod: billingTab,
-          totalAmount: totalValue,
-          orderDate: Date.now(),
-          email: userDetails?.email,
-        });
-        setOpen(true);
-        setOrder(data);
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (billingTab === "netbanking") {
-      try {
-        const { data } = await createOrder({
-          address: address,
-          paymentMethod: selectedBank,
-          totalAmount: totalValue,
-          orderDate: Date.now(),
-          email: userDetails?.email,
-        });
-        setOpen(true);
-        setOrder(data);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      // Payment method is not COD, proceed with credit card validation
-      if (
-        typeof cardData?.cardNo === "string" &&
-        typeof parseInt(cardData?.cvv) === "number" &&
-        typeof parseInt(cardData?.expiredMonth) === "number" &&
-        typeof parseInt(cardData?.expiredYear) === "number"
-      ) {
-        const areEqual =
-          JSON.stringify(cardData) === JSON.stringify(cardDetails);
-        if (areEqual) {
-          try {
-            const { data } = await createOrder({
-              address: address,
-              paymentMethod: billingTab,
-              totalAmount: totalValue,
-              orderDate: Date.now(),
-              email: userDetails?.email,
+    if (cartItems.length) {
+      if (address && billingTab === "cod") {
+        try {
+          const { data } = await createOrder({
+            product: cartItems,
+            quntity: cartItems.length,
+            address: address,
+            paymentMethod: billingTab,
+            totalAmount: totalValue,
+            orderDate: Date.now(),
+            email: userDetails?.email,
+          });
+          setOpen(true);
+          setOrder(data);
+        } catch (error) {
+          console.error(error);
+        }
+      } else if (billingTab === "netbanking") {
+        try {
+          const { data } = await createOrder({
+            product: cartItems,
+            quntity: cartItems.length,
+            address: address,
+            paymentMethod: selectedBank,
+            totalAmount: totalValue,
+            orderDate: Date.now(),
+            email: userDetails?.email,
+          });
+          setOpen(true);
+          setOrder(data);
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        // Payment method is not COD, proceed with credit card validation
+        if (
+          typeof cardData?.cardNo === "string" &&
+          typeof parseInt(cardData?.cvv) === "number" &&
+          typeof parseInt(cardData?.expiredMonth) === "number" &&
+          typeof parseInt(cardData?.expiredYear) === "number"
+        ) {
+          const areEqual =
+            JSON.stringify(cardData) === JSON.stringify(cardDetails);
+          if (areEqual) {
+            try {
+              const { data } = await createOrder({
+                product: cartItems,
+                quntity: cartItems.length,
+                address: address,
+                paymentMethod: billingTab,
+                totalAmount: totalValue,
+                orderDate: Date.now(),
+                email: userDetails?.email,
+              });
+              setOpen(true);
+              setOrder(data);
+            } catch (error) {
+              console.error(error);
+              // Handle error appropriately
+            }
+          } else {
+            toast.error("Enter valid card details", {
+              duration: 4000,
+              style: {
+                border: "1px solid black",
+                backgroundColor: "black",
+                color: "white",
+              },
             });
-            setOpen(true);
-            setOrder(data);
-          } catch (error) {
-            console.error(error);
-            // Handle error appropriately
           }
         } else {
           toast.error("Enter valid card details", {
@@ -246,15 +250,6 @@ function Checkout() {
             },
           });
         }
-      } else {
-        toast.error("Enter valid card details", {
-          duration: 4000,
-          style: {
-            border: "1px solid black",
-            backgroundColor: "black",
-            color: "white",
-          },
-        });
       }
     }
   };
@@ -288,6 +283,13 @@ function Checkout() {
   };
 
   useEffect(() => {
+    const userToken = getUserAccessToken();
+    if (!userToken && window.location.pathname.includes("/checkout")) {
+      navigate("/login");
+    }
+  }, [getUserAccessToken()]);
+
+  useEffect(() => {
     if (!userDetails?.length || refetch) {
       fetchDetails();
     }
@@ -308,9 +310,9 @@ function Checkout() {
 
   return (
     <>
-      <div className="mx-auto mt-[120px] w-[1168px]">
-        <div className="grid grid-cols-3 gap-12">
-          <div className="col-span-2">
+      <div className="mx-auto pt-[30px] md:pt-[120px] xl:w-[1168px] px-4">
+        <div className="flex flex-col">
+          <div className="flex flex-col lg:flex-row justify-between w-full gap-8">
             {/* Billing Information */}
             {changeAddress ? (
               <div className="border-[1px] w-[635px] h-[489px]">
@@ -421,7 +423,7 @@ function Checkout() {
                 </div>
               </div>
             ) : (
-              <div className="w-[635px] border border-[#B0B0B0] p-5 flex justify-between align-top font-dmsans">
+              <div className="w-full lg:w-[65%] h-[132px] border border-[#B0B0B0] p-5 flex justify-between align-top font-dmsans">
                 <div className="flex flex-col">
                   <div>{address?.firstname}</div>
                   <div>{address?.street}</div>
@@ -445,241 +447,278 @@ function Checkout() {
               </div>
             )}
 
-            {/* Payment Information */}
-            <div className="font-dmsans border-[0.84px] w-[635px] h-[570px] mt-[5rem] mb-[5rem]">
-              <div className="h-[44px] flex text-center justify-center items-center bg-black">
-                <h1 className="text-white font-dmsans font-[400] text-[18px] leading-[21.78px]">
-                  Billing Information
-                </h1>
-              </div>
-              <div className="w-[563px] mx-auto py-[2rem]">
-                <div className="flex justify-between">
-                  <div>
-                    <button
-                      className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                        billingTab === "credit"
-                          ? "bg-black text-white"
-                          : "bg-none"
-                      }`}
-                      onClick={() => handleBillingTab("credit")}
-                    >
-                      Credit Card
-                    </button>
+            {/* Product Details */}
+            <div className="flex-1 h-fit">
+              <div className="font-dmsans grid grid-cols-1 border border-[#B0B0B0]">
+                {cartItems.map((item) => (
+                  <>
+                    <div className="border-b-2 p-[1rem] flex justify-between">
+                      <div className="pl-[2rem]">
+                        <img
+                          src={item.img}
+                          className="w-[100px] h-[115px]"
+                          alt=""
+                        />
+                      </div>
+                      <div className="w-[50%]">
+                        <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
+                          {item.header}
+                        </p>
+                        <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
+                          Quantity: {item.quantity}
+                        </p>
+                        <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
+                          {item.price}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                ))}
+                <div className="">
+                  <div className="flex justify-between px-[15px] py-[5px] mt-[2rem]">
+                    <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                      Subtotal
+                    </div>
+                    <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                      ₹{totalValue}
+                    </div>
                   </div>
-                  <div>
-                    <button
-                      className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                        billingTab === "debit"
-                          ? "bg-black text-white"
-                          : "bg-none"
-                      }`}
-                      onClick={() => handleBillingTab("debit")}
-                    >
-                      Debit Card
-                    </button>
+                  <div className="flex justify-between px-[15px] py-[5px] border-b-2">
+                    <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                      Shipping Charge
+                    </div>
+                    <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px] text-end">
+                      Free Shipping
+                    </div>
                   </div>
-                  <div>
-                    <button
-                      className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                        billingTab === "netbanking"
-                          ? "bg-black text-white"
-                          : "bg-none"
-                      }`}
-                      onClick={() => handleBillingTab("netbanking")}
-                    >
-                      Net Banking
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                        billingTab === "cod" ? "bg-black text-white" : "bg-none"
-                      }`}
-                      onClick={() => handleBillingTab("cod")}
-                    >
-                      Cash on Delivery
-                    </button>
+                  <div className="flex justify-between p-[15px]">
+                    <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                      Total
+                    </div>
+                    <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                      ₹{totalValue}
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center w-[563px] mx-auto">
-                {(billingTab === "credit" || billingTab === "debit") && (
-                  <>
-                    <div className="w-[560px] h-[300px] mx-auto">
-                      <div className="flex justify-between mt-[10px] w-[339px] h-[40px]">
-                        <div className="">
-                          <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] w-[91px] h-[19px]">
-                            We Accept:{" "}
-                          </p>
-                        </div>
-                        <div>
-                          <img
-                            src={mastercard}
-                            alt=""
-                            className="w-[38px] h-[21px]"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src={rupay}
-                            alt=""
-                            className="w-[44px] h-[21px]"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src={visa}
-                            alt=""
-                            className="w-[38px] h-[21px]"
-                          />
-                        </div>
+            </div>
+          </div>
+
+          {/* Payment Information */}
+          <div className="w-full font-dmsans border-[0.84px] lg:w-[65%] h-fit pb-4 my-8 lg:mt-[-19rem] border-[#B0B0B0]">
+            <div className="h-[44px] flex text-center justify-center items-center border bg-black">
+              <h1 className="text-white font-dmsans font-[400] text-[18px] leading-[21.78px]">
+                Billing Information
+              </h1>
+            </div>
+            <div className="w-full md:w-[570px] px-3 md:px-0 mx-auto py-[2rem]">
+              <div className="flex justify-between gap-2">
+                <button
+                  className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                    billingTab === "credit" ? "bg-black text-white" : "bg-none"
+                  }`}
+                  onClick={() => handleBillingTab("credit")}
+                >
+                  Credit Card
+                </button>
+                <button
+                  className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                    billingTab === "debit" ? "bg-black text-white" : "bg-none"
+                  }`}
+                  onClick={() => handleBillingTab("debit")}
+                >
+                  Debit Card
+                </button>
+                <button
+                  className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                    billingTab === "netbanking"
+                      ? "bg-black text-white"
+                      : "bg-none"
+                  }`}
+                  onClick={() => handleBillingTab("netbanking")}
+                >
+                  Net Banking
+                </button>
+                <button
+                  className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                    billingTab === "cod" ? "bg-black text-white" : "bg-none"
+                  }`}
+                  onClick={() => handleBillingTab("cod")}
+                >
+                  Cash on Delivery
+                </button>
+              </div>
+            </div>
+            <div className="w-full md:w-[570px] px-3 md:px-0">
+              {(billingTab === "credit" || billingTab === "debit") && (
+                <>
+                  <div className="w-full h-[300px] mx-auto">
+                    <div className="flex justify-between mt-[10px] w-full h-[40px]">
+                      <div className="">
+                        <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] w-[91px] h-[19px]">
+                          We Accept:{" "}
+                        </p>
                       </div>
-                      <div className="mt-[10px] w-[560px] h-[75px] gap-[4px]">
-                        <div>
-                          <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] ">
-                            Card Number
+                      <div>
+                        <img
+                          src={mastercard}
+                          alt=""
+                          className="w-[38px] h-[21px]"
+                        />
+                      </div>
+                      <div>
+                        <img src={rupay} alt="" className="w-[44px] h-[21px]" />
+                      </div>
+                      <div>
+                        <img src={visa} alt="" className="w-[38px] h-[21px]" />
+                      </div>
+                    </div>
+                    <div className="mt-[10px] w-full h-[75px] gap-[4px]">
+                      <div>
+                        <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] ">
+                          Card Number
+                        </p>
+                        <p className="font-dmsans font-[400] text-[10.09px] leading-[12.21px] mb-[5px]">
+                          Enter the 16-digit card number on the card
+                        </p>
+                        <input
+                          type="text"
+                          onChange={handleCreditCardChange}
+                          value={cardData.cardNo}
+                          maxLength={16}
+                          minLength={16}
+                          name="cardNo"
+                          className="rounded-[3px] border-[1px] w-full h-[36px] pl-[8px] font-dmsans"
+                        />
+                      </div>
+                      <div className="mt-[15px]">
+                        <p className="font-dmsans font-normal text-[16px] leading-[19.36px] mb-[5px]">
+                          Card Name
+                        </p>
+                        <input
+                          type="text"
+                          className="rounded-[3px] border w-full h-[36px] pl-[8px] font-dmsans"
+                        />
+                      </div>
+                      <div className="flex justify-between flex-col md:flex-row gap-3 md:gap-0 full h-[32px] mt-[15px]">
+                        <div className=" h-[32px] gap-[14px] flex justify-between items-center">
+                          <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] w-[114px] h-[19px] gap-[4.21px]">
+                            Expiration date
                           </p>
-                          <p className="font-dmsans font-[400] text-[10.09px] leading-[12.21px] mb-[5px]">
-                            Enter the 16-digit card number on the card
+                          <div className="w-[197.53px] h-[32px] gap-[2px] ">
+                            <input
+                              type="text"
+                              onChange={handleCreditCardChange}
+                              value={cardData.expiredMonth}
+                              name="expiredMonth"
+                              minLength={2}
+                              maxLength={2}
+                              className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-dmsans"
+                            />
+                            <label htmlFor=""> / </label>
+                            <input
+                              type="text"
+                              onChange={handleCreditCardChange}
+                              value={cardData.expiredYear}
+                              name="expiredYear"
+                              minLength={2}
+                              maxLength={2}
+                              className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-dmsans"
+                            />
+                          </div>
+                        </div>
+                        <div className="w-[184px] h-[32px] gap-[8px] flex justify-between mr-[1rem] items-baseline">
+                          <p className="w-[184px] h-[32px] gap-[8px] font-dmsans">
+                            CVV Number
                           </p>
                           <input
                             type="text"
                             onChange={handleCreditCardChange}
-                            value={cardData.cardNo}
-                            maxLength={16}
-                            minLength={16}
-                            name="cardNo"
-                            className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px] font-dmsans"
+                            value={cardData.cvv}
+                            name="cvv"
+                            minLength={3}
+                            maxLength={3}
+                            aria-errormessage="enter number"
+                            className="w-[77px] h-[32px] rounded-[3px] border-[1px] pl-[8px] font-dmsans"
                           />
-                        </div>
-                        <div className="mt-[15px]">
-                          <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] mb-[5px]">
-                            Card Name
-                          </p>
-                          <input
-                            type="text"
-                            className="rounded-[3px] border-[1px] w-[544px] h-[36px] pl-[8px] font-dmsans"
-                          />
-                        </div>
-                        <div className="flex justify-between w-[560px] h-[32px] mt-[15px]">
-                          <div className="w-[341.53px] h-[32px] gap-[14px] flex justify-between items-center">
-                            <p className="font-dmsans font-[400] text-[16px] leading-[19.36px] w-[114px] h-[19px] gap-[4.21px]">
-                              Expiration date
-                            </p>
-                            <div className="w-[197.53px] h-[32px] gap-[2px] ">
-                              <input
-                                type="text"
-                                onChange={handleCreditCardChange}
-                                value={cardData.expiredMonth}
-                                name="expiredMonth"
-                                minLength={2}
-                                maxLength={2}
-                                className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-dmsans"
-                              />
-                              <label htmlFor=""> / </label>
-                              <input
-                                type="text"
-                                onChange={handleCreditCardChange}
-                                value={cardData.expiredYear}
-                                name="expiredYear"
-                                minLength={2}
-                                maxLength={2}
-                                className="border-[1px] w-[77px] h-[32px] rounded-[3px] pl-[8px] font-dmsans"
-                              />
-                            </div>
-                          </div>
-                          <div className="w-[184px] h-[32px] gap-[8px] flex justify-between mr-[1rem] items-baseline">
-                            <p className="w-[184px] h-[32px] gap-[8px] font-dmsans">
-                              CVV Number
-                            </p>
-                            <input
-                              type="text"
-                              onChange={handleCreditCardChange}
-                              value={cardData.cvv}
-                              name="cvv"
-                              minLength={3}
-                              maxLength={3}
-                              aria-errormessage="enter number"
-                              className="w-[77px] h-[32px] rounded-[3px] border-[1px] pl-[8px] font-dmsans"
-                            />
-                          </div>
                         </div>
                       </div>
                     </div>
-                  </>
-                )}
+                  </div>
+                </>
+              )}
 
-                {billingTab === "netbanking" && (
-                  <>
-                    <div className="">
-                      <div className="grid grid-cols-3 w-[425px] gap-10 text-center mb-[20px]">
-                        {banks.slice(0, visibleBanks).map((bank, index) => (
-                          <div
-                            key={index}
-                            className="w-full flex flex-col items-center justify-center"
-                            onClick={() => handleBankSelection(bank.name)}
-                          >
-                            <img
-                              src={bank.logo}
-                              className="w-[50.46px] h-[50.46px] font-dmsans hover:cursor-pointer"
-                              alt=""
-                            />
-                            <p>{bank.name}</p>
-                          </div>
-                        ))}
-                        {visibleBanks < banks.length && (
-                          <div className="grid w-[425px] grid-cols-3 px-[4rem] mb-[2rem]">
-                            <div className="col-span-3">
-                              <button
-                                className="w-full text-left font-dmsans font-[400] text-[13.46px] leading-[16.29px]"
-                                onClick={showMoreBanks}
-                              >
-                                Other Banks{" "}
-                                <div className="float-right">
-                                  {" "}
-                                  <DownOutlined />{" "}
-                                </div>
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {billingTab === "cod" && (
-                  <>
-                    <div className="w-[539px] border border-[#B0B0B0] p-[8.41px] mb-52 flex justify-between align-top font-dmsans">
-                      {userDetails?.address?.length === 0 ? (
-                        "Add your address"
-                      ) : (
-                        <div className="flex flex-col">
-                          <div>{address?.firstname}</div>
-                          <div>{address?.street}</div>
-                          <div>
-                            {address?.city +
-                              ", " +
-                              address?.state +
-                              ", " +
-                              address?.zipCode}
+              {billingTab === "netbanking" && (
+                <>
+                  <div className="">
+                    <div className="grid grid-cols-3 w-[425px] gap-10 text-center mb-[20px]">
+                      {banks.slice(0, visibleBanks).map((bank, index) => (
+                        <div
+                          key={index}
+                          className="w-full flex flex-col items-center justify-center"
+                          onClick={() => handleBankSelection(bank.name)}
+                        >
+                          <img
+                            src={bank.logo}
+                            className="w-[50.46px] h-[50.46px] font-dmsans hover:cursor-pointer"
+                            alt=""
+                          />
+                          <p>{bank.name}</p>
+                        </div>
+                      ))}
+                      {visibleBanks < banks.length && (
+                        <div className="grid w-[425px] grid-cols-3 px-[4rem] mb-[2rem]">
+                          <div className="col-span-3">
+                            <button
+                              className="w-full text-left font-dmsans font-[400] text-[13.46px] leading-[16.29px]"
+                              onClick={showMoreBanks}
+                            >
+                              Other Banks{" "}
+                              <div className="float-right">
+                                {" "}
+                                <DownOutlined />{" "}
+                              </div>
+                            </button>
                           </div>
                         </div>
                       )}
-                      <div
-                        className="underline underline-offset-4 cursor-pointer"
-                        // onClick={handleAddressClick}
-                        onClick={() => setOpenAddressModel(true)}
-                      >
-                        {userDetails?.address?.length === 0
-                          ? "Add address"
-                          : "Change"}
-                      </div>
                     </div>
-                  </>
-                )}
+                  </div>
+                </>
+              )}
 
-                {/* <div
+              {billingTab === "cod" && (
+                <>
+                  <div className="w-[539px] border border-[#B0B0B0] p-[8.41px] mb-52 flex justify-between align-top font-dmsans">
+                    {userDetails?.address?.length === 0 ? (
+                      "Add your address"
+                    ) : (
+                      <div className="flex flex-col">
+                        <div>{address?.firstname}</div>
+                        <div>{address?.street}</div>
+                        <div>
+                          {address?.city +
+                            ", " +
+                            address?.state +
+                            ", " +
+                            address?.zipCode}
+                        </div>
+                      </div>
+                    )}
+                    <div
+                      className="underline underline-offset-4 cursor-pointer"
+                      // onClick={handleAddressClick}
+                      onClick={() => setOpenAddressModel(true)}
+                    >
+                      {userDetails?.address?.length === 0
+                        ? "Add address"
+                        : "Change"}
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {/* <div
                         className="mt-[28px] mb-[1rem]"
                         onClick={() => setOpen(true)}
                       >
@@ -687,82 +726,24 @@ function Checkout() {
                           Order Now
                         </button>
                       </div> */}
-              </div>
-
-              <div className="w-[563px] h-[99px] gap-[24px] mx-auto ">
-                <div className="w-[547px] h-[35px] px-[16px] py-[6px] flex justify-between bg-[#ECECEC]">
-                  <p className="font-dmsans font-[400] text-[16px] leading-[19.36px]">
-                    Total Amount
-                  </p>
-                  <p className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                    ₹{totalValue}
-                  </p>
-                </div>
-                <button
-                  className="w-[190px] h-[40px] p-[10px] gap-[10px] font-dmsans font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white mt-[24px]"
-                  onClick={() => {
-                    handleOrderNow();
-                  }}
-                >
-                  Order Now
-                </button>
-              </div>
             </div>
-          </div>
-
-          {/* Product Details */}
-          <div className="w-[469px]">
-            <div className="font-dmsans grid grid-cols-1 border-[1px] border-black">
-              {cartItems.map((item) => (
-                <>
-                  <div className="border-b-2 p-[1rem] flex justify-between">
-                    <div className="pl-[2rem]">
-                      <img
-                        src={item.img}
-                        className="w-[100px] h-[115px]"
-                        alt=""
-                      />
-                    </div>
-                    <div className="w-[50%]">
-                      <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
-                        {item.header}
-                      </p>
-                      <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
-                        Quantity: {item.quantity}
-                      </p>
-                      <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
-                        {item.price}
-                      </p>
-                    </div>
-                  </div>
-                </>
-              ))}
-              <div className="">
-                <div className="flex justify-between px-[15px] py-[5px] mt-[2rem]">
-                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                    Subtotal
-                  </div>
-                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                    ₹{totalValue}
-                  </div>
-                </div>
-                <div className="flex justify-between px-[15px] py-[5px] border-b-2">
-                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                    Shipping Charge
-                  </div>
-                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                    Free Shipping
-                  </div>
-                </div>
-                <div className="flex justify-between p-[15px]">
-                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                    Total
-                  </div>
-                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                    ₹{totalValue}
-                  </div>
-                </div>
+            <div className="w-full md:w-[563px] px-3 md:px-0 h-[99px] gap-[24px] mx-auto">
+              <div className="h-[35px] px-[16px] py-[6px] flex justify-between bg-[#ECECEC]">
+                <p className="font-dmsans font-[400] text-[16px] leading-[19.36px]">
+                  Total Amount
+                </p>
+                <p className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                  ₹{totalValue}
+                </p>
               </div>
+              <button
+                className="w-[190px] h-[40px] p-[10px] gap-[10px] font-dmsans font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white my-[24px]"
+                onClick={() => {
+                  handleOrderNow();
+                }}
+              >
+                Order Now
+              </button>
             </div>
           </div>
         </div>
