@@ -12,6 +12,7 @@ function OrderDetail() {
   const [totalValue, setTotalvalue] = useState();
   const [orderDetail, setOrderDetail] = useState(null);
   const [getOrderDetail] = useGetOrderDetailsMutation();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,7 +24,6 @@ function OrderDetail() {
         console.error("Error fetching order details:", error);
       }
     };
-
     fetchData();
   }, [params?.id]);
 
@@ -42,7 +42,7 @@ function OrderDetail() {
 
   return (
     <>
-      <div className="w-[1183px]  mx-auto mt-[40px]  mb-[175px]">
+      <div className="mt-[40px] mb-[16px] xl:w-[1183px] mx-auto">
         <div className="flex items-center justify-center">
           <div className="flex justify-between gap-[16px]">
             <Box>
@@ -65,9 +65,9 @@ function OrderDetail() {
           </div>
         </div>
 
-        <div className="flex justify-between mt-[32px]">
-          <div className="flex flex-col w-[658px] border-[1px] p-[20px] gap-8 h-fit">
-            <div className="w-[618px] h-[84px] border-b-[1px] pl-[12px]">
+        <div className="flex md:flex-row flex-col justify-between mt-[32px] gap-3">
+          <div className="w-full flex flex-col border p-[20px] gap-8 h-[470px]">
+            <div className="w-full h-[84px] border-b pl-[12px]">
               <h3 className="font-dmsans font-[500] text-[20px] leading-[24.2px] tracking-[2.5%] mb-[10px]">
                 Your order is confirmed
               </h3>
@@ -77,7 +77,7 @@ function OrderDetail() {
                 smartphone.
               </p>
             </div>
-            <div className="flex flex-col w-[618px] gap-[16px]">
+            <div className="flex flex-col w-full gap-[16px] pl-[12px]">
               <h1 className="font-dmsans font-[700] text-[24px] leading-[29.5px] tracking-[2.5%]">
                 Shipping Detail
               </h1>
@@ -99,7 +99,7 @@ function OrderDetail() {
                   </p>
                 </div>
               </div>
-              <div className="h-[92px] w-[618px] mt-[16px]">
+              <div className="h-[92px] w-full mt-[16px]">
                 <h3 className="font-dmsans font-[500] text-[20px] leading-[24.2px] mb-[10px]">
                   Address
                 </h3>
@@ -118,7 +118,7 @@ function OrderDetail() {
                 </p>
               </div>
             </div>
-            <div className="flex flex-col justify-center w-[618px] h-[48px] p-[10px] gap-[10px] text-center bg-black text-white cursor-pointer">
+            <div className="flex flex-col justify-center w-full h-[48px] p-[10px] gap-[10px] text-center bg-black text-white cursor-pointer">
               <button
                 className="font-dmsans font-[400] text-[16px] leading-[19.36px] text-center"
                 onClick={() => {
@@ -130,30 +130,32 @@ function OrderDetail() {
             </div>
           </div>
 
-          <div className="font-dmsans grid grid-cols-1 w-[469px] border justify-between pt-[24px] h-fit">
-            {orderDetail?.product?.map((item) => (
-              <>
-                <div className="border-b-[1px] w-[469px] h-[135px] p-[10px] flex justify-between">
-                  <img
-                    src={item.img}
-                    className="w-[100px] h-[115px]"
-                    alt="product"
-                  />
-                  <div>
-                    <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
-                      {item.header}
-                    </p>
-                    <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
-                      Quantity: {item.quantity}
-                    </p>
-                    <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
-                      {item.price}
-                    </p>
+          <div className="font-dmsans grid grid-cols-1 w-full md:w-[469px] border justify-center mt-5 md:mt-0 ">
+            <div className="h-[320px] overflow-y-scroll">
+              {orderDetail?.product?.map((item) => (
+                <>
+                  <div className="border-b-[1px] w-full h-[135px] p-[10px] flex justify-between">
+                    <img
+                      src={item.img}
+                      className="w-[100px] h-[115px]"
+                      alt="product"
+                    />
+                    <div>
+                      <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
+                        {item.header}
+                      </p>
+                      <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
+                        Quantity: {item.quantity}
+                      </p>
+                      <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
+                        {item.price}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </>
-            ))}
-            <div className="flex justify-end flex-col py-3">
+                </>
+              ))}
+            </div>
+            <div className="flex justify-end flex-col py-3 border-t">
               <div className="flex justify-between px-[15px] py-[5px]">
                 <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
                   Subtotal

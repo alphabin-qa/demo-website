@@ -6,6 +6,7 @@ import Circle from "../assets/CheckCircle.png";
 import { useNavigate, useParams } from "react-router-dom";
 import { clearCart } from "../store/reducers/cartItems";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const style = {
   position: "absolute",
@@ -17,8 +18,8 @@ const style = {
   p: 4,
   borderRadius: "5px",
   py: "68px",
-  pr: "171px",
-  pl: "180px",
+  pr: "20%",
+  pl: "20%",
 };
 
 export default function OrderConfirmModel({ open, setOpen, order }) {
@@ -30,6 +31,8 @@ export default function OrderConfirmModel({ open, setOpen, order }) {
     dispatch(clearCart());
     navigate(`/status/${id}`);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <Modal
@@ -50,7 +53,7 @@ export default function OrderConfirmModel({ open, setOpen, order }) {
             className="w-[100px] h-[100px]"
           />
         </Box>
-        <Box className="flex flex-col justify-center items-center">
+        <Box className="flex flex-col justify-center items-center w-max">
           <Typography className="font-dmsans font-normal text-2xl text-[#000]">
             Your order is successfully placed
           </Typography>

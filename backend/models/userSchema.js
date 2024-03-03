@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Order = require("./orderSchema");
 
 const addressSchema = mongoose.Schema({
   firstname: {
@@ -67,7 +68,12 @@ const userSchema = mongoose.Schema({
     trim: true,
   },
   addresses: [addressSchema],
-  orders: [],
+  orders: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      reff: Order,
+    },
+  ],
 });
 
 module.exports = mongoose.model("user", userSchema);

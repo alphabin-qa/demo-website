@@ -87,6 +87,7 @@ exports.deleteOrder = async (req, res) => {
     // Step 4: Respond based on the result
     if (order) {
       res.json({
+        status: true,
         message: "Your order is canceled successfully",
         user: updatedUser,
       });

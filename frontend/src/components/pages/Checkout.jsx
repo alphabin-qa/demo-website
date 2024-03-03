@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUserAccessToken } from "../../utils/localstorage.helper";
-import { useDispatch } from "react-redux";
 import {
   axis,
   hdfc,
@@ -63,7 +62,6 @@ const cardDetail = {
 
 function Checkout() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [createOrder] = useCreateOrderMutation();
   const [billingTab, setBillingTab] = useState("credit");
   const [visibleBanks, setVisibleBanks] = useState(6);
@@ -307,22 +305,21 @@ function Checkout() {
       setTotalvalue(totalSum);
     }
   }, [cartItems]);
-
   return (
     <>
-      <div className="mx-auto pt-[30px] md:pt-[120px] xl:w-[1168px] px-4">
-        <div className="flex flex-col">
-          <div className="flex flex-col lg:flex-row justify-between w-full gap-8">
+      <div className="mx-auto pt-[30px] md:pt-[80px] xl:w-[1168px] px-4">
+        <div className="flex flex-col-reverse lg:flex-row gap-6">
+          <div className="flex flex-col justify-between w-full h-fit">
             {/* Billing Information */}
             {changeAddress ? (
-              <div className="border-[1px] w-[635px] h-[489px]">
+              <div className="border-[1px] w-full h-fit pb-10">
                 <div className="h-[44px] flex text-center justify-center items-center bg-black">
                   <h1 className="text-white font-dmsans font-[400] text-[18px] leading-[21.78px]">
                     Billing Information
                   </h1>
                 </div>
-                <div className="font-dmsans w-[556px] h-[355px] mx-auto gap-[10px] mt-[20px]">
-                  <div className="w-[556px] h-[63px] gap-[8px]">
+                <div className="font-dmsans w-full h-[355px] mx-auto gap-[10px] mt-[20px] px-4">
+                  <div className="w-full h-[63px] gap-[8px]">
                     <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                       First Name
                     </p>
@@ -331,10 +328,10 @@ function Checkout() {
                       onChange={handleChange}
                       value={formData.firstName}
                       name="firstName"
-                      className="border-[0.94px] pl-[8px] border-black w-[556px] h-[38px] rounded-[3px] font-dmsans"
+                      className="border-[0.94px] pl-[8px] border-black w-full h-[38px] rounded-[3px] font-dmsans"
                     />
                   </div>
-                  <div className="my-[15px] w-[307px] h-[63px] gap-[8px]">
+                  <div className="my-[15px] w-full h-[63px] gap-[8px]">
                     <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                       Email
                     </p>
@@ -343,11 +340,11 @@ function Checkout() {
                       onChange={handleChange}
                       value={formData.email}
                       name="email"
-                      className="border-[0.94px] pl-[8px] font-dmsans border-black h-[38px] w-[307px] rounded-[3px]"
+                      className="border-[0.94px] pl-[8px] font-dmsans border-black h-[38px] w-full rounded-[3px]"
                     />
                   </div>
-                  <div className="flex justify-between my-[15px] gap-[26px] w-[556px] h-[63px]">
-                    <div className="w-[307px] h-[63px] gap-[8px]">
+                  <div className="flex justify-between my-[15px] gap-[26px] w-full h-[63px]">
+                    <div className="w-full h-[63px] gap-[8px]">
                       <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                         Town / City
                       </p>
@@ -356,10 +353,10 @@ function Checkout() {
                         onChange={handleChange}
                         value={formData.city}
                         name="city"
-                        className="border-[0.94px]  pl-[8px] font-dmsans border-black w-[307px] h-[38px] rounded-[3px]"
+                        className="border-[0.94px]  pl-[8px] font-dmsans border-black w-full h-[38px] rounded-[3px]"
                       />
                     </div>
-                    <div className="w-[223px] h-[63px] gap-[8px]">
+                    <div className="w-full h-[63px] gap-[8px]">
                       <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                         State
                       </p>
@@ -368,12 +365,12 @@ function Checkout() {
                         onChange={handleChange}
                         value={formData.state}
                         name="state"
-                        className="border-[0.94px] pl-[8px] font-dmsans border-black w-[223px] h-[38px] rounded-[3px]"
+                        className="border-[0.94px] pl-[8px] font-dmsans border-black w-full h-[38px] rounded-[3px]"
                       />
                     </div>
                   </div>
-                  <div className="flex justify-between my-[15px] gap-[26px] w-[556px] h-[63px]">
-                    <div className="w-[307px] h-[63px] gap-[8px]">
+                  <div className="flex justify-between my-[15px] gap-[26px] w-full h-[63px]">
+                    <div className="w-full h-[63px] gap-[8px]">
                       <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                         Street
                       </p>
@@ -382,10 +379,10 @@ function Checkout() {
                         onChange={handleChange}
                         value={formData.street}
                         name="street"
-                        className="border-[0.94px] pl-[8px] font-dmsans border-black w-[307px] h-[38px] rounded-[3px]"
+                        className="border-[0.94px] pl-[8px] font-dmsans border-black w-full h-[38px] rounded-[3px]"
                       />
                     </div>
-                    <div className="w-[223px] h-[63px] gap-[8px]">
+                    <div className="w-full h-[63px] gap-[8px]">
                       <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                         Zip code
                       </p>
@@ -394,12 +391,12 @@ function Checkout() {
                         value={formData.zipCode}
                         name="zipCode"
                         onChange={handleChange}
-                        className="border-[0.94px] pl-[8px] font-dmsans border-black w-[223px] h-[38px] rounded-[3px]"
+                        className="border-[0.94px] pl-[8px] font-dmsans border-black w-full h-[38px] rounded-[3px]"
                       />
                     </div>
                   </div>
-                  <div className="flex w-[556px] h-[63px] gap-[26px]">
-                    <div className="my-[15px] w-[307px] h-[63px] gap-[8px]">
+                  <div className="flex justify-center items-center w-full h-[63px] gap-[26px]">
+                    <div className="my-[15px] w-full h-[63px] gap-[8px]">
                       <p className="font-[400] text-[14px] leading-[16.94px] mb-[4px]">
                         Country / Region
                       </p>
@@ -408,22 +405,20 @@ function Checkout() {
                         name="country"
                         onChange={handleChange}
                         type="text"
-                        className="border-[0.94px] pl-[8px] font-dmsans border-black rounded-[3px] h-[37px] w-[307px]"
+                        className="border-[0.94px] pl-[8px] font-dmsans border-black rounded-[3px] h-[37px] w-full"
                       />
                     </div>
-                    <div className="my-[35px] w-[223px] h-[37px] gap-[10px] flex items-center text-center justify-center">
-                      <button
-                        className="px-[40px] py-[10px] bg-black text-white font-dmsans font-[400] text-[14px] leading-[16.94px] text-center"
-                        onClick={handleSubmit}
-                      >
-                        Save Your Address
-                      </button>
-                    </div>
+                    <button
+                      className="px-[40px] mt-4 rounded-md w-fit py-[10px] bg-black text-white font-dmsans font-normal text-[14px] leading-[16.94px] text-center"
+                      onClick={handleSubmit}
+                    >
+                      Save
+                    </button>
                   </div>
                 </div>
               </div>
             ) : (
-              <div className="w-full lg:w-[65%] h-[132px] border border-[#B0B0B0] p-5 flex justify-between align-top font-dmsans">
+              <div className="w-full h-[132px] border border-[#B0B0B0] p-5 flex justify-between align-top font-dmsans">
                 <div className="flex flex-col">
                   <div>{address?.firstname}</div>
                   <div>{address?.street}</div>
@@ -446,112 +441,57 @@ function Checkout() {
                 </div>
               </div>
             )}
-
-            {/* Product Details */}
-            <div className="flex-1 h-fit">
-              <div className="font-dmsans grid grid-cols-1 border border-[#B0B0B0]">
-                {cartItems.map((item) => (
-                  <>
-                    <div className="border-b-2 p-[1rem] flex justify-between">
-                      <div className="pl-[2rem]">
-                        <img
-                          src={item.img}
-                          className="w-[100px] h-[115px]"
-                          alt=""
-                        />
-                      </div>
-                      <div className="w-[50%]">
-                        <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
-                          {item.header}
-                        </p>
-                        <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
-                          Quantity: {item.quantity}
-                        </p>
-                        <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
-                          {item.price}
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                ))}
-                <div className="">
-                  <div className="flex justify-between px-[15px] py-[5px] mt-[2rem]">
-                    <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                      Subtotal
-                    </div>
-                    <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                      ₹{totalValue}
-                    </div>
-                  </div>
-                  <div className="flex justify-between px-[15px] py-[5px] border-b-2">
-                    <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                      Shipping Charge
-                    </div>
-                    <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px] text-end">
-                      Free Shipping
-                    </div>
-                  </div>
-                  <div className="flex justify-between p-[15px]">
-                    <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                      Total
-                    </div>
-                    <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                      ₹{totalValue}
-                    </div>
-                  </div>
+            {/* Payment Information */}
+            <div
+              className={`w-full font-dmsans border-[0.84px] h-fit pb-4 my-8 border-[#B0B0B0] $`}
+            >
+              <div className="h-[44px] flex text-center justify-center items-center border bg-black">
+                <h1 className="text-white font-dmsans font-[400] text-[18px] leading-[21.78px]">
+                  Billing Information
+                </h1>
+              </div>
+              <div className="w-full md:w-[570px] px-3 md:px-0 mx-auto py-[2rem]">
+                <div className="flex justify-between gap-2">
+                  <button
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                      billingTab === "credit"
+                        ? "bg-black text-white"
+                        : "bg-none"
+                    }`}
+                    onClick={() => handleBillingTab("credit")}
+                  >
+                    Credit Card
+                  </button>
+                  <button
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                      billingTab === "debit" ? "bg-black text-white" : "bg-none"
+                    }`}
+                    onClick={() => handleBillingTab("debit")}
+                  >
+                    Debit Card
+                  </button>
+                  <button
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                      billingTab === "netbanking"
+                        ? "bg-black text-white"
+                        : "bg-none"
+                    }`}
+                    onClick={() => handleBillingTab("netbanking")}
+                  >
+                    Net Banking
+                  </button>
+                  <button
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                      billingTab === "cod" ? "bg-black text-white" : "bg-none"
+                    }`}
+                    onClick={() => handleBillingTab("cod")}
+                  >
+                    Cash on Delivery
+                  </button>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Payment Information */}
-          <div className="w-full font-dmsans border-[0.84px] lg:w-[65%] h-fit pb-4 my-8 lg:mt-[-19rem] border-[#B0B0B0]">
-            <div className="h-[44px] flex text-center justify-center items-center border bg-black">
-              <h1 className="text-white font-dmsans font-[400] text-[18px] leading-[21.78px]">
-                Billing Information
-              </h1>
-            </div>
-            <div className="w-full md:w-[570px] px-3 md:px-0 mx-auto py-[2rem]">
-              <div className="flex justify-between gap-2">
-                <button
-                  className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                    billingTab === "credit" ? "bg-black text-white" : "bg-none"
-                  }`}
-                  onClick={() => handleBillingTab("credit")}
-                >
-                  Credit Card
-                </button>
-                <button
-                  className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                    billingTab === "debit" ? "bg-black text-white" : "bg-none"
-                  }`}
-                  onClick={() => handleBillingTab("debit")}
-                >
-                  Debit Card
-                </button>
-                <button
-                  className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                    billingTab === "netbanking"
-                      ? "bg-black text-white"
-                      : "bg-none"
-                  }`}
-                  onClick={() => handleBillingTab("netbanking")}
-                >
-                  Net Banking
-                </button>
-                <button
-                  className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                    billingTab === "cod" ? "bg-black text-white" : "bg-none"
-                  }`}
-                  onClick={() => handleBillingTab("cod")}
-                >
-                  Cash on Delivery
-                </button>
-              </div>
-            </div>
-            <div className="w-full px-4">
-              {(billingTab === "credit" || billingTab === "debit") && (
-                <>
+              <div className="w-full px-4">
+                {(billingTab === "credit" || billingTab === "debit") && (
                   <div className="w-full h-[300px] mx-auto">
                     <div className="flex mt-[10px] w-full h-[40px]">
                       <div className="">
@@ -641,13 +581,11 @@ function Checkout() {
                       </div>
                     </div>
                   </div>
-                </>
-              )}
+                )}
 
-              {billingTab === "netbanking" && (
-                <>
-                  <div className="">
-                    <div className="grid grid-cols-3 w-[425px] gap-10 text-center mb-[20px]">
+                {billingTab === "netbanking" && (
+                  <div className="flex justify-center items-center">
+                    <div className="grid grid-cols-3 w-[425px]   gap-10 text-center mb-[20px]">
                       {banks.slice(0, visibleBanks).map((bank, index) => (
                         <div
                           key={index}
@@ -680,66 +618,111 @@ function Checkout() {
                       )}
                     </div>
                   </div>
-                </>
-              )}
+                )}
 
-              {billingTab === "cod" && (
-                <>
-                  <div className="w-[539px] border border-[#B0B0B0] p-[8.41px] mb-52 flex justify-between align-top font-dmsans">
-                    {userDetails?.address?.length === 0 ? (
-                      "Add your address"
-                    ) : (
-                      <div className="flex flex-col">
-                        <div>{address?.firstname}</div>
-                        <div>{address?.street}</div>
-                        <div>
-                          {address?.city +
-                            ", " +
-                            address?.state +
-                            ", " +
-                            address?.zipCode}
+                {billingTab === "cod" && (
+                  <div className="flex justify-center">
+                    <div className="w-[539px] border  border-[#B0B0B0] p-[8.41px] mb-52 flex justify-between items-center font-dmsans">
+                      {userDetails?.address?.length === 0 ? (
+                        "Add your address"
+                      ) : (
+                        <div className="flex flex-col">
+                          <div>{address?.firstname}</div>
+                          <div>{address?.street}</div>
+                          <div>
+                            {address?.city +
+                              ", " +
+                              address?.state +
+                              ", " +
+                              address?.zipCode}
+                          </div>
                         </div>
+                      )}
+                      <div
+                        className="underline underline-offset-4 cursor-pointer"
+                        onClick={() => setOpenAddressModel(true)}
+                      >
+                        {userDetails?.address?.length === 0
+                          ? "Add address"
+                          : "Change"}
                       </div>
-                    )}
-                    <div
-                      className="underline underline-offset-4 cursor-pointer"
-                      // onClick={handleAddressClick}
-                      onClick={() => setOpenAddressModel(true)}
-                    >
-                      {userDetails?.address?.length === 0
-                        ? "Add address"
-                        : "Change"}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="w-full px-4 h-[99px] gap-[24px]">
+                <div className="h-[35px] px-[16px] py-[6px] flex justify-between bg-[#ECECEC]">
+                  <p className="font-dmsans font-[400] text-[16px] leading-[19.36px]">
+                    Total Amount
+                  </p>
+                  <p className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                    ₹{totalValue}
+                  </p>
+                </div>
+                <button
+                  className="w-[190px] h-[40px] p-[10px] gap-[10px] font-dmsans font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white my-[24px]"
+                  onClick={() => {
+                    handleOrderNow();
+                  }}
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          </div>
+          {/* Product Details */}
+          <div className="w-full lg:w-[60%] mb-5 h-[736px] overflow-y-scroll border border-[#B0B0B0]">
+            <div className="font-dmsans grid grid-cols-1">
+              {cartItems.map((item) => (
+                <>
+                  <div className="border-b-2 p-[1rem] flex justify-between">
+                    <div className="pl-[2rem]">
+                      <img
+                        src={item.img}
+                        className="w-[100px] h-[115px]"
+                        alt=""
+                      />
+                    </div>
+                    <div className="w-[50%]">
+                      <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
+                        {item.header}
+                      </p>
+                      <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
+                        Quantity: {item.quantity}
+                      </p>
+                      <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
+                        {item.price}
+                      </p>
                     </div>
                   </div>
                 </>
-              )}
-
-              {/* <div
-                        className="mt-[28px] mb-[1rem]"
-                        onClick={() => setOpen(true)}
-                      >
-                        <button className="px-[35px] py-[15px] bg-black text-white font-dmsans font-[400] text-[16px] leading-[19.36px]">
-                          Order Now
-                        </button>
-                      </div> */}
-            </div>
-            <div className="w-full px-4 h-[99px] gap-[24px]">
-              <div className="h-[35px] px-[16px] py-[6px] flex justify-between bg-[#ECECEC]">
-                <p className="font-dmsans font-[400] text-[16px] leading-[19.36px]">
-                  Total Amount
-                </p>
-                <p className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                  ₹{totalValue}
-                </p>
+              ))}
+              <div className="">
+                <div className="flex justify-between px-[15px] py-[5px] mt-[2rem]">
+                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                    Subtotal
+                  </div>
+                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                    ₹{totalValue}
+                  </div>
+                </div>
+                <div className="flex justify-between px-[15px] py-[5px] border-b-2">
+                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                    Shipping Charge
+                  </div>
+                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px] text-end">
+                    Free Shipping
+                  </div>
+                </div>
+                <div className="flex justify-between p-[15px]">
+                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                    Total
+                  </div>
+                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                    ₹{totalValue}
+                  </div>
+                </div>
               </div>
-              <button
-                className="w-[190px] h-[40px] p-[10px] gap-[10px] font-dmsans font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white my-[24px]"
-                onClick={() => {
-                  handleOrderNow();
-                }}
-              >
-                Order Now
-              </button>
             </div>
           </div>
         </div>

@@ -50,7 +50,7 @@ export const authApi = createApi({
         };
       },
     }),
-    updateUser: builder.mutation({
+    getUpdateUser: builder.mutation({
       query: (data) => {
         return {
           method: "PUT",
@@ -76,6 +76,21 @@ export const authApi = createApi({
         return {
           method: "GET",
           url: `/findOrder/${id}`,
+          headers: {
+            authorization: `Bearer ${getUserAccessToken()}`,
+          },
+        };
+      },
+    }),
+    getCancleOrder: builder.mutation({
+      query: (data) => {
+        return {
+          method: "PUT",
+          url: "/cancleOrder",
+          body: data,
+          headers: {
+            authorization: `Bearer ${getUserAccessToken()}`,
+          },
         };
       },
     }),
@@ -90,4 +105,5 @@ export const {
   useAddAddressMutation,
   useGetUserMutation,
   useGetUpdateUserMutation,
+  useGetCancleOrderMutation,
 } = authApi;

@@ -39,6 +39,7 @@ const MyAccount = () => {
   const navigate = useNavigate();
   const [selection, setSelection] = useState(1);
   const [userDetails, setUserDetails] = useState({});
+  const [refetch, setRefetch] = useState(false);
 
   const fetchDetails = async () => {
     try {
@@ -60,10 +61,11 @@ const MyAccount = () => {
   }, [selection]);
 
   useEffect(() => {
-    if (!userDetails?.length) {
+    if (!userDetails?.length || refetch) {
       fetchDetails();
     }
-  }, []);
+  }, [refetch]);
+
   return (
     <>
       <div className="flex justify-center items-center mt-[144px] mb-[302px]">
@@ -97,7 +99,9 @@ const MyAccount = () => {
           </div>
 
           {selection === 1 && <MyProfile />}
-          {selection === 2 && <MyOrder />}
+          {selection === 2 && (
+            <MyOrder userDetails={userDetails} setRefetch={setRefetch} />
+          )}
           {selection === 4 && <Address userDetails={userDetails} />}
         </div>
       </div>

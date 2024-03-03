@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/userSchema.js");
 const jwt = require("jsonwebtoken");
+const Order = require("../models/orderSchema.js");
 require("dotenv").config();
 
 const generateToken = (payload) => {
@@ -180,6 +181,7 @@ exports.userDetail = async (req, res) => {
     if (decodedToken && decodedToken.payload.email) {
       const email = decodedToken.payload.email;
       let user = await User.findOne({ email });
+
       if (!user) {
         res.json({
           data: {
@@ -188,12 +190,21 @@ exports.userDetail = async (req, res) => {
           },
         });
       } else {
+        let orderIds = user.orders;
+        let ordersArray = [];
+        try {
+          ordersArray = await Order.find({ _id: { $in: orderIds } }).exec();
+        } catch (err) {
+          console.error(err);
+        }
+
         let data = {
           firstname: user.firstname,
           lastname: user.lastname,
           email: user.email,
           contactNumber: user.phoneNumber,
           address: user.addresses,
+          orders: ordersArray,
           userId: user._id,
         };
         return res.status(200).json({
