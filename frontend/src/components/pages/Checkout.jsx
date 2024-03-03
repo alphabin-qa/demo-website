@@ -671,8 +671,8 @@ function Checkout() {
             </div>
           </div>
           {/* Product Details */}
-          <div className="w-full lg:w-[60%] mb-5 h-[736px] overflow-y-scroll border border-[#B0B0B0]">
-            <div className="font-dmsans grid grid-cols-1">
+          <div className="w-full lg:w-[60%] mb-8">
+            <div className="font-dmsans grid grid-cols-1 h-fit max-h-[608px] overflow-y-auto border border-b-0 border-[#B0B0B0]">
               {cartItems.map((item) => (
                 <>
                   <div className="border-b-2 p-[1rem] flex justify-between">
@@ -697,30 +697,30 @@ function Checkout() {
                   </div>
                 </>
               ))}
-              <div className="">
-                <div className="flex justify-between px-[15px] py-[5px] mt-[2rem]">
-                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                    Subtotal
-                  </div>
-                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                    ₹{totalValue}
-                  </div>
+            </div>
+            <div className="border border-[#B0B0B0]">
+              <div className="flex justify-between px-[15px] mt-[2rem]">
+                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                  Subtotal
                 </div>
-                <div className="flex justify-between px-[15px] py-[5px] border-b-2">
-                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                    Shipping Charge
-                  </div>
-                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px] text-end">
-                    Free Shipping
-                  </div>
+                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                  ₹{totalValue}
                 </div>
-                <div className="flex justify-between p-[15px]">
-                  <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                    Total
-                  </div>
-                  <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                    ₹{totalValue}
-                  </div>
+              </div>
+              <div className="flex justify-between px-[15px] py-[5px] border-b-2">
+                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                  Shipping Charge
+                </div>
+                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px] text-end">
+                  Free Shipping
+                </div>
+              </div>
+              <div className="flex justify-between px-[15px] py-[5px]">
+                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
+                  Total
+                </div>
+                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
+                  ₹{totalValue}
                 </div>
               </div>
             </div>

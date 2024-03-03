@@ -66,15 +66,15 @@ function OrderDetail() {
         </div>
 
         <div className="flex md:flex-row flex-col justify-between mt-[32px] gap-3">
-          <div className="w-full flex flex-col border p-[20px] gap-8 h-[470px]">
-            <div className="w-full h-[84px] border-b pl-[12px]">
+          <div className="w-full flex flex-col border p-[20px] gap-8">
+            <div className="w-full border-b pl-[12px]">
               <h3 className="font-dmsans font-[500] text-[20px] leading-[24.2px] tracking-[2.5%] mb-[10px]">
                 Your order is confirmed
               </h3>
               <p className="font-dmsans font-[400] text-[14px] leading-[18.9px] tracking-[1.5%] mb-3">
-                Your order confirmation page includes your purchase of the
-                iPhone 14 Pro Max, confirming your selection of this premium
-                smartphone.
+                We are pleased to confirm that your order has been successfully
+                processed and is now being prepared for shipment. Your order
+                details are as follows :
               </p>
             </div>
             <div className="flex flex-col w-full gap-[16px] pl-[12px]">
@@ -134,7 +134,7 @@ function OrderDetail() {
             <div className="h-[320px] overflow-y-scroll">
               {orderDetail?.product?.map((item) => (
                 <>
-                  <div className="border-b-[1px] w-full h-[135px] p-[10px] flex justify-between">
+                  <div className="border-b-[1px] w-full h-[135px] p-[10px] flex gap-3 ">
                     <img
                       src={item.img}
                       className="w-[100px] h-[115px]"
