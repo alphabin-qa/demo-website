@@ -39,19 +39,19 @@ const MyOrder = ({ userDetails, setRefetch }) => {
   }, [userDetails]);
 
   return (
-    <div className="flex flex-col">
-      <div className="w-[963px] h-max border rounded-[5px]">
+    <div className="flex flex-col w-full xl:w-[963px]">
+      <div className="w-full h-max border rounded-[5px]">
         <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b border-[#E0E0E0]">
           <div className="text-2xl font-bold font-dmsans uppercase">
             My Order
           </div>
         </div>
-        <div className=" flex flex-col gap-4 h-[430px] overflow-y-scroll ">
+        <div className=" flex flex-col gap-4 h-[390px] overflow-y-scroll ">
           {orderedProducts.length > 0 ? (
             <div>
               {orderedProducts?.map((order) => {
                 return (
-                  <div className="flex justify-between items-center mt-3 ml-[30px] mr-[278px] h-[115px] self-stretch pb-4">
+                  <div className="flex justify-between items-center mt-3 px-[30px] mr-auto lg:mr-[278px] h-[115px] self-stretch pb-4">
                     <div className="flex justify-between items-center gap-4">
                       <div className="w-[100px] h-[115px]">
                         <img src={order?.img} alt="order" />

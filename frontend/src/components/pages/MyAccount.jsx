@@ -68,10 +68,10 @@ const MyAccount = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center mt-[144px] mb-[302px]">
-        <div className="flex justify-center items-start w-[1260px] h-[534px] gap-6">
-          <div className="border h-full rounded-b-[8px] border-t-0">
-            <div className="w-[273px] flex justify-start items-center gap-[13px] p-[14px] border rounded-t-[8px] bg-[#FBFBFB]">
+      <div className="flex justify-center items-center mt-[48px] lg:mt-[144px] mb-[48px] lg:mb-[302px]">
+        <div className="flex xl:flex-row flex-col justify-center items-start w-full xl:w-[1260px] mx-4 xl:mx-0 gap-6">
+          <div className="w-full flex justify-center xl:flex-col items-center h-full rounded-b-[8px] border-t-0 xl:w-[30%] gap-3 xl:gap-0">
+            <div className="lg:flex hidden w-[273px] justify-around xl:justify-start items-center gap-[13px] p-[14px] border rounded-t-[8px] bg-[#FBFBFB]">
               <Avatar sx={{ width: "75px", height: "75px", bgcolor: "black" }}>
                 {userDetails?.firstname?.charAt(0) +
                   userDetails?.lastname?.charAt(0)}
@@ -80,7 +80,7 @@ const MyAccount = () => {
                 {userDetails?.firstname + " " + userDetails?.lastname}
               </p>
             </div>
-            <div className="w-[273px] px-[15px] py-5 flex flex-col gap-8">
+            <div className="w-full xl:w-[273px] py-auto px-[15px] xl:py-5 xl:flex grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 flex-row xl:flex-col gap-8 xl:border">
               {menuItems?.map((item) => {
                 return (
                   <div
@@ -89,7 +89,12 @@ const MyAccount = () => {
                     onClick={() => setSelection(item.id)}
                   >
                     <div>{item?.icon}</div>
-                    <div className={`${item.id === selection && "font-bold"}`}>
+                    <div
+                      className={`${
+                        item.id === selection &&
+                        "font-bold border-b-2 border-black xl:border-none"
+                      } text-center`}
+                    >
                       {item.label}
                     </div>
                   </div>

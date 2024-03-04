@@ -54,12 +54,14 @@ function OrderDetail() {
               />
             </Box>
             <div className="flex justify-center flex-col">
-              <h1 className="font-dmsans font-[500] text-[32px] leading-[24px] mb-[6px]">
+              <h1 className="font-dmsans font-[500] text-[24px] sm:text-[32px] leading-[24px] mb-[6px]">
                 Thank You, {orderDetail?.address?.firstname}
               </h1>
-              <p className="flex font-dmsans font-normal text-[18x] leading-[28.8px]">
+              <p className="flex font-dmsans font-normal text-[12px] sm:text-[18x] leading-[28.8px]">
                 Your Order ID -
-                <p className="ml-1 font-semibold">{orderDetail?._id}</p>
+                <p className="ml-1 font-semibold break-words">
+                  {orderDetail?._id}
+                </p>
               </p>
             </div>
           </div>
@@ -86,7 +88,7 @@ function OrderDetail() {
                   <p className="font-dmsans font-[500] text-[20px] leading-[24.2px]">
                     Email
                   </p>
-                  <p className="font-dmsans font-[400] text-[16px] leading-[32px]">
+                  <p className="font-dmsans font-[400] text-[16px] leading-[32px] break-words">
                     {orderDetail?.address?.email}
                   </p>
                 </div>

@@ -90,9 +90,9 @@ const Address = ({ userDetails }) => {
     }
   };
   return (
-    <div>
+    <div className="w-full h-fit">
       <div
-        className={`w-[963px] h-full border rounded-[5px] ${
+        className={`w-full xl:w-[963px] h-full border rounded-[5px] ${
           selectAddress && "hidden"
         }`}
       >
@@ -115,7 +115,7 @@ const Address = ({ userDetails }) => {
           ) : (
             userDetails?.address?.map((item) => {
               return (
-                <div className="w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
+                <div className="w-[280px] sm:w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
                   <div className="p-[10px]">
                     <p>{item?.firstname}</p>
                     <p>
@@ -138,13 +138,13 @@ const Address = ({ userDetails }) => {
       </div>
       {selectAddress && (
         <div
-          className={`w-[963px] h-full border rounded-[5px] ${
+          className={`w-full xl:w-[963px] h-full border rounded-[5px] ${
             !selectAddress && "hidden"
           }`}
         >
-          <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
+          <div className="w-full h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
             <div className="text-2xl font-bold font-dmsans">Address</div>
-            <div className="flex gap-9 text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer">
+            <div className="flex flex-col sm:flex-row text-end gap-9 text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer">
               <div
                 onClick={() => {
                   setSelectAddress(false);
@@ -161,7 +161,7 @@ const Address = ({ userDetails }) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-start items-center gap-7 my-[30px] ml-[30px] mr-[89px]">
+          <div className="h-fit flex flex-col justify-start items-center gap-5 my-[20px] ml-[30px] mr-[89px]">
             <div className="w-full">
               <label className="w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
@@ -176,7 +176,7 @@ const Address = ({ userDetails }) => {
                 />
               </label>
             </div>
-            <div className="flex justify-between items-center gap-[104px]">
+            <div className="w-full flex flex-col sm:flex-row gap-3 justify-between items-center sm:gap-[104px]">
               <label className=" w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   EMAIL<sup className="text-red-600">*</sup>
@@ -186,10 +186,10 @@ const Address = ({ userDetails }) => {
                   onChange={handleChange}
                   value={formData.email}
                   name="email"
-                  className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+                  className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
-              <label className=" w-full flex flex-col gap-[13px]">
+              <label className="w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   TOWN/CITY
                 </p>
@@ -198,11 +198,11 @@ const Address = ({ userDetails }) => {
                   onChange={handleChange}
                   value={formData.city}
                   name="city"
-                  className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+                  className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
             </div>
-            <div className="flex justify-between items-center gap-[104px]">
+            <div className="w-full flex flex-col sm:flex-row gap-3 justify-between items-center sm:gap-[104px]">
               <label className=" w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   STREET
@@ -212,7 +212,7 @@ const Address = ({ userDetails }) => {
                   onChange={handleChange}
                   value={formData.street}
                   name="street"
-                  className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+                  className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
               <label className=" w-full flex flex-col gap-[13px]">
@@ -224,11 +224,11 @@ const Address = ({ userDetails }) => {
                   onChange={handleChange}
                   value={formData.country}
                   name="country"
-                  className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+                  className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
             </div>
-            <div className="flex justify-between items-center gap-[104px]">
+            <div className="w-full flex flex-col sm:flex-row gap-3 justify-between items-center sm:gap-[104px]">
               <label className=" w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   STATE
@@ -238,7 +238,7 @@ const Address = ({ userDetails }) => {
                   onChange={handleChange}
                   value={formData.state}
                   name="state"
-                  className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+                  className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
               <label className=" w-full flex flex-col gap-[13px]">
@@ -250,7 +250,7 @@ const Address = ({ userDetails }) => {
                   value={formData.zipCode}
                   name="zipCode"
                   onChange={handleChange}
-                  className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+                  className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
             </div>

@@ -22,7 +22,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="w-[963px] h-full border rounded-[5px]">
+    <div className="w-full xl:w-[963px] h-full border rounded-[5px] pb-5">
       <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
         <div className="text-2xl font-bold font-dmsans uppercase">
           My Profile
@@ -32,7 +32,7 @@ const MyProfile = () => {
         </div>
       </div>
       <div className="flex flex-col h-full justify-start items-center gap-7 mt-[30px] ml-[60px] mr-[59px]">
-        <div className="w-full flex items-center justify-between gap-[104px]">
+        <div className="w-full flex-col sm:flex-row gap-8 flex items-center justify-between xl:gap-[104px]">
           <label className="w-full flex flex-col gap-[13px]">
             <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
               FIRST NAME
@@ -51,21 +51,21 @@ const MyProfile = () => {
             </p>
             <input
               type="text"
-              className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+              className="border w-full h-[40.39px] pl-2 font-dmsans"
               value={userInfo?.lastName}
               name="lastName"
               onChange={handleUserInfoChange}
             />
           </label>
         </div>
-        <div className="flex justify-between items-center gap-[104px]">
+        <div className="w-full flex-col sm:flex-row gap-7 flex justify-between items-center xl:gap-[104px]">
           <label className=" w-full flex flex-col gap-[13px]">
             <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
               EMAIL
             </p>
             <input
               type="text"
-              className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+              className="border w-full h-[40.39px] pl-2 font-dmsans"
               value={userInfo?.email}
               disabled
             />
@@ -76,7 +76,7 @@ const MyProfile = () => {
             </p>
             <input
               type="text"
-              className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+              className="border w-full h-[40.39px] pl-2 font-dmsans"
               placeholder="Enter contact number"
               value={userInfo?.contactNumber}
               name="contactNumber"
@@ -90,14 +90,14 @@ const MyProfile = () => {
             reset your password
           </div>
         </div>
-        <div className="flex justify-between items-center gap-[104px]">
+        <div className="w-full flex-col sm:flex-row gap-7 flex justify-between items-center xl:gap-[104px]">
           <label className=" w-full flex flex-col gap-[13px]">
             <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
               New Password
             </p>
             <input
               type="text"
-              className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+              className="border w-full h-[40.39px] pl-2 font-dmsans"
               placeholder="Enter new password"
               minLength={8}
               name="password"
@@ -111,7 +111,7 @@ const MyProfile = () => {
             </p>
             <input
               type="text"
-              className="border w-[370px] h-[40.39px] pl-2 font-dmsans"
+              className="border w-full h-[40.39px] pl-2 font-dmsans"
               placeholder="Confirm password"
               name="confirmPassword"
               onChange={handleUserInfoChange}
