@@ -6,12 +6,13 @@ import {
   PlusOutlined,
   StarFilled,
   StarOutlined,
+  LeftOutlined,
+  RightOutlined,
 } from "@ant-design/icons";
 import { FeatureProductsData } from "../../StaticData/static";
 import ReviewForm from "../ReviewForm";
 import ReviewList from "../ReviewList";
 import FeatureCards from "../FeatureCards";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/reducers/cartItems";

@@ -36,9 +36,9 @@ const Footer = () => {
         {/* <div className="flex justify-between border"> */}
         <div className="flex flex-col gap-4">
           <div>
-            <div className="font-nunito text-white">
+            <div className="font-nunito text-white pb-2">
               <Link to={"/home"}>
-                <img src={FooterLogo} alt="" />
+                <img src={FooterLogo} alt="" height={52} width={159} />
               </Link>
             </div>
           </div>

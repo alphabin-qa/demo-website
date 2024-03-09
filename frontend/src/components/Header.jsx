@@ -78,7 +78,7 @@ const Header = () => {
             className="sm:w-[200px] h-[62px] flex flex-col justify-center items-center cursor-pointer ml-2 sm:ml-10"
             onClick={() => navigate("/home")}
           >
-            <img src={HeaderLogo} alt="logo" />
+            <img src={HeaderLogo} alt="logo" width={128} height={40} />
           </div>
           <div>
             <ul className="hidden lg:flex justify-center items-center gap-8 font-medium text-[16px] leading-5 font-dmsans">
