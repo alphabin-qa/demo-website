@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Products } from "../../StaticData/static";
+import { FeatureProductsData } from "../../StaticData/static";
 import { Link } from "react-router-dom";
 import {
   StarFilled,
@@ -67,7 +67,7 @@ function AllProducts() {
           </div>
         </div>
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-[32px] xl:pt-[20px] justify-center">
-          {Products.map((product) => (
+          {FeatureProductsData.map((product) => (
             <div
               key={product.id}
               className="hover:shadow-md group w-[300px] h-[447px] mt-[2rem] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative px-3"
