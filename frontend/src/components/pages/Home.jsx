@@ -46,8 +46,8 @@ const Home = () => {
 
   const settings = {
     arrows: true,
-    infinite: false,
-    speed: 500,
+    infinite: true,
+    speed: 400,
     slidesToShow: 4,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
@@ -60,7 +60,7 @@ const Home = () => {
         },
       },
       {
-        breakpoint: 1000,
+        breakpoint: 900,
         settings: {
           slidesToShow: 2,
         },
@@ -110,15 +110,18 @@ const Home = () => {
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Audio & Camera
               </h1>
-              <p className="font-dmsans text-[14px] leading-[19.36px] tracking-[1px] xl:w-[280px] font-[100] text-gray-600 lg:w-[190px] md:w-[140px]">
+              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[400px] w-[140px]">
                 Unlock reliability and unmatched video, Audio and photo quality.
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="#"
-                  className="font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black"
+                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black transition ease-in-out delay-150 hover:-translate-y-[1px] hover:scale-110 duration-300"
                 >
-                  Explore More <ArrowRightOutlined />
+                  Explore More
+                  <div className="pl-1 flex items-center">
+                    <ArrowRightOutlined />
+                  </div>
                 </a>
               </div>
             </div>
@@ -127,7 +130,7 @@ const Home = () => {
             <div className="relative">
               <div className="overflow-hidden">
                 <img
-                  className="object-cover h-[342px] w-full xl:w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
+                  className="object-cover h-[342px] w-full xl:w-[670px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
                   src={Appliances1}
                   alt=""
                 />
@@ -137,15 +140,18 @@ const Home = () => {
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Appliances
               </h1>
-              <p className="font-dmsans text-[16px]  xl:w-[280px] font-[100] text-gray-600 leading-[19.36px] tracking-[1px]">
+              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[375px] w-[140px]">
                 Explore advance tech for enhanced workspace productivity
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="#"
-                  className="font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black"
+                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black transition ease-in-out delay-150 hover:-translate-y-[1px] hover:scale-110 duration-300"
                 >
-                  Explore More <ArrowRightOutlined />
+                  Explore More
+                  <div className="pl-1 flex items-center">
+                    <ArrowRightOutlined />
+                  </div>
                 </a>
               </div>
             </div>
@@ -166,24 +172,27 @@ const Home = () => {
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Gadgets
               </h1>
-              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] font-[100] text-gray-600 tracking-[1px]">
+              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[370px] w-[140px]">
                 Get your hands on the newest groundbreaking innovation
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="#"
-                  className="font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black"
+                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black transition ease-in-out delay-150 hover:-translate-y-[1px] hover:scale-110 duration-300"
                 >
-                  Explore More <ArrowRightOutlined />
+                  Explore More
+                  <div className="pl-1 flex items-center">
+                    <ArrowRightOutlined />
+                  </div>
                 </a>
               </div>
             </div>
           </div>
-          <div className="relative bg-[#F0F0F0] rounded-[5px] hover:cursor-pointer">
+          <div className="w-full xl:w-[670px] relative bg-[#F0F0F0] rounded-[5px] hover:cursor-pointer">
             <div className="relative">
               <div className="overflow-hidden">
                 <img
-                  class="object-cover h-[342px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-y-1 hover:scale-110 duration-700"
+                  class="w-full object-cover h-[342px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-y-1 hover:scale-110 duration-700"
                   src={Laptop1}
                   alt=""
                 />
@@ -193,16 +202,19 @@ const Home = () => {
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 PC & Laptops
               </h1>
-              <p className="font-dmsans text-[16px] leading-[19.36px]  xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[190px] md:w-[140px]">
+              <p className="font-dmsans text-[16px] leading-[19.36px]  xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[450px] w-[140px]">
                 Potent PCs & laptops optimized for gaming & development
                 purposes.
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="#"
-                  className="font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black"
+                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black transition ease-in-out delay-150 hover:-translate-y-[1px] hover:scale-110 duration-300"
                 >
-                  Explore More <ArrowRightOutlined />
+                  Explore More
+                  <div className="pl-1 flex items-center">
+                    <ArrowRightOutlined />
+                  </div>
                 </a>
               </div>
             </div>
@@ -342,7 +354,8 @@ const Home = () => {
               </div>
               <div className="absolute top-0 text-white flex flex-col justify-center items-center h-full w-full">
                 <h1 className="xl:w-[40%] lg:w-[50%] md:w-[60%] sm:w-[90%] text-center font-dmsans font-[600] xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[20px] leading-[2.5rem] text-white">
-                Pick a Subscription that fits you and give you daily update of our product
+                  Pick a Subscription that fits you and give you daily update of
+                  our product
                 </h1>
                 <div className="mt-[20px]">
                   <input
