@@ -134,7 +134,11 @@ const Header = () => {
                 <Cart className="cursor-pointer" onClick={toggleCart} />
               )}
             </div>
-            <CartModel isOpen={isCartOpen} toggleCart={toggleCart} />
+            <CartModel
+              isOpen={isCartOpen}
+              toggleCart={toggleCart}
+              setIsCartOpen={setIsCartOpen}
+            />
             <User
               className="cursor-pointer hidden lg:flex"
               onClick={handleClick}

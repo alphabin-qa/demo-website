@@ -9,7 +9,6 @@ import {
   ShoppingOutlined,
   ShoppingFilled,
 } from "@ant-design/icons";
-import Cart from "../../assets/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToWishlist,
@@ -70,7 +69,7 @@ function AllProducts() {
           {FeatureProductsData.map((product) => (
             <div
               key={product.id}
-              className="hover:shadow-md group w-[300px] h-[447px] mt-[2rem] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative px-3"
+              className="hover:shadow-md group w-[340px] h-[447px] mt-[2rem] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative px-3"
             >
               <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px]">
                 <button
@@ -105,7 +104,7 @@ function AllProducts() {
                 <div className="mt-[4rem] flex flex-col justify-center items-center">
                   <img
                     src={product.img}
-                    className="h-[253px] w-[233px] object-cover"
+                    className="h-[253px] object-contain"
                     alt="dp"
                   />
                   <div className="px-[20px]">

@@ -250,12 +250,12 @@ const Home = () => {
 
       <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
         <div className="xl:container lg:container mx-auto">
-          <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-2 md:gap-0">
-            <div className="relative ">
+          <div class="grid md:grid-cols-2 sm:grid-cols-1 md:gap-0 px-4 gap-8">
+            <div className="relative md:mr-4">
               <div className="relative">
                 {" "}
                 <img
-                  class="object-cover h-[210px] w-[95%] rounded-[5px]"
+                  class="object-cover h-[210px] rounded-[5px] w-full"
                   src={Offer1}
                   alt=""
                 />
@@ -269,11 +269,11 @@ const Home = () => {
                 </button>
               </div>
             </div>
-            <div className="relative ">
+            <div className="relative md:ml-4">
               <div className="relative">
                 {" "}
                 <img
-                  class="object-cover h-[210px] w-[95%] rounded-[5px]"
+                  class="object-cover h-[210px] rounded-[5px] w-full"
                   src={Offer2}
                   alt=""
                 />

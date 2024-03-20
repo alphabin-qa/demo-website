@@ -62,7 +62,7 @@ const Footer = () => {
                 +91-740 552 2523
               </span>
               <span className="text-[16px] hover:cursor-pointer hover:text-white text-[#A1A1A1]">
-                business@alphabin.co
+                <a href="mailto:business@alphabin.co">business@alphabin.co</a>
               </span>
             </div>
           </div>
