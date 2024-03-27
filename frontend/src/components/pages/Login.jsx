@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLoginMutation } from "../../services/authServices";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   getUserAccessToken,
   setUserAccessToken,
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/reducers/userData";
 
 const Login = () => {
+  const prevRoute = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login] = useLoginMutation();
@@ -37,6 +38,7 @@ const Login = () => {
       handleLogin();
     }
   };
+  console.log(prevRoute);
 
   // Function to handle the login button click
   const handleLogin = async () => {
@@ -53,7 +55,11 @@ const Login = () => {
             color: "white",
           },
         });
-        navigate("/checkout");
+        if (prevRoute?.key === "default") {
+          navigate("/checkout");
+        } else {
+          navigate("/");
+        }
         setFormData({
           email: "",
           password: "",

@@ -167,6 +167,18 @@ function Checkout() {
     }));
   };
 
+  function findDifferentKeys(obj1, obj2) {
+    const differentKeys = [];
+    for (const key in obj1) {
+      if (obj1.hasOwnProperty(key) && obj2.hasOwnProperty(key)) {
+        if (obj1[key] !== obj2[key]) {
+          differentKeys.push(key);
+        }
+      }
+    }
+    return differentKeys;
+  }
+
   const handleOrderNow = async () => {
     if (cartItems.length) {
       if (address && billingTab === "cod") {
@@ -204,32 +216,22 @@ function Checkout() {
       } else {
         // Payment method is not COD, proceed with credit card validation
         if (
-          typeof cardData?.cardNo === "string" &&
-          typeof parseInt(cardData?.cvv) === "number" &&
-          typeof parseInt(cardData?.expiredMonth) === "number" &&
-          typeof parseInt(cardData?.expiredYear) === "number"
+          cardData &&
+          cardData.cardNo &&
+          typeof cardData.cardNo === "string" &&
+          cardData.cvv &&
+          typeof parseInt(cardData.cvv) === "number" &&
+          cardData.expiredMonth &&
+          typeof parseInt(cardData.expiredMonth) === "number" &&
+          cardData.expiredYear &&
+          typeof parseInt(cardData.expiredYear) === "number"
         ) {
-          const areEqual =
-            JSON.stringify(cardData) === JSON.stringify(cardDetails);
-          if (areEqual) {
-            try {
-              const { data } = await createOrder({
-                product: cartItems,
-                quntity: cartItems.length,
-                address: address,
-                paymentMethod: billingTab,
-                totalAmount: totalValue,
-                orderDate: Date.now(),
-                email: userDetails?.email,
-              });
-              setOpen(true);
-              setOrder(data);
-            } catch (error) {
-              console.error(error);
-              // Handle error appropriately
-            }
-          } else {
-            toast.error("Enter valid card details", {
+          const differentKeys = findDifferentKeys(cardData, cardDetails);
+          if (differentKeys.length > 0) {
+            const errorMessage = differentKeys
+              .map((key) => `Enter valid ${key}`)
+              .join(", ");
+            return toast.error(errorMessage, {
               duration: 4000,
               style: {
                 border: "1px solid black",
@@ -238,8 +240,25 @@ function Checkout() {
               },
             });
           }
+
+          try {
+            const { data } = await createOrder({
+              product: cartItems,
+              quantity: cartItems.length,
+              address: address,
+              paymentMethod: billingTab,
+              totalAmount: totalValue,
+              orderDate: Date.now(),
+              email: userDetails?.email,
+            });
+            setOpen(true);
+            setOrder(data);
+          } catch (error) {
+            console.error(error);
+            // Handle error appropriately
+          }
         } else {
-          toast.error("Enter valid card details", {
+          toast.error("Please enter all the required card details", {
             duration: 4000,
             style: {
               border: "1px solid black",
