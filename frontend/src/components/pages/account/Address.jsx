@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { useAddAddressMutation } from "../../../services/authServices";
+import {
+  useAddAddressMutation,
+  useGetUpdateAddressMutation,
+} from "../../../services/authServices";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
 
 const formsData = {
-  firstName: "",
+  firstname: "",
   email: "",
   city: "",
   street: "",
@@ -15,9 +18,11 @@ const formsData = {
 };
 const Address = ({ userDetails }) => {
   const [addAddress] = useAddAddressMutation();
+  const [updateAddAddress] = useGetUpdateAddressMutation();
   const { data: userData } = useSelector((state) => state?.userData);
   const [selectAddress, setSelectAddress] = useState(false);
   const [formData, setFormData] = useState(formsData);
+  const [addressDetails, setAddressDetails] = useState();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,8 +38,8 @@ const Address = ({ userDetails }) => {
   const validateForm = (data) => {
     const errors = {};
 
-    if (!data.firstName.trim()) {
-      errors.firstName = "First Name is required";
+    if (!data.firstname.trim()) {
+      errors.firstname = "First Name is required";
     }
 
     if (!data.email.trim()) {
@@ -54,17 +59,31 @@ const Address = ({ userDetails }) => {
     }
     return errors;
   };
-  const handleSubmit = async (e) => {
-    const validationErrors = validateForm(formData);
-    if (Object.keys(validationErrors)?.length === 0) {
-      try {
-        if (userDetails.address.length <= 4) {
-          const { data } = await addAddress({
-            id: userData?.data?.userId,
-            address: formData,
-          });
-          if (data.success === true) {
-            toast.success(`Fill all the required fields..`, {
+  const handleSubmit = async (id) => {
+    if (id) {
+      await updateAddressById(formData);
+    } else {
+      const validationErrors = validateForm(formData);
+      if (Object.keys(validationErrors)?.length === 0) {
+        try {
+          if (userDetails.address.length <= 4) {
+            const { data } = await addAddress({
+              id: userData?.data?.userId,
+              address: formData,
+            });
+            if (data.success === true) {
+              toast.success(`Fill all the required fields..`, {
+                duration: 4000,
+                style: {
+                  border: "1px solid black",
+                  backgroundColor: "black",
+                  color: "white",
+                },
+              });
+              setSelectAddress(false);
+            }
+          } else {
+            toast.error(`You can not add more than 4 addresses`, {
               duration: 4000,
               style: {
                 border: "1px solid black",
@@ -73,22 +92,65 @@ const Address = ({ userDetails }) => {
               },
             });
           }
-        } else {
-          toast.error(`You can not add more than 4 addresses`, {
-            duration: 4000,
-            style: {
-              border: "1px solid black",
-              backgroundColor: "black",
-              color: "white",
-            },
-          });
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
+        setFormData(formsData);
       }
+      setSelectAddress(false);
+    }
+  };
+
+  const handleAddNewAddress = () => {
+    if (userDetails?.address?.length >= 4) {
+      return toast.error(`You can not add more than 4 addresses`, {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    } else {
+      setSelectAddress(true);
       setFormData(formsData);
     }
   };
+
+  const updateAddressById = async (formData) => {
+    const data = await updateAddAddress(formData);
+    if (data?.data?.success) {
+      toast.success(`${data?.data?.message}`, {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    } else {
+      toast.error(`${data?.error?.data?.message}`, {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    }
+    setSelectAddress(false);
+    setFormData(formsData);
+  };
+
+  const handleChangeOrDeleteAddress = async (address) => {
+    setSelectAddress(true);
+    setAddressDetails(address);
+    setFormData({
+      ...formData,
+      ...address,
+    });
+  };
+
   return (
     <div className="w-full h-fit">
       <div
@@ -99,17 +161,15 @@ const Address = ({ userDetails }) => {
         <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
           <div className="text-2xl font-bold font-dmsans">Address</div>
           <div
-            className="text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer"
-            onClick={() => {
-              setSelectAddress(true);
-            }}
+            className="ml-[50%] flex border justify-center items-center p-[10px] font-dmsans cursor-pointer rounded-md bg-black text-white"
+            onClick={handleAddNewAddress}
           >
-            <FaEdit className="w-[21px] h-[21px]" />
+            Add New Address
           </div>
         </div>
-        <div className="h-96 grid grid-cols-2 justify-center items-start gap-8 mt-[30px] ml-[30px] mb-8">
+        <div className="h-[330px] grid grid-cols-2 justify-center items-start gap-8 mt-[30px] ml-[30px] mb-8">
           {!userDetails?.address?.length ? (
-            <div className="w-full ml-[50%] flex border justify-center items-center p-[10px] font-dmsans">
+            <div className="w-full ml-[50%] flex border justify-center items-center p-[10px] font-dmsans font-medium">
               ADDRESS NOT FOUND
             </div>
           ) : (
@@ -117,7 +177,17 @@ const Address = ({ userDetails }) => {
               return (
                 <div className="w-[280px] sm:w-[394px] h-[139px] p-[10px] border font-sans text-sm leading-[22.4px] font-normal">
                   <div className="p-[10px]">
-                    <p>{item?.firstname}</p>
+                    <div className="flex justify-between">
+                      <p>{item?.firstname}</p>
+                      <div
+                        className="text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer"
+                        onClick={() => {
+                          handleChangeOrDeleteAddress(item);
+                        }}
+                      >
+                        <FaEdit className="w-[21px] h-[21px]" />
+                      </div>
+                    </div>
                     <p>
                       {item?.street +
                         " " +
@@ -138,7 +208,7 @@ const Address = ({ userDetails }) => {
       </div>
       {selectAddress && (
         <div
-          className={`w-full xl:w-[963px] h-full border rounded-[5px] ${
+          className={`w-full xl:w-[963px] h-full border rounded-[5px] pb-2 ${
             !selectAddress && "hidden"
           }`}
         >
@@ -154,7 +224,7 @@ const Address = ({ userDetails }) => {
               </div>
               <div
                 onClick={() => {
-                  handleSubmit();
+                  handleSubmit(formData?._id);
                 }}
               >
                 save your address
@@ -170,8 +240,8 @@ const Address = ({ userDetails }) => {
                 <input
                   type="text"
                   onChange={handleChange}
-                  value={formData.firstName}
-                  name="firstName"
+                  value={formData.firstname}
+                  name="firstname"
                   className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
@@ -184,7 +254,7 @@ const Address = ({ userDetails }) => {
                 <input
                   type="text"
                   onChange={handleChange}
-                  value={formData.email}
+                  value={formData?.email}
                   name="email"
                   className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
@@ -241,15 +311,16 @@ const Address = ({ userDetails }) => {
                   className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
-              <label className=" w-full flex flex-col gap-[13px]">
-                <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
+              <label className="w-full flex flex-col gap-[13px]">
+                <p className="text-[14px] font-sans font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   ZIP CODE
                 </p>
                 <input
-                  type="text"
+                  type="number"
                   value={formData.zipCode}
                   name="zipCode"
                   onChange={handleChange}
+                  maxLength={6}
                   className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>

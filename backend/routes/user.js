@@ -18,9 +18,9 @@ const {
 router.post("/login", login);
 router.post("/register", register);
 router.post("/address", addAddress);
+router.put("/updateAddress", updateAddress);
 router.get("/me", userDetail);
 router.put("/updateUser", updateUser);
-router.put("/updateAddress", updateAddress);
 router.post("/createOrder", createOrder);
 router.get("/findOrder/:id", findOrderByIds);
 router.put("/cancleOrder", deleteOrder);

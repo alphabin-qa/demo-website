@@ -147,7 +147,7 @@ exports.addAddress = async (req, res) => {
           city: address?.city || "",
           country: address.country || "",
           email: address.email || "",
-          firstname: address.firstName || "",
+          firstname: address.firstname || "",
           state: address.state || "",
           street: address.street || "",
           zipCode: address.zipCode || "",
@@ -251,19 +251,26 @@ exports.updateUser = async (req, res) => {
 
 exports.updateAddress = async (req, res) => {
   try {
-    const { city, country, email, firstname, state, street, zipCode, id } =
-      req.body;
+    const {
+      city,
+      country,
+      email,
+      firstname,
+      state,
+      street,
+      zipCode,
+      _id,
+      userId,
+    } = req.body;
+
     const authHeader = req.headers["authorization"];
     const authToken = authHeader && authHeader.split(" ")[1];
 
     const decodedToken = jwt.decode(authToken, { complete: true });
 
     if (decodedToken && decodedToken.payload.email) {
-      const email = decodedToken.payload.email;
-      let user = await User.findOne({ email });
-      let address = user.addresses.find({
-        _id: "659ab7f8b74d8d434ed75372",
-      });
+      const userEmail = decodedToken.payload.email;
+      let user = await User.findOne({ email: userEmail });
 
       if (!user) {
         return res.status(401).json({
@@ -271,10 +278,38 @@ exports.updateAddress = async (req, res) => {
           message: "User is not registered",
         });
       } else {
-        return res.status(200).json({
-          data: { success: true, user },
-        });
+        const addressIndex = user.addresses.findIndex(
+          (address) => address._id.toString() === _id.toString()
+        );
+        if (addressIndex !== -1) {
+          user.addresses[addressIndex] = {
+            _id: _id,
+            city,
+            country,
+            firstname,
+            state,
+            street,
+            zipCode,
+            email,
+          };
+          await user.save();
+          return res.status(200).json({
+            success: true,
+            message: "Address updated successfully",
+          });
+        } else {
+          return res.status(404).json({
+            success: false,
+            message: "Address not found",
+          });
+        }
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
 };

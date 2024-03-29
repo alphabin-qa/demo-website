@@ -47,7 +47,7 @@ const AddressModel = ({
         sx={style}
         className="flex flex-col gap-3 justify-center items-center"
       >
-        <div className={`w-[963px] h-full rounded-[5px] `}>
+        <div className={`w-[100%] max-w-[963px] h-full rounded-[5px] `}>
           <div className="flex justify-between">
             <div className="text-2xl font-bold font-dmsans">Address</div>
             <div
