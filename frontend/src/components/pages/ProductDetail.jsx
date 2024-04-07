@@ -56,14 +56,12 @@ function ProductDetail() {
   const handleDecrement = () => {
     if (quantity > 1) {
       quantity = setQuantity((prevCount) => prevCount - 1);
-      // console.log("Quantity after decrement---", quantity);
     }
   };
 
   const handleIncrement = () => {
     if (quantity < 10) {
       quantity = setQuantity((prevCount) => prevCount + 1);
-      // console.log("Quantity after increment---", quantity);
     }
   };
 
@@ -72,7 +70,6 @@ function ProductDetail() {
   };
 
   const buyNowHandler = () => {
-    console.log("Quantity before clicking on Buy Now", quantity);
     dispatch(addToCart({ id, img, header, price, reviewCount, quantity }));
     navigate("/checkout");
   };

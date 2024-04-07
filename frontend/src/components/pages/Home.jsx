@@ -116,10 +116,10 @@ const Home = () => {
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="#"
-                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black transition ease-in-out delay-150 hover:-translate-y-[1px] hover:scale-110 duration-300"
+                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150 hover:translate-x-[3px] hover:scale-105 duration-300"
                 >
                   Explore More
-                  <div className="pl-1 flex items-center">
+                  <div className="pl-1 flex items-center hover:translate-x-[2px] duration-300">
                     <ArrowRightOutlined />
                   </div>
                 </a>
@@ -146,10 +146,10 @@ const Home = () => {
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="#"
-                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black transition ease-in-out delay-150 hover:-translate-y-[1px] hover:scale-110 duration-300"
+                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105  duration-300"
                 >
                   Explore More
-                  <div className="pl-1 flex items-center">
+                  <div className="pl-1 flex items-center hover:translate-x-[2px] duration-300">
                     <ArrowRightOutlined />
                   </div>
                 </a>
@@ -178,10 +178,10 @@ const Home = () => {
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="#"
-                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black transition ease-in-out delay-150 hover:-translate-y-[1px] hover:scale-110 duration-300"
+                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105 duration-300"
                 >
                   Explore More
-                  <div className="pl-1 flex items-center">
+                  <div className="pl-1 flex items-center hover:translate-x-[2px] duration-300">
                     <ArrowRightOutlined />
                   </div>
                 </a>
@@ -209,10 +209,10 @@ const Home = () => {
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="#"
-                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b-[1px] border-black transition ease-in-out delay-150 hover:-translate-y-[1px] hover:scale-110 duration-300"
+                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105 duration-300"
                 >
                   Explore More
-                  <div className="pl-1 flex items-center">
+                  <div className="pl-1 flex items-center hover:translate-x-[2px] duration-300">
                     <ArrowRightOutlined />
                   </div>
                 </a>

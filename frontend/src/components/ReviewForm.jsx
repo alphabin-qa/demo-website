@@ -67,9 +67,9 @@ const ReviewForm = ({ onSubmit }) => {
   return (
     <div className="mt-[3rem]">
       <div className="p-[40px] mx-auto w-[832px] h-[562px] border-[1px] border-black">
-        <div className="w-[708px] h-[470px] gap-[16px] mx-auto">
+        <div className="w-[708px] h-[470px] gap-[16px] mx-auto flex flex-col">
           {/* For Name & Email */}
-          <div className="flex w-[708px] h-[79px] justify-between gap-[32px] mb-[20px]">
+          <div className="flex w-[708px] h-[79px] justify-between gap-[32px]">
             <div className="w-[338px] h-[79px]">
               <div className="py-[8px]">
                 <label
@@ -104,15 +104,15 @@ const ReviewForm = ({ onSubmit }) => {
             </div>
           </div>
           {/* For Rating */}
-          <div className="flex gap-[7px] py-[10px] items-center mb-[20px]">
+          <div className="flex gap-[7px] py-[10px] items-center">
             <div className="font-dmsans font-[500] text-[16px] leading-[19.36px]">
               Give Rating:{" "}
             </div>
-            <div className="">
+            <div className="flex">
               {[1, 2, 3, 4, 5].map((star) => (
                 <span
                   key={star}
-                  className={`cursor-pointer px-[10px] text-2xl`}
+                  className={`cursor-pointer px-[10px] text-2xl flex justify-center items-center`}
                   onMouseEnter={() => handlleHover(star)}
                   onMouseLeave={() => handlleHover(0)}
                   onClick={() => handleRatingClick(star)}
@@ -127,7 +127,7 @@ const ReviewForm = ({ onSubmit }) => {
             </div>
           </div>
           {/* For Review Title */}
-          <div className="mb-[20px]">
+          <div>
             <label
               htmlFor=""
               className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
@@ -142,7 +142,7 @@ const ReviewForm = ({ onSubmit }) => {
             />
           </div>
           {/* For Opinion */}
-          <div className=" mb-[20px]">
+          <div>
             <label
               htmlFor=""
               className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
@@ -157,14 +157,12 @@ const ReviewForm = ({ onSubmit }) => {
             />
           </div>
           {/* For Submit Button */}
-          <div>
-            <button
-              className="px-[80px] py-[15px] border-[1px] rounded-[3px] bg-black text-white font-dmsans font-[400] text-[16px] leading-[19.36px] items-center"
-              onClick={handleSubmit}
-            >
-              SUBMIT
-            </button>
-          </div>
+          <button
+            className="w-[200px] h-[48px] px-[11px] py-[15.79px] border-[1px] bg-black text-white font-dmsans font-[400] text-[16px] leading-[19.36px] items-center rounded-md"
+            onClick={handleSubmit}
+          >
+            SUBMIT
+          </button>
         </div>
       </div>
     </div>
