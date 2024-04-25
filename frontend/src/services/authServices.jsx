@@ -106,6 +106,26 @@ export const authApi = createApi({
         };
       },
     }),
+    deleteAddress: builder.mutation({
+      query: ({ id }) => {
+        return {
+          method: "DELETE",
+          url: `/address/${id}`,
+          headers: {
+            authorization: `Bearer ${getUserAccessToken()}`,
+          },
+        };
+      },
+    }),
+    resetPassword: builder.mutation({
+      query: (data) => {
+        return {
+          method: "PUT",
+          url: `/reset-password`,
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -119,4 +139,6 @@ export const {
   useGetUpdateUserMutation,
   useGetCancleOrderMutation,
   useGetUpdateAddressMutation,
+  useDeleteAddressMutation,
+  useResetPasswordMutation,
 } = authApi;

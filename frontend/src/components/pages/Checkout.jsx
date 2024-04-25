@@ -539,9 +539,10 @@ function Checkout() {
                         <input
                           type="text"
                           onChange={handleCreditCardChange}
-                          value={cardData.cardNo}
-                          maxLength={16}
-                          minLength={16}
+                          value={cardData?.cardNo}
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          maxLength="16"
                           name="cardNo"
                           className="rounded-[3px] border-[1px] w-full h-[36px] pl-[8px] font-dmsans"
                         />
@@ -563,6 +564,8 @@ function Checkout() {
                           <div className="w-[197.53px] h-[32px] gap-[2px] ">
                             <input
                               type="text"
+                              inputMode="numeric"
+                              pattern="[0-9]*"
                               onChange={handleCreditCardChange}
                               value={cardData.expiredMonth}
                               name="expiredMonth"
@@ -573,6 +576,8 @@ function Checkout() {
                             <label htmlFor=""> / </label>
                             <input
                               type="text"
+                              inputMode="numeric"
+                              pattern="[0-9]*"
                               onChange={handleCreditCardChange}
                               value={cardData.expiredYear}
                               name="expiredYear"
@@ -588,6 +593,8 @@ function Checkout() {
                           </p>
                           <input
                             type="text"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             onChange={handleCreditCardChange}
                             value={cardData.cvv}
                             name="cvv"
@@ -669,7 +676,7 @@ function Checkout() {
                   </div>
                 )}
               </div>
-              <div className="w-full px-4 h-[99px] gap-[24px]">
+              <div className="w-full h-[99px] gap-[24px] px-[48px]">
                 <div className="h-[35px] px-[16px] py-[6px] flex justify-between bg-[#ECECEC]">
                   <p className="font-dmsans font-[400] text-[16px] leading-[19.36px]">
                     Total Amount
@@ -679,7 +686,7 @@ function Checkout() {
                   </p>
                 </div>
                 <button
-                  className="w-[190px] h-[40px] p-[10px] gap-[10px] font-dmsans font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white my-[24px]"
+                  className="w-[195px] h-[35px] font-dmsans font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white my-[24px]"
                   onClick={() => {
                     handleOrderNow();
                   }}

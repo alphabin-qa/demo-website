@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Order = require("./orderSchema");
+const Address = require("./addressSchema");
 
 const addressSchema = mongoose.Schema({
   firstname: {
@@ -67,11 +68,17 @@ const userSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
-  addresses: [addressSchema],
+  addresses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: Address,
+    },
+  ],
+
   orders: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      reff: Order,
+      ref: Order,
     },
   ],
 });

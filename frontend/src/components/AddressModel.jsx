@@ -8,6 +8,9 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
+  height: { xs: "600px", md: "460px" },
+  width: { xs: "350px", md: "700px" },
+  overflow: "auto",
   transform: "translate(-50%, -50%)",
   bgcolor: "background.paper",
   boxShadow: 24,
@@ -15,7 +18,6 @@ const style = {
   borderRadius: "5px",
   py: "30px",
   pr: "20px",
-  pl: "80px",
 };
 
 const AddressModel = ({
@@ -51,7 +53,7 @@ const AddressModel = ({
           <div className="flex justify-between">
             <div className="text-2xl font-bold font-dmsans">Address</div>
             <div
-              className="text-xl font-bold font-dmsans mr-14 border p-2 rounded-lg bg-slate-500 text-white cursor-pointer"
+              className="w-[160px] text-center items-end font-bold font-dmsans border p-[4px] rounded-lg bg-slate-500 text-white cursor-pointer"
               onClick={() => {
                 handleAddressClick();
               }}
@@ -59,17 +61,17 @@ const AddressModel = ({
               Add new address
             </div>
           </div>
-          <div className="h-fit flex justify-center items-center  mt-[30px] ml-[30px] mb-8">
+          <div className="h-fit flex justify-center items-center  mt-[30px] mb-8">
             {!userDetails?.address?.length ? (
               <div className="flex border justify-center items-center p-[10px] px-32 rounded-lg font-dmsans">
                 ADDRESS NOT FOUND
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-flow-col-1 md:grid-cols-2 gap-8 mb-6">
                 {userDetails?.address?.map((item) => {
                   return (
                     <div
-                      className="w-[394px] h-[139px] p-[10px] border-2 border-gray-600 rounded-lg font-dmsans text-sm leading-[22.4px] font-medium cursor-pointer"
+                      className="w-[100%] max-w-[394px] h-[139px] p-[10px] border-2 border-gray-600 rounded-lg font-dmsans text-sm leading-[22.4px] font-medium cursor-pointer"
                       onClick={() => handleAddressSelect(item?._id)}
                     >
                       <div className="p-[10px]">

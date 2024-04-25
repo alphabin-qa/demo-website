@@ -107,7 +107,9 @@ const MyAccount = () => {
           {selection === 2 && (
             <MyOrder userDetails={userDetails} setRefetch={setRefetch} />
           )}
-          {selection === 4 && <Address userDetails={userDetails} />}
+          {selection === 4 && (
+            <Address userDetails={userDetails} setRefetch={setRefetch} />
+          )}
         </div>
       </div>
     </>

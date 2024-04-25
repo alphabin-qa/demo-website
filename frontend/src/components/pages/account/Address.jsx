@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useAddAddressMutation,
+  useDeleteAddressMutation,
   useGetUpdateAddressMutation,
 } from "../../../services/authServices";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { FaEdit } from "react-icons/fa";
+import { MdOutlineDelete } from "react-icons/md";
 
 const formsData = {
   firstname: "",
@@ -16,9 +18,10 @@ const formsData = {
   state: "",
   zipCode: "",
 };
-const Address = ({ userDetails }) => {
+const Address = ({ userDetails, setRefetch }) => {
   const [addAddress] = useAddAddressMutation();
   const [updateAddAddress] = useGetUpdateAddressMutation();
+  const [deleteAddressById] = useDeleteAddressMutation();
   const { data: userData } = useSelector((state) => state?.userData);
   const [selectAddress, setSelectAddress] = useState(false);
   const [formData, setFormData] = useState(formsData);
@@ -59,31 +62,19 @@ const Address = ({ userDetails }) => {
     }
     return errors;
   };
-  const handleSubmit = async (id) => {
-    if (id) {
-      await updateAddressById(formData);
-    } else {
-      const validationErrors = validateForm(formData);
-      if (Object.keys(validationErrors)?.length === 0) {
-        try {
-          if (userDetails.address.length <= 4) {
-            const { data } = await addAddress({
-              id: userData?.data?.userId,
-              address: formData,
-            });
-            if (data.success === true) {
-              toast.success(`Fill all the required fields..`, {
-                duration: 4000,
-                style: {
-                  border: "1px solid black",
-                  backgroundColor: "black",
-                  color: "white",
-                },
-              });
-              setSelectAddress(false);
-            }
-          } else {
-            toast.error(`You can not add more than 4 addresses`, {
+  const handleSubmit = async (address) => {
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors)?.length === 0) {
+      console.log(address);
+      try {
+        if (userDetails.address.length <= 4) {
+          const { data } = await addAddress({
+            id: userData?.data?.id,
+            address: formData,
+          });
+          if (data.success === true) {
+            setRefetch(true);
+            toast.success(`Address added successfully`, {
               duration: 4000,
               style: {
                 border: "1px solid black",
@@ -91,14 +82,24 @@ const Address = ({ userDetails }) => {
                 color: "white",
               },
             });
+            setSelectAddress(false);
           }
-        } catch (error) {
-          console.error(error);
+        } else {
+          toast.error(`You can not add more than 4 addresses`, {
+            duration: 4000,
+            style: {
+              border: "1px solid black",
+              backgroundColor: "black",
+              color: "white",
+            },
+          });
         }
-        setFormData(formsData);
+      } catch (error) {
+        console.error(error);
       }
-      setSelectAddress(false);
+      // setFormData(formsData);
     }
+    setSelectAddress(false);
   };
 
   const handleAddNewAddress = () => {
@@ -113,12 +114,12 @@ const Address = ({ userDetails }) => {
       });
     } else {
       setSelectAddress(true);
-      setFormData(formsData);
+      // setFormData(formsData);
     }
   };
 
   const updateAddressById = async (formData) => {
-    const data = await updateAddAddress(formData);
+    const data = await updateAddAddress({ formData });
     if (data?.data?.success) {
       toast.success(`${data?.data?.message}`, {
         duration: 4000,
@@ -138,11 +139,22 @@ const Address = ({ userDetails }) => {
         },
       });
     }
-    setSelectAddress(false);
-    setFormData(formsData);
+    // setSelectAddress(false);
+    // setFormData(formsData);
   };
 
-  const handleChangeOrDeleteAddress = async (address) => {
+  const handleDeleteAddress = async (id) => {
+    if (!id) {
+      return;
+    }
+    const { data } = await deleteAddressById({ id });
+
+    if (data?.success) {
+      setRefetch(true);
+    }
+  };
+
+  const handleAddress = async (address) => {
     setSelectAddress(true);
     setAddressDetails(address);
     setFormData({
@@ -179,13 +191,23 @@ const Address = ({ userDetails }) => {
                   <div className="p-[10px]">
                     <div className="flex justify-between">
                       <p>{item?.firstname}</p>
-                      <div
-                        className="text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer"
-                        onClick={() => {
-                          handleChangeOrDeleteAddress(item);
-                        }}
-                      >
-                        <FaEdit className="w-[21px] h-[21px]" />
+                      <div className="flex gap-3">
+                        <div
+                          className="text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer"
+                          onClick={() => {
+                            handleAddress(item);
+                          }}
+                        >
+                          <FaEdit className="w-[21px] h-[21px]" />
+                        </div>
+                        <div
+                          className="text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer"
+                          onClick={() => {
+                            handleDeleteAddress(item?._id);
+                          }}
+                        >
+                          <MdOutlineDelete className="w-[24px] h-[24px]" />
+                        </div>
                       </div>
                     </div>
                     <p>
@@ -224,7 +246,7 @@ const Address = ({ userDetails }) => {
               </div>
               <div
                 onClick={() => {
-                  handleSubmit(formData?._id);
+                  handleSubmit(formData);
                 }}
               >
                 save your address
