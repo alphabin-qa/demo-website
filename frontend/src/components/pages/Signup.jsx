@@ -77,7 +77,6 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
 
     if (validateForm()) {
       const response = await signup(formData);

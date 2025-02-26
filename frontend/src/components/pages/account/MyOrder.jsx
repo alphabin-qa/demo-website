@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetCancleOrderMutation } from "../../../services/authServices";
+import toast from 'react-hot-toast'; // Assuming you have react-hot-toast installed
 
 const MyOrder = ({ userDetails, setRefetch }) => {
   const navigate = useNavigate();
@@ -10,12 +11,35 @@ const MyOrder = ({ userDetails, setRefetch }) => {
   const [orderedProducts, setOrderedProducts] = useState([]);
 
   const cancleOrder = async (orderId) => {
-    const { data } = await deleteOrder({
-      id: orderId,
-      userId: userDetails && userDetails.userId,
-    });
-    if (data.status) {
-      setRefetch(true);
+    try {
+      const { data } = await deleteOrder({
+        id: orderId,
+        userId: userDetails?.id,
+      });
+      
+      if (data?.success) {
+        setRefetch(true);
+        toast.success(data.message || 'Order cancelled successfully', {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
+      } else {
+        throw new Error(data?.message || 'Failed to cancel order');
+      }
+    } catch (error) {
+      toast.error(error.message || 'Failed to cancel order', {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+      console.error(error);
     }
   };
 

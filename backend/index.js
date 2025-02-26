@@ -1,18 +1,21 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+
+// Load environment variables first
+dotenv.config();
+
 const dbConnect = require("./config/database.js");
 const userRoutes = require("./routes/user.js");
 const cors = require("cors");
 
-dotenv.config();
 const PORT = process.env.PORT || 4000;
 
 // Middleware to parse JSON request body
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://demo.alphabin.co", // http://localhost:3000 OR https://demo.alphabin.co
+    origin: "http://localhost:3000", // http://localhost:3000 OR https://demo.alphabin.co
     credentials: true,
   })
 );

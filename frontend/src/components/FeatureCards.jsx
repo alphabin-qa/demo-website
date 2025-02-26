@@ -55,7 +55,7 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
   };
 
   return (
-    <div className="w-[320px] flex justify-center items-center mb-[20px] group hover:shadow-md hover:bg-[#fff] rounded-[5px] mt-[20px] mx-auto hover:cursor-pointer relative">
+    <div className="w-[320px] flex justify-center items-center group hover:shadow-md hover:bg-[#fff] rounded-[5px] mt-[20px] mx-auto hover:cursor-pointer relative">
       <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px]">
         <button
           onClick={() => {
@@ -85,20 +85,20 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
       <Link to={`/product-detail/${id}`}>
         <div className="pb-5">
           <img src={img} className="h-[253px] mx-auto" alt="dp" />
-          <div className="h-[116px] w-[292px] px-[20px] mt-[20px]">
-            <h1 className="text-[18px] font-[550] font-dmsans leading-[21.78px] w-[251px] h-[24px]">
+          <div className="h-[116px] w-[292px] px-[20px] mt-[20px] flex flex-col gap-[10px]">
+            <h1 key={id} className="text-[18px] font-[550] font-dmsans leading-[21.78px] w-[251px] h-[24px]">
               {header}
             </h1>
-            <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between">
-              {[...Array(4)].map(() => (
-                <StarFilled />
+            <div className="w-[100px] mt-[15px] gap-[12px] flex justify-between">
+              {[...Array(4)].map((_, index) => (
+                <StarFilled key={index} />
               ))}
-              <StarOutlined />
+              <StarOutlined key={5} />
               <p className="text-[12px] leading-[14.52px] font-[400] font-dmsans">
                 {reviewCount}
               </p>
             </div>
-            <p className="my-3 font-normal text-base font-dmsans ">{price}</p>
+            <p className="my-1 font-normal text-base font-dmsans ">{price}</p>
           </div>
         </div>
       </Link>

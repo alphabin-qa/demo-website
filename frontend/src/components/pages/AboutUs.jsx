@@ -7,7 +7,7 @@ const AboutUs = () => {
   return (
     <>
       <div>
-        <div className="my-[144px]">
+        <div className="my-[80px]">
           <div className="h-auto flex flex-col gap-[64px] justify-center items-center self-stretch">
             <p className="text-[#333] w-full xl:w-[1270px] font-dmsans text-[36px] font-bold leading-[18.5px] text-left ml-9">
               About Us

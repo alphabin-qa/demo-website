@@ -120,84 +120,6 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.addAddress = async (req, res) => {
-  try {
-    const { id, address } = req.body;
-
-    if (!id || !address) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid request format",
-      });
-    }
-
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
-    const newAddress = await Address.create({
-      firstname: address.firstname || "",
-      email: address.email || "",
-      city: address.city || "",
-      street: address.street || "",
-      country: address.country || "",
-      state: address.state || "",
-      zipCode: address.zipCode || "",
-    });
-
-    await user.addresses.push(newAddress);
-    await user.save();
-
-    await User.aggregate([
-      {
-        $lookup: {
-          from: "address",
-          localField: "_id",
-          foreignField: "_id",
-          as: "addressForUser",
-        },
-      },
-    ]);
-
-    return res.status(200).json({
-      success: true,
-      data: { user },
-    });
-  } catch (error) {
-    console.error("Error adding address:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
-  }
-};
-
-exports.deleteAddress = async (req, res) => {
-  const { id } = req.params;
-  if (!id) {
-    return res.status(401).json({
-      success: false,
-      message: "Id is not found",
-    });
-  }
-
-  const address = await Address.findByIdAndDelete({ _id: id });
-  if (!address) {
-    return res.status(401).json({
-      success: false,
-      message: "Address not found",
-    });
-  }
-  return res.status(200).json({
-    success: true,
-    message: "Address deleted Successfully",
-  });
-};
-
 exports.userDetail = async (req, res) => {
   try {
     const authHeader = req.headers["authorization"];
@@ -265,7 +187,6 @@ exports.updateUser = async (req, res) => {
 
     const authHeader = req.headers["authorization"];
     const authToken = authHeader && authHeader.split(" ")[1];
-
     const decodedToken = jwt.decode(authToken, { complete: true });
 
     if (decodedToken && decodedToken.payload.email) {
@@ -273,75 +194,43 @@ exports.updateUser = async (req, res) => {
       let user = await User.findOne({ email });
 
       if (user) {
-        await User.updateOne(user, {
-          fistname: firstName,
-          lastname: lastName,
-          phoneNumber,
-        });
+        let updatedFields = {}; // Object to track updated fields
 
-        let updatedUser = await User.findOne({ email });
-        return res.status(200).json({
-          data: { success: true, updatedUser },
-        });
-      }
-    }
-  } catch (error) {}
-};
+        if (firstName && firstName.trim() !== user.firstname.trim()) {
+          updatedFields.firstname = firstName; // Make sure the field name matches your schema
+        }
 
-exports.updateAddress = async (req, res) => {
-  try {
-    const {
-      city,
-      country,
-      email,
-      firstname,
-      state,
-      street,
-      zipCode,
-      _id,
-      userId,
-    } = req.body;
+        if (lastName && lastName !== user.lastname) {
+          updatedFields.lastname = lastName;
+        }
 
-    const authHeader = req.headers["authorization"];
-    const authToken = authHeader && authHeader.split(" ")[1];
+        if (phoneNumber && phoneNumber !== user.phoneNumber) {
+          updatedFields.phoneNumber = phoneNumber;
+        }
 
-    const decodedToken = jwt.decode(authToken, { complete: true });
-
-    if (decodedToken && decodedToken.payload.email) {
-      const userEmail = decodedToken.payload.email;
-      let user = await User.findOne({ email: userEmail });
-
-      if (!user) {
-        return res.status(401).json({
-          success: false,
-          message: "User is not registered",
-        });
-      } else {
-        const addressIndex = user.addresses.findIndex(
-          (address) => address._id.toString() === _id.toString()
-        );
-        if (addressIndex !== -1) {
-          user.addresses[addressIndex] = {
-            _id: _id,
-            city,
-            country,
-            firstname,
-            state,
-            street,
-            zipCode,
-            email,
-          };
-          await user.save();
-          return res.status(200).json({
-            success: true,
-            message: "Address updated successfully",
-          });
-        } else {
-          return res.status(404).json({
+        // If no fields were changed, return an error
+        if (Object.keys(updatedFields).length === 0) {
+          return res.status(400).json({
             success: false,
-            message: "Address not found",
+            message: "No changes detected",
           });
         }
+
+        // Update the user with the new data
+        await User.updateOne({ email }, { $set: updatedFields });
+
+        // Fetch the updated user and send response
+        const updatedUser = await User.findOne({ email });
+
+        return res.status(200).json({
+          success: true,
+          updatedUser,
+        });
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        });
       }
     }
   } catch (error) {
@@ -349,6 +238,180 @@ exports.updateAddress = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal server error",
+    });
+  }
+};
+
+exports.addAddress = async (req, res) => {
+  try {
+    const { id, address } = req.body;
+
+    if (!id || !address) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid request format",
+      });
+    }
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Check for duplicate address
+    const isDuplicate = user?.addresses?.some(
+      (existingAddr) =>
+        existingAddr?.street?.toLowerCase() === address?.street?.toLowerCase() &&
+        existingAddr?.city?.toLowerCase() === address?.city?.toLowerCase() &&
+        existingAddr?.zipCode === address?.zipCode
+    );
+
+    if (isDuplicate) {
+      return res.status(400).json({
+        success: false,
+        message: "This address already exists",
+      });
+    }
+
+    const newAddress = await Address.create({
+      firstname: address.firstname || "",
+      email: address.email || "",
+      city: address.city || "",
+      street: address.street || "",
+      country: address.country || "",
+      state: address.state || "",
+      zipCode: address.zipCode || "",
+    });
+
+    user.addresses.push(newAddress);
+    await user.save();
+
+    // Get updated user with populated addresses
+    const updatedUser = await User.findById(id).populate('addresses');
+
+    return res.status(200).json({
+      success: true,
+      data: { user: updatedUser },
+      message: "Address added successfully"
+    });
+  } catch (error) {
+    console.error("Error adding address:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+exports.updateAddress = async (req, res) => {
+  try {
+    const { id, userId, ...addressData } = req.body;
+
+    if (!id || !userId) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Address ID and User ID are required" 
+      });
+    }
+
+    // First find the user
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "User not found" 
+      });
+    }
+
+    // Then find the address
+    const address = await Address.findById(id);
+    if (!address) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Address not found" 
+      });
+    }
+
+    // Verify that this address belongs to the user
+    const hasAddress = user.addresses.some(addr => addr._id.toString() === id);
+    if (!hasAddress) {
+      return res.status(403).json({
+        success: false,
+        message: "Address does not belong to this user"
+      });
+    }
+
+    // Update address fields
+    Object.keys(addressData).forEach(key => {
+      if (addressData[key] !== undefined) {
+        address[key] = addressData[key];
+      }
+    });
+
+    await address.save();
+
+    // Update the user's address list
+    const addressIndex = user.addresses.findIndex(addr => addr._id.toString() === id);
+    if (addressIndex !== -1) {
+      user.addresses[addressIndex] = address;
+      await user.save();
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: { address },
+      message: "Address updated successfully"
+    });
+
+  } catch (error) {
+    console.error("Error updating address:", error);
+    return res.status(500).json({ 
+      success: false, 
+      message: "Internal server error" 
+    });
+  }
+};
+
+exports.deleteAddress = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Address ID is required" 
+      });
+    }
+
+    const address = await Address.findById(id);
+    if (!address) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Address not found" 
+      });
+    }
+
+    // Find user before deleting address
+    const user = await User.findOne({ "addresses": id });
+    if (user) {
+      user.addresses = user.addresses.filter(addr => addr._id.toString() !== id);
+      await user.save();
+    }
+
+    // Delete the address
+    await Address.findByIdAndDelete(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Address deleted successfully"
+    });
+  } catch (error) {
+    console.error("Error deleting address:", error);
+    return res.status(500).json({ 
+      success: false, 
+      message: "Internal server error" 
     });
   }
 };
@@ -363,11 +426,15 @@ exports.resetPassword = async (req, res) => {
       message: "User is not registered",
     });
   }
+
   const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Update password only
   user.password = hashedPassword;
   await user.save();
+
   return res.status(200).json({
     success: true,
-    message: "password reset successfully",
+    message: "Password reset successfully",
   });
 };

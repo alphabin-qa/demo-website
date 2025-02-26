@@ -22,31 +22,66 @@ const MyProfile = () => {
     });
   };
 
-  const handleUpdateuser = async () => {
+  const handleUpdateDetails = async () => {
+    const updatedDetails = {};
+    // Only send the updated fields
+    if (userInfo?.firstName !== data?.data?.firstname) {
+      updatedDetails.firstName = userInfo.firstName;
+    }
+    if (userInfo?.lastName !== data?.data?.lastname) {
+      updatedDetails.lastName = userInfo.lastName;
+    }
+    if (userInfo?.contactNumber !== data?.data?.contactNumber) {
+      updatedDetails.phoneNumber = userInfo.contactNumber;
+    }
+
+    if (Object.keys(updatedDetails).length === 0) {
+      return toast.error("No changes detected in user details!", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    }
+
+    const { data: updateData } = await updateUser(updatedDetails);
+
+    console.log(`updateData`, updateData);
+    
+    if (updateData?.success) {
+      console.log(`updateData`, updateData.updatedUser?.firstname);
+      
+      setUserInfo({
+        firstName: updateData?.updatedUser?.firstname,
+        lastName: updateData?.updatedUser?.lastname,
+        contactNumber: updateData?.updatedUser?.phoneNumber,
+      });
+      toast.success("User details updated successfully", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    }
+  };
+
+  const handleResetPassword = async () => {
     if (userInfo?.password?.length < 8) {
-      return toast.error(
-        "Password should be atleast 8 digits with special characters !",
-        {
-          duration: 4000,
-          style: {
-            border: "1px solid black",
-            backgroundColor: "black",
-            color: "white",
-          },
-        }
-      );
+      return toast.error("Password should be at least 8 characters with special characters!", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
     }
     if (userInfo?.password !== userInfo?.confirmPassword) {
-      return toast.error("Password did not match !", {
-        duration: 4000,
-        style: {
-          border: "1px solid black",
-          backgroundColor: "black",
-          color: "white",
-        },
-      });
-    } else if (userInfo?.contactNumber?.length !== 10) {
-      return toast.error("Contact number must be 10 digits !", {
+      return toast.error("Passwords do not match!", {
         duration: 4000,
         style: {
           border: "1px solid black",
@@ -56,29 +91,20 @@ const MyProfile = () => {
       });
     }
 
-    if (userInfo?.password?.length) {
-      await resetPassword({
-        email: userInfo.email,
-        password: userInfo.password,
-      });
-      setRefetch(true);
-    }
-
-    const { data } = await updateUser({
-      firstName: userInfo?.firstName,
-      lastName: userInfo?.lastName,
-      phoneNumber: userInfo?.contactNumber,
+    await resetPassword({
+      email: userInfo.email,
+      password: userInfo.password,
     });
-    if (data?.data?.success) {
-      toast.success("Details are updated succesfully", {
-        duration: 4000,
-        style: {
-          border: "1px solid black",
-          backgroundColor: "black",
-          color: "white",
-        },
-      });
-    }
+
+    setRefetch(true);
+    toast.success("Password reset successfully", {
+      duration: 4000,
+      style: {
+        border: "1px solid black",
+        backgroundColor: "black",
+        color: "white",
+      },
+    });
   };
 
   useEffect(() => {
@@ -95,19 +121,16 @@ const MyProfile = () => {
   }, [data, refetch]);
 
   return (
-    <div className="w-full xl:w-[963px] h-full border rounded-[5px] pb-5">
+    <div className="w-full xl:w-[963px] h-full border rounded-[5px] pb-5 mx-auto">
       <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
-        <div className="text-2xl font-bold font-dmsans uppercase">
-          My Profile
-        </div>
-        <div className="text-xs font-normal font-dmsans underline underline-offset-4 uppercase cursor-pointer">
-          <FaSave className="w-7 h-7" onClick={handleUpdateuser} />
-        </div>
+        <div className="text-2xl font-bold font-dmsans uppercase">My Profile</div>
       </div>
-      <div className="flex flex-col h-full justify-start items-center gap-7 mt-[30px] ml-[60px] mr-[59px]">
-        <div className="w-full flex-col sm:flex-row gap-8 flex items-center justify-between xl:gap-[104px]">
+
+      <div className="flex flex-col gap-7 mt-6 ml-[60px] mr-[60px]">
+        {/* Name Fields */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
           <label className="w-full flex flex-col gap-[13px]">
-            <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
+            <p className="text-[14px] font-sans font-semibold uppercase tracking-[1px]">
               FIRST NAME
             </p>
             <input
@@ -118,8 +141,8 @@ const MyProfile = () => {
               onChange={handleUserInfoChange}
             />
           </label>
-          <label className=" w-full flex flex-col gap-[13px]">
-            <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
+          <label className="w-full flex flex-col gap-[13px]">
+            <p className="text-[14px] font-sans font-semibold uppercase tracking-[1px]">
               LAST NAME
             </p>
             <input
@@ -131,9 +154,11 @@ const MyProfile = () => {
             />
           </label>
         </div>
-        <div className="w-full flex-col sm:flex-row gap-7 flex justify-between items-center xl:gap-[104px]">
-          <label className=" w-full flex flex-col gap-[13px]">
-            <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
+
+        {/* Email & Contact Fields */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 w-full">
+          <label className="w-full flex flex-col gap-[13px]">
+            <p className="text-[14px] font-sans font-semibold uppercase tracking-[1px]">
               EMAIL
             </p>
             <input
@@ -143,8 +168,8 @@ const MyProfile = () => {
               disabled
             />
           </label>
-          <label className=" w-full flex flex-col gap-[13px]">
-            <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
+          <label className="w-full flex flex-col gap-[13px]">
+            <p className="text-[14px] font-sans font-semibold uppercase tracking-[1px]">
               CONTACT NUMBER
             </p>
             <input
@@ -158,18 +183,20 @@ const MyProfile = () => {
             />
           </label>
         </div>
+
+        {/* Password Reset Section */}
         <div className="w-full">
           <div className="flex font-bold text-lg justify-start leading-[17.92px] capitalize font-dmsans">
             reset your password
           </div>
         </div>
-        <div className="w-full flex-col sm:flex-row gap-7 flex justify-between items-center xl:gap-[104px]">
-          <label className=" w-full flex flex-col gap-[13px]">
-            <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 w-full">
+          <label className="w-full flex flex-col gap-[13px]">
+            <p className="text-[14px] font-sans font-semibold uppercase tracking-[1px]">
               New Password
             </p>
             <input
-              type="text"
+              type="password"
               className="border w-full h-[40.39px] pl-2 font-dmsans"
               placeholder="Enter new password"
               minLength={8}
@@ -178,12 +205,12 @@ const MyProfile = () => {
               onChange={handleUserInfoChange}
             />
           </label>
-          <label className=" w-full flex flex-col gap-[13px]">
-            <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
-              confirm Password
+          <label className="w-full flex flex-col gap-[13px]">
+            <p className="text-[14px] font-sans font-semibold uppercase tracking-[1px]">
+              Confirm Password
             </p>
             <input
-              type="text"
+              type="password"
               className="border w-full h-[40.39px] pl-2 font-dmsans"
               placeholder="Confirm password"
               name="confirmPassword"
@@ -192,8 +219,28 @@ const MyProfile = () => {
             />
           </label>
         </div>
-        <div className=" w-full text-[11px] font-medium text-start font-dmsans text-[#404040] -translate-[0.2px] -mt-5">
-          Password should be more than 8 characters including special characters
+
+        {/* Password Guidelines */}
+        <div className="w-full text-[11px] font-medium text-start font-dmsans text-[#404040] -mt-5">
+          Password should be more than 8 characters, including special characters.
+        </div>
+
+        <div className="flex gap-4 mt-6">
+          {/* Update Details Button */}
+          <button
+            onClick={handleUpdateDetails}
+            className="w-[370px] h-[46px] p-[10px] gap-[10px] bg-black text-white font-bold"
+          >
+            Update Details
+          </button>
+
+          {/* Reset Password Button */}
+          <button
+            onClick={handleResetPassword}
+            className="w-[370px] h-[46px] p-[10px] gap-[10px] bg-blue-600 text-white font-bold"
+          >
+            Reset Password
+          </button>
         </div>
       </div>
     </div>

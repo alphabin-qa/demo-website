@@ -18,6 +18,7 @@ const formsData = {
   state: "",
   zipCode: "",
 };
+
 const Address = ({ userDetails, setRefetch }) => {
   const [addAddress] = useAddAddressMutation();
   const [updateAddAddress] = useGetUpdateAddressMutation();
@@ -25,7 +26,7 @@ const Address = ({ userDetails, setRefetch }) => {
   const { data: userData } = useSelector((state) => state?.userData);
   const [selectAddress, setSelectAddress] = useState(false);
   const [formData, setFormData] = useState(formsData);
-  const [addressDetails, setAddressDetails] = useState();
+  const [addressDetails, setAddressDetails] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,17 +35,17 @@ const Address = ({ userDetails, setRefetch }) => {
       [name]: value,
     });
   };
+
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
   const validateForm = (data) => {
     const errors = {};
-
     if (!data.firstname.trim()) {
       errors.firstname = "First Name is required";
     }
-
     if (!data.email.trim()) {
       errors.email = "Email is required";
     } else if (!isValidEmail(data.email)) {
@@ -62,19 +63,25 @@ const Address = ({ userDetails, setRefetch }) => {
     }
     return errors;
   };
-  const handleSubmit = async (address) => {
+
+  const handleSubmit = async () => {
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors)?.length === 0) {
-      console.log(address);
       try {
-        if (userDetails.address.length <= 4) {
-          const { data } = await addAddress({
-            id: userData?.data?.id,
-            address: formData,
+        if (addressDetails) {
+          // Update existing address
+          const { data } = await updateAddAddress({
+            id: String(addressDetails._id), // Ensure ID is properly stringified
+            userId: userData?.data?.id,
+            ...formData,
           });
-          if (data.success === true) {
-            setRefetch(true);
-            toast.success(`Address added successfully`, {
+
+          if (data?.success) {
+            if (typeof setRefetch === 'function') {
+              setRefetch(true);
+              setTimeout(() => setRefetch(false), 100); // Ensure refetch is reset
+            }
+            toast.success(data.message || "Address updated successfully", {
               duration: 4000,
               style: {
                 border: "1px solid black",
@@ -82,103 +89,153 @@ const Address = ({ userDetails, setRefetch }) => {
                 color: "white",
               },
             });
-            setSelectAddress(false);
+            resetForm();
+          } else {
+            throw new Error(data?.message || "Failed to update address");
           }
         } else {
-          toast.error(`You can not add more than 4 addresses`, {
+          // Add new address
+          if (userDetails.address.length < 4) {
+            const { data } = await addAddress({
+              id: userData?.data?.id,
+              address: formData,
+            });
+
+            if (data?.success) {
+              if (typeof setRefetch === 'function') {
+                setRefetch(true);
+                setTimeout(() => setRefetch(false), 100); // Ensure refetch is reset
+              }
+              toast.success(data.message || "Address added successfully", {
+                duration: 4000,
+                style: {
+                  border: "1px solid black",
+                  backgroundColor: "black",
+                  color: "white",
+                },
+              });
+              resetForm();
+            } else {
+              throw new Error(data?.message || "Failed to add address");
+            }
+          } else {
+            toast.error("You cannot add more than 4 addresses", {
+              duration: 4000,
+              style: {
+                border: "1px solid black",
+                backgroundColor: "black",
+                color: "white",
+              },
+            });
+          }
+        }
+      } catch (error) {
+        toast.error(
+          error.message || `Failed to ${addressDetails ? "update" : "add"} address`,
+          {
             duration: 4000,
             style: {
               border: "1px solid black",
               backgroundColor: "black",
               color: "white",
             },
-          });
-        }
-      } catch (error) {
+          }
+        );
         console.error(error);
       }
-      // setFormData(formsData);
     }
-    setSelectAddress(false);
-  };
-
-  const handleAddNewAddress = () => {
-    if (userDetails?.address?.length >= 4) {
-      return toast.error(`You can not add more than 4 addresses`, {
-        duration: 4000,
-        style: {
-          border: "1px solid black",
-          backgroundColor: "black",
-          color: "white",
-        },
-      });
-    } else {
-      setSelectAddress(true);
-      // setFormData(formsData);
-    }
-  };
-
-  const updateAddressById = async (formData) => {
-    const data = await updateAddAddress({ formData });
-    if (data?.data?.success) {
-      toast.success(`${data?.data?.message}`, {
-        duration: 4000,
-        style: {
-          border: "1px solid black",
-          backgroundColor: "black",
-          color: "white",
-        },
-      });
-    } else {
-      toast.error(`${data?.error?.data?.message}`, {
-        duration: 4000,
-        style: {
-          border: "1px solid black",
-          backgroundColor: "black",
-          color: "white",
-        },
-      });
-    }
-    // setSelectAddress(false);
-    // setFormData(formsData);
   };
 
   const handleDeleteAddress = async (id) => {
-    if (!id) {
-      return;
-    }
-    const { data } = await deleteAddressById({ id });
+    if (!id) return;
 
-    if (data?.success) {
-      setRefetch(true);
+    try {
+      const { data } = await deleteAddressById({ id: String(id) });
+      if (data?.success) {
+        if (typeof setRefetch === 'function') {
+          setRefetch(true);
+          setTimeout(() => setRefetch(false), 100); // Ensure refetch is reset
+        }
+        toast.success(data.message || "Address deleted successfully", {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
+      } else {
+        throw new Error(data?.message || "Failed to delete address");
+      }
+    } catch (error) {
+      toast.error(error.message || "Failed to delete address", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+      console.error(error);
     }
   };
 
-  const handleAddress = async (address) => {
+
+  const resetForm = () => {
+    setSelectAddress(false);
+    setFormData(formsData);
+    setAddressDetails(null);
+  };
+
+  const handleAddress = (address) => {
     setSelectAddress(true);
     setAddressDetails(address);
     setFormData({
-      ...formData,
-      ...address,
+      firstname: address.firstname || "",
+      email: address.email || "",
+      city: address.city || "",
+      street: address.street || "",
+      country: address.country || "",
+      state: address.state || "",
+      zipCode: address.zipCode || "",
     });
+  };
+
+  const handleCancel = () => {
+    resetForm();
   };
 
   return (
     <div className="w-full h-fit">
+      {/* Address List Section */}
       <div
-        className={`w-full xl:w-[963px] h-full border rounded-[5px] ${
-          selectAddress && "hidden"
-        }`}
+        className={`w-full xl:w-[963px] h-full border rounded-[5px] ${selectAddress && "hidden"
+          }`}
       >
         <div className="h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
           <div className="text-2xl font-bold font-dmsans">Address</div>
           <div
             className="ml-[50%] flex border justify-center items-center p-[10px] font-dmsans cursor-pointer rounded-md bg-black text-white"
-            onClick={handleAddNewAddress}
+            onClick={() => {
+              if (userDetails?.address?.length >= 4) {
+                return toast.error(`You cannot add more than 4 addresses`, {
+                  duration: 4000,
+                  style: {
+                    border: "1px solid black",
+                    backgroundColor: "black",
+                    color: "white",
+                  },
+                });
+              } else {
+                setSelectAddress(true);
+              }
+            }}
           >
             Add New Address
           </div>
         </div>
+
+        {/* List of Addresses */}
         <div className="h-[330px] grid grid-cols-2 justify-center items-start gap-8 mt-[30px] ml-[30px] mb-8">
           {!userDetails?.address?.length ? (
             <div className="w-full ml-[50%] flex border justify-center items-center p-[10px] font-dmsans font-medium">
@@ -194,17 +251,13 @@ const Address = ({ userDetails, setRefetch }) => {
                       <div className="flex gap-3">
                         <div
                           className="text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer"
-                          onClick={() => {
-                            handleAddress(item);
-                          }}
+                          onClick={() => handleAddress(item)}
                         >
                           <FaEdit className="w-[21px] h-[21px]" />
                         </div>
                         <div
                           className="text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer"
-                          onClick={() => {
-                            handleDeleteAddress(item?._id);
-                          }}
+                          onClick={() => handleDeleteAddress(item?._id)}
                         >
                           <MdOutlineDelete className="w-[24px] h-[24px]" />
                         </div>
@@ -228,31 +281,22 @@ const Address = ({ userDetails, setRefetch }) => {
           )}
         </div>
       </div>
+
+      {/* Add/Edit Address Form */}
       {selectAddress && (
         <div
-          className={`w-full xl:w-[963px] h-full border rounded-[5px] pb-2 ${
-            !selectAddress && "hidden"
-          }`}
+          className={`w-full xl:w-[963px] h-full border rounded-[5px] pb-2 ${!selectAddress && "hidden"
+            }`}
         >
           <div className="w-full h-[102px] px-[30px] py-[10px] flex justify-between items-center border-b">
             <div className="text-2xl font-bold font-dmsans">Address</div>
             <div className="flex flex-col sm:flex-row text-end gap-9 text-xs uppercase font-normal font-dmsans underline underline-offset-4 cursor-pointer">
-              <div
-                onClick={() => {
-                  setSelectAddress(false);
-                }}
-              >
-                cancle
-              </div>
-              <div
-                onClick={() => {
-                  handleSubmit(formData);
-                }}
-              >
-                save your address
-              </div>
+              <div onClick={handleCancel}>Cancel</div>
+              <div onClick={handleSubmit}>{addressDetails ? "Update" : "Save"} Address</div>
             </div>
           </div>
+
+          {/* Address Form Fields */}
           <div className="h-fit flex flex-col justify-start items-center gap-5 my-[20px] ml-[30px] mr-[89px]">
             <div className="w-full">
               <label className="w-full flex flex-col gap-[13px]">
@@ -269,14 +313,14 @@ const Address = ({ userDetails, setRefetch }) => {
               </label>
             </div>
             <div className="w-full flex flex-col sm:flex-row gap-3 justify-between items-center sm:gap-[104px]">
-              <label className=" w-full flex flex-col gap-[13px]">
+              <label className="w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   EMAIL<sup className="text-red-600">*</sup>
                 </p>
                 <input
                   type="text"
                   onChange={handleChange}
-                  value={formData?.email}
+                  value={formData.email}
                   name="email"
                   className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
@@ -294,8 +338,10 @@ const Address = ({ userDetails, setRefetch }) => {
                 />
               </label>
             </div>
+
+            {/* Additional Fields */}
             <div className="w-full flex flex-col sm:flex-row gap-3 justify-between items-center sm:gap-[104px]">
-              <label className=" w-full flex flex-col gap-[13px]">
+              <label className="w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   STREET
                 </p>
@@ -307,7 +353,7 @@ const Address = ({ userDetails, setRefetch }) => {
                   className="border w-full h-[40.39px] pl-2 font-dmsans"
                 />
               </label>
-              <label className=" w-full flex flex-col gap-[13px]">
+              <label className="w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   COUNTRY / REGION
                 </p>
@@ -321,7 +367,7 @@ const Address = ({ userDetails, setRefetch }) => {
               </label>
             </div>
             <div className="w-full flex flex-col sm:flex-row gap-3 justify-between items-center sm:gap-[104px]">
-              <label className=" w-full flex flex-col gap-[13px]">
+              <label className="w-full flex flex-col gap-[13px]">
                 <p className="text-[14px] font-sans font font-semibold uppercase tracking-[1px] leading-[17.92px]">
                   STATE
                 </p>

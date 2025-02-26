@@ -89,14 +89,14 @@ function Checkout() {
   };
   const handleSubmit = async () => {
     const validationErrors = validateForm(formData);
-    if (Object?.keys(validationErrors)?.length === 0) {
+    if (Object.keys(validationErrors).length === 0) {
       try {
         const { data } = await addAddress({
-          id: user[0]?.user?._id,
+          id: userDetails?.id,
           address: formData,
         });
-        if (data.success === true) {
-          toast.success(`Fill all the required fields`, {
+        if (data?.success === true) {
+          toast.success(`Address added successfully`, {
             duration: 4000,
             style: {
               border: "1px solid black",
@@ -104,11 +104,19 @@ function Checkout() {
               color: "white",
             },
           });
-        } else if (data?.data?.success === true) {
           setRefetch(true);
+          setChangeAddress(false);
         }
       } catch (error) {
         console.error(error);
+        toast.error(`Error adding address`, {
+          duration: 4000,
+          style: {
+            border: "1px solid black",
+            backgroundColor: "black",
+            color: "white",
+          },
+        });
       }
       setFormData(formdata);
     }
@@ -142,6 +150,8 @@ function Checkout() {
   const fetchDetails = async () => {
     try {
       const { data } = await userDetail();
+      console.log(`dfara`, data?.data?.data);
+
       setUserDetails(data?.data?.data);
       if (!data?.data?.data?.address?.length) {
         setChangeAddress(true);
@@ -150,7 +160,7 @@ function Checkout() {
         setChangeAddress(false);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching user details:", error);
     }
   };
 
@@ -185,7 +195,7 @@ function Checkout() {
         try {
           const { data } = await createOrder({
             product: cartItems,
-            quntity: cartItems.length,
+            quantity: cartItems.length,
             address: address,
             paymentMethod: billingTab,
             totalAmount: totalValue,
@@ -201,7 +211,7 @@ function Checkout() {
         try {
           const { data } = await createOrder({
             product: cartItems,
-            quntity: cartItems.length,
+            quantity: cartItems.length,
             address: address,
             paymentMethod: selectedBank,
             totalAmount: totalValue,
@@ -216,49 +226,12 @@ function Checkout() {
       } else {
         // Payment method is not COD, proceed with credit card validation
         if (
-          cardData &&
-          cardData.cardNo &&
-          typeof cardData.cardNo === "string" &&
-          cardData.cvv &&
-          typeof parseInt(cardData.cvv) === "number" &&
-          cardData.expiredMonth &&
-          typeof parseInt(cardData.expiredMonth) === "number" &&
-          cardData.expiredYear &&
-          typeof parseInt(cardData.expiredYear) === "number"
+          !cardData.cardNo.trim() ||
+          !cardData.cvv.trim() ||
+          !cardData.expiredMonth.trim() ||
+          !cardData.expiredYear.trim()
         ) {
-          const differentKeys = findDifferentKeys(cardData, cardDetails);
-          if (differentKeys.length > 0) {
-            const errorMessage = differentKeys
-              .map((key) => `Enter valid ${key}`)
-              .join(", ");
-            return toast.error(errorMessage, {
-              duration: 4000,
-              style: {
-                border: "1px solid black",
-                backgroundColor: "black",
-                color: "white",
-              },
-            });
-          }
-
-          try {
-            const { data } = await createOrder({
-              product: cartItems,
-              quantity: cartItems.length,
-              address: address,
-              paymentMethod: billingTab,
-              totalAmount: totalValue,
-              orderDate: Date.now(),
-              email: userDetails?.email,
-            });
-            setOpen(true);
-            setOrder(data);
-          } catch (error) {
-            console.error(error);
-            // Handle error appropriately
-          }
-        } else {
-          toast.error("Please enter all the required card details", {
+          return toast.error("Please fill all the credit card details", {
             duration: 4000,
             style: {
               border: "1px solid black",
@@ -266,6 +239,23 @@ function Checkout() {
               color: "white",
             },
           });
+        } 
+
+        try {
+          const { data } = await createOrder({
+            product: cartItems,
+            quantity: cartItems.length,
+            address: address,
+            paymentMethod: billingTab,
+            totalAmount: totalValue,
+            orderDate: Date.now(),
+            email: userDetails?.email,
+          });
+          setOpen(true);
+          setOrder(data);
+        } catch (error) {
+          console.error(error);
+          // Handle error appropriately
         }
       }
     }
@@ -472,37 +462,33 @@ function Checkout() {
               <div className="w-full md:w-[570px] px-3 md:px-0 mx-auto py-[2rem]">
                 <div className="flex justify-between gap-2">
                   <button
-                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                      billingTab === "credit"
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${billingTab === "credit"
                         ? "bg-black text-white"
                         : "bg-none"
-                    }`}
+                      }`}
                     onClick={() => handleBillingTab("credit")}
                   >
                     Credit Card
                   </button>
                   <button
-                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                      billingTab === "debit" ? "bg-black text-white" : "bg-none"
-                    }`}
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${billingTab === "debit" ? "bg-black text-white" : "bg-none"
+                      }`}
                     onClick={() => handleBillingTab("debit")}
                   >
                     Debit Card
                   </button>
                   <button
-                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                      billingTab === "netbanking"
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${billingTab === "netbanking"
                         ? "bg-black text-white"
                         : "bg-none"
-                    }`}
+                      }`}
                     onClick={() => handleBillingTab("netbanking")}
                   >
                     Net Banking
                   </button>
                   <button
-                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
-                      billingTab === "cod" ? "bg-black text-white" : "bg-none"
-                    }`}
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${billingTab === "cod" ? "bg-black text-white" : "bg-none"
+                      }`}
                     onClick={() => handleBillingTab("cod")}
                   >
                     Cash on Delivery

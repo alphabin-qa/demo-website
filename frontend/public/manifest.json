@@ -1,0 +1,8 @@
+{
+  "short_name": "AB Demo Store",
+  "name": "AB Demo Store",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

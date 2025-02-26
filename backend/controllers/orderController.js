@@ -6,7 +6,7 @@ exports.createOrder = async (req, res) => {
   try {
     const {
       product,
-      quntity,
+      quantity,
       address,
       paymentMethod,
       totalAmount,
@@ -15,7 +15,7 @@ exports.createOrder = async (req, res) => {
     } = req.body;
     const newOrder = {
       product,
-      quntity,
+      quantity,
       address,
       paymentMethod,
       totalAmount,
@@ -23,15 +23,15 @@ exports.createOrder = async (req, res) => {
     };
     const result = await Order.create(newOrder);
     const userDetails = await User.findOne({ email });
-
+    
     if (userDetails) {
-      userDetails.orders.push(result._id);
+      userDetails.orders.push(result.id);
       await userDetails.save();
     }
 
     res.json({
       message: "Order placed successfully",
-      orderId: result._id,
+      orderId: result.id,
     });
   } catch (error) {
     console.error("Error creating order:", error);
@@ -72,31 +72,29 @@ exports.deleteOrder = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const getOrder = await Order.findById(id);
+
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
 
     user.orders = user.orders.filter(
-      (order) => order.toString() !== getOrder?._id.toString()
+      (orderItem) => orderItem.toString() !== order._id.toString()
     );
 
     await user.save();
+    await Order.findByIdAndDelete(id);
 
-    const order = await Order.findByIdAndDelete(id);
-
-    const updatedUser = await User.findById(userId);
-
-    // Step 4: Respond based on the result
-    if (order) {
-      res.json({
-        status: true,
-        message: "Your order is canceled successfully",
-        user: updatedUser,
-      });
-    } else {
-      res.status(404).json({ message: "Order not found" });
-    }
+    return res.status(200).json({ 
+      success: true,
+      message: "Order cancelled successfully",
+      user: user
+    });
   } catch (error) {
-    // Handle errors at a higher level (e.g., database connection issues)
-    console.error("Error deleting order:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error("Error in deleteOrder:", error);
+    return res.status(500).json({ 
+      message: "Failed to delete order",
+      error: error.message 
+    });
   }
 };

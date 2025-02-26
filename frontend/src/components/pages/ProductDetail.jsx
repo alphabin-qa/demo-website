@@ -108,6 +108,7 @@ function ProductDetail() {
   };
 
   const settings = {
+    className: "flex",
     arrows: true,
     infinite: true,
     speed: 500,
@@ -142,11 +143,11 @@ function ProductDetail() {
       {/* Product Details */}
       <section className="sm:mt-[40px] md:nmt-[50px] lg:mt-[60px] xl:mt-[120px] mb-[60px]">
         <div className="xl:container lg:container mx-auto">
-          <div class="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
+          <div className="grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[10px] sm:p-[8px] ">
             <div className="sm:mb-[10px] ">
               <div className="flex justify-center">
                 <img
-                  class="object-cover h-[601px] w-[549px] rounded-[5px]"
+                  className="object-cover h-[601px] w-[549px] rounded-[5px]"
                   src={img}
                   alt=""
                 />
@@ -154,10 +155,10 @@ function ProductDetail() {
             </div>
             <div className="sm:mb-[10px]  pl-[20px]">
               <div className="top-0 h-full w-[500px] flex flex-col">
-                <h1 className="font-[700] font-dmsans text-[48px] leading-[58.09px] mb-2">
+                <h1 className="font-[700] font-brigada text-[48px] leading-[58.09px] mb-2">
                   {header}
                 </h1>
-                <p className="w-[489px] h-[72px] font-dmsans font-[400] text-[16px] leading-[24px] tracking-[1px] mb-3">
+                <p className="w-[489px] h-[72px] font-inter font-[400] text-[16px] leading-[24px] tracking-[1px] mb-3">
                   {subdescription}
                 </p>
                 <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between font-dmsans font-[400] size-[21.87px] tracking-[3.93px] mb-[15px]">
@@ -177,15 +178,15 @@ function ProductDetail() {
                   <div className=" w-full">
                     <img
                       src={img}
-                      alt=""
-                      className="h-[120px] w-[140px] bg-[#E8E8E9]"
+                      alt={`${header} img`}
+                      className="h-[120px] w-[140px] bg-[#E8E8E9] object-cover"
                     />
                   </div>
                   <div className=" w-full">
-                    <img src={img} alt="" className="h-[120px] w-[140px]" />
+                    <img src={img} alt={`${header} img`} className="h-[120px] w-[140px] object-cover" />
                   </div>
                   <div className="w-full">
-                    <img src={img} alt="" className="h-[120px] w-[140px]" />
+                    <img src={img} alt={`${header} img`} className="h-[120px] w-[140px] object-cover" />
                   </div>
                   <div className="w-full"></div>
                 </div>
@@ -231,34 +232,35 @@ function ProductDetail() {
             <div className="">
               <img
                 src={img}
-                alt=""
-                className="w-[253px] h-[237px] rounded-[5px]"
+                alt={`${header} img`}
+                className="w-[253px] h-[237px] rounded-[5px] object-cover"
+              />
+            </div>
+            <div>
+              <img
+                src={img}
+                alt={`${header} img`}
+                className="w-[253px] h-[237px] rounded-[5px] object-cover"
+              />
+            </div>
+            <div>
+              <img
+                src={img}
+                alt={`${header} img`}
+                className="w-[253px] h-[237px] rounded-[5px] object-cover"
               />
             </div>
             <div>
               <img
                 src={img}
                 alt=""
-                className="w-[253px] h-[237px] rounded-[5px]"
-              />
-            </div>
-            <div>
-              <img
-                src={img}
-                alt=""
-                className="w-[253px] h-[237px] rounded-[5px]"
-              />
-            </div>
-            <div>
-              <img
-                src={img}
-                alt=""
-                className="w-[253px] h-[237px] rounded-[5px]"
+                className="w-[253px] h-[237px] rounded-[5px] object-cover"
               />
             </div>
           </div>
         </div>
       </section>
+
 
       <section>
         <div className="container w-[60%] mx-auto">

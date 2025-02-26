@@ -72,17 +72,18 @@ const Header = () => {
 
   return (
     <>
-      <div className="h-[80px] flex justify-between items-center px-[8px]">
+      <div className="h-[80px] flex justify-between items-center px-4 md:px-8 lg:px-12 max-w-[1440px] mx-auto w-full">
         <div
-          className="sm:w-[200px] h-[62px] flex flex-col justify-center items-center cursor-pointer ml-2 sm:ml-10"
+          className="w-[128px] md:w-[150px] h-[62px] flex items-center cursor-pointer"
           onClick={() => navigate("/home")}
         >
-          <img src={HeaderLogo} alt="logo" width={128} height={40} />
+          <img src={HeaderLogo} alt="logo" className="w-full h-auto object-contain" />
         </div>
-        <div>
-          <ul className="hidden lg:flex justify-center items-center gap-8 font-medium text-[16px] leading-5 font-dmsans">
-            {headerMenu.map((item) => (
+        <div className="hidden lg:block flex-1 max-w-[600px]">
+          <ul className="flex justify-center items-center gap-8 font-medium text-[16px] leading-5 font-dmsans">
+            {headerMenu.map((item, index) => (
               <li
+                key={index}
                 className={`cursor-pointer p-[6px] hover:underline underline-offset-4 ${
                   item === isSelectedTab ? "underline underline-offset-4" : ""
                 }`}
@@ -93,45 +94,44 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        <div className="flex justify-center items-center gap-7">
-          <div className="flex justify-center items-center gap-2">
+        <div className="flex items-center gap-4 md:gap-7">
+          <div className="flex items-center gap-2">
             <Search
-              className="cursor-pointer bg-white"
+              className="cursor-pointer bg-white w-10 h-10"
               onClick={() => {
                 setOpenSearch(!openSearch);
               }}
             />
             <div
-              className="cursor-pointer hidden lg:flex"
+              className="cursor-pointer hidden lg:block relative"
               onClick={() => {
                 navigate("/wishlist");
               }}
             >
               {wishlistItems.length ? (
-                <div className="xl:mt-[-25px] lg:mt-[-20px] md:mt-[-16px] flex flex-col">
-                  <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
+                <div className="relative mr-2">
+                  <span className="absolute -top-3 -right-3 text-[13px] min-w-[20px] h-5 flex items-center justify-center bg-orange-100 rounded-full">
                     {wishlistItemCount}
                   </span>
-                  <FaHeart className="w-[24px] h-[22px]" />
+                  <FaHeart className="w-5 h-5" />
                 </div>
               ) : (
-                <WishList className="cursor-pointer" />
+                <WishList className="w-10 h-10" />
               )}
             </div>
-            <div className="cursor-pointer hidden lg:flex">
+            <div className="cursor-pointer hidden lg:block relative">
               {cartItems.length ? (
-                <div className="flex flex-col xl:mt-[-25px] lg:mt-[-20px] md:mt-[-16px] shrink">
-                  <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
+                <div className="relative">
+                  <span className="absolute -top-3 -right-3 text-[13px] min-w-[20px] h-5 flex items-center justify-center bg-orange-100 rounded-full">
                     {cartItemCount}
                   </span>
-
                   <FaCartShopping
-                    className="w-[24px] h-[22px]"
+                    className="w-5 h-5"
                     onClick={toggleCart}
                   />
                 </div>
               ) : (
-                <Cart className="cursor-pointer" onClick={toggleCart} />
+                <Cart className="w-10 h-10" onClick={toggleCart} />
               )}
             </div>
             <CartModel
@@ -140,108 +140,114 @@ const Header = () => {
               setIsCartOpen={setIsCartOpen}
             />
             <User
-              className="cursor-pointer hidden lg:flex"
+              className="cursor-pointer hidden lg:block w-10 h-10"
               onClick={handleClick}
             />
           </div>
-          <div
-            className="w-[44px] h-[44px] flex justify-center items-center lg:hidden"
+          <button
+            className="w-10 h-10 flex justify-center items-center lg:hidden rounded-lg hover:bg-gray-100"
             onClick={() => {
               setToggle(!toggle);
             }}
           >
-            <MdOutlineStorage className="w-[25px] h-[25px] text-gray-600" />
-            {toggle && (
-              <div className="w-full flex justify-start items-center p-2 bg-[#ffffff] absolute top-[80px] right-0 border gap-5 pl-3 z-10">
-                <ul className="w-full h-full flex flex-col font-medium text-[16px] text-black leading-5 font-dmsans gap-[3px]">
-                  {headerMenu.map((item) => (
-                    <>
-                      <li
-                        className="cursor-pointer py-[6px] ml-2 sm:ml-10 rounded-lg"
-                        onClick={() => handleMenuSelection(item)}
-                      >
-                        {item}
-                      </li>
-                    </>
-                  ))}
-                  <li className="flex py-[6px] pt-[15px] ml-2 sm:ml-10">
-                    <div
-                      className="cursor-pointer bg-white"
-                      onClick={() => {
-                        navigate("/wishlist");
-                      }}
-                    >
-                      <div className="flex text-center">
-                        {wishlistItems.length ? (
-                          <div className="mt-[-10px] flex flex-col">
-                            <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
-                              {wishlistItemCount}
-                            </span>
-                            <FaHeart className="w-[24px] h-[22px] border-white" />
-                          </div>
-                        ) : (
-                          <WishList className="cursor-pointer" />
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="cursor-pointer">
-                      <div className="flex">
-                        {cartItems.length ? (
-                          <div className="flex flex-col mt-[-10px] shrink px-[10px]">
-                            <span className="text-[13px] px-[12px] ml-4 bg-orange-100 rounded-full">
-                              {cartItemCount}
-                            </span>
-
-                            <FaCartShopping
-                              className="w-[24px] h-[22px]"
-                              onClick={toggleCart}
-                            />
-                          </div>
-                        ) : (
-                          <Cart
-                            className="cursor-pointer"
-                            onClick={toggleCart}
-                          />
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="flex">
-                      <User className="cursor-pointer" onClick={handleClick} />
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-          {openSearch && (
-            <div className="flex justify-center items-center drop-container absolute top-0 z-10 bg-white px-5 mx-0 -mt-5 h-[80px]">
-              <div className="flex items-center justify-center font-dmsans px-[30px] py-[15px]">
-                <input
-                  type="text"
-                  style={{
-                    width: "50vw",
-                    height: "43px",
-                    paddingLeft: "10px",
-                    outline: "none",
-                  }}
-                  className="border-b text-lg"
-                  id="standard-basic"
-                  placeholder="Search..."
-                />
-                <div className="flex gap-3">
-                  <IoMdClose
-                    className="h-6 w-6 -ml-6 cursor-pointer"
-                    onClick={() => setOpenSearch(false)}
-                  />
-                  <IoSearchOutline className="w-[21px] h-[21px] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-          )}
+            <MdOutlineStorage className="w-6 h-6 text-gray-600" />
+          </button>
         </div>
       </div>
+      
+      {/* Mobile Menu */}
+      {toggle && (
+        <div className="fixed inset-0 top-[80px] bg-white z-50 lg:hidden">
+          <div className="p-4">
+            <ul className="flex flex-col gap-4 font-medium text-[16px] text-black font-dmsans">
+              {headerMenu.map((item) => (
+                <li
+                  key={item}
+                  className="cursor-pointer py-2 px-4 hover:bg-gray-100 rounded-lg"
+                  onClick={() => {
+                    handleMenuSelection(item);
+                    setToggle(false);
+                  }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+            
+            <div className="flex gap-6 mt-6 px-4">
+              <div
+                className="cursor-pointer relative"
+                onClick={() => {
+                  navigate("/wishlist");
+                  setToggle(false);
+                }}
+              >
+                {wishlistItems.length ? (
+                  <div className="relative">
+                    <span className="absolute -top-3 -right-3 text-[13px] min-w-[20px] h-5 flex items-center justify-center bg-orange-100 rounded-full">
+                      {wishlistItemCount}
+                    </span>
+                    <FaHeart className="w-6 h-6" />
+                  </div>
+                ) : (
+                  <WishList className="w-6 h-6" />
+                )}
+              </div>
+
+              <div className="cursor-pointer relative">
+                {cartItems.length ? (
+                  <div className="relative">
+                    <span className="absolute -top-3 -right-3 text-[13px] min-w-[20px] h-5 flex items-center justify-center bg-orange-100 rounded-full">
+                      {cartItemCount}
+                    </span>
+                    <FaCartShopping
+                      className="w-6 h-6"
+                      onClick={() => {
+                        toggleCart();
+                        setToggle(false);
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <Cart 
+                    className="w-6 h-6" 
+                    onClick={() => {
+                      toggleCart();
+                      setToggle(false);
+                    }}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {openSearch && (
+        <div className="flex justify-center items-center drop-container absolute top-0 z-10 bg-white px-5 mx-0 -mt-5 h-[80px]">
+          <div className="flex items-center justify-center font-dmsans px-[30px] py-[15px]">
+            <input
+              type="text"
+              style={{
+                width: "50vw",
+                height: "43px",
+                paddingLeft: "10px",
+                outline: "none",
+              }}
+              className="border-b text-lg"
+              id="standard-basic"
+              placeholder="Search..."
+            />
+            <div className="flex gap-3">
+              <IoMdClose
+                className="h-6 w-6 -ml-6 cursor-pointer"
+                onClick={() => setOpenSearch(false)}
+              />
+              <IoSearchOutline className="w-[21px] h-[21px] cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

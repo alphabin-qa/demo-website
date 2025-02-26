@@ -6,7 +6,7 @@ const Contact = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center my-[151px] ">
+      <div className="flex flex-col justify-center items-center my-[80px] ">
         <div className="flex flex-col justify-center items-center gap-16">
           <div className=" w-full text-start text-[28px] font-bold leading-[18.5px] font-dmsans text-[#333333]">
             Contact Us
@@ -43,8 +43,7 @@ const Contact = () => {
                   Phone:{" "}
                 </p>
                 <div className=" flex flex-col gap-2 pl-[22px] text-[16px] font-normal font-dmsans tracking-[0.36px] ">
-                  <spna>+91-261 440 2724</spna>
-                  <spna>+91-740 552 2523</spna>
+                  <spna>+91-261 489 5106</spna>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -52,25 +51,21 @@ const Contact = () => {
                   Email:{" "}
                 </p>
                 <p className="text-[16px] font-normal font-dmsans tracking-[0.36px] pl-[30px]">
-                  business@alphabin.co
+                  info@alphabin.co
                 </p>
               </div>
-              <div className="flex gap-4">
+              <div className="flex flex-col gap-4">
                 <p className="shrink-0 text-[18px] font-medium font-dmsans tracking-[0.36px]">
-                  Address 1:
+                  Address:
                 </p>
                 <p className="text-[16px] font-normal font-dmsans tracking-[0.36px]">
-                  India: Alphabin Technology Consulting (Headquarters) Silver
-                  Business Point, 1st Floor, 1100, Utran, Surat, Gujarat -
-                  395101
-                </p>
-              </div>
-              <div className="flex gap-4">
-                <p className="shrink-0 text-[18px] font-medium font-dmsans tracking-[0.36px]">
-                  Address 2:
-                </p>
-                <p className="text-[16px] font-normal font-dmsans tracking-[0.36px]">
-                  Germany Alboinstraße 79,12103 Berlin
+                  <span className="block">India:</span>
+                  Alphabin Technology Consulting (Headquarters) <br />
+                  Silver Business Point, 1st Floor, 1100, Utran, <br />
+                  Surat, Gujarat - 395101 <br />
+                  <br />
+                  <span className="block">Germany:</span>
+                  Alboinstraße 79, 12103 Berlin
                 </p>
               </div>
             </div>

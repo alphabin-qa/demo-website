@@ -54,7 +54,7 @@ function AllProducts() {
   };
 
   return (
-    <section className="xl:my-[10rem]">
+    <section className="xl:my-[6rem]">
       <div className="mt-[30px] xl:w-[1440px] lg:w-[1440px] xl:container lg:container md:container sm:container sm:p-[7px] md:p-[12px] mx-auto">
         <div className="h-[50px]">
           <div className="h-[39px]">
@@ -111,7 +111,7 @@ function AllProducts() {
                     <h1 className="font-dmsans mt-[20px] text-[18px] leading-[21.78px] w-[280px] h-[24px]">
                       {product.header}
                     </h1>
-                    <div className="w-[100px] mt-[10px] gap-[12px] flex justify-between">
+                    <div className="w-[100px] mt-[25px] gap-[12px] flex justify-between">
                       {[...Array(4)].map(() => (
                         <StarFilled />
                       ))}
@@ -120,7 +120,7 @@ function AllProducts() {
                         {product.reviewCount}
                       </p>
                     </div>
-                    <p className="my-5 font-normal text-base font-dmsan">
+                    <p className="my-1 font-normal text-base font-dmsan">
                       {product.price}
                     </p>
                   </div>
