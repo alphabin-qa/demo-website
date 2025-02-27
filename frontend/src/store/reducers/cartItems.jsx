@@ -19,9 +19,12 @@ const cartItems = createSlice({
       if (existsItemIndex >= 0) {
         toast.error("This product already added in your cart");
       } else {
+
+        console.log(`action.payload`, action.payload);
+        
         let buildCartlistItem = {
           ...action.payload,
-          quantity: action.payload.quantity,
+          quantity: action.payload.quantity || 1,
         };
         state.cartItems?.push(buildCartlistItem);
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));

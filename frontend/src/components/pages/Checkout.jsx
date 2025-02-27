@@ -306,7 +306,8 @@ function Checkout() {
     if (cartItems) {
       let totalSum = 0;
       cartItems.forEach((obj) => {
-        const priceValue = parseFloat(obj.price.slice(1) * obj?.quantity);
+        const priceString = obj.price.slice(1);
+        const priceValue = (parseFloat(priceString.replace(/,/g, ''))) * (obj?.quantity || 1);
         if (!isNaN(priceValue)) {
           totalSum += priceValue;
         }

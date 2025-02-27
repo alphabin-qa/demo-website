@@ -49,7 +49,7 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
         },
       });
     } else {
-      dispatch(addToCart({ id, img, header, price, reviewCount }));
+      dispatch(addToCart({ id, img, header, price, reviewCount, quantity: 1 }));
     }
     setCartIcon(!cartIcon);
   };

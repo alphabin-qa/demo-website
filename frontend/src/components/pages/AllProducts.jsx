@@ -112,8 +112,8 @@ function AllProducts() {
                       {product.header}
                     </h1>
                     <div className="w-[100px] mt-[25px] gap-[12px] flex justify-between">
-                      {[...Array(4)].map(() => (
-                        <StarFilled />
+                      {[...Array(4)].map((_, index) => (
+                        <StarFilled key={index} />
                       ))}
                       <StarOutlined />
                       <p className="text-[12px] leading-[14.52px] font-dmsans">
