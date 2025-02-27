@@ -67,8 +67,9 @@ const MyAccount = () => {
         },
       });
       removeUserAccessToken();
+      localStorage.clear();
       navigate("/login");
-    }
+    } 
   }, [selection]);
 
   useEffect(() => {
@@ -81,6 +82,14 @@ const MyAccount = () => {
     if (!userDetails?.length) {
       fetchDetails();
     }
+  }, []);
+
+  useEffect(() => {
+    const defaultTitle = document.title;
+    document.title = 'AB | My Account';
+    return () => {
+      document.title = defaultTitle;
+    };
   }, []);
 
   return (

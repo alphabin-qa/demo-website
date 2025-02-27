@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../Header";
 import AboutUs1 from "../../assets/aboutus-1.png";
 import AboutUs2 from "../../assets/aboutus-2.png";
 
 const AboutUs = () => {
+  
+  useEffect(() => {
+    const defaultTitle = document.title;
+    document.title = 'AB | About Us';
+    return () => {
+      document.title = defaultTitle;
+    };
+  }, []);
+  
   return (
     <>
       <div>

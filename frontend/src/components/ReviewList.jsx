@@ -27,44 +27,44 @@ const ReviewList = ({ reviews }) => {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="mt-[40px] w-[70%]">
+    <div className="flex">
+      <div className="w-full max-h-[400px] overflow-y-auto">
         <ul>
           {reviews.slice(0, visibleReviews).map((review, index) => (
-            <li key={index} className="mb-[20px]">
-              <div>
-                <p className="font-dmsans font-[700] text-[16px] leading-[18px]">
-                  {review.name}
-                </p>
+            <li
+              key={index}
+              className="mb-[20px] border border-gray-200 bg-white p-4 rounded-md"
+            >
+              <div className="flex justify-between">
+                <div>
+                  <p className="font-dmsans font-[600] text-[20px] leading-[18px]">
+                    {review.name}
+                  </p>
+                </div>
+                <div className="py-[10px] flex items-center gap-[4px]">
+                  {Array.from({ length: review.rating }, (_, i) => (
+                    <StarFilled key={i} />
+                  ))}
+                </div>
               </div>
-              <div className="py-[10px] flex items-center gap-[4px]">
-                {Array.from({ length: review.rating }, (_, i) => (
-                  <StarFilled key={i} />
-                ))}
-                <p className="ml-[10px] font-dmsans font-[700] text-[18px] leading-[24px]">
-                  {getRatingText(review.rating)}
-                </p>
-              </div>
-              <div className="font-dmsans font-[400] text-[16px] leading-[20px]">
+              <p className="font-dmsans font-[700] text-[25px] my-2 leading-[24px]">
+                {getRatingText(review.rating)}
+              </p>
+              <div
+                style={{ overflowWrap: "break-word" }}
+                className="font-dmsans font-[700]  text-[16px] leading-[20px]"
+              >
                 {review.opinion}
               </div>
-              <div className="font-dmsans font-[700] text-[16px] leading-[19.36px] py-[5px]">
+              <div
+                style={{ overflowWrap: "break-word" }}
+                className="font-dmsans font-[300] text-[16px] leading-[19.36px] py-[5px]"
+              >
                 {review.title}
               </div>
-              <div className="w-full border-b-[1px] mt-[5px]"></div>
             </li>
           ))}
         </ul>
-        <div className="mt-[50px] w-full flex justify-center">
-          {visibleReviews < reviews.length && (
-            <button
-              className="rounded-[3px] border-[1px] p-[10px] px-[20px] font-dmsans font-[700] text-[18px] leading-[30px] bg-black text-white"
-              onClick={handleLoadMoreReviews}
-            >
-              Load More Reviews
-            </button>
-          )}
-        </div>
       </div>
     </div>
   );

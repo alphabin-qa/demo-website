@@ -92,12 +92,12 @@ function CartModel({ isOpen, toggleCart, setIsCartOpen }) {
           {/* Your cart content goes here */}
           {cartItems?.map((item) => (
             <div key={item.id} className="flex justify-between mx-[40px] mt-[36px] gap-[25px]">
-              <div className="flex justify-center items-center w-auto h-auto bg-pink-200">
+              <div className="flex justify-center items-center w-auto h-auto">
                 <div className="flex justify-center items-center">
                   <img
                     src={item?.img}
                     alt=""
-                    className="w-[130px] h-[130px] object-cover"
+                    className="w-[130px] h-[130px] object-contain"
                   />
                 </div>
               </div>

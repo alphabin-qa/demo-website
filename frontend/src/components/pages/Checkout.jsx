@@ -24,6 +24,9 @@ import {
 } from "../../services/authServices";
 import toast from "react-hot-toast";
 import AddressModel from "../AddressModel";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../store/reducers/cartItems";
+import AddressForm from "../AddressForm";
 
 const banks = [
   { name: "AXIS", logo: axis },
@@ -35,13 +38,6 @@ const banks = [
   { name: "Punjab", logo: punjab },
   { name: "BOI", logo: boi },
 ];
-
-const cardDetails = {
-  cardNo: "1111111111111111",
-  cvv: "111",
-  expiredMonth: "11",
-  expiredYear: "11",
-};
 
 const formdata = {
   firstName: "",
@@ -62,6 +58,7 @@ const cardDetail = {
 
 function Checkout() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [createOrder] = useCreateOrderMutation();
   const [billingTab, setBillingTab] = useState("credit");
   const [visibleBanks, setVisibleBanks] = useState(6);
@@ -80,6 +77,11 @@ function Checkout() {
   const [userDetail] = useGetUserMutation();
   const user = useSelector((state) => state?.userData);
   const [formData, setFormData] = useState(formdata);
+  const [addresses, setAddresses] = useState([]);
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const [showAddressForm, setShowAddressForm] = useState(false);
+  const [editingAddress, setEditingAddress] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -168,9 +170,25 @@ function Checkout() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-
   const handleCreditCardChange = (e) => {
     const { name, value } = e.target;
+    
+    if (name === 'cvv' && value.length > 3) {
+      return;
+    }
+
+    if (name === 'expiredMonth' && value.length > 2) {
+      return;
+    }
+
+    if (name === 'expiredYear' && value.length > 2) {
+      return;
+    }
+
+    if (name === 'cardNo' && value.length > 16) {
+      return;
+    }
+
     setCardData((prevCardData) => ({
       ...prevCardData,
       [name]: value,
@@ -202,8 +220,15 @@ function Checkout() {
             orderDate: Date.now(),
             email: userDetails?.email,
           });
-          setOpen(true);
-          setOrder(data);
+          if (data?.success) {
+            setOpen(true);
+            setOrder(data);
+            console.log("Dispatching clearCart action");
+            dispatch(clearCart());
+            console.log("Cart cleared successfully");
+          } else {
+            toast.error(data?.message || "Failed to place order");
+          }
         } catch (error) {
           console.error(error);
         }
@@ -218,8 +243,15 @@ function Checkout() {
             orderDate: Date.now(),
             email: userDetails?.email,
           });
-          setOpen(true);
-          setOrder(data);
+          if (data?.success) {
+            setOpen(true);
+            setOrder(data);
+            console.log("Dispatching clearCart action");
+            dispatch(clearCart());
+            console.log("Cart cleared successfully");
+          } else {
+            toast.error(data?.message || "Failed to place order");
+          }
         } catch (error) {
           console.error(error);
         }
@@ -239,7 +271,7 @@ function Checkout() {
               color: "white",
             },
           });
-        } 
+        }
 
         try {
           const { data } = await createOrder({
@@ -251,8 +283,15 @@ function Checkout() {
             orderDate: Date.now(),
             email: userDetails?.email,
           });
-          setOpen(true);
-          setOrder(data);
+          if (data?.success) {
+            setOpen(true);
+            setOrder(data);
+            console.log("Dispatching clearCart action");
+            dispatch(clearCart());
+            console.log("Cart cleared successfully");
+          } else {
+            toast.error(data?.message || "Failed to place order");
+          }
         } catch (error) {
           console.error(error);
           // Handle error appropriately
@@ -307,7 +346,8 @@ function Checkout() {
       let totalSum = 0;
       cartItems.forEach((obj) => {
         const priceString = obj.price.slice(1);
-        const priceValue = (parseFloat(priceString.replace(/,/g, ''))) * (obj?.quantity || 1);
+        const priceValue =
+          parseFloat(priceString.replace(/,/g, "")) * (obj?.quantity || 1);
         if (!isNaN(priceValue)) {
           totalSum += priceValue;
         }
@@ -315,6 +355,99 @@ function Checkout() {
       setTotalvalue(totalSum);
     }
   }, [cartItems]);
+
+  useEffect(() => {
+    const savedAddresses = localStorage.getItem("userAddresses");
+    if (savedAddresses) {
+      const parsedAddresses = JSON.parse(savedAddresses);
+      setAddresses(parsedAddresses);
+
+      // Set selected address to default or first one
+      const defaultAddress = parsedAddresses.find((addr) => addr.isDefault);
+      if (defaultAddress) {
+        setSelectedAddressId(defaultAddress.id);
+      } else if (parsedAddresses.length > 0) {
+        setSelectedAddressId(parsedAddresses[0].id);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("userAddresses", JSON.stringify(addresses));
+  }, [addresses]);
+
+  const handleAddAddress = (newAddress) => {
+    // If it's an existing address being edited
+    if (editingAddress) {
+      const updatedAddresses = addresses.map((addr) =>
+        addr.id === newAddress.id ? newAddress : addr
+      );
+
+      // If the edited address is set as default, update other addresses
+      if (newAddress.isDefault) {
+        updatedAddresses.forEach((addr) => {
+          if (addr.id !== newAddress.id) {
+            addr.isDefault = false;
+          }
+        });
+      }
+
+      setAddresses(updatedAddresses);
+    } else {
+      // It's a new address
+
+      // If new address is default, update other addresses
+      let updatedAddresses = [...addresses];
+      if (newAddress.isDefault) {
+        updatedAddresses = updatedAddresses.map((addr) => ({
+          ...addr,
+          isDefault: false,
+        }));
+      }
+
+      // Add the new address to the list
+      updatedAddresses.push(newAddress);
+      setAddresses(updatedAddresses);
+
+      // Select the new address
+      setSelectedAddressId(newAddress.id);
+    }
+
+    // Close the form
+    setShowAddressForm(false);
+    setEditingAddress(null);
+  };
+
+  const handleSelectAddress = (addressId) => {
+    setSelectedAddressId(addressId);
+  };
+
+  const handleEditAddress = (address) => {
+    setEditingAddress(address);
+    setShowAddressForm(true);
+  };
+
+  const handleDeleteAddress = (addressId) => {
+    if (window.confirm("Are you sure you want to delete this address?")) {
+      const updatedAddresses = addresses.filter(
+        (addr) => addr.id !== addressId
+      );
+      setAddresses(updatedAddresses);
+
+      // If we deleted the selected address, select another one
+      if (selectedAddressId === addressId) {
+        const defaultAddress = updatedAddresses.find((addr) => addr.isDefault);
+        if (defaultAddress) {
+          setSelectedAddressId(defaultAddress.id);
+        } else if (updatedAddresses.length > 0) {
+          setSelectedAddressId(updatedAddresses[0].id);
+        } else {
+          setSelectedAddressId(null);
+        }
+      }
+    }
+  };
+
   return (
     <>
       <div className="mx-auto pt-[30px] md:pt-[80px] xl:w-[1168px] px-4">
@@ -419,6 +552,16 @@ function Checkout() {
                       />
                     </div>
                     <button
+                      className="px-[40px] mt-4 rounded-md w-fit py-[10px] bg-white text-black border border-black font-dmsans font-normal text-[14px] leading-[16.94px] text-center hover:bg-gray-100"
+                      onClick={() => {
+                        setChangeAddress(false);
+                        setShowAddressForm(false);
+                        setEditingAddress(null);
+                      }}
+                    >
+                      Cancel
+                    </button>
+                    <button
                       className="px-[40px] mt-4 rounded-md w-fit py-[10px] bg-black text-white font-dmsans font-normal text-[14px] leading-[16.94px] text-center"
                       onClick={handleSubmit}
                     >
@@ -463,33 +606,37 @@ function Checkout() {
               <div className="w-full md:w-[570px] px-3 md:px-0 mx-auto py-[2rem]">
                 <div className="flex justify-between gap-2">
                   <button
-                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${billingTab === "credit"
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                      billingTab === "credit"
                         ? "bg-black text-white"
                         : "bg-none"
-                      }`}
+                    }`}
                     onClick={() => handleBillingTab("credit")}
                   >
                     Credit Card
                   </button>
                   <button
-                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${billingTab === "debit" ? "bg-black text-white" : "bg-none"
-                      }`}
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                      billingTab === "debit" ? "bg-black text-white" : "bg-none"
+                    }`}
                     onClick={() => handleBillingTab("debit")}
                   >
                     Debit Card
                   </button>
                   <button
-                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${billingTab === "netbanking"
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                      billingTab === "netbanking"
                         ? "bg-black text-white"
                         : "bg-none"
-                      }`}
+                    }`}
                     onClick={() => handleBillingTab("netbanking")}
                   >
                     Net Banking
                   </button>
                   <button
-                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${billingTab === "cod" ? "bg-black text-white" : "bg-none"
-                      }`}
+                    className={`font-dmsans font-[400] text-[13.46px] leading-[16.29px] px-[15px] py-[10px] border-[1px] border-black rounded-[4.205px] ${
+                      billingTab === "cod" ? "bg-black text-white" : "bg-none"
+                    }`}
                     onClick={() => handleBillingTab("cod")}
                   >
                     Cash on Delivery
@@ -524,7 +671,7 @@ function Checkout() {
                           Enter the 16-digit card number on the card
                         </p>
                         <input
-                          type="text"
+                          type="number"
                           onChange={handleCreditCardChange}
                           value={cardData?.cardNo}
                           inputMode="numeric"
@@ -550,7 +697,7 @@ function Checkout() {
                           </p>
                           <div className="w-[197.53px] h-[32px] gap-[2px] ">
                             <input
-                              type="text"
+                              type="number"
                               inputMode="numeric"
                               pattern="[0-9]*"
                               onChange={handleCreditCardChange}
@@ -562,7 +709,7 @@ function Checkout() {
                             />
                             <label htmlFor=""> / </label>
                             <input
-                              type="text"
+                              type="number"
                               inputMode="numeric"
                               pattern="[0-9]*"
                               onChange={handleCreditCardChange}
@@ -579,7 +726,7 @@ function Checkout() {
                             CVV Number
                           </p>
                           <input
-                            type="text"
+                            type="number"
                             inputMode="numeric"
                             pattern="[0-9]*"
                             onChange={handleCreditCardChange}
@@ -602,7 +749,11 @@ function Checkout() {
                       {banks.slice(0, visibleBanks).map((bank, index) => (
                         <div
                           key={index}
-                          className="w-full flex flex-col items-center justify-center"
+                          className={`w-full flex flex-col items-center justify-center ${
+                            selectedBank === bank.name
+                              ? "bg-gray-100 rounded-lg p-2"
+                              : ""
+                          }`}
                           onClick={() => handleBankSelection(bank.name)}
                         >
                           <img
@@ -610,7 +761,13 @@ function Checkout() {
                             className="w-[50.46px] h-[50.46px] font-dmsans hover:cursor-pointer"
                             alt=""
                           />
-                          <p>{bank.name}</p>
+                          <p
+                            className={
+                              selectedBank === bank.name ? "font-semibold" : ""
+                            }
+                          >
+                            {bank.name}
+                          </p>
                         </div>
                       ))}
                       {visibleBanks < banks.length && (
@@ -687,28 +844,26 @@ function Checkout() {
           <div className="w-full lg:w-[60%] mb-8">
             <div className="font-dmsans grid grid-cols-1 h-fit max-h-[608px] overflow-y-auto border border-b-0 border-[#B0B0B0]">
               {cartItems.map((item) => (
-                <>
-                  <div className="border-b-2 p-[1rem] flex justify-between">
-                    <div className="pl-[2rem]">
-                      <img
-                        src={item.img}
-                        className="w-[100px] h-[115px]"
-                        alt=""
-                      />
-                    </div>
-                    <div className="w-[50%]">
-                      <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
-                        {item.header}
-                      </p>
-                      <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
-                        Quantity: {item.quantity}
-                      </p>
-                      <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
-                        {item.price}
-                      </p>
-                    </div>
+                <div className="border-b-2 p-[1rem] flex justify-between">
+                  <div className="pl-[2rem]">
+                    <img
+                      src={item.img}
+                      className="w-[100px] h-[115px]"
+                      alt=""
+                    />
                   </div>
-                </>
+                  <div className="w-[50%]">
+                    <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
+                      {item.header}
+                    </p>
+                    <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
+                      Quantity: {item.quantity}
+                    </p>
+                    <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
+                      {item.price}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
             <div className="border border-[#B0B0B0]">

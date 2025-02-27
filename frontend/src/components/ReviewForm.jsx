@@ -1,172 +1,186 @@
-import { StarFilled, StarOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { StarOutlined, StarFilled } from "@ant-design/icons";
 import toast from "react-hot-toast";
 
-const ReviewForm = ({ onSubmit }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [title, setTitle] = useState("");
-  const [opinion, setOpinion] = useState("");
-  const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
+function ReviewForm({ onSubmit, initialData }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    rating: 0,
+    title: "",
+    review: "",
+    date: new Date().toISOString(),
+  });
 
-  const handlleHover = (hoveredRating) => {
-    setHoverRating(hoveredRating);
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
+
+  const [errors, setErrors] = useState({});
+  const [hover, setHover] = useState(0);
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
+    }
+
+    if (formData.rating === 0) newErrors.rating = "Please select a rating";
+
+    if (!formData.title.trim()) newErrors.title = "Title is required";
+
+    if (!formData.review.trim()) {
+      newErrors.review = "Review content is required";
+    } else if (formData.review.trim().length < 10) {
+      newErrors.review = "Review must be at least 10 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleRatingClick = (clickedRating) => {
-    setRating(clickedRating);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+
+    // Clear error when field is edited
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: null });
+    }
+  };
+
+  const handleRatingClick = (rating) => {
+    setFormData({
+      ...formData,
+      rating,
+    });
+    if (errors.rating) {
+      setErrors({ ...errors, rating: null });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name || !email || !title || !opinion || rating === 0) {
-      toast.error("Fill all the required field!", {
-        duration: 4000,
-        style: {
-          border: "1px solid black",
-          backgroundColor: "black",
-          color: "white",
-        },
+    if (validate()) {
+      onSubmit({
+        ...formData,
+        date: new Date().toISOString(),
       });
-      return;
     }
+  };
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error("Enter valid email address");
-      return;
-    }
-
-    if (title.length < 10) {
-      toast.error("Enter title atleast 10 characters long.");
-      return;
-    }
-
-    if (opinion.length < 20) {
-      toast.error("Enter opinion atleast 20 characters long.");
-      return;
-    }
-
-    const newReview = {
-      name,
-      email,
-      title,
-      rating,
-      opinion,
-    };
-    onSubmit(newReview);
-    setName("");
-    setEmail("");
-    setTitle("");
-    setRating(0);
-    setOpinion("");
+  const handleCancel = () => {
+    onSubmit(null);
   };
 
   return (
-    <div className="mt-[3rem]">
-      <div className="p-[40px] mx-auto w-[832px] h-[562px] border-[1px] border-black">
-        <div className="w-[708px] h-[470px] gap-[16px] mx-auto flex flex-col">
-          {/* For Name & Email */}
-          <div className="flex w-[708px] h-[79px] justify-between gap-[32px]">
-            <div className="w-[338px] h-[79px]">
-              <div className="py-[8px]">
-                <label
-                  htmlFor=""
-                  className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
-                >
-                  Your Name
-                </label>
-              </div>
-              <input
-                type="text"
-                value={name}
-                className="xl:w-[300px] lg:w-[280px] h-[40px] font-dmsans rounded-[2.52px] border-[1px] border-black pl-[8px]"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <div className="py-[8px]">
-                <label
-                  htmlFor=""
-                  className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
-                >
-                  Your Email
-                </label>
-              </div>
-              <input
-                type="email"
-                value={email}
-                className="font-dmsans xl:w-[300px] lg:w-[280px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-          </div>
-          {/* For Rating */}
-          <div className="flex gap-[7px] py-[10px] items-center">
-            <div className="font-dmsans font-[500] text-[16px] leading-[19.36px]">
-              Give Rating:{" "}
-            </div>
-            <div className="flex">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <span
-                  key={star}
-                  className={`cursor-pointer px-[10px] text-2xl flex justify-center items-center`}
-                  onMouseEnter={() => handlleHover(star)}
-                  onMouseLeave={() => handlleHover(0)}
-                  onClick={() => handleRatingClick(star)}
-                >
-                  {hoverRating >= star || rating >= star ? (
-                    <StarFilled />
-                  ) : (
-                    <StarOutlined />
-                  )}
-                </span>
-              ))}
-            </div>
-          </div>
-          {/* For Review Title */}
+    <div className="bg-white p-6 rounded-md w-full">
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
-            <label
-              htmlFor=""
-              className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
-            >
-              Review Title
-            </label>{" "}
+            <label className="block mb-2 font-medium">Your Name</label>
             <input
               type="text"
-              value={title}
-              className="font-dmsans w-full mt-[10px] h-[40px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
-              onChange={(e) => setTitle(e.target.value)}
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded p-2"
             />
+            {errors.name && (
+              <p className="text-red-500 text-xs">{errors.name}</p>
+            )}
           </div>
-          {/* For Opinion */}
           <div>
-            <label
-              htmlFor=""
-              className="font-dmsans font-[500] text-[16px] leading-[19.36px]"
-            >
-              Give Us Your Opinion
-            </label>{" "}
-            <textarea
-              type="text"
-              value={opinion}
-              className="font-dmsans w-full mt-[10px] h-[120px] rounded-[2.52px] border-[1px] border-black pl-[8px]"
-              onChange={(e) => setOpinion(e.target.value)}
+            <label className="block mb-2 font-medium">Your Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded p-2"
             />
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email}</p>
+            )}
           </div>
-          {/* For Submit Button */}
+        </div>
+
+        <div className="mb-4">
+          <label className="block mb-2 font-medium">Give Rating: </label>
+          <div className="flex gap-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                onClick={() => handleRatingClick(star)}
+                className="cursor-pointer text-lg"
+              >
+                {star <= formData.rating ? <StarFilled /> : <StarOutlined />}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label className="block mb-2 font-medium">Review Title</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+            className="w-full border border-gray-300 rounded p-2"
+          />
+          {errors.title && (
+            <p className="text-red-500 text-xs">{errors.title}</p>
+          )}
+        </div>
+
+        <div className="mb-4">
+          <label className="block mb-2 font-medium">Give us your opinion</label>
+          <textarea
+            name="review"
+            value={formData.review}
+            onChange={handleChange}
+            required
+            rows="5"
+            className="w-full border border-gray-300 rounded p-2"
+          ></textarea>
+          {errors.review && (
+            <p className="text-red-500 text-xs">{errors.review}</p>
+          )}
+        </div>
+
+        <div className="flex justify-between">
           <button
-            className="w-[200px] h-[48px] px-[11px] py-[15.79px] border-[1px] bg-black text-white font-dmsans font-[400] text-[16px] leading-[19.36px] items-center rounded-md"
-            onClick={handleSubmit}
+            type="button"
+            onClick={handleCancel}
+            className="px-4 py-2 border border-gray-300 rounded font-medium"
           >
-            SUBMIT
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-black text-white rounded font-medium"
+          >
+            Submit
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
-};
+}
 
 export default ReviewForm;

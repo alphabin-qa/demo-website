@@ -4,125 +4,242 @@ import React, { useEffect, useState } from "react";
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(true);
 
+  // State for form fields
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    subject: "",
+    message: "",
+  });
+
+  // State for validation errors and success
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  // Validate form fields
+  const validateForm = () => {
+    const tempErrors = {};
+
+    if (!formData.firstName.trim()) {
+      tempErrors.firstName = "First Name is required.";
+    }
+    if (!formData.lastName.trim()) {
+      tempErrors.lastName = "Last Name is required.";
+    }
+    if (!formData.subject.trim()) {
+      tempErrors.subject = "Subject is required.";
+    }
+    // Check if message has at least a few characters
+    if (!formData.message.trim()) {
+      tempErrors.message = "Message is required.";
+    } else if (formData.message.trim().length < 10) {
+      tempErrors.message = "Message must be at least 10 characters.";
+    }
+
+    return tempErrors;
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSuccessMessage(""); // clear any old success message
+
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      // If no errors, show success and clear form
+      setErrors({});
+      setSuccessMessage("Your message has been sent successfully!");
+
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 4000);
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        subject: "",
+        message: "",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const defaultTitle = document.title;
+    document.title = 'AB | Contact Us';
+    return () => {
+      document.title = defaultTitle;
+    };
+  }, []);
   return (
-    <>
-      <div className="flex flex-col justify-center items-center my-[80px] ">
-        <div className="flex flex-col justify-center items-center gap-16">
-          <div className=" w-full text-start text-[28px] font-bold leading-[18.5px] font-dmsans text-[#333333]">
-            Contact Us
+    <div className="flex flex-col items-center my-[80px] gap-8">
+      {/* Heading */}
+      <h1 className="w-full max-w-[1210px] text-start text-[28px] font-bold font-dmsans text-[#333333]">
+        Contact Us
+      </h1>
+
+      {/* Map Section */}
+      <div className="w-full max-w-[1210px] relative h-[500px]">
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/50">
+            <CircularProgress />
           </div>
-          <div className="w-[98vw] max-w-[1210px] pb-3">
-            <div className="relative h-[500px] w-full">
-              {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center opacity-75">
-                  <CircularProgress />
-                </div>
-              )}
-              <iframe
-                src={`https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting`}
-                width="100%"
-                height="100%"
-                loading="lazy"
-                title="Alphabin Technology"
-                onLoad={() => {
-                  setIsLoading(false);
-                  console.log("After called hello");
-                }}
-              ></iframe>
+        )}
+        <iframe
+          src="https://maps.google.com/maps?q=21.2334333,72.8633784&z=15&output=embed&q=Alphabin+Technology+Consulting"
+          width="100%"
+          height="100%"
+          loading="lazy"
+          title="Alphabin Technology"
+          onLoad={() => setIsLoading(false)}
+          className="rounded-md border"
+        ></iframe>
+      </div>
+
+      {/* Below Section (Contact info & Get in touch) */}
+      <div className="w-full max-w-[1210px] flex flex-col lg:flex-row gap-8 items-start">
+        {/* Contact info */}
+        <div className="flex flex-col items-start gap-8 px-4 sm:px-8 py-5 bg-[#FBFBFB] rounded-md w-full lg:w-1/2">
+          <p className="text-[28px] font-bold font-dmsans">Contact info</p>
+
+          <div className="flex flex-col gap-8">
+            <div className="flex gap-4">
+              <p className="text-[18px] font-medium font-dmsans">Phone:</p>
+              <div className="text-[16px] font-normal font-dmsans">
+                +91-261 489 5106
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <p className="text-[18px] font-medium font-dmsans">Email:</p>
+              <div className="text-[16px] font-normal font-dmsans">
+                info@alphabin.co
+              </div>
+            </div>
+
+            <div>
+              <p className="text-[18px] font-medium font-dmsans mb-2">
+                Address:
+              </p>
+              <div className="text-[16px] font-normal font-dmsans leading-relaxed">
+                <span className="block font-semibold">India:</span>
+                Alphabin Technology Consulting (Headquarters)
+                <br />
+                Silver Business Point, 1st Floor, 1100, Utran,
+                <br />
+                Surat, Gujarat - 395101
+                <br />
+                <br />
+                <span className="block font-semibold">Germany:</span>
+                Alboinstraße 79, 12103 Berlin
+              </div>
             </div>
           </div>
         </div>
-        <div className="xl:w-[1260px] flex flex-col lg:flex-row gap-8">
-          <div className="flex flex-col items-center gap-8 px-2 sm:px-[30px] pb-[35px] bg-[#FBFBFB] rounded-[3px] py-5">
-            <p className="w-full text-start text-[28px] font-bold leading-[23.1px] font-dmsans tracking-[0.56px]">
-              Contact info
-            </p>
-            <div className="flex flex-col gap-8">
-              <div className="flex gap-4">
-                <p className="text-[18px] font-medium font-dmsans tracking-[0.36px]">
-                  Phone:{" "}
-                </p>
-                <div className=" flex flex-col gap-2 pl-[22px] text-[16px] font-normal font-dmsans tracking-[0.36px] ">
-                  <spna>+91-261 489 5106</spna>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <p className="text-[18px] font-medium font-dmsans tracking-[0.36px]">
-                  Email:{" "}
-                </p>
-                <p className="text-[16px] font-normal font-dmsans tracking-[0.36px] pl-[30px]">
-                  info@alphabin.co
-                </p>
-              </div>
-              <div className="flex flex-col gap-4">
-                <p className="shrink-0 text-[18px] font-medium font-dmsans tracking-[0.36px]">
-                  Address:
-                </p>
-                <p className="text-[16px] font-normal font-dmsans tracking-[0.36px]">
-                  <span className="block">India:</span>
-                  Alphabin Technology Consulting (Headquarters) <br />
-                  Silver Business Point, 1st Floor, 1100, Utran, <br />
-                  Surat, Gujarat - 395101 <br />
-                  <br />
-                  <span className="block">Germany:</span>
-                  Alboinstraße 79, 12103 Berlin
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="grow flex flex-col items-center gap-8 sm:p-[30px] bg-[#FBFBFB] rounded-[3px] px-2">
-            <p className=" w-full text-start font-dmsans text-[28px] font-bold leading-[23.1px] tracking-[0.556px]">
-              Get in touch
-            </p>
-            <div className=" w-full flex flex-col gap-4">
-              <div className="w-full flex-grow flex justify-start items-center flex-col sm:flex-row gap-4">
-                <label className="flex flex-col w-full gap-2 flex-grow">
-                  <p className="text-[14px] font-normal font-dmsans text-[#333333]">
-                    First Name
-                  </p>
-                  <input
-                    type="text"
-                    className="h-[38px] self-stretch font-dmsans pl-2 rounded-[3px] border-[0.941px] border-[#CFCFCF] flex-grow"
-                  />
-                </label>
-                <label className="flex flex-col w-full gap-2 flex-grow">
-                  <p className="text-[14px] font-normal font-dmsans text-[#333333]">
-                    Last Name
-                  </p>
-                  <input className="h-[38px] self-stretch font-dmsans pl-2 rounded-[3px] border-[0.941px] border-[#CFCFCF] flex-grow" />
-                </label>
-              </div>
 
-              <div>
-                <label className="flex flex-col gap-2">
-                  <p className="text-[14px] font-normal font-dmsans text-[#333333]">
-                    Subject
-                  </p>
-                  <input
-                    type="text"
-                    className="h-[38px] self-stretch font-dmsans pl-2 rounded-[3px] border-[0.941px] border-[#CFCFCF]"
-                  />
-                </label>
-              </div>
-              <div>
-                <label className="flex flex-col gap-2">
-                  <p className="text-[14px] font-normal font-dmsans text-[#333333]">
-                    Your Massage
-                  </p>
-                  <textarea
-                    type="text"
-                    className="h-[100px] self-stretch font-dmsans pl-2 rounded-[3px] pt-2 border-[0.941px] border-[#CFCFCF]"
-                  />
-                </label>
-              </div>
-              <button className="w-full leading-[18.8px] h-[46px] p-[10px] gap-[10px] bg-black text-white align-center font-bold uppercase">
-                Send message
-              </button>
+        {/* Get in touch */}
+        <div className="flex flex-col items-start gap-8 px-4 sm:px-8 py-5 bg-[#FBFBFB] rounded-md w-full lg:w-1/2">
+          <p className="text-[28px] font-bold font-dmsans">Get in touch</p>
+
+          {/* Success message */}
+          {successMessage && (
+            <div className="w-full p-3 bg-green-100 text-green-800 rounded-md">
+              {successMessage}
             </div>
-          </div>
+          )}
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+            {/* First & Last Name */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              {/* First Name */}
+              <label className="flex flex-col w-full">
+                <span className="text-[14px] font-normal font-dmsans text-[#333333]">
+                  First Name
+                </span>
+                <input
+                  name="firstName"
+                  type="text"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="h-[38px] rounded-[3px] border-[1px] border-[#CFCFCF] font-dmsans pl-2"
+                />
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm">{errors.firstName}</p>
+                )}
+              </label>
+
+              {/* Last Name */}
+              <label className="flex flex-col w-full">
+                <span className="text-[14px] font-normal font-dmsans text-[#333333]">
+                  Last Name
+                </span>
+                <input
+                  name="lastName"
+                  type="text"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="h-[38px] rounded-[3px] border-[1px] border-[#CFCFCF] font-dmsans pl-2"
+                />
+                {errors.lastName && (
+                  <p className="text-red-500 text-sm">{errors.lastName}</p>
+                )}
+              </label>
+            </div>
+
+            {/* Subject */}
+            <label className="flex flex-col gap-2">
+              <span className="text-[14px] font-normal font-dmsans text-[#333333]">
+                Subject
+              </span>
+              <input
+                name="subject"
+                type="text"
+                value={formData.subject}
+                onChange={handleChange}
+                className="h-[38px] rounded-[3px] border-[1px] border-[#CFCFCF] font-dmsans pl-2"
+              />
+              {errors.subject && (
+                <p className="text-red-500 text-sm">{errors.subject}</p>
+              )}
+            </label>
+
+            {/* Message */}
+            <label className="flex flex-col gap-2">
+              <span className="text-[14px] font-normal font-dmsans text-[#333333]">
+                Your Message
+              </span>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className="h-[100px] rounded-[3px] border-[1px] border-[#CFCFCF] font-dmsans p-2"
+              />
+              {errors.message && (
+                <p className="text-red-500 text-sm">{errors.message}</p>
+              )}
+            </label>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full h-[46px] bg-black text-white font-bold uppercase rounded-md"
+            >
+              Send message
+            </button>
+          </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

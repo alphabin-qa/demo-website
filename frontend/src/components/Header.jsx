@@ -96,12 +96,6 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-4 md:gap-7">
           <div className="flex items-center gap-2">
-            <Search
-              className="cursor-pointer bg-white w-10 h-10"
-              onClick={() => {
-                setOpenSearch(!openSearch);
-              }}
-            />
             <div
               className="cursor-pointer hidden lg:block relative"
               onClick={() => {
@@ -223,31 +217,6 @@ const Header = () => {
         </div>
       )}
       
-      {openSearch && (
-        <div className="flex justify-center items-center drop-container absolute top-0 z-10 bg-white px-5 mx-0 -mt-5 h-[80px]">
-          <div className="flex items-center justify-center font-dmsans px-[30px] py-[15px]">
-            <input
-              type="text"
-              style={{
-                width: "50vw",
-                height: "43px",
-                paddingLeft: "10px",
-                outline: "none",
-              }}
-              className="border-b text-lg"
-              id="standard-basic"
-              placeholder="Search..."
-            />
-            <div className="flex gap-3">
-              <IoMdClose
-                className="h-6 w-6 -ml-6 cursor-pointer"
-                onClick={() => setOpenSearch(false)}
-              />
-              <IoSearchOutline className="w-[21px] h-[21px] cursor-pointer" />
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

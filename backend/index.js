@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const path = require('path');
 
 // Load environment variables first
 dotenv.config();
@@ -15,7 +16,7 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000", // http://localhost:3000 OR https://demo.alphabin.co
+    origin: "https://demo.alphabin.co", // http://localhost:3000 OR https://demo.alphabin.co
     credentials: true,
   })
 );
@@ -26,9 +27,18 @@ dbConnect();
 // Import routes for user API
 app.use("/api", userRoutes);
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
 // Default route
 app.get("/", (req, res) => {
   res.send("<h1>This is the Home Page</h1>");
+});
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
 // Start server

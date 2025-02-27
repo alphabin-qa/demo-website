@@ -55,8 +55,8 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
   };
 
   return (
-    <div className="w-[320px] flex justify-center items-center group hover:shadow-md hover:bg-[#fff] rounded-[5px] mt-[20px] mx-auto hover:cursor-pointer relative">
-      <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] ml-[16px] mt-[14px]">
+    <div className="w-[320px] flex justify-center items-center group rounded-[5px] mt-[20px] mx-auto hover:cursor-pointer relative">
+      <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 bg-white group-hover:rounded-[100%] ml-[20px] mt-[14px]">
         <button
           onClick={() => {
             addToWishlistHandler();
@@ -70,7 +70,7 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
           )}
         </button>
       </div>
-      <div className="absolute top-0 right-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-[100%] mr-[16px] mt-[14px]">
+      <div className="absolute top-0 right-0 bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200  group-hover:rounded-[100%] mr-[20px] mt-[14px]">
         <button
           onClick={() => addToCartHandler()}
           className="h-[45px] w-[45px]"
@@ -83,8 +83,15 @@ const FeatureCards = ({ img, header, price, reviewCount, id }) => {
         </button>
       </div>
       <Link to={`/product-detail/${id}`}>
-        <div className="pb-5">
-          <img src={img} className="h-[253px] mx-auto" alt="dp" />
+        <div
+          style={{
+            backgroundColor: "#FBFBFB",
+            border: "1px solid #EDEDED",
+            borderRadius: "5px",
+          }}
+          className="pb-5"
+        >
+          <img src={img} className="bg-transparent h-[253px] mx-auto" alt="dp" />
           <div className="h-[116px] w-[292px] px-[20px] mt-[20px] flex flex-col gap-[10px]">
             <h1 key={id} className="text-[18px] font-[550] font-dmsans leading-[21.78px] w-[251px] h-[24px]">
               {header}

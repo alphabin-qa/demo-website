@@ -25,7 +25,7 @@ function OrderDetail() {
       }
     };
     fetchData();
-  }, [params?.id]);
+  }, [params?.id, getOrderDetail]);
 
   useEffect(() => {
     if (cartItems) {
@@ -41,152 +41,133 @@ function OrderDetail() {
   }, [cartItems]);
 
   return (
-    <>
-      <div className="mt-[40px] mb-[16px] xl:w-[1183px] mx-auto">
-        <div className="flex items-center justify-center">
-          <div className="flex justify-between gap-[16px]">
-            <Box>
-              <img
-                src={Circle}
-                alt={"Orderplaced"}
-                loading="lazy"
-                className="w-[100px] h-[100px]"
-              />
-            </Box>
-            <div className="flex justify-center flex-col">
-              <h1 className="font-dmsans font-[500] text-[24px] sm:text-[32px] leading-[24px] mb-[6px]">
-                Thank You, {orderDetail?.address?.firstname}
-              </h1>
-              <p className="flex font-dmsans font-normal text-[12px] sm:text-[18x] leading-[28.8px]">
-                Your Order ID -
-                <p className="ml-1 font-semibold break-words">
-                  {orderDetail?._id}
+    <div className="max-w-6xl mx-auto p-4 my-20">
+      {/* Header Section */}
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+        <Box className="flex-shrink-0">
+          <img
+            src={Circle}
+            alt="Order Placed"
+            loading="lazy"
+            className="w-16 h-16"
+          />
+        </Box>
+        <div className="text-center sm:text-left">
+          <h1 className="font-dmsans font-semibold text-2xl sm:text-3xl mb-2">
+            Thank You, {orderDetail?.address?.firstname}!
+          </h1>
+          <p className="font-dmsans text-sm sm:text-base">
+            Your Order ID -{" "}
+            <span className="font-bold break-words">{orderDetail?._id}</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Left Column: Shipping & Order Details */}
+        <div className="flex-1 border rounded-lg p-6 shadow-sm">
+          <div className="border-b pb-4 mb-4">
+            <h3 className="font-dmsans font-medium text-xl sm:text-2xl mb-2">
+              Your order is confirmed
+            </h3>
+            <p className="font-dmsans text-sm sm:text-base text-gray-600">
+              We are pleased to confirm that your order has been successfully
+              processed and is now being prepared for shipment. Your order
+              details are as follows:
+            </p>
+          </div>
+          <div className="space-y-4">
+            <h1 className="font-dmsans font-bold text-2xl mb-2">
+              Shipping Detail
+            </h1>
+            <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+              <div className="flex-1">
+                <p className="font-dmsans font-medium text-lg">Email</p>
+                <p className="font-dmsans text-base text-gray-700 break-words">
+                  {orderDetail?.address?.email}
                 </p>
+              </div>
+              <div className="flex-1">
+                <p className="font-dmsans font-medium text-lg">
+                  Payment Method
+                </p>
+                <p className="font-dmsans text-base text-gray-700">
+                  {orderDetail?.paymentMethod} - ₹{orderDetail?.totalAmount}
+                </p>
+              </div>
+            </div>
+            <div className="mt-4">
+              <h3 className="font-dmsans font-medium text-lg mb-2">Address</h3>
+              <p className="font-dmsans text-base text-gray-700">
+                {orderDetail?.address?.street}, {orderDetail?.address?.city},{" "}
+                {orderDetail?.address?.state}, {orderDetail?.address?.country} -{" "}
+                {orderDetail?.address?.zipCode}
               </p>
             </div>
+          </div>
+          <div className="mt-6">
+            <button
+              onClick={() => navigate("/")}
+              className="w-full py-3 bg-black text-white font-dmsans font-medium rounded-md hover:bg-gray-800 transition-colors"
+            >
+              Continue Shopping
+            </button>
           </div>
         </div>
 
-        <div className="flex md:flex-row flex-col justify-between mt-[32px] gap-3">
-          <div className="w-full flex flex-col border p-[20px] gap-8">
-            <div className="w-full border-b pl-[12px]">
-              <h3 className="font-dmsans font-[500] text-[20px] leading-[24.2px] tracking-[2.5%] mb-[10px]">
-                Your order is confirmed
-              </h3>
-              <p className="font-dmsans font-[400] text-[14px] leading-[18.9px] tracking-[1.5%] mb-3">
-                We are pleased to confirm that your order has been successfully
-                processed and is now being prepared for shipment. Your order
-                details are as follows :
+        {/* Right Column: Order Items Summary */}
+        <div className="w-full md:w-96 border rounded-lg shadow-sm flex flex-col">
+          <div className="h-80 overflow-y-auto">
+            {orderDetail?.product?.map((item) => (
+              <div
+                key={item._id}
+                className="border-b p-4 flex gap-4 items-center"
+              >
+                <img
+                  src={item.img}
+                  alt="product"
+                  className="w-24 h-24 object-cover rounded"
+                />
+                <div className="flex flex-col justify-between">
+                  <p className="font-dmsans font-medium text-lg">
+                    {item.header}
+                  </p>
+                  <p className="font-dmsans text-sm text-gray-700">
+                    Quantity: {item.quantity}
+                  </p>
+                  <p className="font-dmsans font-semibold text-base">
+                    {item.price}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="border-t p-4">
+            <div className="flex justify-between items-center">
+              <p className="font-dmsans font-medium text-base">Subtotal</p>
+              <p className="font-dmsans font-semibold text-base">
+                ₹{orderDetail?.totalAmount}
               </p>
             </div>
-            <div className="flex flex-col w-full gap-[16px] pl-[12px]">
-              <h1 className="font-dmsans font-[700] text-[24px] leading-[29.5px] tracking-[2.5%]">
-                Shipping Detail
-              </h1>
-              <div className="w-full gap-3 flex mt-[20px]">
-                <div className="w-[50%]">
-                  <p className="font-dmsans font-[500] text-[20px] leading-[24.2px]">
-                    Email
-                  </p>
-                  <p className="font-dmsans font-[400] text-[16px] leading-[32px] break-words">
-                    {orderDetail?.address?.email}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-dmsans font-[500] text-[20px] leading-[24.2px]">
-                    Payment Method
-                  </p>
-                  <p className="font-dmsans font-[400] text-[16px] leading-[32px]">
-                    {orderDetail?.paymentMethod} - ₹{orderDetail?.totalAmount}
-                  </p>
-                </div>
-              </div>
-              <div className="h-[92px] w-full mt-[16px]">
-                <h3 className="font-dmsans font-[500] text-[20px] leading-[24.2px] mb-[10px]">
-                  Address
-                </h3>
-                <p className="font-dmsans font-[400] text-[15px] leading-[19.58px]">
-                  {orderDetail?.address?.firstname +
-                    ", " +
-                    orderDetail?.address?.street +
-                    ", " +
-                    orderDetail?.address?.city +
-                    ", " +
-                    orderDetail?.address?.state +
-                    ", " +
-                    orderDetail?.address?.country +
-                    ", " +
-                    orderDetail?.address?.zipCode}
-                </p>
-              </div>
+            <div className="flex justify-between items-center py-2 border-t">
+              <p className="font-dmsans font-medium text-base">
+                Shipping Charge
+              </p>
+              <p className="font-dmsans font-semibold text-base">
+                Free Shipping
+              </p>
             </div>
-            <div className="flex flex-col justify-center w-full h-[48px] p-[10px] gap-[10px] text-center bg-black text-white cursor-pointer">
-              <button
-                className="font-dmsans font-[400] text-[16px] leading-[19.36px] text-center"
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Continue Shopping
-              </button>
-            </div>
-          </div>
-
-          <div className="font-dmsans grid grid-cols-1 w-full md:w-[469px] border justify-center mt-5 md:mt-0 ">
-            <div className="h-[320px] overflow-y-scroll">
-              {orderDetail?.product?.map((item) => (
-                <>
-                  <div className="border-b-[1px] w-full h-[135px] p-[10px] flex gap-3 ">
-                    <img
-                      src={item.img}
-                      className="w-[100px] h-[115px]"
-                      alt="product"
-                    />
-                    <div>
-                      <p className="font-dmsans font-[500] text-[16px] mb-[10px]">
-                        {item.header}
-                      </p>
-                      <p className="font-dmsans font-[500] text-[14px] mb-[8px] leading-[16.94px]">
-                        Quantity: {item.quantity}
-                      </p>
-                      <p className="font-dmsans font-[600] text-[16px] tracking-[1px]">
-                        {item.price}
-                      </p>
-                    </div>
-                  </div>
-                </>
-              ))}
-            </div>
-            <div className="flex justify-end flex-col py-3 border-t">
-              <div className="flex justify-between px-[15px] py-[5px]">
-                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                  Subtotal
-                </div>
-                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                  ₹{orderDetail?.totalAmount}
-                </div>
-              </div>
-              <div className="flex justify-between px-[15px] py-[5px] border-b-[1px]">
-                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                  Shipping Charge
-                </div>
-                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                  Free Shipping
-                </div>
-              </div>
-              <div className="flex justify-between p-[15px]">
-                <div className="font-dmsans font-[400] text-[16px] leading-[19.36px] tracking-[4%]">
-                  Total
-                </div>
-                <div className="font-dmsans font-[600] text-[16px] leading-[24px] tracking-[1px]">
-                  ₹{orderDetail?.totalAmount}
-                </div>
-              </div>
+            <div className="flex justify-between items-center pt-2">
+              <p className="font-dmsans font-medium text-base">Total</p>
+              <p className="font-dmsans font-semibold text-base">
+                ₹{orderDetail?.totalAmount}
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

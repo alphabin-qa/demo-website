@@ -30,12 +30,15 @@ exports.createOrder = async (req, res) => {
     }
 
     res.json({
+      success: true,
       message: "Order placed successfully",
       orderId: result.id,
     });
   } catch (error) {
     console.error("Error creating order:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ 
+      success: false,
+      error: "Internal Server Error" });
   }
 };
 
@@ -52,7 +55,7 @@ exports.findOrderByIds = async (req, res) => {
           order: order,
         });
       } else {
-        res.status(404).json({ message: "Order not found" });
+        res.status(404).json({success: false, message: "Order not found" });
       }
     } catch (error) {
       console.error("Error finding order:", error);
@@ -93,6 +96,7 @@ exports.deleteOrder = async (req, res) => {
   } catch (error) {
     console.error("Error in deleteOrder:", error);
     return res.status(500).json({ 
+      success: false,
       message: "Failed to delete order",
       error: error.message 
     });

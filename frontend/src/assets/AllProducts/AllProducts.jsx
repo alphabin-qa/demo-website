@@ -1,20 +1,37 @@
-import HardDisk from '../AllProducts/hard-disk.jpg'
-import Microphone from '../AllProducts/microphone.jpg'
-import Speaker from '../AllProducts/speaker.jpg'
-import USB from '../AllProducts/usb.jpg'
-import Appliances from '../AllProducts/appliances.png'
-import Speaker1 from '../AllProducts/speaker1.png'
-import Mobile from '../AllProducts/mobile.png'
-import Laptop from '../AllProducts/laptop.png'
-import GoPro from '../AllProducts/go-pro.jpg'
-import WirelessMouse from '../AllProducts/wireless-mouse.jpg'
-import Router from '../AllProducts/router.jpg'
-import Tablet from '../AllProducts/Tablet.jpg'
-import LCD from '../AllProducts/LCD.jpg'
-import SmartWatch from '../AllProducts/smart-watch.jpg'
-import Laptop1 from '../AllProducts/laptop1.png'
-import MemoryCardReader from '../AllProducts/memory-card-reader.jpg'
-import Printer from '../AllProducts/Printer.jpg'
-import Projector from '../AllProducts/projector.jpg'
+const HardDisk = '/products/Hard Disk.png'
+const Microphone = '/products/Mic.png'
+const Speaker = '/products/Speaker.png'
+const Speaker1 = '/products/Speaker-1.png'
+const USB = '/products/Pen Drive.png'
+const Appliances = '/products/Appliances.png'
+const Mobile = '/products/Mobile.png'
+const Laptop = '/products/Laptop.png'
+const GoPro = '/products/Go Pro.png'
+const WirelessMouse = '/products/Wireless mouse.png'
+const Router = '/products/Router.png'
+const Tablet = '/products/Tablet.png'
+const LCD = '/products/LCD.png'
+const SmartWatch = '/products/Smart Watch 1.png'
+const MemoryCardReader = '/products/Memory card reader.png'
+const Printer = '/products/Printer.png'
+const Projector = '/products/Projector.png'
 
-export {HardDisk, Microphone, Speaker, USB, Appliances, Speaker1, Mobile, Laptop, GoPro, WirelessMouse, Router, Tablet, LCD, SmartWatch, Laptop1, MemoryCardReader, Printer, Projector} 
+module.exports = {
+    HardDisk,
+    Microphone,
+    Speaker,
+    Speaker1,
+    USB,
+    Appliances,
+    Mobile,
+    Laptop,
+    GoPro,
+    WirelessMouse,
+    Router,
+    Tablet,
+    LCD,
+    SmartWatch,
+    MemoryCardReader,
+    Printer,
+    Projector
+}

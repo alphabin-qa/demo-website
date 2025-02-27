@@ -13,7 +13,6 @@ import {
   Tablet,
   LCD,
   SmartWatch,
-  Laptop1,
   MemoryCardReader,
   Printer,
   Projector,
@@ -269,7 +268,7 @@ const FeatureProductsData = [
 
   {
     id: "product11",
-    img: Laptop1,
+    img: Laptop,
     header: "Dell XPS 13 (2021) Laptop",
     price: "₹1,29,999",
     subdescription:

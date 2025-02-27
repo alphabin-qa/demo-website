@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../index.css";
 import "./home.css";
 import {
@@ -44,6 +44,14 @@ const Home = () => {
     );
   };
 
+  useEffect(() => {
+    const defaultTitle = document.title;
+    document.title = 'AB | Demo Store';
+    return () => {
+      document.title = defaultTitle;
+    };
+  }, []);
+
   const settings = {
     arrows: true,
     infinite: true,
@@ -77,8 +85,8 @@ const Home = () => {
   return (
     <div className="flex flex-col gap-3 md:gap-0 xs:p-2">
       <section>
-        <div className="flex justify-center items-center h-[35vh] sm:h-[50vh] lg:h-[80vh] main">
-          <div className="text-center md:w-[800px] md:h-[300px] lg:w-[976px] lg:h-[319px] sm:p-[20px] ">
+        <div className="flex justify-center items-center h-[35vh] sm:h-[50vh] lg:h-[50vh] main">
+          <div className="text-center md:w-[800px] md:h-[300px] lg:w-[976px] lg:h-[319px] sm:p-[20px] flex flex-col items-center justify-center">
             <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] font-[900]  text-white lg:leading-[4rem]">
               Demo E-commerce Testing Store
             </h1>
@@ -94,32 +102,35 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] px-5">
         <div className="flex flex-col xl:flex-row justify-center xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
           <div className="sm:mb-[10px] relative hover:cursor-pointer">
-            <div className="relative" >
+            <div className="relative">
               <div className="overflow-hidden">
                 <img
                   className="object-cover h-[342px] xl:w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700 w-full"
                   src={Camera}
-                  onClick={() => window.location.href = '/products'} 
+                  onClick={() => (window.location.href = "/products")}
                   alt="camera"
                   loading="lazy"
                   fetchpriority="high"
                 />
               </div>
             </div>
-            <div onClick={() => window.location.href = '/products'} className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[249px]">
+            <div
+              onClick={() => (window.location.href = "/products")}
+              className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[249px]"
+            >
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Audio & Camera
               </h1>
-              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[400px] w-[140px]">
+              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[400px] w-[140px]">
                 Unlock reliability and unmatched video, Audio and photo quality.
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="/products"
-                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150 hover:translate-x-[3px] hover:scale-105 duration-300"
+                  className="flex font-dmsans font-[600] text-[13px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150 hover:translate-x-[3px] hover:scale-105 duration-300"
                 >
                   Explore More
                   <div className="pl-1 flex items-center hover:translate-x-[2px] duration-300">
@@ -129,29 +140,31 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="sm:mb-[10px] relative h-[342px] bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer">
+          <div className="sm:mb-[10px] relative h-[342px] bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer ">
             <div className="relative">
               <div className="overflow-hidden">
                 <img
                   className="object-cover h-[342px] w-full xl:w-[670px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
                   src={Appliances1}
-                  onClick={() => window.location.href = '/products'} 
-
+                  onClick={() => (window.location.href = "/products")}
                   alt=""
                 />
               </div>
             </div>
-            <div onClick={() => window.location.href = '/products'} className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[200px] lg:w-[180px] md:w-[140px]">
+            <div
+              onClick={() => (window.location.href = "/products")}
+              className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[200px] lg:w-[180px] md:w-[140px]"
+            >
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Appliances
               </h1>
-              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[375px] w-[140px]">
+              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[375px] w-[140px]">
                 Explore advance tech for enhanced workspace productivity
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="/products"
-                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105  duration-300"
+                  className="flex font-dmsans font-[600] text-[13px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105  duration-300"
                 >
                   Explore More
                   <div className="pl-1 flex items-center hover:translate-x-[2px] duration-300">
@@ -162,29 +175,32 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div  className="flex flex-col xl:flex-row justify-center xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
+        <div className="flex flex-col xl:flex-row justify-center xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
           <div className="relative bg-[#EFF5F5] rounded-[5px] hover:cursor-pointer">
             <div className="relative">
               <div className="overflow-hidden">
                 <img
                   className="object-cover h-[342px] w-full xl:w-[695px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-x-1 hover:scale-110 duration-700"
                   src={Gadgets}
-                  onClick={() => window.location.href = '/products'}
+                  onClick={() => (window.location.href = "/products")}
                   alt="Gadgets"
                 />
               </div>
             </div>
-            <div onClick={() => window.location.href = '/products'} className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[200px] lg:w-[180px] md:w-[150px]">
+            <div
+              onClick={() => (window.location.href = "/products")}
+              className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[200px] lg:w-[180px] md:w-[150px]"
+            >
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 Gadgets
               </h1>
-              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[370px] w-[140px]">
+              <p className="font-dmsans text-[16px] leading-[19.36px] xl:w-[280px] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[370px] w-[140px]">
                 Get your hands on the newest groundbreaking innovation
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="/products"
-                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105 duration-300"
+                  className="flex font-dmsans font-[600] text-[13px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105 duration-300"
                 >
                   Explore More
                   <div className="pl-1 flex items-center hover:translate-x-[2px] duration-300">
@@ -200,23 +216,26 @@ const Home = () => {
                 <img
                   className="w-full object-cover h-[342px] rounded-[5px] transition ease-in-out delay-300 hover:-translate-y-1 hover:scale-110 duration-700"
                   src={Laptop1}
-                  onClick={() => window.location.href = '/products'}
+                  onClick={() => (window.location.href = "/products")}
                   alt=""
                 />
               </div>
             </div>
-            <div onClick={() => window.location.href = '/products'} className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[249px]">
+            <div
+              onClick={() => (window.location.href = "/products")}
+              className="absolute top-0 flex flex-col justify-center ml-[2rem] h-full gap-[10px] xl:w-[249px]"
+            >
               <h1 className="font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[38.73px]">
                 PC & Laptops
               </h1>
-              <p className="font-dmsans text-[16px] leading-[19.36px]  xl:w-[280px] font-[100] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[450px] w-[140px]">
+              <p className="font-dmsans text-[16px] leading-[19.36px]  xl:w-[280px] text-gray-600 tracking-[1px] lg:w-[450px] md:w-[450px] w-[140px]">
                 Potent PCs & laptops optimized for gaming & development
                 purposes.
               </p>
               <div className="w-[100px] h-[17px] gap-[10px]">
                 <a
                   href="/products"
-                  className="flex font-dmsans font-[600] text-[12px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105 duration-300"
+                  className="flex font-dmsans font-[600] text-[13px] leading-[14.52px]  border-b hover:border-black transition ease-in-out delay-150  hover:translate-x-[3px] hover:scale-105 duration-300"
                 >
                   Explore More
                   <div className="pl-1 flex items-center hover:translate-x-[2px] duration-300">
@@ -229,7 +248,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] px-5">
         <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
@@ -255,7 +274,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] px-5">
         <div className="xl:container lg:container mx-auto">
           <div className="grid md:grid-cols-2 sm:grid-cols-1 md:gap-0 px-4 gap-8">
             <div className="relative md:mr-4">
@@ -268,10 +287,10 @@ const Home = () => {
                 />
               </div>
               <div className="absolute top-0 text-white flex flex-col justify-center items-center h-full w-full">
-                <h1 className="xl:w-[40%] lg:w-[50%] text-center font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[2.5rem] text-white">
+                <h1 className="xl:w-[40%] lg:w-[50%] text-center font-dmsans xl:text-[24px] lg:text-[20px] md:text-[18px] sm:text-[20px] leading-[1.5rem] text-white">
                   Enjoy an Exclusive 20% Off on Laptops
                 </h1>
-                <button className="font-dmsans font-[400] text-[14px] leading-[16.94px] text-black bg-white px-[15px] py-[10px] mt-[10px] border-white border-[1px] hover:bg-transparent hover:text-white">
+                <button className="font-dmsans rounded-[5px] font-[400] text-[14px] leading-[16.94px] text-black bg-white px-[15px] py-[10px] mt-[20px] border-white border-[1px] hover:bg-transparent hover:text-white">
                   Shop Now
                 </button>
               </div>
@@ -286,10 +305,10 @@ const Home = () => {
                 />
               </div>
               <div className="absolute top-0 text-white flex flex-col justify-center items-center h-full w-full">
-                <h1 className="xl:w-[40%] lg:w-[50%] text-center font-dmsans xl:text-[32px] lg:text-[28px] md:text-[26px] sm:text-[28px] leading-[2.5rem] text-white">
-                  Watch the price drop by a whopping 20%!
+                <h1 className="xl:w-[40%] lg:w-[50%] text-center font-dmsans xl:text-[24px] lg:text-[20px] md:text-[18px] sm:text-[20px] leading-[1.5rem] text-white">
+                  Watch the Price Drop by a Whopping 20%!
                 </h1>
-                <button className="font-dmsans font-[400] text-[14px] leading-[16.94px] text-black bg-white px-[15px] py-[10px] mt-[10px] border-white border-[1px] hover:bg-transparent hover:text-white">
+                <button className="font-dmsans rounded-[5px] font-[400] text-[14px] leading-[16.94px] text-black bg-white px-[15px] py-[10px] mt-[20px] border-white border-[1px] hover:bg-transparent hover:text-white">
                   Shop Now
                 </button>
               </div>
@@ -298,7 +317,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] px-5">
         <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
@@ -324,7 +343,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px]">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] px-5">
         <div className="mt-[30px] xl:container lg:container sm:p-[7px] md:p-[12px] mx-auto">
           <div className="border-b-[1px] h-[50px]">
             <div className="h-[39px]">
@@ -347,10 +366,10 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] mb-[130px]">
+      <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] mb-[130px] px-5">
         <div className="xl:container lg:container mx-auto">
           <div className="grid grid-cols-1 xl:gap-6 lg:gap-2 md:gap-2 md:p-[30px] sm:p-[8px]">
-            <div className="sm:mb-[10px] relative rounded-[5px] clip-path-border-box overflow-hidden" >
+            <div className="sm:mb-[10px] relative rounded-[5px] clip-path-border-box overflow-hidden">
               <div className="relative">
                 {" "}
                 <img

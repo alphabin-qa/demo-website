@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   StarFilled,
@@ -43,7 +43,13 @@ const Wishlist = () => {
     }
     setCartIcon(!cartIcon);
   };
-
+  useEffect(() => {
+    const defaultTitle = document.title;
+    document.title = 'AB |  Wishlist';
+    return () => {
+      document.title = defaultTitle;
+    };
+  }, []);
   return (
     <>
       {!wishlistItems.length ? (
