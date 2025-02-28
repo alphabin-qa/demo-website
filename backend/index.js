@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://demo.alphabin.co", // http://localhost:3000 OR https://demo.alphabin.co
+    origin: ["https://demo.alphabin.co", "http://localhost:3000", "http://backend.demo.alphabin.co"],
     credentials: true,
   })
 );
@@ -24,11 +24,17 @@ app.use(
 // Connect to the database
 dbConnect();
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 // API routes should be handled first
 app.use("/api", userRoutes);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
+
 
 // Handle all other routes by sending back index.html
 app.get('*', (req, res) => {
