@@ -22,6 +22,7 @@ import {
   FeatureProductsData,
   CategoryProductsData,
 } from "../../StaticData/static";
+import bg from "../../assets/Home/bg.webp";
 
 const Home = () => {
   const NextArrow = ({ onClick }) => {
@@ -84,17 +85,25 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-3 md:gap-0 xs:p-2">
-      <section>
-        <div className="flex justify-center items-center h-[35vh] sm:h-[50vh] lg:h-[50vh] main">
+      <section className="relative">
+        {/* Background image positioned absolutely */}
+        <img
+          src={bg}
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Content positioned on top */}
+        <div className="relative flex justify-center items-center h-[35vh] sm:h-[50vh] lg:h-[50vh]">
           <div className="text-center md:w-[800px] md:h-[300px] lg:w-[976px] lg:h-[319px] sm:p-[20px] flex flex-col items-center justify-center">
-            <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] font-[900]  text-white lg:leading-[4rem]">
+            <h1 className="text-2xl md:text-4xl lg:text-6xl md:w-full lg:font-[700] lg:w-[976px] font-[900] text-white lg:leading-[4rem]">
               Demo E-commerce Testing Store
             </h1>
-            <p className="mt-5 text-[12px] md:text-[18px] lg:text-[18px] sm:mx-[50px] md:mx-[200px] font-dmsans leading-[21.78px] align-center text-white">
+            <p className="mt-5 text-[12px] md:text-[18px] lg:text-[18px] sm:mx-[50px] md:mx-[200px] font-dmsans leading-[21.78px] text-white">
               Embark on an electronic journey. Dive into our shop now!
             </p>
-            <Link to={`/products`}>
-              <button className="lg:w-[170px] lg:h-[48px] p-[5px] md:p-[7px] lg:p-[10px] font-dmsans font-[400] lg:text-[18px] leading-[21.78px] align-middle border-white bg-white mt-4 px-[20px] py-[10px] hover:bg-transparent hover:border-[1px] hover:text-white">
+            <Link to="/products">
+              <button className="lg:w-[170px] lg:h-[48px] p-[5px] md:p-[7px] lg:p-[10px] font-dmsans font-[400] lg:text-[18px] leading-[21.78px] border-white bg-white mt-4 px-[20px] py-[10px] hover:bg-transparent hover:border hover:text-white">
                 Shop Now
               </button>
             </Link>
