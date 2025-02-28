@@ -35,15 +35,13 @@ app.use("/api", userRoutes);
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-
 // Handle all other routes by sending back index.html
-app.get('*', (req, res) => {
+app.get('*', (req, res, next) => {
+  // Skip API routes
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-});
-
-// Handle 404s
-app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 // Start server
