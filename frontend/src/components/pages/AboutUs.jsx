@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "../Header";
-import AboutUs1 from "../../assets/aboutus-1.png";
-import AboutUs2 from "../../assets/aboutus-2.png";
+import AboutUs1 from "../../assets/aboutus-1.webp";
+import AboutUs2 from "../../assets/aboutus-2.webp";
 
 const AboutUs = () => {
   
@@ -18,7 +18,7 @@ const AboutUs = () => {
       <div>
         <div className="my-[80px]">
           <div className="h-auto flex flex-col gap-[64px] justify-center items-center self-stretch">
-            <p className="text-[#333] w-full xl:w-[1270px] font-dmsans text-[36px] font-bold leading-[18.5px] text-left ml-9">
+            <p className="text-[#333] w-full xl:w-[1270px] font-dmsans text-[36px] font-bold leading-[18.5px] text-left">
               About Us
             </p>
 
@@ -27,7 +27,7 @@ const AboutUs = () => {
               <img src={AboutUs2} alt="table" className="w-full" />
             </div>
 
-            <div className="xl:w-[1260px] min-h-[305px] flex flex-col xl:flex-row justify-center items-start gap-6 ml-9">
+            <div className="xl:w-[1260px] min-h-[305px] flex flex-col xl:flex-row justify-center items-start gap-6">
               <div className="xl:w-full flex-grow">
                 <p className="font-dmsans text-[32px] font-semibold">
                   Our Mission

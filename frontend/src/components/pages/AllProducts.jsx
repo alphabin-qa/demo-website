@@ -74,8 +74,8 @@ function AllProducts() {
   );
 
   return (
-    <section className="xl:my-[6rem]">
-      <div className="mt-[30px] xl:w-[1440px] lg:w-[1440px] xl:container lg:container md:container sm:container sm:p-[7px] md:p-[12px] lg:mx-auto">
+    <section className="xl:my-[2rem]">
+      <div className="mt-[20px] xl:w-[1440px] lg:w-[1440px] xl:container lg:container md:container sm:container sm:p-[7px] md:p-[12px] lg:mx-auto">
         {/* Heading & Search */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
           <h1 className="float-start font-dmsans font-bold text-[28px] px-2 leading-[18.5px] mb-2 sm:mb-0">
@@ -94,7 +94,7 @@ function AllProducts() {
         </div>
 
         {/* Product Grid */}
-        <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-[32px] xl:pt-[20px]">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-[32px] xl:pt-[20px] justify-items-center">
           {filteredProducts.length === 0 ? (
             <div className="text-center col-span-full mt-6">
               <p className="text-gray-500">No products found.</p>
@@ -108,7 +108,7 @@ function AllProducts() {
                   borderRadius: "5px",
                 }}
                 key={product.id}
-                className="hover:shadow-md align-start group w-[340px] h-[447px] mt-[2rem] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative px-3"
+                className="hover:shadow-md align-start group w-[340px] h-[447px] hover:bg-[#fff] rounded-[5px] hover:cursor-pointer flex flex-col justify-center items-center relative px-3"
               >
                 {/* Wishlist Button */}
                 <div className="absolute top-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:bg-[#EEEFF2] group-hover:rounded-full ml-[20px] mt-[14px]">

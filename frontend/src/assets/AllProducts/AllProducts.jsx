@@ -1,20 +1,20 @@
-const HardDisk = '/products/Hard Disk.png'
-const Microphone = '/products/Mic.png'
-const Speaker = '/products/Speaker.png'
-const Speaker1 = '/products/Speaker-1.png'
-const USB = '/products/Pen Drive.png'
-const Appliances = '/products/Appliances.png'
-const Mobile = '/products/Mobile.png'
-const Laptop = '/products/Laptop.png'
-const GoPro = '/products/Go Pro.png'
-const WirelessMouse = '/products/Wireless mouse.png'
-const Router = '/products/Router.png'
-const Tablet = '/products/Tablet.png'
-const LCD = '/products/LCD.png'
-const SmartWatch = '/products/Smart Watch 1.png'
-const MemoryCardReader = '/products/Memory card reader.png'
-const Printer = '/products/Printer.png'
-const Projector = '/products/Projector.png'
+const HardDisk = "/products/Hard Disk.webp";
+const Microphone = "/products/Mic.png";
+const Speaker = "/products/Speaker.png";
+const Speaker1 = "/products/Speaker-1.webp";
+const USB = "/products/Pen Drive.webp";
+const Appliances = "/products/Appliances.webp";
+const Mobile = "/products/Mobile.webp";
+const Laptop = "/products/Laptop.png";
+const GoPro = '/products/Go Pro.webp'
+const WirelessMouse = '/products/Wireless mouse.webp'
+const Router = '/products/Router.webp'
+const Tablet = '/products/Tablet.webp'
+const LCD = '/products/LCD.webp'
+const SmartWatch = '/products/Smart Watch 1.webp'
+const MemoryCardReader = "/products/Memory card reader.webp";
+const Printer = "/products/Printer.webp";
+const Projector = "/products/Projector.webp";
 
 module.exports = {
     HardDisk,
