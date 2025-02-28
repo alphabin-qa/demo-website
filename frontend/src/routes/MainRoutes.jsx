@@ -24,10 +24,6 @@ const MainRoutes = {
       element: <Home />,
     },
     {
-      path: "home",
-      element: <Home />,
-    },
-    {
       path: "about-us",
       element: <AboutUs />,
     },

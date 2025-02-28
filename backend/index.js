@@ -24,21 +24,20 @@ app.use(
 // Connect to the database
 dbConnect();
 
-// Import routes for user API
+// API routes should be handled first
 app.use("/api", userRoutes);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// Default route
-app.get("/", (req, res) => {
-  res.send("<h1>This is the Home Page</h1>");
+// Handle all other routes by sending back index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+// Handle 404s
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 // Start server

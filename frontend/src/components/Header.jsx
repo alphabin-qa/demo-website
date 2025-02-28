@@ -35,7 +35,7 @@ const Header = () => {
     switch (menuItem) {
       case "Home":
         setIsSelectedTab("Home");
-        navigate("/home");
+        navigate("/");
         break;
 
       case "About Us":
@@ -75,7 +75,7 @@ const Header = () => {
       <div className="h-[80px] flex justify-between items-center px-4 md:px-8 lg:px-12 max-w-[1440px] mx-auto w-full">
         <div
           className="w-[128px] md:w-[150px] h-[62px] flex items-center cursor-pointer"
-          onClick={() => navigate("/home")}
+          onClick={() => navigate("/")}
         >
           <img src={HeaderLogo} alt="logo" className="w-full h-auto object-contain" />
         </div>
