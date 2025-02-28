@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+        // Extract the path from the URL
+        const path = window.location.pathname;
+        // Redirect to the homepage with a query parameter that contains the original path
+        window.location.href = '/?redirect=' + encodeURIComponent(path);
+    </script>
+</head>
+
+<body>
+    <p>Redirecting...</p>
+</body>
+
+</html>
