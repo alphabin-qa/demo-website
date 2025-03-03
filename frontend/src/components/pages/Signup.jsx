@@ -16,6 +16,8 @@ const Signup = () => {
     password: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formErrors, setFormErrors] = useState({
     firstname: "",
     lastname: "",
@@ -77,11 +79,38 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-
     if (validateForm()) {
-      const response = await signup(formData);
-      if (response?.data?.success === true) {
-        toast.success("Created account successfully!", {
+      setIsLoading(true);
+      try {
+        const response = await signup(formData);
+        if (response?.data?.success === true) {
+          toast.success(
+            "Account created successfully! Please login to continue.",
+            {
+              duration: 4000,
+              style: {
+                border: "1px solid black",
+                backgroundColor: "black",
+                color: "white",
+              },
+            }
+          );
+          navigate("/login");
+        } else {
+          toast.error(
+            response?.error?.data?.message || "Failed to create account",
+            {
+              duration: 4000,
+              style: {
+                border: "1px solid black",
+                backgroundColor: "black",
+                color: "white",
+              },
+            }
+          );
+        }
+      } catch (error) {
+        toast.error("An error occurred. Please try again.", {
           duration: 4000,
           style: {
             border: "1px solid black",
@@ -89,16 +118,8 @@ const Signup = () => {
             color: "white",
           },
         });
-        navigate("/login");
-      } else {
-        toast.error(response?.error?.data?.message, {
-          duration: 4000,
-          style: {
-            border: "1px solid black",
-            backgroundColor: "black",
-            color: "white",
-          },
-        });
+      } finally {
+        setIsLoading(false);
       }
     } else {
       for (let item of Object.entries(formErrors)) {
@@ -192,10 +213,11 @@ const Signup = () => {
             </span>
           </div>
           <button
-            className="leading-[18.8px] w-[370px] h-[46px] p-[10px] gap-[10px] bg-black text-white align-center font-bold"
+            className="leading-[18.8px] w-[370px] h-[46px] p-[10px] gap-[10px] bg-black text-white align-center font-bold disabled:opacity-70 disabled:cursor-not-allowed"
             onClick={handleSubmit}
+            disabled={isLoading}
           >
-            CREATE ACCOUNT
+            {isLoading ? "CREATING ACCOUNT..." : "CREATE ACCOUNT"}
           </button>
         </div>
         <div className="">

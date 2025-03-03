@@ -16,7 +16,7 @@ const footerContent = {
     facebook:
       "https://www.facebook.com/people/Alphabin-Technology-Consulting/100081731796422/",
     instagram: "https://www.instagram.com/alphabintech/",
-    twitter: "https://twitter.com/alphabin_",
+    twitter: "https://twitter.com/alphabin_tech",
     youtube: "https://www.youtube.com/@alphabin-your-qa-partner/featured",
   },
   policies: ["Shipping Policy", "Return Policy", "Cancellation", "FAQ"],

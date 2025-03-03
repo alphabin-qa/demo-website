@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://demo.alphabin.co", "http://localhost:3000"],
+    origin: ["https://demo.alphabin.co", "http://localhost:3000","https://backend-demo-alphabin.azurewebsites.net"],
     credentials: true,
   })
 );

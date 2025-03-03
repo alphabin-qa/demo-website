@@ -17,6 +17,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const { InputType, Icon, toggleVisibility } = usePasswordToggle();
 
   const handleInputChange = (e) => {
@@ -34,6 +35,19 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
+    if (!formData.email || !formData.password) {
+      toast.error("Please fill in all required fields", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const { data } = await login(formData);
       if (data) {
@@ -57,7 +71,7 @@ const Login = () => {
           password: "",
         });
       } else {
-        toast.error("Something went wrong !", {
+        toast.error("Invalid credentials", {
           duration: 4000,
           style: {
             border: "1px solid black",
@@ -67,23 +81,35 @@ const Login = () => {
         });
       }
     } catch (error) {
-      console.error(error);
-      toast.error(error, { duration: 4000 });
+      toast.error(error?.data?.message || "Login failed. Please try again.", {
+        duration: 4000,
+        style: {
+          border: "1px solid black",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="h-full flex items-center justify-center">
       <div className="flex flex-col items-center justify-center p-8 w-full sm:w-[450px]">
-        <h2 className="text-3xl font-bold text-center text-gray-800 pb-4">LOG IN</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 pb-4">
+          LOG IN
+        </h2>
 
         <div className="w-full space-y-4">
           {/* Email Field */}
           <div>
-            <label className="text-sm font-semibold text-gray-700">EMAIL<sup className="text-red-600">*</sup></label>
+            <label className="text-sm font-semibold text-gray-700">
+              EMAIL<sup className="text-red-600">*</sup>
+            </label>
             <input
               type="email"
-              name="email" 
+              name="email"
               value={formData.email}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
@@ -123,9 +149,10 @@ const Login = () => {
           <div>
             <button
               onClick={handleLogin}
-              className="w-full bg-black text-white py-2  font-semibold mt-4 hover:bg-gray-900 transition duration-200"
+              disabled={isLoading}
+              className="w-full bg-black text-white py-2 font-semibold mt-4 hover:bg-gray-900 transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              LOG IN
+              {isLoading ? "LOGGING IN..." : "LOG IN"}
             </button>
           </div>
 
