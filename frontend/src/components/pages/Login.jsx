@@ -149,6 +149,7 @@ const Login = () => {
           <div>
             <button
               onClick={handleLogin}
+              type="submit"
               disabled={isLoading}
               className="w-full bg-black text-white py-2 font-semibold mt-4 hover:bg-gray-900 transition duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
             >

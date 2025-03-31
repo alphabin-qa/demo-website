@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../index.css";
 import "./home.css";
 import {
@@ -23,8 +23,20 @@ import {
   CategoryProductsData,
 } from "../../StaticData/static";
 import bg from "../../assets/Home/bg.webp";
+import toast from "react-hot-toast";
 
 const Home = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = () => {
+    if (email.trim() === "") {
+      toast.error("Please enter your email");
+    } else {
+      toast.success("Subscribed successfully!");
+      setEmail("");
+    }
+  };
+
   const NextArrow = ({ onClick }) => {
     return (
       <div className="absolute right-0 -top-[60px]" onClick={onClick}>
@@ -47,7 +59,7 @@ const Home = () => {
 
   useEffect(() => {
     const defaultTitle = document.title;
-    document.title = 'AB | Demo Store';
+    document.title = "AB | Demo Store";
     return () => {
       document.title = defaultTitle;
     };
@@ -110,6 +122,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      
 
       <section className="sm:mt-[40px] md:mt-[50px] lg:mt-[60px] xl:mt-[80px] px-5">
         <div className="flex flex-col xl:flex-row justify-center xl:gap-6 lg:gap-2 md:gap-2 mb-[2rem] mx-auto">
@@ -393,12 +407,18 @@ const Home = () => {
                 </h1>
                 <div className="mt-[20px] mb-[23px]">
                   <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="xl:w-[372px] lg:w-[372px] md:w-[365px] sm:h-[35px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:w-[250px] text-black placeholder-black rounded-[2px] border-[1px] sm:text-[12px] xl:text-[18px] lg:text-[18px] md:text-[16px] pl-[15px] font-dmsans sm:mr-[2px] xl:mr-[10px] lg:mr-[10px] md:mr-[8px] gap-[96px]"
                     type="email"
                     name="email"
                     placeholder="Your Email"
                   />
-                  <button className="xl:w-[100px] lg:w-[100px] md:w-[100px] sm:w-[80px] xl:text-[16px] lg:text-[16px] sm:text-[12px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:h-[35px]  rounded-[2px] sm:p-[7px] xl:p-[10px] lg:p-[10px] md:p-[10px] gap-[10px] text-white bg-[#353535] font-roboto ">
+                  <button
+                    type="submit"
+                    onClick={handleSubscribe}
+                    className="xl:w-[100px] lg:w-[100px] md:w-[100px] sm:w-[80px] xl:text-[16px] lg:text-[16px] sm:text-[12px] xl:h-[42px] lg:h-[42px] md:h-[40px] sm:h-[35px] rounded-[2px] sm:p-[7px] xl:p-[10px] lg:p-[10px] md:p-[10px] gap-[10px] text-white bg-[#353535] font-roboto"
+                  >
                     Subscribe
                   </button>
                 </div>
