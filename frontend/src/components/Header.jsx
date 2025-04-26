@@ -64,6 +64,7 @@ const Header = () => {
     } else {
       navigate("/login");
     }
+    setToggle(false);
   };
 
   const toggleCart = () => {
@@ -181,10 +182,10 @@ const Header = () => {
                     <span className="absolute -top-3 -right-3 text-[13px] min-w-[20px] h-5 flex items-center justify-center bg-orange-100 rounded-full">
                       {wishlistItemCount}
                     </span>
-                    <FaHeart className="w-6 h-6" />
+                    <FaHeart className="w-10 h-10" />
                   </div>
                 ) : (
-                  <WishList className="w-6 h-6" />
+                  <WishList className="w-10 h-10" />
                 )}
               </div>
 
@@ -195,7 +196,7 @@ const Header = () => {
                       {cartItemCount}
                     </span>
                     <FaCartShopping
-                      className="w-6 h-6"
+                        className="w-10 h-10"
                       onClick={() => {
                         toggleCart();
                         setToggle(false);
@@ -204,13 +205,18 @@ const Header = () => {
                   </div>
                 ) : (
                   <Cart 
-                    className="w-6 h-6" 
+                    className="w-10 h-10" 
                     onClick={() => {
                       toggleCart();
                       setToggle(false);
                     }}
                   />
                 )}
+              </div>
+
+              {/* Account Icon for Mobile */}
+              <div className="cursor-pointer relative" onClick={handleClick}>
+                <User className="w-10 h-10" />
               </div>
             </div>
           </div>

@@ -50,7 +50,7 @@ const MyOrder = ({ userDetails, setRefetch }) => {
 
   useEffect(() => {
     let products = [];
-    if (userDetails) {
+    if (userDetails && userDetails.orders) {
       userDetails.orders.forEach((order) => {
         order.product.forEach((product) => {
           products.push({ ...product, orderId: order._id });

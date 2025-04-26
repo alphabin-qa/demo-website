@@ -830,7 +830,8 @@ function Checkout() {
                   </p>
                 </div>
                 <button
-                  className="w-[195px] h-[35px] font-dmsans font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white my-[24px]"
+                  disabled={changeAddress || !address}
+                  className="w-[195px] h-[35px] font-dmsans font-[400] text-[16px] leading-[19.36px] text-center bg-black text-white my-[24px] disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={() => {
                     handleOrderNow();
                   }}

@@ -47,6 +47,7 @@ function ProductDetail() {
     // Load reviews from localStorage specific to this product
     const storedReviews = localStorage.getItem(`reviews_${id}`);
     setReviews(storedReviews ? JSON.parse(storedReviews) : []);
+    setQuantity(1);
   }, [id]);
 
   useEffect(() => {
@@ -80,7 +81,7 @@ function ProductDetail() {
   };
 
   const handleIncrement = () => {
-    if (quantity < 10) {
+    if (quantity < 9) {
       quantity = setQuantity((prevCount) => prevCount + 1);
     }
   };
@@ -188,7 +189,7 @@ function ProductDetail() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 select-none">
       {/* Product Details */}
       <section className="mb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px]">
