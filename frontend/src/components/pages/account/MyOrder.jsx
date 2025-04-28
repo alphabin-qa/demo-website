@@ -41,7 +41,7 @@ const MyOrder = ({ userDetails, setRefetch }) => {
           duration: 3000,
           style: {
             borderRadius: "8px",
-            backgroundColor: "#333",
+            backgroundColor: "black",
             color: "white",
           },
         });
@@ -55,7 +55,7 @@ const MyOrder = ({ userDetails, setRefetch }) => {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });

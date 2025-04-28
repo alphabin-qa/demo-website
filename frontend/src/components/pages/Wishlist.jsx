@@ -55,7 +55,7 @@ const Wishlist = () => {
           duration: 2000,
           style: {
             borderRadius: "8px",
-            backgroundColor: "#333",
+            backgroundColor: "black",
             color: "white",
           },
         });

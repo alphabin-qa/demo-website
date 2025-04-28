@@ -76,7 +76,7 @@ const MyAccount = () => {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -96,7 +96,7 @@ const MyAccount = () => {
       duration: 3000,
       style: {
         borderRadius: "8px",
-        backgroundColor: "#333",
+        backgroundColor: "black",
         color: "white",
       },
     });

@@ -125,7 +125,7 @@ const Address = ({ userDetails, setRefetch }) => {
               duration: 3000,
               style: {
                 borderRadius: "8px",
-                backgroundColor: "#333",
+                backgroundColor: "black",
                 color: "white",
               },
             });
@@ -149,7 +149,7 @@ const Address = ({ userDetails, setRefetch }) => {
                 duration: 3000,
                 style: {
                   borderRadius: "8px",
-                  backgroundColor: "#333",
+                  backgroundColor: "black",
                   color: "white",
                 },
               });
@@ -162,7 +162,7 @@ const Address = ({ userDetails, setRefetch }) => {
               duration: 3000,
               style: {
                 borderRadius: "8px",
-                backgroundColor: "#333",
+                backgroundColor: "black",
                 color: "white",
               },
             });
@@ -175,7 +175,7 @@ const Address = ({ userDetails, setRefetch }) => {
             duration: 3000,
             style: {
               borderRadius: "8px",
-              backgroundColor: "#333",
+              backgroundColor: "black",
               color: "white",
             },
           }
@@ -200,7 +200,7 @@ const Address = ({ userDetails, setRefetch }) => {
           duration: 3000,
           style: {
             borderRadius: "8px",
-            backgroundColor: "#333",
+            backgroundColor: "black",
             color: "white",
           },
         });
@@ -215,7 +215,7 @@ const Address = ({ userDetails, setRefetch }) => {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -328,7 +328,7 @@ const Address = ({ userDetails, setRefetch }) => {
                   duration: 3000,
                   style: {
                     borderRadius: "8px",
-                    backgroundColor: "#333",
+                    backgroundColor: "black",
                     color: "white",
                   },
                 });

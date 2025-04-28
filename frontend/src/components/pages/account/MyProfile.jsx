@@ -150,7 +150,7 @@ const MyProfile = () => {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -174,7 +174,7 @@ const MyProfile = () => {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -197,7 +197,7 @@ const MyProfile = () => {
           icon: <CheckCircleOutlined />,
           style: {
             borderRadius: "8px",
-            backgroundColor: "#333",
+            backgroundColor: "black",
             color: "white",
           },
         });
@@ -210,7 +210,7 @@ const MyProfile = () => {
         icon: <ExclamationCircleOutlined />,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -226,7 +226,7 @@ const MyProfile = () => {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -259,7 +259,7 @@ const MyProfile = () => {
           icon: <CheckCircleOutlined />,
           style: {
             borderRadius: "8px",
-            backgroundColor: "#333",
+            backgroundColor: "black",
             color: "white",
           },
         });
@@ -272,7 +272,7 @@ const MyProfile = () => {
         icon: <ExclamationCircleOutlined />,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });

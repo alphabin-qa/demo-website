@@ -18,7 +18,7 @@ function Cart() {
       style: {
         border: "1px solid #e0e0e0",
         borderRadius: "8px",
-        backgroundColor: "#ffffff",
+        backgroundColor: "black",
         color: "#333333",
         boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
       },
@@ -39,7 +39,7 @@ function Cart() {
         style: {
           border: "1px solid #ff5555",
           borderRadius: "8px",
-          backgroundColor: "#fff8f8",
+          backgroundColor: "black",
           color: "#333333",
           boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
         },

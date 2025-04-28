@@ -109,7 +109,7 @@ function Checkout() {
             duration: 3000,
             style: {
               borderRadius: "8px",
-              backgroundColor: "#333",
+              backgroundColor: "black",
               color: "white",
             },
           });
@@ -122,7 +122,7 @@ function Checkout() {
           duration: 3000,
           style: {
             borderRadius: "8px",
-            backgroundColor: "#333",
+            backgroundColor: "black",
             color: "white",
           },
         });
@@ -165,7 +165,7 @@ function Checkout() {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -190,7 +190,7 @@ function Checkout() {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -266,12 +266,24 @@ function Checkout() {
   };
 
   const handleOrderNow = async () => {
+    if (!address || Object.keys(address).length === 0) {
+      toast.error("Please add an address", {
+        duration: 3000,
+        style: {
+          borderRadius: "8px",
+          backgroundColor: "black",
+          color: "white",
+        },
+      });
+      return;
+    }
+
     if (!cartItems.length) {
       toast.error("Your cart is empty", {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -287,7 +299,7 @@ function Checkout() {
           duration: 3000,
           style: {
             borderRadius: "8px",
-            backgroundColor: "#333",
+            backgroundColor: "black",
             color: "white",
           },
         });
@@ -301,7 +313,7 @@ function Checkout() {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -334,7 +346,7 @@ function Checkout() {
           duration: 3000,
           style: {
             borderRadius: "8px",
-            backgroundColor: "#333",
+            backgroundColor: "black",
             color: "white",
           },
         });
@@ -345,7 +357,7 @@ function Checkout() {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
@@ -360,7 +372,7 @@ function Checkout() {
         duration: 3000,
         style: {
           borderRadius: "8px",
-          backgroundColor: "#333",
+          backgroundColor: "black",
           color: "white",
         },
       });
