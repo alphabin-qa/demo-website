@@ -106,9 +106,9 @@ const Contact = () => {
       </div>
 
       {/* Below Section (Contact info & Get in touch) */}
-      <div className="w-full max-w-[1210px] flex flex-col lg:flex-row gap-8 items-start">
+      <div className="w-full max-w-[1210px] flex justify-center">
         {/* Contact info */}
-        <div className="flex flex-col items-start gap-8 px-4 sm:px-8 py-5 bg-[#FBFBFB] rounded-md w-full lg:w-1/2">
+        {/* <div className="flex flex-col items-start gap-8 px-4 sm:px-8 py-5 bg-[#FBFBFB] rounded-md w-full lg:w-1/2">
           <p className="text-[28px] font-bold font-dmsans">Contact info</p>
 
           <div className="flex flex-col gap-8">
@@ -144,10 +144,10 @@ const Contact = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Get in touch */}
-        <div className="flex flex-col items-start gap-8 px-4 sm:px-8 py-5 bg-[#FBFBFB] rounded-md w-full lg:w-1/2">
+        <div className="flex flex-col items-start gap-8 px-4 sm:px-8 py-5 bg-[#FBFBFB] rounded-md w-full">
           <p className="text-[28px] font-bold font-dmsans">Get in touch</p>
 
           {/* Success message */}

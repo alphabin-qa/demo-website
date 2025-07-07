@@ -59,7 +59,7 @@ const Footer = () => {
               />
             </Link>
 
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <h3 className="text-white text-sm font-medium mb-3">ADDRESS</h3>
               <p className="text-gray-400 text-sm">{content.address}</p>
             </div>
@@ -74,7 +74,7 @@ const Footer = () => {
                   {content.contact?.email}
                 </a>
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Useful Links */}
@@ -161,7 +161,7 @@ const Footer = () => {
               ))}
             </div>
             <div className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Alphabin Technology Consulting.
+              © {new Date().getFullYear()} Alphabin Technology Consulting
             </div>
           </div>
         </div>
